@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Équations - Présentation Interactive</title>
+    <link rel="stylesheet" href="../../../Style presentation/styles.css">
+</head>
+<body>
+    <div class="container">
+        <div class="content">
+            <!-- Slide 1 : Titre -->
+            <div class="slide active">
+                <h1>Équations</h1>
+            </div>
+
+            <!-- Slide 2 : Section I Définitions -->
+            <div class="slide">
+                <h2 class="section-title">I. Définitions</h2>
+            </div>
+
+            <!-- Slide 3 : Définition équation et exemples -->
+            <div class="slide">
+                <h3 class="subsection-title">Qu'est-ce qu'une équation ?</h3>
+                <div class="definition">
+                    <div class="step"><strong>Définition :</strong> Une équation est une égalité contenant une ou plusieurs inconnues (variables).</div>
+                </div>
+                <div class="definition">
+                    <div class="step"><strong>Définition :</strong> Le degré d'une équation est égal à l'exposant le plus grand de l'inconnue <span class="math">x</span>.</div>
+                </div>
+                <div class="example">
+                    <div class="step">3<span class="math">x</span> + 5 = 12 est une équation du <strong>premier degré</strong> à une inconnue.</div>
+                    <div class="step">2<span class="math">x</span><span class="exposant">2</span> + 3<span class="math">x</span> − 1 = 0 est une équation du <strong>second degré</strong> à une inconnue.</div>
+                </div>
+                <div class="remarque">
+                    <div class="step"><strong>Attention :</strong> le degré d'une équation peut être « caché » :</div>
+                    <div class="step"><span class="math">x</span><span class="exposant">2</span> + 3<span class="math">x</span> + 1 = <span class="math">x</span><span class="exposant">2</span> + 5 est une équation du premier degré car les termes en <span class="math">x</span><span class="exposant">2</span> s'annulent.</div>
+                </div>
+            </div>
+
+            <!-- Slide 4 : Section II -->
+            <div class="slide">
+                <h2 class="section-title">II. Équation du premier degré</h2>
+            </div>
+
+            <!-- Slide 5 : Conservation égalité - Règle 1 -->
+            <div class="slide">
+                <h3 class="subsection-title">1) Conservation d'une égalité - Règle 1</h3>
+                <div class="important">
+                    <div class="step"><strong>Règle 1 :</strong> L'égalité est conservée quand on ajoute (ou quand on retranche) un même nombre aux deux membres d'une égalité.</div>
+                </div>
+                <div class="example">
+                    <div class="step">Si 2<span class="math">x</span> + 5 = 13</div>
+                    <div class="step">alors 2<span class="math">x</span> + 5 <span class="mark-blue">− 5</span> = 13 <span class="mark-blue">− 5</span></div>
+                    <div class="step">donc 2<span class="math">x</span> = 8</div>
+                </div>
+                <div class="example">
+                    <div class="step">Si 3<span class="math">x</span> − 7 = <span class="math">x</span> + 1</div>
+                    <div class="step">alors 3<span class="math">x</span> − 7 <span class="mark-orange">− <span class="math">x</span></span> = <span class="math">x</span> + 1 <span class="mark-orange">− <span class="math">x</span></span></div>
+                    <div class="step">donc 2<span class="math">x</span> − 7 = 1</div>
+                </div>
+            </div>
+
+            <!-- Slide 6 : Conservation égalité - Règle 2 -->
+            <div class="slide">
+                
+                <div class="important">
+                    <div class="step"><strong>Règle 2 :</strong> L'égalité est conservée quand on multiplie (ou quand on divise) par un même nombre non nul les deux membres d'une égalité.</div>
+                </div>
+                <div class="example">
+                    <div class="step">Si 2<span class="math">x</span> = 8</div>
+                    <div class="step">alors <span class="frac"><span class="num">2<span class="math">x</span></span><span class="den"><span class="mark-pink">2</span></span></span> = <span class="frac"><span class="num">8</span><span class="den"><span class="mark-pink">2</span></span></span></div>
+                    <div class="step">donc <span class="math">x</span> = 4 (on a divisé par 2)</div>
+                </div>
+                <div class="example">
+                    <div class="step">Si <span class="frac"><span class="num"><span class="math">x</span></span><span class="den">3</span></span> = 5</div>
+                    <div class="step">alors <span class="frac"><span class="num"><span class="math">x</span></span><span class="den">3</span></span> <span class="mark-green">× 3</span> = 5 <span class="mark-green">× 3</span></div>
+                    <div class="step">donc <span class="math">x</span> = 15 (on a multiplié par 3)</div>
+                </div>
+            </div>
+
+            <!-- Slide 7 : Vérification d'une solution -->
+            <div class="slide">
+                <h3 class="subsection-title">2) Vérification d'une solution</h3>
+                <div class="method">
+                    <div class="step"><strong>Méthode :</strong> Pour savoir si un nombre est solution d'une équation, on remplace les inconnues par la valeur souhaitée.</div>
+                    <div class="step"><strong>Rappel :</strong> Il faut vérifier une égalité, donc calculer chaque membre de l'équation séparément.</div>
+                </div>
+                <div class="example">
+                    <div class="step">Vérifions si 15 est solution de l'équation 2<span class="math">x</span> + 3 = 29.</div>
+                    <div class="step">Pour <span class="math">x</span> = 15 :</div>
+                    <div class="step">Membre de gauche : 2 × 15 + 3</div>
+                    <div class="step">= 30 + 3</div>
+                    <div class="step">= 33</div>
+                    <div class="step">Membre de droite : 29</div>
+                    <div class="step">Comme 33 ≠ 29, 15 n'est pas une solution de l'équation.</div>
+                </div>
+                <div class="example">
+                    <div class="step">Vérifions si 13 est solution de l'équation 2<span class="math">x</span> + 3 = 29.</div>
+                    <div class="step">Pour <span class="math">x</span> = 13 :</div>
+                    <div class="step">Membre de gauche : 2 × 13 + 3</div>
+                    <div class="step">= 26 + 3</div>
+                    <div class="step">= 29</div>
+                    <div class="step">Membre de droite : 29</div>
+                    <div class="step">Comme 29 = 29, 13 est une solution de l'équation.</div>
+                </div>
+            </div>
+
+            <!-- Slide 8 : Résolution d'une équation -->
+            <div class="slide">
+                <h3 class="subsection-title">3) Résolution d'une équation</h3>
+                <div class="definition">
+                    <div class="step"><strong>Définition :</strong> Résoudre une équation, c'est trouver toutes ses solutions.</div>
+                </div>
+                <div class="important">
+                    <div class="step"><strong>Propriété :</strong> Toute équation du premier degré à une inconnue se ramène à une équation de la forme <span class="math">ax</span> = <span class="math">b</span>.</div>
+                </div>
+                <div class="example">
+                    <div class="step"><strong>Résoudre :</strong> 3<span class="math">x</span> + 7 = <span class="math">x</span> − 5</div>
+                    <div class="step">Le <span class="math">x</span> est du mauvais côté. On fait <span class="mark-orange">−<span class="math">x</span></span> dans chaque membre.</div>
+                    <div class="step">3<span class="math">x</span> + 7 <span class="mark-orange">− <span class="math">x</span></span> = <span class="math">x</span> − 5 <span class="mark-orange">− <span class="math">x</span></span></div>
+                    <div class="step">On réduit : 2<span class="math">x</span> + 7 = −5</div>
+                    <div class="step">On fait <span class="mark-blue">−7</span> dans chaque membre.</div>
+                    <div class="step">2<span class="math">x</span> + 7 <span class="mark-blue">− 7</span> = −5 <span class="mark-blue">− 7</span></div>
+                    <div class="step">On réduit : 2<span class="math">x</span> = −12</div>
+                    <div class="step"><span class="math">x</span> = <span class="frac"><span class="num">−12</span><span class="den">2</span></span> = −6</div>
+                    <div class="step"><strong>La solution est −6.</strong></div>
+                </div>
+            </div>
+
+            <!-- Slide 9 : Section III -->
+            <div class="slide">
+                <h2 class="section-title">III. Équation produit nul</h2>
+            </div>
+
+            <!-- Slide 10 : Propriété produit nul et exemple -->
+            <div class="slide">
+                <div class="important">
+                    <div class="step"><strong>Propriété :</strong> Un produit est nul si et seulement si l'un de ses facteurs est nul.</div>
+                    <div class="step">C'est-à-dire si <span class="math">a</span> et <span class="math">b</span> sont deux nombres relatifs et si <span class="math">a</span> × <span class="math">b</span> = 0</div>
+                    <div class="step">alors <span class="math">a</span> = 0 ou <span class="math">b</span> = 0.</div>
+                </div>
+                <div class="example">
+                    <div class="step"><strong>Résoudre :</strong> (2<span class="math">x</span> − 4)(3<span class="math">x</span> + 6) = 0</div>
+                    <div class="step">Un produit est nul si et seulement si l'un de ses facteurs est nul.</div>
+                    <div class="step">2<span class="math">x</span> − 4 = 0 &nbsp;&nbsp;&nbsp;&nbsp; ou &nbsp;&nbsp;&nbsp;&nbsp; 3<span class="math">x</span> + 6 = 0</div>
+                    <div class="step">2<span class="math">x</span> = 4 &nbsp;&nbsp;&nbsp;&nbsp; ou &nbsp;&nbsp;&nbsp;&nbsp; 3<span class="math">x</span> = −6</div>
+                    <div class="step"><span class="math">x</span> = <span class="frac"><span class="num">4</span><span class="den">2</span></span> &nbsp;&nbsp;&nbsp;&nbsp; ou &nbsp;&nbsp;&nbsp;&nbsp; <span class="math">x</span> = <span class="frac"><span class="num">−6</span><span class="den">3</span></span></div>
+                    <div class="step"><span class="math">x</span> = 2 &nbsp;&nbsp;&nbsp;&nbsp; ou &nbsp;&nbsp;&nbsp;&nbsp; <span class="math">x</span> = −2</div>
+                    <div class="step"><strong>L'équation a deux solutions : 2 et −2.</strong></div>
+                </div>
+            </div>
+
+            <!-- Slide 11 : Section IV -->
+            <div class="slide">
+                <h2 class="section-title">IV. Équation <span class="math">x</span><span class="exposant">2</span> = <span class="math">a</span></h2>
+            </div>
+
+            <!-- Slide 12 : Propriété x²=a -->
+            <div class="slide">
+                <div class="important">
+                    <div class="step"><strong>Propriété :</strong> Soit <span class="math">a</span> un nombre relatif.</div>
+                    <div class="step">• Si <span class="math">a</span> &lt; 0, alors l'équation <span class="math">x</span><span class="exposant">2</span> = <span class="math">a</span> n'admet aucune solution.</div>
+                    <div class="step">• Si <span class="math">a</span> = 0, alors l'équation <span class="math">x</span><span class="exposant">2</span> = <span class="math">a</span> admet une unique solution : 0.</div>
+                    <div class="step">• Si <span class="math">a</span> &gt; 0, alors l'équation <span class="math">x</span><span class="exposant">2</span> = <span class="math">a</span> admet deux solutions : <span class="sqrt"><span class="math">a</span></span> et −<span class="sqrt"><span class="math">a</span></span>.</div>
+                </div>
+            </div>
+
+            <!-- Slide 13 : Exemples x²=a -->
+            <div class="slide">
+             <div class="example">
+                    <div class="step">Exemples: </div>
+            </div>
+                <div class="example">
+                    <div class="step"><strong>•</strong> <span class="math">x</span><span class="exposant">2</span> = −9</div>
+                    <div class="step">L'équation n'admet pas de solution car  −9 &lt; 0.</div>
+                </div>
+                <div class="example">
+                    <div class="step"><strong>•</strong> <span class="math">x</span><span class="exposant">2</span> = 0</div>
+                    <div class="step"><span class="math">x</span> = 0</div>
+                </div>
+                <div class="example">
+                    <div class="step"><strong>•</strong> <span class="math">x</span><span class="exposant">2</span> = 9</div>
+                    <div class="step"><span class="math">x</span> = <span class="sqrt">9</span> ou <span class="math">x</span> = −<span class="sqrt">9</span></div>
+                    <div class="step"><span class="math">x</span> = 3 ou <span class="math">x</span> = −3</div>
+                    <div class="step">Les deux solutions sont 3 et −3.</div>
+                </div>
+                <div class="example">
+                    <div class="step"><strong>•</strong> <span class="math">x</span><span class="exposant">2</span> = 7</div>
+                    <div class="step"><span class="math">x</span> = <span class="sqrt">7</span> ou <span class="math">x</span> = −<span class="sqrt">7</span></div>
+                    <div class="step">Les deux solutions sont <span class="sqrt">7</span> et −<span class="sqrt">7</span>.</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Contrôles -->
+        <div class="controls">
+            <div class="controls-left">
+                <button id="prevBtn" onclick="changeSlide(-1)">← Précédent</button>
+                <button class="btn-reset" onclick="resetSlide()">⟲</button>
+            </div>
+            <div class="progress">
+                <span><span id="currentSlide">1</span> / <span id="totalSlides">13</span></span>
+                <span class="step-indicator" id="stepIndicator"></span>
+            </div>
+            <div class="controls-right">
+                <button class="btn-menu" onclick="openMenu()">📋 Menu</button>
+                <button class="btn-menu" onclick="openHelp()">❓ Aide</button>
+                <button id="nextBtn" onclick="changeSlide(1)">Suivant →</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Menu des slides -->
+    <div class="slide-menu" id="slideMenu">
+        <div class="menu-content">
+            <h2>Sélectionner une diapositive</h2>
+            <div class="slide-list" id="slideList"></div>
+            <button class="close-menu" onclick="closeMenu()">Fermer</button>
+        </div>
+    </div>
+
+    <!-- Aide -->
+    <div class="help-overlay" id="helpOverlay">
+        <div class="help-content">
+            <h2>Raccourcis clavier</h2>
+            <ul>
+                <li><kbd>→</kbd> ou <kbd>Espace</kbd> : Étape/Slide suivante</li>
+                <li><kbd>←</kbd> : Étape/Slide précédente</li>
+                <li><kbd>M</kbd> : Ouvrir le menu des slides</li>
+                <li><kbd>R</kbd> : Réinitialiser la slide actuelle</li>
+                <li><kbd>H</kbd> ou <kbd>?</kbd> : Afficher cette aide</li>
+                <li><kbd>Échap</kbd> : Fermer les menus</li>
+            </ul>
+            <button class="close-menu" onclick="closeHelp()">Fermer</button>
+        </div>
+    </div>
+
+    <script src="script-equations.js"></script>
+</body>
+</html>

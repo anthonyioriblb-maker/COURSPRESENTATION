@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Statistiques - Présentation Interactive (cohérent)</title>
+    <link rel="stylesheet" href="../../../Style presentation/styles.css">
+</head>
+<body>
+    <div class="container">
+        <div class="content">
+            <div class="slide active">
+                <h1>Organisation et gestion de données</h1>
+            </div>
+            <div class="slide">
+                <h2>I. Statistiques</h2>
+                <div class="example">
+                <div class="step">Fred veut connaître les loisirs préférés de ses camarades de classe. Il fait une petite enquête auprès de ses 24 camarades et demande à chacun de noter sur un bout de papier son activité préférée.</div>
+                <div class="step"><img src="6-41.png" width="80%" alt="Résultats de l'enquête"></div>
+                <div class="step">Sans le savoir, Fred va réaliser une étude statistique :</div>
+                <div class="step">Il a rassemblé des données et va les exploiter, c'est à dire qu'il va les présenter autrement pour les utiliser plus facilement.</div>
+                </div>
+            </div>
+            <div class="slide">
+                <h2>II. Utilisation de tableaux</h2>
+            </div>
+            <div class="slide">
+                <h3>1) Tableau à simple entrée</h3>
+                <div class="definition">
+                    <div class="step">C'est un tableau qui comporte deux lignes, on l'utilise lorsque l'on étudie un seul phénomène.</div>
+                </div>
+                <div class="example">
+                <div class="step">A partir de l'exemple précédent on peut réaliser le tableau suivant :</div>
+                <div class="step">
+                    <table>
+                        <tr><th>Loisir préféré</th><th>Sport</th><th>Cinéma</th><th>Lecture</th><th>Télévision</th><th>Jeu vidéo</th><th>Total</th></tr>
+                        <tr><td>Effectif</td><td>8</td><td>5</td><td><span class="mark-green">6</span></td><td>2</td><td>3</td><td><strong>24</strong></td></tr>
+                    </table>
+                </div>
+                <div class="step">L'effectif est ici le nombre d'élèves ayant la lecture comme loisir préféré, ils sont <span class="mark-green">6</span> dans cette classe.</div>
+                </div>
+            </div>
+<div class="slide">
+    <h3>2) Tableau à double entrée</h3>
+    <div class="definition">
+        <div class="step">On utilise un tableau à double entrée lorsque l'on étudie deux phénomènes en même temps.</div>
+    </div>
+    <div class="example">
+        <div class="step">Fred a décidé de séparer les réponses des filles et des garçons, il réalise donc une étude statistique avec deux phénomènes : le loisir préféré et le sexe de la personne qui répond.</div>
+        <div class="step">Il obtient le tableau suivant :</div>
+        <div class="step">
+            <table>
+                <tr><th></th><th colspan="5">Loisir préféré</th></tr>
+                <tr><th>Sexe</th><th>Sport</th><th>Cinéma</th><th>Lecture</th><th>Télévision</th><th>Jeu vidéo</th></tr>
+                <tr><td><strong>Fille</strong></td><td><span class="mark-blue">4</span></td><td><span class="mark-pink">2</span></td><td>4</td><td>0</td><td>1</td></tr>
+                <tr><td><strong>Garçon</strong></td><td><span class="mark-blue">4</span></td><td>3</td><td>2</td><td>2</td><td><span class="mark-orange">2</span></td></tr>
+                <tr><td><strong>Total</strong></td><td><span class="mark-green">8</span></td><td>5</td><td>6</td><td>2</td><td>3</td></tr>
+            </table>
+        </div>
+        <div class="step">Grâce à ce tableau à double entrée on peut dire que :</div>
+        <ul>
+            <li class="step"><span class="mark-green">8</span> élèves de la classe préfèrent le sport.</li>
+            <li class="step"><span class="mark-blue">Il y a autant de filles que de garçons qui préfèrent le sport.</span></li>
+            <li class="step"><span class="mark-orange">2</span> garçons de la classe préfèrent le jeu vidéo.</li>
+            <li class="step"><span class="mark-pink">2</span> filles de la classe préfèrent le cinéma.</li>
+        </ul>
+    </div>
+</div>
+            <div class="slide">
+                <h2>III. Représentations graphiques</h2>
+            </div>
+            <div class="slide">
+                <h3>1) Diagramme en bâtons</h3>
+                <div class="definition">
+                    <div class="step">Dans un diagramme en bâtons, les hauteurs sont proportionnelles aux quantités qu'elles représentent.</div>
+                </div>
+               <div class="example">
+                <div class="step">A partir de l'exemple du début, on peut réaliser le diagramme en bâtons suivant :</div>
+                <div class="step"><img src="6-42.png" width="80%" alt="Diagramme en bâtons"></div>
+                </div>
+            </div>
+            <div class="slide">
+                <h3>2) Diagramme circulaire</h3>
+                <div class="definition">
+                    <div class="step">Dans un diagramme circulaire, les angles des secteurs sont proportionnels aux quantités qu'ils représentent.</div>
+                </div>
+                
+               <div class="example">
+                <div class="step">Il faut trouver la valeur des angles pour construire le diagramme circulaire :</div>
+                <div class="step">
+                    <table>
+                        <tr><th>Loisir préféré</th><th>Sport</th><th>Cinéma</th><th>Lecture</th><th>Télévision</th><th>Jeu vidéo</th><th>Total</th></tr>
+                        <tr><td>Effectif</td><td>8</td><td>5</td><td>6</td><td>2</td><td>3</td><td><strong>24</strong></td></tr>
+                        <tr><td>Angle en degrés</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+                    </table>
+                </div>
+                <div class="step"><strong>L'angle complet d'un cercle est de 360°</strong></div>
+                <div class="step">
+                    <table>
+                        <tr><th>Loisir préféré</th><th>Sport</th><th>Cinéma</th><th>Lecture</th><th>Télévision</th><th>Jeu vidéo</th><th>Total</th></tr>
+                        <tr><td>Effectif</td><td>8</td><td>5</td><td>6</td><td>2</td><td>3</td><td><strong>24</strong></td></tr>
+                        <tr><td>Angle en degrés</td><td></td><td></td><td></td><td></td><td></td><td><strong><span class="red-text">360</span></strong></td></tr>
+                    </table>
+                </div>
+                <div class="step">360 ÷ 24 = 15 donc on multiplie la deuxième ligne par 15 pour obtenir la troisième.</div>
+                <div class="step">
+                    <table>
+                        <tr><th>Loisir préféré</th><th>Sport</th><th>Cinéma</th><th>Lecture</th><th>Télévision</th><th>Jeu vidéo</th><th>Total</th></tr>
+                        <tr><td>Effectif</td><td>8</td><td>5</td><td>6</td><td>2</td><td>3</td><td><strong>24</strong></td></tr>
+                        <tr><td>Angle en degrés</td><td><span class="green-text">120</span></td><td><span class="green-text">75</span></td><td><span class="green-text">90</span></td><td><span class="green-text">30</span></td><td><span class="green-text">45</span></td><td><strong><span class="red-text">360</span></strong></td></tr>
+                    </table>
+                </div>
+                <div class="step"><img src="6-43.png" width="60%" alt="Diagramme circulaire"></div>
+                </div>
+            </div>
+            <div class="slide">
+                <h3>3) Courbes</h3>
+                <div class="definition">
+                    <div class="step">Ces représentations sont utiles pour observer l'évolution d'une grandeur par rapport à une autre.</div>
+                </div>
+                <div class="example">
+                <div class="step">Fred a fait une nouvelle étude statistique. ll a recueilli les températures à Bourbonne toutes les heures pendant une journée. Il obtient le tableau suivant:</div>
+                <div class="step">
+                    <table>
+                        <tr><th>Heure</th><th>0h</th><th>1h</th><th>2h</th><th>3h</th><th>4h</th><th>5h</th><th>6h</th><th>7h</th><th>8h</th><th>9h</th><th>10h</th><th>11h</th></tr>
+                        <tr><td>Température en °C</td><td>4</td><td>5</td><td>7</td><td>7</td><td>7</td><td>10</td><td>13</td><td>15</td><td>17</td><td>20</td><td>21</td><td>23</td></tr>
+                    </table>
+                </div>
+                <div class="step">
+                    <table>
+                        <tr><th>Heure</th><th>12h</th><th>13h</th><th>14h</th><th>15h</th><th>16h</th><th>17h</th><th>18h</th><th>19h</th><th>20h</th><th>21h</th><th>22h</th><th>23h</th></tr>
+                        <tr><td>Température en °C</td><td>25</td><td>27</td><td>27</td><td>27</td><td>25</td><td>22</td><td>20</td><td>16</td><td>15</td><td>11</td><td>8</td><td>5</td></tr>
+                    </table>
+                </div>
+                <div class="step">Réalisons la courbe correspondante à ce tableau.</div>
+                <div class="step"><img src="6-44.png" width="85%" alt="Courbe de température"></div>
+                <div class="step"><em>Évolution de la température en fonction du temps à Bourbonne.</em></div>
+                </div>
+            </div>
+        </div>
+        <div class="controls">
+            <div class="controls-left">
+                <button id="prevBtn" onclick="changeSlide(-1)">← Précédent</button>
+                <button class="btn-reset" onclick="resetSlide()">⟲</button>
+            </div>
+            <div class="progress">
+                <span><span id="currentSlide">1</span> / <span id="totalSlides">9</span></span>
+                <span class="step-indicator" id="stepIndicator"></span>
+            </div>
+            <div class="controls-right">
+                <button class="btn-menu" onclick="openMenu()">📋 Menu</button>
+                <button class="btn-menu" onclick="openHelp()">❓ Aide</button>
+                <button id="nextBtn" onclick="changeSlide(1)">Suivant →</button>
+            </div>
+        </div>
+    </div>
+    <div class="slide-menu" id="slideMenu">
+        <div class="menu-content">
+            <h2>Sélectionner une diapositive</h2>
+            <div class="slide-list" id="slideList"></div>
+            <button class="close-menu" onclick="closeMenu()">Fermer</button>
+        </div>
+    </div>
+    <div class="help-overlay" id="helpOverlay">
+        <div class="help-content">
+            <h2>Raccourcis clavier</h2>
+            <ul>
+                <li><kbd>→</kbd> ou <kbd>Espace</kbd> : Étape/Slide suivante</li>
+                <li><kbd>←</kbd> : Étape/Slide précédente</li>
+                <li><kbd>M</kbd> : Ouvrir le menu des slides</li>
+                <li><kbd>R</kbd> : Réinitialiser la slide actuelle</li>
+                <li><kbd>H</kbd> ou <kbd>?</kbd> : Afficher cette aide</li>
+                <li><kbd>Échap</kbd> : Fermer les menus</li>
+            </ul>
+            <button class="close-menu" onclick="closeHelp()">Fermer</button>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
