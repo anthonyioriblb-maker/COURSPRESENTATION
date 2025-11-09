@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Les fractions - Présentation Interactive</title>
+    <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+    <div class="container">
+        <div class="content">
+            <div class="slide active">
+                <h1>Chapitre 6 : Les fractions - Partie 1</h1>
+            </div>
+
+            <div class="slide">
+                <h2><u>I. Écriture fractionnaire</u></h2>
+                <h3><u>1) Partage</u></h3>
+                <div class="example">
+                    <div class="step"><strong>Exemple :</strong> On a divisé un rectangle en 7 parties égales puis colorié 3 de ces parties :</div>
+                    <div class="step">
+                        <div class="fraction-visual">
+                            <div class="fraction-rectangle large">
+                                <div class="fraction-part orange"></div>
+                                <div class="fraction-part orange"></div>
+                                <div class="fraction-part orange"></div>
+                                <div class="fraction-part"></div>
+                                <div class="fraction-part"></div>
+                                <div class="fraction-part"></div>
+                                <div class="fraction-part"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="step">La partie coloriée représente <span class="fraction"><span class="numerateur">3</span><span class="denominateur">7</span></span> (trois septième) du rectangle.</div>
+                    <div class="step"><strong>On remarque que :</strong><br>
+                        <span class="fraction"><span class="numerateur">3</span><span class="denominateur">7</span></span> = <span class="fraction"><span class="numerateur">1</span><span class="denominateur">7</span></span> + <span class="fraction"><span class="numerateur">1</span><span class="denominateur">7</span></span> + <span class="fraction"><span class="numerateur">1</span><span class="denominateur">7</span></span> = 3 × <span class="fraction"><span class="numerateur">1</span><span class="denominateur">7</span></span>
+                    </div>
+                </div>
+                <h3><u>2) Vocabulaire</u></h3>
+                <div class="definition">
+                    <div class="step">Pour la fraction
+                        <span class="fraction"><span class="numerateur red-text">3</span><span class="denominateur green-text">7</span></span>
+                    </div>
+                    <div class="step">
+                        <ul>
+                            <li><span class="red-text">3</span> est <span class="red-text">le numérateur</span> (du latin <em>numerator</em> = celui qui compte)</li>
+                            <li><span class="green-text">7</span> est <span class="green-text">le dénominateur</span> (du latin <em>denominator</em> = celui qui nomme, ici des septièmes)</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="remarque">
+                    <div class="step"><strong>⚠ Attention : il faut forcément que les parties soient identiques !</strong></div>
+                    <div class="step">
+                        <div style="text-align: center;">
+                            <svg width="250" height="250" viewBox="0 0 250 250">
+                                <defs>
+                                    <pattern id="hachure" patternUnits="userSpaceOnUse" width="8" height="8">
+                                        <path d="M-1,1 l2,-2 M0,8 l8,-8 M7,9 l2,-2" stroke="#ff6b6b" stroke-width="1.5"/>
+                                    </pattern>
+                                </defs>
+                                <g transform="translate(125, 125)">
+                                    <path d="M 0,0 L 100,0 A 100,100 0 0,1 50,86.6 Z"
+                                          fill="url(#hachure)" stroke="#333" stroke-width="2"/>
+                                    <path d="M 0,0 L 50,86.6 A 100,100 0 0,1 -17.4,98.5 Z"
+                                          fill="#f0f0f0" stroke="#333" stroke-width="2"/>
+                                    <path d="M 0,0 L -17.4,98.5 A 100,100 0 0,1 -76.6,64.3 Z"
+                                          fill="url(#hachure)" stroke="#333" stroke-width="2"/>
+                                    <path d="M 0,0 L -76.6,64.3 A 100,100 0 0,1 -93.9,34.2 Z"
+                                          fill="#f0f0f0" stroke="#333" stroke-width="2"/>
+                                    <path d="M 0,0 L -93.9,34.2 A 100,100 0 0,1 -70.7,-70.7 Z"
+                                          fill="url(#hachure)" stroke="#333" stroke-width="2"/>
+                                    <path d="M 0,0 L -70.7,-70.7 A 100,100 0 0,1 17.4,-98.5 Z"
+                                          fill="#f0f0f0" stroke="#333" stroke-width="2"/>
+                                    <path d="M 0,0 L 17.4,-98.5 A 100,100 0 0,1 100,0 Z"
+                                          fill="#f0f0f0" stroke="#333" stroke-width="2"/>
+                                </g>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="step">La partie hachurée de la figure ci-dessus ne correspond pas au <span class="fraction"><span class="numerateur">3</span><span class="denominateur">7</span></span> du disque car les 7 parts ne sont pas égales.</div>
+                </div>
+            </div>
+
+            <div class="slide">
+                <h2><u>II. Fraction et nombres</u></h2>
+                <div class="definition">
+                    <div class="step"><strong>Définition :</strong> Soient <em>a</em> et <em>b</em> deux nombres entiers avec <em>b</em> ≠ 0.</div>
+                    <div class="step">La fraction <span class="fraction"><span class="numerateur">a</span><span class="denominateur">b</span></span> est le <strong>quotient</strong> de <em>a</em> par <em>b</em> : <span class="fraction"><span class="numerateur">a</span><span class="denominateur">b</span></span> = <em>a</em> ÷ <em>b</em></div>
+                </div>
+                <div class="example">
+                    <div class="step"><strong>Exemples :</strong></div>
+                    <div class="step">
+                        <ul>
+                            <li><span class="fraction"><span class="numerateur">1</span><span class="denominateur">2</span></span> ; <span class="fraction"><span class="numerateur">1</span><span class="denominateur">4</span></span> ; <span class="fraction"><span class="numerateur">2</span><span class="denominateur">9</span></span> ; <span class="fraction"><span class="numerateur">14</span><span class="denominateur">3</span></span> sont des fractions.</li>
+                            <li><span class="fraction"><span class="numerateur">2,1</span><span class="denominateur">5</span></span> n'est pas une fraction car 2,1 n'est pas un nombre entier.</li>
+                            <li><span class="fraction"><span class="numerateur">1</span><span class="denominateur">10</span></span> ; <span class="fraction"><span class="numerateur">3</span><span class="denominateur">100</span></span> ; <span class="fraction"><span class="numerateur">47</span><span class="denominateur">1 000</span></span> sont des <strong>fractions décimales</strong>.</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="remarque">
+                    <div class="step"><strong>⚠ Attention :</strong> Certaines fractions ne possèdent pas d'écriture décimale.</div>
+                    <div class="step">Par exemple : <span class="fraction"><span class="numerateur">1</span><span class="denominateur">3</span></span> = 1 ÷ 3 = 0,333333... 😱</div>
+                    <div class="step">Mais on peut toujours en donner une valeur approchée : <span class="fraction"><span class="numerateur">1</span><span class="denominateur">3</span></span> ≈ 0,33 😅</div>
+                </div>
+            </div>
+
+            <div class="slide">
+                <h2><u>III. Quotients égaux</u></h2>
+                <div class="example">
+                    <div class="step"><strong>Observation :</strong></div>
+                    <div class="step">
+                        <div class="fraction-visual">
+                            <div style="display: inline-block; text-align: center; margin: 20px; vertical-align: top;">
+                                <div style="display: flex; flex-direction: column; gap: 2px; width: 200px; height: 200px; border: 2px solid #333;">
+                                    <div style="flex: 1; background-color: #4a90e2; border: 1px solid #333;"></div>
+                                    <div style="flex: 1; background-color: white; border: 1px solid #333;"></div>
+                                </div>
+                                <br>On a colorié <span class="fraction"><span class="numerateur">1</span><span class="denominateur">2</span></span> de la figure
+                            </div>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <span style="font-size: 2em; vertical-align: middle;"> = </span>
+                        <div style="display: inline-block; text-align: center; margin: 20px; vertical-align: top;">
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr; gap: 2px; width: 200px; height: 200px; border: 2px solid #333;">
+                                <div style="background-color: #6fdc6f; border: 1px solid #333;"></div>
+                                <div style="background-color: #6fdc6f; border: 1px solid #333;"></div>
+                                <div style="background-color: white; border: 1px solid #333;"></div>
+                                <div style="background-color: white; border: 1px solid #333;"></div>
+                            </div>
+                            <br>On a colorié <span class="fraction"><span class="numerateur">2</span><span class="denominateur">4</span></span> de la figure
+                        </div>
+                    </div>
+                    <div class="step">
+                        <span style="font-size: 2em; vertical-align: middle;"> = </span>
+                        <div style="display: inline-block; text-align: center; margin: 20px; vertical-align: top;">
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr 1fr 1fr; gap: 2px; width: 200px; height: 200px; border: 2px solid #333;">
+                                <div style="background-color: #e24a4a; border: 1px solid #333;"></div>
+                                <div style="background-color: #e24a4a; border: 1px solid #333;"></div>
+                                <div style="background-color: #e24a4a; border: 1px solid #333;"></div>
+                                <div style="background-color: #e24a4a; border: 1px solid #333;"></div>
+                                <div style="background-color: white; border: 1px solid #333;"></div>
+                                <div style="background-color: white; border: 1px solid #333;"></div>
+                                <div style="background-color: white; border: 1px solid #333;"></div>
+                                <div style="background-color: white; border: 1px solid #333;"></div>
+                            </div>
+                            <br>On a colorié <span class="fraction"><span class="numerateur">4</span><span class="denominateur">8</span></span> de la figure
+                        </div>
+                    </div>
+                    <div class="step">Or, les trois parties coloriées sur les trois figures sont identiques.</div>
+                    <div class="step">Cela veut dire que les fractions sont <strong>égales</strong> :</div>
+                    <div class="step">
+                        <div style="text-align: center; font-size: 1.2em; margin: 20px 0;">
+                            <span class="fraction"><span class="numerateur">1</span><span class="denominateur">2</span></span> =
+                            <span class="fraction"><span class="numerateur">2</span><span class="denominateur">4</span></span> =
+                            <span class="fraction"><span class="numerateur">4</span><span class="denominateur">8</span></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="important">
+                    <div class="step"><strong>Propriété fondamentale :</strong></div>
+                    <div class="step">On ne change pas la valeur d'une fraction si on multiplie (ou si on divise) le numérateur et le dénominateur par un même nombre non nul.</div>
+                </div>
+                <div class="example">
+                    <div class="step"><strong>Exemples :</strong></div>
+                    <div class="step">
+                        <ul>
+                            <li><span class="fraction"><span class="numerateur">2</span><span class="denominateur">7</span></span> = <span class="fraction"><span class="numerateur">2×5</span><span class="denominateur">7×5</span></span> = <span class="fraction"><span class="numerateur">10</span><span class="denominateur">35</span></span></li>
+                            <li><span class="fraction"><span class="numerateur">18</span><span class="denominateur">28</span></span> = <span class="fraction"><span class="numerateur">18÷2</span><span class="denominateur">28÷2</span></span> = <span class="fraction"><span class="numerateur">9</span><span class="denominateur">14</span></span></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="remarque">
+                    <div class="step"><strong>⚠ Attention :</strong> Cette règle ne s'applique pas à l'addition et à la soustraction.</div>
+                    <div class="step"><span class="fraction"><span class="numerateur">3</span><span class="denominateur">4</span></span> ≠ <span class="fraction"><span class="numerateur">3+5</span><span class="denominateur">4+5</span></span></div>
+                    <div class="step">En effet : <span class="fraction"><span class="numerateur">3</span><span class="denominateur">4</span></span> = 0,75 et <span class="fraction"><span class="numerateur">3+5</span><span class="denominateur">4+5</span></span> = <span class="fraction"><span class="numerateur">8</span><span class="denominateur">9</span></span> ≈ 0,9</div>
+                </div>
+            </div>
+
+            <div class="slide">
+                <h2><u>IV. Fractions et demi-droite graduée</u></h2>
+                <div class="definition">
+                    <div class="step"><strong>Représentation sur une demi-droite graduée :</strong></div>
+                    <div class="step">Pour placer une fraction sur une droite graduée, on partage l'unité en autant de parties égales qu'indique le dénominateur, puis on reporte le nombre de parts indiqué par le numérateur.</div>
+                </div>
+                <div class="example">
+                    <div class="step"><strong>Exemple :</strong> Placer A(<span class="fraction"><span class="numerateur">7</span><span class="denominateur">5</span></span>) sur cette demi-droite graduée.</div>
+                    <div class="step">
+                        <img src="6-61.png" alt="Demi-droite graduée avec l'unité marquée" style="display: block; margin: 10px auto; max-width: 100%; height: auto;">
+                    </div>
+                    <div class="step">
+                        <strong>Étape 1 :</strong> On partage l'unité en 5 parties égales. Chaque écart représente <span class="fraction"><span class="numerateur">1</span><span class="denominateur">5</span></span>
+                        <img src="6-62.png" alt="Demi-droite graduée avec l'unité divisée en 5 parties égales" style="display: block; margin: 10px auto; max-width: 100%; height: auto;">
+                    </div>
+                    <div class="step">
+                        <strong>Étape 2 :</strong> On reporte 7 fois la longueur du cinquième de l'unité.
+                        <img src="6-63.png" alt="Demi-droite graduée avec la fraction 7/5 placée" style="display: block; margin: 10px auto; max-width: 100%; height: auto;">
+                    </div>
+                    <div class="step">
+                        On observe que : <span class="fraction"><span class="numerateur">7</span><span class="denominateur">5</span></span> = 7 × <span class="fraction"><span class="numerateur">1</span><span class="denominateur">5</span></span> = 1 + <span class="fraction"><span class="numerateur">2</span><span class="denominateur">5</span></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="slide">
+                <h2><u>V. Comparaison de fractions</u></h2>
+                <h3><u>1) Mettre des fractions au même dénominateur</u></h3>
+                <div class="method">
+                    <div class="step"><strong>Méthode :</strong> Pour comparer deux fractions, on peut les mettre au même dénominateur en utilisant la propriété fondamentale des fractions.</div>
+                </div>
+                <div class="example">
+                    <div class="step"><strong>Exemple 1 :</strong> Mettre au même dénominateur les fractions <span class="fraction"><span class="numerateur">3</span><span class="denominateur">4</span></span> et <span class="fraction"><span class="numerateur">2</span><span class="denominateur">5</span></span>.</div>
+                    <div class="step">On cherche un <strong>dénominateur commun</strong>. On peut utiliser le produit des dénominateurs : 4 × 5 = 20</div>
+                    <div class="step">
+                        <ul>
+                            <li><span class="fraction"><span class="numerateur">3</span><span class="denominateur">4</span></span> = <span class="fraction"><span class="numerateur">3×5</span><span class="denominateur">4×5</span></span> = <span class="fraction"><span class="numerateur">15</span><span class="denominateur">20</span></span></li>
+                            <li><span class="fraction"><span class="numerateur">2</span><span class="denominateur">5</span></span> = <span class="fraction"><span class="numerateur">2×4</span><span class="denominateur">5×4</span></span> = <span class="fraction"><span class="numerateur">8</span><span class="denominateur">20</span></span></li>
+                        </ul>
+                    </div>
+                    <div class="step">Les deux fractions sont maintenant au même dénominateur : <span class="fraction"><span class="numerateur">15</span><span class="denominateur">20</span></span> et <span class="fraction"><span class="numerateur">8</span><span class="denominateur">20</span></span></div>
+                </div>
+                <div class="example">
+                    <div class="step"><strong>Exemple 2 :</strong> Mettre au même dénominateur les fractions <span class="fraction"><span class="numerateur">5</span><span class="denominateur">6</span></span> et <span class="fraction"><span class="numerateur">7</span><span class="denominateur">9</span></span>.</div>
+                    <div class="step">On cherche un dénominateur commun. Ici, on peut remarquer que 18 est un multiple de 6 et de 9 (car 6 × 3 = 18 et 9 × 2 = 18).</div>
+                    <div class="step">
+                        <ul>
+                            <li><span class="fraction"><span class="numerateur">5</span><span class="denominateur">6</span></span> = <span class="fraction"><span class="numerateur">5×3</span><span class="denominateur">6×3</span></span> = <span class="fraction"><span class="numerateur">15</span><span class="denominateur">18</span></span></li>
+                            <li><span class="fraction"><span class="numerateur">7</span><span class="denominateur">9</span></span> = <span class="fraction"><span class="numerateur">7×2</span><span class="denominateur">9×2</span></span> = <span class="fraction"><span class="numerateur">14</span><span class="denominateur">18</span></span></li>
+                        </ul>
+                    </div>
+                </div>
+                <h3><u>2) Comparer les fractions</u></h3>
+                <div class="important">
+                    <div class="step"><strong>Propriété :</strong> Pour comparer deux fractions qui ont le même dénominateur, on compare leurs numérateurs.</div>
+                </div>
+                <div class="example">
+                    <div class="step"><strong>Exemple :</strong> Comparer <span class="fraction"><span class="numerateur">3</span><span class="denominateur">4</span></span> et <span class="fraction"><span class="numerateur">2</span><span class="denominateur">5</span></span>.</div>
+                    <div class="step"><strong>Étape 1 :</strong> On met les fractions au même dénominateur :
+                        <ul>
+                            <li><span class="fraction"><span class="numerateur">3</span><span class="denominateur">4</span></span> = <span class="fraction"><span class="numerateur">15</span><span class="denominateur">20</span></span></li>
+                            <li><span class="fraction"><span class="numerateur">2</span><span class="denominateur">5</span></span> = <span class="fraction"><span class="numerateur">8</span><span class="denominateur">20</span></span></li>
+                        </ul>
+                    </div>
+                    <div class="step"><strong>Étape 2 :</strong> On compare les numérateurs :<br>
+                        15 &gt; 8 donc <span class="fraction"><span class="numerateur">15</span><span class="denominateur">20</span></span> &gt; <span class="fraction"><span class="numerateur">8</span><span class="denominateur">20</span></span>
+                    </div>
+                    <div class="step"><strong>Conclusion :</strong> <span class="fraction"><span class="numerateur">3</span><span class="denominateur">4</span></span> &gt; <span class="fraction"><span class="numerateur">2</span><span class="denominateur">5</span></span></div>
+                </div>
+                <div class="remarque">
+                    <div class="step"><strong>Astuce :</strong> Pour comparer rapidement des fractions avec 1 :</div>
+                    <div class="step">
+                        <ul>
+                            <li>Si le numérateur est <strong>inférieur</strong> au dénominateur, la fraction est <strong>inférieure à 1</strong>. Exemple : <span class="fraction"><span class="numerateur">3</span><span class="denominateur">5</span></span> &lt; 1</li>
+                            <li>Si le numérateur est <strong>égal</strong> au dénominateur, la fraction est <strong>égale à 1</strong>. Exemple : <span class="fraction"><span class="numerateur">7</span><span class="denominateur">7</span></span> = 1</li>
+                            <li>Si le numérateur est <strong>supérieur</strong> au dénominateur, la fraction est <strong>supérieure à 1</strong>. Exemple : <span class="fraction"><span class="numerateur">11</span><span class="denominateur">8</span></span> &gt; 1</li>
+                        </ul>
+                    </div>
+                </div>
+                <h3><u>3) Encadrer une fraction par deux entiers consécutifs</u></h3>
+                <div class="method">
+                    <div class="step"><strong>Méthode 1 :</strong> Pour encadrer une fraction par deux entiers consécutifs, on divise le numérateur par le dénominateur pour trouver entre quels entiers se trouve le quotient.</div>
+                </div>
+                <div class="example">
+                    <div class="step"><strong>Exemple :</strong> Encadrer <span class="fraction"><span class="numerateur">7</span><span class="denominateur">3</span></span> par deux entiers consécutifs.</div>
+                    <div class="step">On effectue la division : 7 ÷ 3 ≈ 2,33...</div>
+                    <div class="step">Le quotient est compris entre 2 et 3.</div>
+                    <div class="step"><strong>Donc :</strong> 2 &lt; <span class="fraction"><span class="numerateur">7</span><span class="denominateur">3</span></span> &lt; 3</div>
+                </div>
+                <div class="method">
+                    <div class="step"><strong>Méthode 2 :</strong> On peut aussi encadrer une fraction en cherchant des multiples du dénominateur.</div>
+                </div>
+                <div class="example">
+                    <div class="step"><strong>Exemple :</strong> Pour encadrer <span class="fraction"><span class="numerateur">23</span><span class="denominateur">5</span></span>, on cherche les multiples de 5 qui encadrent 23 :</div>
+                    <div class="step">On sait que 4 × 5 = 20 et 5 × 5 = 25</div>
+                    <div class="step">Donc <span class="fraction"><span class="numerateur">20</span><span class="denominateur">5</span></span> &lt; <span class="fraction"><span class="numerateur">23</span><span class="denominateur">5</span></span> &lt; <span class="fraction"><span class="numerateur">25</span><span class="denominateur">5</span></span></div>
+                    <div class="step">Ainsi 4 &lt; <span class="fraction"><span class="numerateur">23</span><span class="denominateur">5</span></span> &lt; 5</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="controls">
+            <div class="controls-left">
+                <button id="prevBtn" onclick="changeSlide(-1)">← Précédent</button>
+                <button class="btn-reset" onclick="resetSlide()">⟲</button>
+            </div>
+            <div class="progress">
+                <span><span id="currentSlide">1</span> / <span id="totalSlides">6</span></span>
+                <span class="step-indicator" id="stepIndicator"></span>
+            </div>
+            <div class="controls-right">
+                <button class="btn-menu" onclick="openMenu()">📋 Menu</button>
+                <button class="btn-menu" onclick="openHelp()">❓ Aide</button>
+                <button id="nextBtn" onclick="changeSlide(1)">Suivant →</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="slide-menu" id="slideMenu">
+        <div class="menu-content">
+            <h2>Sélectionner une diapositive</h2>
+            <div class="slide-list" id="slideList"></div>
+            <button class="close-menu" onclick="closeMenu()">Fermer</button>
+        </div>
+    </div>
+
+    <div class="help-overlay" id="helpOverlay">
+        <div class="help-content">
+            <h2>Raccourcis clavier</h2>
+            <ul>
+                <li><kbd>→</kbd> ou <kbd>Espace</kbd> : Étape/Slide suivante</li>
+                <li><kbd>←</kbd> : Étape/Slide précédente</li>
+                <li><kbd>M</kbd> : Ouvrir le menu des slides</li>
+                <li><kbd>R</kbd> : Réinitialiser la slide actuelle</li>
+                <li><kbd>H</kbd> ou <kbd>?</kbd> : Afficher cette aide</li>
+                <li><kbd>Échap</kbd> : Fermer les menus</li>
+            </ul>
+            <button class="close-menu" onclick="closeHelp()">Fermer</button>
+        </div>
+    </div>
+
+    <script src="script-fractions.js"></script>
+</body>
+</html>

@@ -166,6 +166,71 @@ h3 {
     font-size: 0.8em;
 }
 
+/* Styles pour les fractions (version alternative) */
+.fraction {
+    display: inline-block;
+    vertical-align: middle;
+    text-align: center;
+    font-size: 1.1em;
+    margin: 0 5px;
+}
+
+.numerateur {
+    display: block;
+    border-bottom: 3px solid currentColor;
+    padding: 3px 10px 5px 10px;
+    line-height: 1.2;
+}
+
+.denominateur {
+    display: block;
+    padding: 5px 10px 3px 10px;
+    line-height: 1.2;
+}
+
+/* Visualisation des fractions avec rectangles */
+.fraction-visual {
+    display: inline-block;
+    margin: 20px auto;
+    text-align: center;
+}
+
+.fraction-rectangle {
+    display: flex;
+    gap: 2px;
+    border: 2px solid #333;
+    width: 350px;
+    height: 80px;
+    margin: 10px auto;
+}
+
+.fraction-rectangle.large {
+    width: 450px;
+    height: 100px;
+}
+
+.fraction-part {
+    flex: 1;
+    background-color: white;
+    border: 1px solid #333;
+}
+
+.fraction-part.orange {
+    background-color: #ff9933;
+}
+
+.fraction-part.blue {
+    background-color: #4a90e2;
+}
+
+.fraction-part.green {
+    background-color: #6fdc6f;
+}
+
+.fraction-part.red {
+    background-color: #e24a4a;
+}
+
 /* Style pour les angles */
 .angle {
     font-style: normal;
