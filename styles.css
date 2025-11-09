@@ -166,7 +166,7 @@ h3 {
     font-size: 0.8em;
 }
 
-/* Styles pour les fractions (version alternative) */
+/* Styles pour les fractions avec la nouvelle nomenclature */
 .fraction {
     display: inline-block;
     vertical-align: middle;
@@ -188,47 +188,45 @@ h3 {
     line-height: 1.2;
 }
 
-/* Visualisation des fractions avec rectangles */
+/* Ajustements pour les fractions dans différents contextes */
+.important .fraction,
+.definition .fraction,
+.method .fraction,
+.example .fraction {
+    font-size: 1em;
+}
+
+/* Pour les fractions imbriquées */
+.fraction .fraction {
+    font-size: 0.8em;
+}
+
+/* Styles pour les visualisations de fractions */
 .fraction-visual {
-    display: inline-block;
-    margin: 20px auto;
-    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px 0;
 }
 
 .fraction-rectangle {
     display: flex;
-    gap: 2px;
     border: 2px solid #333;
-    width: 350px;
-    height: 80px;
-    margin: 10px auto;
 }
 
 .fraction-rectangle.large {
-    width: 450px;
-    height: 100px;
+    width: 420px;
+    height: 60px;
 }
 
 .fraction-part {
     flex: 1;
-    background-color: white;
     border: 1px solid #333;
+    background-color: white;
 }
 
 .fraction-part.orange {
     background-color: #ff9933;
-}
-
-.fraction-part.blue {
-    background-color: #4a90e2;
-}
-
-.fraction-part.green {
-    background-color: #6fdc6f;
-}
-
-.fraction-part.red {
-    background-color: #e24a4a;
 }
 
 /* Style pour les angles */
