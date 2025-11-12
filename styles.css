@@ -645,3 +645,39 @@ button:active {
         grid-template-columns: 1fr;
     }
 }
+
+/* Styles pour les barrés en couleur dans les simplifications */
+.strikethrough-red {
+    text-decoration: line-through;
+    color: #e74c3c;
+    text-decoration-color: #e74c3c;
+    text-decoration-thickness: 2px;
+}
+
+.strikethrough-blue {
+    text-decoration: line-through;
+    color: #3498db;
+    text-decoration-color: #3498db;
+    text-decoration-thickness: 2px;
+}
+
+.strikethrough-green {
+    text-decoration: line-through;
+    color: #27ae60;
+    text-decoration-color: #27ae60;
+    text-decoration-thickness: 2px;
+}
+
+.strikethrough-orange {
+    text-decoration: line-through;
+    color: #e67e22;
+    text-decoration-color: #e67e22;
+    text-decoration-thickness: 2px;
+}
+
+.strikethrough-purple {
+    text-decoration: line-through;
+    color: #9b59b6;
+    text-decoration-color: #9b59b6;
+    text-decoration-thickness: 2px;
+}
