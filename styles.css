@@ -681,3 +681,11 @@ button:active {
     text-decoration-color: #9b59b6;
     text-decoration-thickness: 2px;
 }
+
+/* Variable mathématique avec police arrondie */
+.math-var {
+    font-family: 'Cambria Math', 'STIX Two Math', 'Computer Modern', 'Times New Roman', serif;
+    font-style: italic;
+    font-weight: 400;
+    letter-spacing: 0.5px;
+}
