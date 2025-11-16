@@ -681,3 +681,56 @@ button:active {
     text-decoration-color: #9b59b6;
     text-decoration-thickness: 2px;
 }
+
+/* Titre h4 */
+h4 {
+    font-size: 3em;
+    color: #c0392b;
+    margin: 15px 0;
+    margin-top: 25px;
+    text-align: left;
+}
+
+/* Classe exercice */
+.exercice {
+    background: #fce4ec;
+    border-left: 6px solid #c2185b;
+    color: black;
+    font-size: 2.5em;
+    padding: 18px 30px;
+    border-radius: 12px;
+    margin: 12px 0;
+    text-align: left;
+    line-height: 1.5;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.15);
+}
+
+/* Tableaux avec flèches */
+.tableau-avec-fleche {
+    position: relative;
+    display: inline-block;
+    margin: 20px auto;
+}
+
+.fleche-coefficient {
+    position: absolute;
+    right: -80px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 120px;
+}
+
+.fleche-coefficient svg {
+    width: 60px;
+    height: 80px;
+}
+
+.coefficient {
+    font-size: 1.3em;
+    font-weight: bold;
+    color: #2ecc71;
+    margin-top: 5px;
+}
