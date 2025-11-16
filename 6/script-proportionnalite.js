@@ -7,8 +7,8 @@ const totalSlides = slides.length;
 const slideTitles = [
     "Chapitre 7 : Proportionnalité",
     "I. Situation de proportionnalité - Reconnaissance",
-    "I. Situation de proportionnalité - Méthode a)",
-    "I. Situation de proportionnalité - Méthodes b) et c)",
+    "2) Compléter un tableau - Méthode a)",
+    "2) Compléter un tableau - Méthodes b) et c)",
     "II. Les pourcentages - Application",
     "II. Les pourcentages - Calcul",
     "II. Échelles - Utilisation",
