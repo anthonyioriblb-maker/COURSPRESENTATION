@@ -160,11 +160,11 @@ document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape' || e.key === 'h' || e.key === 'H' || e.key === '?') closeHelp();
         return;
     }
-    if (e.key === 'ArrowRight' || e.key === ' ') { 
-        e.preventDefault(); 
-        changeSlide(1); 
-    } else if (e.key === 'ArrowLeft') { 
-        e.preventDefault(); 
+    if (e.key === 'ArrowUp' || e.key === ' ') {
+        e.preventDefault();
+        changeSlide(1);
+    } else if (e.key === 'ArrowDown') {
+        e.preventDefault();
         changeSlide(-1); 
     } else if (e.key === 'm' || e.key === 'M') {
         openMenu();
