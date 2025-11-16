@@ -285,6 +285,7 @@ th, td {
     border: 2px solid #000;
     padding: 12px 18px;
     text-align: center;
+    white-space: nowrap;
 }
 
 th {
