@@ -712,25 +712,29 @@ h4 {
     margin: 20px auto;
 }
 
+.tableau-avec-fleche table {
+    margin: 0;
+}
+
 .fleche-coefficient {
     position: absolute;
-    right: -100px;
+    right: -120px;
     top: 50%;
     transform: translateY(-50%);
     display: flex;
     flex-direction: row;
     align-items: center;
-    gap: 5px;
+    gap: 8px;
+    font-size: 2em;
+    color: #2ecc71;
 }
 
-.fleche-coefficient svg {
-    width: 40px;
-    height: 60px;
+.fleche-coefficient .arrow {
+    font-size: 2.5em;
+    line-height: 1;
 }
 
 .coefficient {
-    font-size: 1.8em;
     font-weight: bold;
-    color: #2ecc71;
     white-space: nowrap;
 }
