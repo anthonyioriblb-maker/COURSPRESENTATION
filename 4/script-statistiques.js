@@ -5,46 +5,46 @@ let slides;
 let totalSlides;
 
 const slideTitles = [
-    "Chapitre 6 : Statistiques et probabilité",
-    "I. Définitions",
-    "Toutes les définitions",
-    "Exemple - Énoncé",
-    "Tableau sans valeurs",
-    "Tableau avec effectifs",
-    "Tableau complet avec fréquences",
-    "Question 1",
-    "Calculs",
-    "Question 2",
-    "Question 3",
-    "II. Utiliser un tableur",
-    "Opérations de base",
-    "Exemple 1",
-    "Remarques fondamentales",
-    "Exemple 2 - Partie 1",
-    "Exemple 2 - Image 1",
-    "Exemple 2 - Partie 2",
-    "Exemple 2 - Image 2",
-    "Exemple 3 - Partie 1",
-    "Exemple 3 - Image",
-    "Exemple 4 - Partie 1",
-    "Exemple 4 - Image",
-    "III. Probabilité",
-    "Définition expérience aléatoire",
-    "Exemple dé",
-    "Définition issue",
-    "Définition probabilité",
-    "Exemple dé probabilité",
-    "Événements impossible et certain",
-    "Propriété équiprobabilité",
-    "Exemple roue - Énoncé",
-    "Exemple roue - Calcul",
-    "IV. Lien entre probabilité et fréquence",
-    "Propriété",
-    "Exemple",
-    "30 répétitions",
-    "122 800 répétitions",
-    "393 511 répétitions",
-    "Conclusion"
+    "Chapitre 6 : Statistiques et probabilité",        // Slide 1
+    "I. Définitions",                                    // Slide 2
+    "Toutes les définitions",                           // Slide 3
+    "Exemple - Énoncé",                                 // Slide 4
+    "Tableau sans valeurs",                             // Slide 5
+    "Tableau avec effectifs",                           // Slide 6
+    "Tableau complet avec fréquences",                  // Slide 7
+    "Question 1",                                        // Slide 8
+    "Calculs",                                          // Slide 9
+    "Question 2",                                        // Slide 10
+    "Question 3",                                        // Slide 11
+    "II. Utiliser un tableur",                          // Slide 12
+    "Opérations de base",                               // Slide 13
+    "Exemple 1",                                        // Slide 14
+    "Remarques fondamentales",                          // Slide 15
+    "Exemple 2 - Partie 1",                             // Slide 16
+    "Exemple 2 - Image 1",                              // Slide 17
+    "Exemple 2 - Partie 2",                             // Slide 18
+    "Exemple 2 - Image 2",                              // Slide 19
+    "Exemple 3 - Partie 1",                             // Slide 20
+    "Exemple 3 - Image",                                // Slide 21
+    "Exemple 4 - Partie 1",                             // Slide 22
+    "Exemple 4 - Image",                                // Slide 23
+    "III. Probabilité",                                 // Slide 24
+    "Définition expérience aléatoire",                  // Slide 25
+    "Exemple dé",                                       // Slide 26
+    "Définition issue",                                 // Slide 27
+    "Définition probabilité",                           // Slide 28
+    "Exemple dé probabilité",                           // Slide 29
+    "Événements impossible et certain",                 // Slide 30
+    "Propriété équiprobabilité",                        // Slide 31
+    "Exemple roue - Énoncé",                            // Slide 32
+    "Exemple roue - Calcul",                            // Slide 33
+    "IV. Lien entre probabilité et fréquence",          // Slide 34
+    "Propriété",                                        // Slide 35
+    "Exemple",                                          // Slide 36
+    "30 répétitions",                                   // Slide 37
+    "122 800 répétitions",                              // Slide 38
+    "393 511 répétitions",                              // Slide 39
+    "Conclusion"                                        // Slide 40
 ];
 
 // Attendre que le DOM soit chargé
