@@ -91,6 +91,7 @@ h3 {
                 transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
     margin: 12px 0;
     will-change: transform, opacity;
+    font-size: inherit;
 }
 
 .step.visible {
@@ -120,6 +121,10 @@ h3 {
     background: #d4ebf7;
     border-left: 6px solid #2980b9;
     color: blue;
+}
+
+.definition .step {
+    margin: 8px 0;
 }
 /* Classes pour les fractions - À ajouter à votre styles.css */
 
