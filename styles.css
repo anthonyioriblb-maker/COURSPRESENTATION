@@ -98,7 +98,7 @@ h3 {
     transform: translateX(0);
 }
 
-.definition, .example, .important, .remarque, .method {
+.definition, .example, .important, .remarque, .method, .calcul-detail {
     font-size: 2.5em;
     padding: 18px 30px;
     border-radius: 12px;
@@ -111,7 +111,7 @@ h3 {
     will-change: transform;
 }
 
-.definition:hover, .example:hover, .important:hover, .remarque:hover, .method:hover {
+.definition:hover, .example:hover, .important:hover, .remarque:hover, .method:hover, .calcul-detail:hover {
     transform: scale(1.02);
     box-shadow: 0 5px 15px rgba(0,0,0,0.2);
 }
@@ -157,7 +157,8 @@ h3 {
 .important .frac,
 .definition .frac,
 .method .frac,
-.example .frac {
+.example .frac,
+.calcul-detail .frac {
     font-size: 1em;
 }
 
@@ -192,7 +193,8 @@ h3 {
 .important .fraction,
 .definition .fraction,
 .method .fraction,
-.example .fraction {
+.example .fraction,
+.calcul-detail .fraction {
     font-size: 1em;
 }
 
@@ -262,6 +264,12 @@ h3 {
 .method {
     background: #c8c8c8;
     border-left: 6px solid #000;
+    color: black;
+}
+
+.calcul-detail {
+    background: #f0f0f0;
+    border-left: 6px solid #7f8c8d;
     color: black;
 }
 
