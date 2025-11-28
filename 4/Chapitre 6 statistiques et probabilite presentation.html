@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Statistiques et probabilité - Présentation Interactive</title>
+    <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+    <div class="container">
+        <div class="content">
+            <!-- Slide 1 : Titre -->
+            <div class="slide active">
+                <h1>Chapitre 6 : Statistiques et probabilité</h1>
+            </div>
+
+            <!-- Slide 2 : Section I -->
+            <div class="slide">
+                <h2 class="section-title">I. Définitions</h2>
+            </div>
+
+            <!-- Slide 3 : Définitions de base -->
+            <div class="slide">
+                <div class="definition">
+                    <div class="step"><strong>La fréquence</strong> d'une valeur est le quotient de l'effectif de cette valeur par l'effectif total.</div>
+                    <div class="step"><strong>La moyenne</strong> d'une série statistique est obtenue en divisant la somme des valeurs du caractère par l'effectif total.</div>
+                </div>
+            </div>
+
+            <!-- Slide 4 : Médiane et étendue -->
+            <div class="slide">
+                <div class="definition">
+                    <div class="step"><strong>La médiane</strong> est la valeur partageant une série statistique dont <span class="highlight-blue">les valeurs sont rangées par ordre croissant</span> (ou décroissant) en deux groupes de même effectif.</div>
+                    <div class="step"><strong>L'étendue</strong> d'une série statistique est la différence entre la plus grande et la plus petite des valeurs.</div>
+                </div>
+            </div>
+
+            <!-- Slide 5 : Exemple - Énoncé -->
+            <div class="slide">
+                <h3 class="subsection-title">1) Exemple : Les plantules de blé</h3>
+                <div class="example">
+                    <div class="step">Un professeur de SVT demande aux 29 élèves d'une classe de 6<sup>ème</sup> de faire germer des graines de blé chez eux.</div>
+                    <div class="step">Le tableau ci-dessous donne les tailles des plantules (petites plantes) des 29 élèves à 10 jours après la mise en germination.</div>
+                </div>
+            </div>
+
+            <!-- Slide 6 : Tableau des données -->
+            <div class="slide">
+                <div class="step">
+                    <table style="margin: auto; border-collapse: collapse; text-align: center; font-size: 0.8em;">
+                        <tr>
+                            <th style="border: 2px solid #333; padding: 8px; background-color: #f0f0f0;">Taille (cm)</th>
+                            <th style="border: 2px solid #333; padding: 8px; background-color: #f0f0f0;">0</th>
+                            <th style="border: 2px solid #333; padding: 8px; background-color: #f0f0f0;">8</th>
+                            <th style="border: 2px solid #333; padding: 8px; background-color: #f0f0f0;">12</th>
+                            <th style="border: 2px solid #333; padding: 8px; background-color: #f0f0f0;">14</th>
+                            <th style="border: 2px solid #333; padding: 8px; background-color: #f0f0f0;">16</th>
+                            <th style="border: 2px solid #333; padding: 8px; background-color: #f0f0f0;">17</th>
+                            <th style="border: 2px solid #333; padding: 8px; background-color: #f0f0f0;">18</th>
+                            <th style="border: 2px solid #333; padding: 8px; background-color: #f0f0f0;">19</th>
+                            <th style="border: 2px solid #333; padding: 8px; background-color: #f0f0f0;">20</th>
+                            <th style="border: 2px solid #333; padding: 8px; background-color: #f0f0f0;">21</th>
+                            <th style="border: 2px solid #333; padding: 8px; background-color: #f0f0f0;">22</th>
+                            <th style="border: 2px solid #333; padding: 8px; background-color: #f0f0f0;">Total</th>
+                        </tr>
+                        <tr>
+                            <th style="border: 2px solid #333; padding: 8px; background-color: #f0f0f0;">Effectif</th>
+                            <td style="border: 2px solid #333; padding: 8px;">1</td>
+                            <td style="border: 2px solid #333; padding: 8px;">2</td>
+                            <td style="border: 2px solid #333; padding: 8px;">2</td>
+                            <td style="border: 2px solid #333; padding: 8px;">4</td>
+                            <td style="border: 2px solid #333; padding: 8px;">2</td>
+                            <td style="border: 2px solid #333; padding: 8px;">2</td>
+                            <td style="border: 2px solid #333; padding: 8px;">3</td>
+                            <td style="border: 2px solid #333; padding: 8px;">3</td>
+                            <td style="border: 2px solid #333; padding: 8px;">4</td>
+                            <td style="border: 2px solid #333; padding: 8px;">4</td>
+                            <td style="border: 2px solid #333; padding: 8px;">2</td>
+                            <td style="border: 2px solid #333; padding: 8px; background-color: #d4f4dd; font-weight: bold; color: #2c5f2d;">29</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Slide 7 : Calcul de la moyenne -->
+            <div class="slide">
+                <h3 class="subsection-title">2) Calcul de la moyenne</h3>
+                <div class="method">
+                    <div class="step"><strong>Formule :</strong> Moyenne = <span class="frac"><span class="num">somme des valeurs × effectifs</span><span class="den">effectif total</span></span></div>
+                    <div class="step">Moyenne = <span class="frac"><span class="num">0×1 + 8×2 + 12×2 + ... + 20×4 + 21×4 + 22×2</span><span class="den">29</span></span></div>
+                    <div class="step">Moyenne = <span class="frac"><span class="num">481</span><span class="den">29</span></span> ≈ <strong class="red-text">16,59 cm</strong></div>
+                </div>
+            </div>
+
+            <!-- Slide 8 : Calcul de l'étendue -->
+            <div class="slide">
+                <h3 class="subsection-title">3) Calcul de l'étendue</h3>
+                <div class="method">
+                    <div class="step"><strong>Formule :</strong> Étendue = valeur max − valeur min</div>
+                    <div class="step">Étendue = 22 − 0 = <strong class="red-text">22 cm</strong></div>
+                </div>
+            </div>
+
+            <!-- Slide 9 : Calcul de la médiane -->
+            <div class="slide">
+                <h3 class="subsection-title">4) Calcul de la médiane</h3>
+                <div class="method">
+                    <div class="step">L'effectif total est de 29.</div>
+                    <div class="step"><span class="frac"><span class="num">29</span><span class="den">2</span></span> = 14,5</div>
+                    <div class="step">La médiane est donc la <strong>15<sup>ème</sup> valeur</strong>.</div>
+                    <div class="step">En comptant les effectifs : 1 + 2 + 2 + 4 + 2 + 2 + 3 = 16</div>
+                    <div class="step">La médiane est donc <strong class="red-text">18 cm</strong>.</div>
+                </div>
+            </div>
+
+            <!-- Slide 10 : Interprétation -->
+            <div class="slide">
+                <h3 class="subsection-title">5) Interprétation des résultats</h3>
+                <div class="remarque">
+                    <div class="step">Si toutes les plantules devaient avoir la même taille, elles mesureraient toutes <strong>16,59 cm</strong>.</div>
+                    <div class="step">Il y a autant de plantules mesurant plus de 18 cm que de plantules qui mesurent moins de 18 cm.</div>
+                    <div class="step">Il y a un écart de 22 cm entre la plus petite et la plus grande plantule.</div>
+                </div>
+            </div>
+
+            <!-- Slide 11 : Section II -->
+            <div class="slide">
+                <h2 class="section-title">II. Utiliser un tableur</h2>
+            </div>
+
+            <!-- Slide 12 : Opérations de base -->
+            <div class="slide">
+                <h3 class="subsection-title">1) Opérations de base</h3>
+                <div class="remarque">
+                    <div class="step"><strong>Le tableur fonctionne sur le même principe qu'une calculatrice</strong></div>
+                    <div class="step">
+                        <table style="margin: 20px auto;">
+                            <tr>
+                                <td style="padding: 10px;"><strong>+</strong> pour additionner</td>
+                                <td style="padding: 10px;"><strong>*</strong> pour multiplier</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 10px;"><strong>−</strong> pour soustraire</td>
+                                <td style="padding: 10px;"><strong>/</strong> pour diviser</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 10px;" colspan="2"><strong>^</strong> pour les puissances</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 13 : Exemple tableur 1 -->
+            <div class="slide">
+                <h3 class="subsection-title">2) Exemple de calcul</h3>
+                <div class="example">
+                    <div class="step"><strong>Pour calculer :</strong> 4 × 5 + 3 − <span class="frac"><span class="num">9</span><span class="den">8</span></span> + 7<sup>3</sup></div>
+                    <div class="step">On se place dans une cellule vide et dans la barre de formule on écrit :</div>
+                    <div class="step"><strong style="color: #2ecc71; font-size: 1.2em;">=4*5+3-9/8+7^3</strong></div>
+                </div>
+            </div>
+
+            <!-- Slide 14 : Remarques fondamentales -->
+            <div class="slide">
+                <h3 class="subsection-title">3) Remarques importantes</h3>
+                <div class="remarque">
+                    <div class="step">Si on oublie le signe <strong>=</strong>, le tableur ne fait pas le calcul, il affiche seulement l'opération.</div>
+                    <div class="step">La virgule pour le tableur n'est pas le point de la calculatrice mais bien la <strong>virgule</strong> !</div>
+                </div>
+            </div>
+
+            <!-- Slide 15 : Fonction SOMME -->
+            <div class="slide">
+                <h3 class="subsection-title">4) Fonction SOMME</h3>
+                <div class="example">
+                    <div class="step">Pour additionner les valeurs de B2 et B5 :</div>
+                    <div class="step"><strong>=B2+B5</strong></div>
+                    <div class="step" style="margin-top: 20px;">Pour additionner les valeurs de B2 à B7 :</div>
+                    <div class="step"><strong style="color: #2ecc71; font-size: 1.2em;">=SOMME(B2:B7)</strong></div>
+                </div>
+                <div class="step" style="text-align: center; margin-top: 20px;">
+                    <img src="4-63.png" alt="Exemple tableur fonction SOMME" style="max-width: 60%;">
+                </div>
+            </div>
+
+            <!-- Slide 16 : Fonction MOYENNE -->
+            <div class="slide">
+                <h3 class="subsection-title">5) Fonction MOYENNE</h3>
+                <div class="example">
+                    <div class="step">Pour calculer la moyenne d'une série de valeurs :</div>
+                    <div class="step"><strong style="color: #2ecc71; font-size: 1.2em;">=MOYENNE(B2:I2)</strong></div>
+                </div>
+                <div class="step" style="text-align: center; margin-top: 20px;">
+                    <img src="4-64.png" alt="Exemple tableur fonction MOYENNE" style="max-width: 70%;">
+                </div>
+            </div>
+
+            <!-- Slide 17 : Fonctions MIN et MAX -->
+            <div class="slide">
+                <h3 class="subsection-title">6) Fonctions MIN et MAX</h3>
+                <div class="example">
+                    <div class="step">Pour obtenir la valeur minimum :</div>
+                    <div class="step"><strong style="color: #2ecc71; font-size: 1.2em;">=MIN(B2:I2)</strong></div>
+                    <div class="step" style="margin-top: 20px;">Pour obtenir la valeur maximum :</div>
+                    <div class="step"><strong style="color: #2ecc71; font-size: 1.2em;">=MAX(B2:I2)</strong></div>
+                </div>
+                <div class="step" style="text-align: center; margin-top: 20px;">
+                    <img src="4-65.png" alt="Exemple tableur fonctions MIN et MAX" style="max-width: 70%;">
+                </div>
+            </div>
+
+            <!-- Slide 18 : Section III -->
+            <div class="slide">
+                <h2 class="section-title">III. Probabilité</h2>
+            </div>
+
+            <!-- Slide 19 : Expérience aléatoire -->
+            <div class="slide">
+                <h3 class="subsection-title">1) Expérience aléatoire</h3>
+                <div class="definition">
+                    <div class="step">On dit d'une expérience qu'elle est <strong style="color: red;">aléatoire</strong> lorsqu'elle vérifie trois conditions :</div>
+                    <div class="step">• On connaît tous les résultats possibles de l'expérience</div>
+                    <div class="step">• Le résultat n'est pas prévisible</div>
+                    <div class="step">• On peut reproduire plusieurs fois l'expérience dans les mêmes conditions</div>
+                </div>
+            </div>
+
+            <!-- Slide 20 : Exemple expérience aléatoire -->
+            <div class="slide">
+                <div class="example">
+                    <div class="step"><strong>Exemple :</strong> On lance un dé et on regarde la face visible lorsque le dé s'arrête de rouler.</div>
+                    <div class="step">Cette expérience est aléatoire car :</div>
+                    <div class="step">• On connaît les 6 résultats possibles : 1, 2, 3, 4, 5, 6</div>
+                    <div class="step">• On ne peut pas prévoir le résultat</div>
+                    <div class="step">• On peut relancer le dé autant de fois qu'on veut</div>
+                </div>
+            </div>
+
+            <!-- Slide 21 : Définition issue -->
+            <div class="slide">
+                <h3 class="subsection-title">2) Issue d'une expérience</h3>
+                <div class="definition">
+                    <div class="step">Chacun des résultats possibles d'une expérience est une <strong style="color: red;">issue</strong> de l'expérience.</div>
+                    <div class="step">Dans l'exemple du dé, l'expérience a 6 issues : <strong>1 ; 2 ; 3 ; 4 ; 5 ; 6</strong></div>
+                </div>
+            </div>
+
+            <!-- Slide 22 : Définition probabilité -->
+            <div class="slide">
+                <h3 class="subsection-title">3) Probabilité d'un événement</h3>
+                <div class="definition">
+                    <div class="step">La <strong style="color: red;">probabilité</strong> d'un événement est un nombre qui traduit la « chance » qu'un événement se réalise.</div>
+                    <div class="step">Ce nombre est compris entre <strong>0 et 1</strong> et peut s'écrire :</div>
+                    <div class="step">• Avec une fraction : <span class="frac"><span class="num">1</span><span class="den">8</span></span></div>
+                    <div class="step">• Avec un pourcentage : 12,5%</div>
+                    <div class="step">• Avec un nombre décimal : 0,125</div>
+                </div>
+            </div>
+
+            <!-- Slide 23 : Exemple probabilité -->
+            <div class="slide">
+                <div class="example">
+                    <div class="step"><strong>Exemple :</strong> Si on lance un dé à six faces, on a 1 chance sur 6 d'obtenir "3".</div>
+                    <div class="step">Si on note F l'événement "obtenir un 3", on dit que :</div>
+                    <div class="step"><strong class="red-text">p(F) = <span class="frac"><span class="num">1</span><span class="den">6</span></span></strong></div>
+                </div>
+            </div>
+
+            <!-- Slide 24 : Événements impossible et certain -->
+            <div class="slide">
+                <h3 class="subsection-title">4) Événements impossible et certain</h3>
+                <div class="definition">
+                    <div class="step">Un événement dont la probabilité est égale à <strong style="color: red;">0</strong> est un <strong style="color: red;">événement impossible</strong>.</div>
+                    <div class="step">Un événement dont la probabilité est égale à <strong style="color: red;">1</strong> est un <strong style="color: red;">événement certain</strong>.</div>
+                </div>
+            </div>
+
+            <!-- Slide 25 : Propriété équiprobabilité -->
+            <div class="slide">
+                <h3 class="subsection-title">5) Propriété (équiprobabilité)</h3>
+                <div class="important">
+                    <div class="step">Quand les issues d'une expérience aléatoire ont toutes la même probabilité (situation équiprobable), alors :</div>
+                    <div class="step" style="text-align: center; font-size: 1.3em; margin: 30px 0;">
+                        <strong>Probabilité = <span class="frac"><span class="num">nombre de résultats favorables</span><span class="den">nombre de résultats possibles</span></span></strong>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 26 : Exemple roue - Énoncé -->
+            <div class="slide">
+                <h3 class="subsection-title">6) Exemple : La roue</h3>
+                <div class="example">
+                    <div class="step">On fait tourner une roue marquée sur ses secteurs de couleurs différentes et on regarde le secteur marqué par la flèche.</div>
+                    <div class="step" style="text-align: center;">
+                        <img src="4-66.png" alt="Roue avec secteurs de couleurs" style="max-width: 300px;">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 27 : Exemple roue - Calcul -->
+            <div class="slide">
+                <div class="example">
+                    <div class="step"><strong>Question :</strong> Calculer la probabilité de l'événement A : "Obtenir jaune"</div>
+                    <div class="step"><strong>Solution :</strong></div>
+                    <div class="step">Si on tourne cette roue, chaque secteur a la même probabilité de sortir.</div>
+                    <div class="step">Il y a <strong>3 secteurs jaunes</strong> sur <strong>8 secteurs</strong> au total.</div>
+                    <div class="step"><strong class="red-text">p(A) = <span class="frac"><span class="num">3</span><span class="den">8</span></span></strong></div>
+                </div>
+            </div>
+
+            <!-- Slide 28 : Section IV -->
+            <div class="slide">
+                <h2 class="section-title">IV. Lien entre probabilité et fréquence</h2>
+            </div>
+
+            <!-- Slide 29 : Propriété lien -->
+            <div class="slide">
+                <div class="important">
+                    <div class="step"><strong>Propriété :</strong> Si on répète un très grand nombre de fois la même expérience aléatoire, la fréquence d'un événement est proche de la probabilité de cet événement.</div>
+                </div>
+            </div>
+
+            <!-- Slide 30 : Exemple 30 répétitions -->
+            <div class="slide">
+                <h3 class="subsection-title">1) Exemple : 30 répétitions</h3>
+                <div class="example">
+                    <div class="step">En reprenant l'exemple de la roue avec 30 répétitions :</div>
+                    <div class="step" style="text-align: center;">
+                        <img src="4-67.png" alt="Pour 30 répétitions" style="max-width: 150px;">
+                    </div>
+                    <div class="step">Fréquence d'apparition de la couleur jaune : <span class="frac"><span class="num">11</span><span class="den">30</span></span> ≈ <strong>0,3667</strong></div>
+                    <div class="step">Probabilité théorique : <span class="frac"><span class="num">3</span><span class="den">8</span></span> = <strong>0,375</strong></div>
+                </div>
+            </div>
+
+            <!-- Slide 31 : Exemple 122 800 répétitions -->
+            <div class="slide">
+                <h3 class="subsection-title">2) Exemple : 122 800 répétitions</h3>
+                <div class="example">
+                    <div class="step">Avec 122 800 répétitions :</div>
+                    <div class="step" style="text-align: center;">
+                        <img src="4-68.png" alt="Pour 122800 répétitions" style="max-width: 150px;">
+                    </div>
+                    <div class="step">Fréquence d'apparition de la couleur jaune : <span class="frac"><span class="num">45766</span><span class="den">122800</span></span> ≈ <strong>0,3727</strong></div>
+                    <div class="step">Probabilité théorique : <span class="frac"><span class="num">3</span><span class="den">8</span></span> = <strong>0,375</strong></div>
+                    <div class="step"><strong class="green-text">La fréquence se rapproche !</strong></div>
+                </div>
+            </div>
+
+            <!-- Slide 32 : Exemple 393 511 répétitions -->
+            <div class="slide">
+                <h3 class="subsection-title">3) Exemple : 393 511 répétitions</h3>
+                <div class="example">
+                    <div class="step">Avec 393 511 répétitions :</div>
+                    <div class="step" style="text-align: center;">
+                        <img src="4-69.png" alt="Pour 393511 répétitions" style="max-width: 150px;">
+                    </div>
+                    <div class="step">Fréquence d'apparition de la couleur jaune : <span class="frac"><span class="num">147259</span><span class="den">393511</span></span> ≈ <strong>0,37422</strong></div>
+                    <div class="step">Probabilité théorique : <span class="frac"><span class="num">3</span><span class="den">8</span></span> = <strong>0,375</strong></div>
+                    <div class="step"><strong class="green-text">Presque identique !</strong></div>
+                </div>
+            </div>
+
+            <!-- Slide 33 : Conclusion -->
+            <div class="slide">
+                <div class="important">
+                    <div class="step"><strong>Conclusion :</strong></div>
+                    <div class="step">Plus le nombre de répétitions est grand, plus la fréquence se rapproche de la probabilité théorique.</div>
+                    <div class="step">C'est la <strong style="color: red;">loi des grands nombres</strong>.</div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Contrôles -->
+        <div class="controls">
+            <div class="controls-left">
+                <button id="prevBtn" onclick="changeSlide(-1)">← Précédent</button>
+                <button class="btn-reset" onclick="resetSlide()">⟲</button>
+            </div>
+            <div class="progress">
+                <span><span id="currentSlide">1</span> / <span id="totalSlides">33</span></span>
+                <span class="step-indicator" id="stepIndicator"></span>
+            </div>
+            <div class="controls-right">
+                <button class="btn-menu" onclick="openMenu()">📋 Menu</button>
+                <button class="btn-menu" onclick="openHelp()">❓ Aide</button>
+                <button id="nextBtn" onclick="changeSlide(1)">Suivant →</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Menu des slides -->
+    <div id="slideMenu" class="slide-menu">
+        <div class="menu-content">
+            <h2>Navigation</h2>
+            <div id="slideList" class="slide-list"></div>
+            <button onclick="closeMenu()" class="close-menu">Fermer</button>
+        </div>
+    </div>
+
+    <!-- Aide -->
+    <div id="helpOverlay" class="help-overlay">
+        <div class="help-content">
+            <h2>Raccourcis clavier</h2>
+            <ul>
+                <li><kbd>→</kbd> ou <kbd>Espace</kbd> : Étape/Slide suivante</li>
+                <li><kbd>←</kbd> : Étape/Slide précédente</li>
+                <li><kbd>M</kbd> : Ouvrir le menu des slides</li>
+                <li><kbd>R</kbd> : Réinitialiser la slide actuelle</li>
+                <li><kbd>H</kbd> ou <kbd>?</kbd> : Afficher cette aide</li>
+                <li><kbd>Échap</kbd> : Fermer les menus</li>
+            </ul>
+            <button onclick="closeHelp()" class="close-menu">Fermer</button>
+        </div>
+    </div>
+
+    <script src="script-statistiques.js"></script>
+</body>
+</html>
