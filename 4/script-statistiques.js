@@ -9,6 +9,8 @@ const slideTitles = [
     "I. Définitions",
     "Toutes les définitions",
     "Exemple - Énoncé",
+    "Tableau sans valeurs",
+    "Tableau avec effectifs",
     "Tableau complet avec fréquences",
     "Question 1",
     "Calculs",
