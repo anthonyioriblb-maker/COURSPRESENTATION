@@ -8,10 +8,8 @@ const slideTitles = [
     "Organisation et gestion de données",
     "I. Statistiques",
     "II. Utilisation de tableaux",
-    "1) Tableau à simple entrée",
     "2) Tableau à double entrée",
     "III. Représentations graphiques",
-    "1) Diagramme en bâtons",
     "2) Diagramme circulaire",
     "3) Courbes"
 ];

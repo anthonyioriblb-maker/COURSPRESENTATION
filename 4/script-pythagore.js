@@ -15,10 +15,8 @@ const slideTitles = [
     "6) Oui mais en maths du coup ?",
     "7) Exemple avec un quadrilatère",
     "II. Réciproque du théorème de Pythagore",
-    "1) Énoncé de la réciproque",
     "2) Exemple",
     "III. Contraposée du théorème de Pythagore",
-    "1) Énoncé de la contraposée",
     "2) Exemple"
 ];
 

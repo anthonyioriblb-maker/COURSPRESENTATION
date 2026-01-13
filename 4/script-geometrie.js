@@ -5,25 +5,21 @@ let slides;
 let totalSlides;
 
 const slideTitles = [
-    "Chapitre 7 : Géométrie dans l'espace",         // Slide 1
-    "I. Pyramide",                                   // Slide 2
-    "1) Définitions",                                // Slide 3
-    "Exemples de pyramides",                         // Slide 4
-    "Pyramide régulière",                            // Slide 5
-    "Exemples pyramides régulières",                 // Slide 6
-    "Remarque hauteur",                              // Slide 7
-    "2) Patron d'une pyramide",                      // Slide 8
-    "Patron - Remarque",                             // Slide 9
-    "Patron - Exemple",                              // Slide 10
-    "II. Cône de révolution",                        // Slide 11
-    "1) Définitions",                                // Slide 12
-    "2) Patron d'un cône",                           // Slide 13
-    "III. Volumes",                                  // Slide 14
-    "Propriété volume",                              // Slide 15
-    "Exemple 1 : Volume d'un cône",                  // Slide 16
-    "Exemple 2 : Volume d'une pyramide",             // Slide 17
-    "À retenir",                                     // Slide 18
-    "Méthode"                                        // Slide 19
+    "Chapitre 7 : Géométrie dans l'espace",     // Slide 1
+    "I. Pyramide",                               // Slide 2
+    "Exemples de pyramides",                     // Slide 3
+    "Pyramide régulière",                        // Slide 4
+    "Exemples pyramides régulières",             // Slide 5
+    "Remarque hauteur",                          // Slide 6
+    "2) Patron d'une pyramide",                  // Slide 7
+    "Remarque",                                  // Slide 8
+    "Exemple",                                   // Slide 9
+    "II. Cône de révolution",                    // Slide 10
+    "2) Patron d'un cône",                       // Slide 11
+    "III. Volumes",                              // Slide 12
+    "Exemple 1",                                 // Slide 13
+    "Exemple 2",                                 // Slide 14
+    "À retenir"                                  // Slide 15
 ];
 
 // Attendre que le DOM soit chargé
