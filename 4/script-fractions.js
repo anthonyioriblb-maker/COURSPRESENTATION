@@ -4,25 +4,22 @@ let currentStepIndex = 0;
 let slides = null;
 let totalSlides = 0;
 
-// Titres correspondant aux 17 slides du HTML
+// Titres correspondant aux 14 slides du HTML
 const slideTitles = [
-    "Chapitre 5 : Écriture fractionnaire partie 2",     // Slide 1
+    "Chapitre 5 : Écriture fractionnaire partie 2",    // Slide 1
     "I. Notion d'inverse",                              // Slide 2
-    "Définition et exemple",                            // Slide 3
-    "Propriété inverse d'une fraction",                 // Slide 4
-    "Remarques",                                        // Slide 5
-    "II. Divisions",                                    // Slide 6
-    "Propriété diviser = multiplier par inverse",       // Slide 7
-    "Propriété diviser deux fractions",                 // Slide 8
-    "Exemples 1 et 2",                                  // Slide 9
-    "Exemples 3 et 4",                                  // Slide 10
-    "III. Produit en croix",                            // Slide 11
-    "Propriété produit en croix",                       // Slide 12
-    "Schéma du produit en croix",                       // Slide 13
-    "Exemple 1",                                        // Slide 14
-    "Exemple 2 - Question",                             // Slide 15
-    "Exemple 2 - Méthode 1",                            // Slide 16
-    "Exemple 2 - Méthode 2"                             // Slide 17
+    "Propriété inverse d'une fraction",                 // Slide 3
+    "Remarques",                                        // Slide 4
+    "II. Divisions",                                    // Slide 5
+    "2) Division de fractions",                         // Slide 6
+    "Exemples 1 et 2",                                  // Slide 7
+    "Exemples 3 et 4",                                  // Slide 8
+    "III. Produit en croix",                            // Slide 9
+    "Schéma du produit en croix",                       // Slide 10
+    "2) Exemples",                                      // Slide 11
+    "Exemple 2",                                        // Slide 12
+    "Méthode 1",                                        // Slide 13
+    "Méthode 2"                                         // Slide 14
 ];
 
 // Initialisation - attendre que le DOM soit chargé

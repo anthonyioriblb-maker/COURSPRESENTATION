@@ -4,28 +4,23 @@ let currentStepIndex = 0;
 let slides = null;
 let totalSlides = 0;
 
-// Titres correspondant exactement aux 20 slides du HTML
+// Titres correspondant exactement aux 15 slides du HTML
 const slideTitles = [
-    "Trigonométrie dans un triangle rectangle",     // Slide 1
-    "I. Trois formules",                            // Slide 2
-    "1) Triangle rectangle et vocabulaire",         // Slide 3
-    "2) Cosinus d'un angle aigu",                   // Slide 4
-    "3) Sinus d'un angle aigu",                     // Slide 5
-    "4) Tangente d'un angle aigu",                  // Slide 6
-    "II. Utilisation de la calculatrice",           // Slide 7
-    "1) Calculer la valeur d'un cosinus",           // Slide 8
-    "2) Calculer un angle",                         // Slide 9
-    "III. Calcul de longueur",                      // Slide 10
-    "Exemple 1 - Calcul avec sinus",                // Slide 11
-    "Exemple 2 - Calcul avec tangente",             // Slide 12
-    "Exemple 3 - Calcul avec cosinus",              // Slide 13
-    "IV. Calcul d'angles",                          // Slide 14
-    "Exemple 1 - Angle avec sinus",                 // Slide 15
-    "Exemple 2 - Angle avec tangente",              // Slide 16
-    "V. Relations trigonométriques",                // Slide 17
-    "Propriétés fondamentales",                     // Slide 18
-    "Démonstration",                                // Slide 19
-    "Exemple d'application"                         // Slide 20
+    "Trigonométrie dans un triangle rectangle",           // Slide 1
+    "I. Trois formules",                                  // Slide 2
+    "2) Cosinus d'un angle aigu",                         // Slide 3
+    "3) Sinus d'un angle aigu",                           // Slide 4
+    "4) Tangente d'un angle aigu",                        // Slide 5
+    "II. Utilisation de la calculatrice",                 // Slide 6
+    "2) Calculer un angle connaissant le cosinus",        // Slide 7
+    "III. Calcul de longueur dans un triangle rectangle", // Slide 8
+    "Exemple 2",                                          // Slide 9
+    "Exemple 3",                                          // Slide 10
+    "IV. Calcul d'angles dans un triangle rectangle",     // Slide 11
+    "Exemple 2",                                          // Slide 12
+    "V. Relations trigonométriques",                      // Slide 13
+    "Démonstration",                                      // Slide 14
+    "Exemple d'application"                               // Slide 15
 ];
 
 // Initialisation - attendre que le DOM soit chargé
