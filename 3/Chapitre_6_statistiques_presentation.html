@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Statistiques - Présentation Interactive</title>
+    <link rel="stylesheet" href="../styles.css">
+    <style>
+        table {
+            font-size: inherit;
+        }
+        table th, table td {
+            font-size: inherit;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="content">
+            <!-- Slide 1 : Titre -->
+            <div class="slide active">
+                <h1>Statistiques</h1>
+            </div>
+
+            <!-- Slide 2 : Vocabulaire -->
+            <div class="slide">
+                <h2 class="section-title">I. Vocabulaire</h2>
+                <div class="definition">
+                    <div class="step"><strong>Définition :</strong> Une <span style="color: red;">série statistique</span> est une liste de valeurs obtenues en étudiant une <span style="color: red;">population</span> (des élèves, des plantes, des factures...).</div>
+                </div>
+                <div class="definition">
+                    <div class="step"><strong>Définition :</strong> Pour chaque <span style="color: red;">individu</span> de la population étudiée on peut observer un ou plusieurs <span style="color: red;">caractères</span> (tailles, masse, âge, prix, couleur...), c'est à dire une information.</div>
+                    <div class="step">Un caractère peut être <span style="color: red;">qualitatif</span> (couleur, difficulté, goût...) ou <span style="color: red;">quantitatif</span> (quantité, nombre, prix...).</div>
+                </div>
+                <div class="definition">
+                    <div class="step"><strong>Définition :</strong> L'<span style="color: red;">effectif total</span> d'une série désigne le nombre total d'individus étudiés.</div>
+                </div>
+                <div class="definition">
+                    <div class="step"><strong>Définition :</strong> Dans un tableau de répartition on utilise le mot <span style="color: red;">effectif</span> pour le nombre d'individus concernés par une valeur du caractère.</div>
+                </div>
+                <div class="definition">
+                    <div class="step"><strong>Définition :</strong> La <span style="color: red;">fréquence</span> d'une valeur du caractère étudié correspond au quotient de l'effectif de ce caractère sur l'effectif total.</div>
+                    <div class="step">Fréquence = <span class="frac"><span class="num">Effectif de la valeur</span><span class="den">Effectif total</span></span></div>
+                </div>
+                <div class="example">
+                    <div class="step"><strong>Exemple 1 :</strong></div>
+                    <div class="step">On a demandé à chaque élève de 4A combien ils ont d'animaux de compagnie.</div>
+                    <div class="step">Voici les réponses obtenues :</div>
+                    <div class="step">2 ; 1 ; 0 ; 1 ; 4 ; 0 ; 3 ; 2 ; 3 ; 1 ; 5 ; 1 ; 2 ; 2 ; 3 ; 0 ; 1 ; 4 ; 1 ; 2 ; 4 ; 3 ; 0 ; 4 ; 1</div>
+                    <div class="step">• La population étudiée, c'est : <strong>les élèves de 4A</strong></div>
+                    <div class="step">• Le caractère étudié est : <strong>le nombre d'animaux de compagnie</strong></div>
+                    <div class="step">• L'effectif total est de : <strong>25</strong></div>
+                    <div class="step">• Les valeurs du caractère sont : <strong>0 ; 1 ; 2 ; 3 ; 4 ; 5</strong></div>
+                    <div class="step">On peut organiser les données sous forme d'un tableau :</div>
+                    <div class="step">
+                        <table>
+                            <tr>
+                                <th>Nombre d'animaux</th>
+                                <th>0</th>
+                                <th>1</th>
+                                <th>2</th>
+                                <th>3</th>
+                                <th>4</th>
+                                <th>5</th>
+                            </tr>
+                            <tr>
+                                <td>Effectif</td>
+                                <td>4</td>
+                                <td>7</td>
+                                <td>5</td>
+                                <td>4</td>
+                                <td>4</td>
+                                <td>1</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <div class="example">
+                    <div class="step"><strong>Exemple 2 :</strong></div>
+                    <div class="step">On a demandé à chaque élève de 4B combien ils ont d'animaux de compagnie.</div>
+                    <div class="step">Voici les réponses obtenues :</div>
+                    <div class="step">0 ; 0 ; 0 ; 0 ; 0 ; 0 ; 0 ; 0 ; 1 ; 1 ; 1 ; 1 ; 1 ; 1 ; 1 ; 2 ; 2 ; 2 ; 2 ; 2 ; 2 ; 3</div>
+                    <div class="step">
+                        <table>
+                            <tr>
+                                <th>Nombre d'animaux</th>
+                                <th>0</th>
+                                <th>1</th>
+                                <th>2</th>
+                                <th>3</th>
+                            </tr>
+                            <tr>
+                                <td>Effectif</td>
+                                <td>8</td>
+                                <td>7</td>
+                                <td>6</td>
+                                <td>1</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 3 : Caractéristiques de position -->
+            <div class="slide">
+                <h2 class="section-title">II. Caractéristiques de position</h2>
+                <h3 class="subsection-title">1) Moyenne d'une série statistique</h3>
+                <div class="definition">
+                    <div class="step"><strong>Définition :</strong> La <span style="color: red;">moyenne</span> d'une série statistique est obtenue en divisant la somme des valeurs du caractère par l'effectif total.</div>
+                    <div class="step">Moyenne = <span class="frac"><span class="num">Somme des valeurs</span><span class="den">Effectif total</span></span></div>
+                </div>
+                <div class="example">
+                    <div class="step"><strong>Pour l'exemple 1 :</strong></div>
+                    <div class="step">Moyenne = <span class="frac"><span class="num">0×4 + 1×7 + 2×5 + 3×4 + 4×4 + 5×1</span><span class="den">25</span></span></div>
+                    <div class="step">Moyenne = <span class="frac"><span class="num">0 + 7 + 10 + 12 + 16 + 5</span><span class="den">25</span></span></div>
+                    <div class="step">Moyenne = <span class="frac"><span class="num">50</span><span class="den">25</span></span> = 2</div>
+                    <div class="step">Les élèves de 4A ont en moyenne 2 animaux de compagnie.</div>
+                </div>
+                <div class="example">
+                    <div class="step"><strong>Pour l'exemple 2 :</strong></div>
+                    <div class="step">Moyenne = <span class="frac"><span class="num">0×8 + 1×7 + 2×6 + 3×1</span><span class="den">22</span></span> = 1</div>
+                    <div class="step">Les élèves de 4B ont en moyenne 1 animal de compagnie.</div>
+                </div>
+                <h3 class="subsection-title">2) Étendue d'une série statistique</h3>
+                <div class="definition">
+                    <div class="step"><strong>Définition :</strong> L'<span style="color: red;">étendue</span> d'une série statistique est la différence entre la plus grande et la plus petite des valeurs.</div>
+                </div>
+                <div class="example">
+                    <div class="step"><strong>Pour l'exemple 1 :</strong> Étendue = 5 − 0 = 5</div>
+                </div>
+            </div>
+
+            <!-- Slide 4 : Médiane -->
+            <div class="slide">
+                <h3 class="subsection-title">3) Médiane d'une série statistique</h3>
+                <div class="definition">
+                    <div class="step"><strong>Définition :</strong> La <span style="color: red;">médiane</span> est une valeur qui partage une série ordonnée en deux groupes de même effectif.</div>
+                </div>
+                <div class="remarque">
+                    <div class="step"><strong>Méthode :</strong> Pour déterminer la médiane :</div>
+                    <div class="step">• On ordonne les valeurs dans l'ordre croissant</div>
+                    <div class="step">• On calcule la position : <span class="frac"><span class="num">Effectif total</span><span class="den">2</span></span></div>
+                    <div class="step">• Si l'effectif total est impair, la médiane est la valeur qui suit (arrondi supérieur)</div>
+                    <div class="step">• Si l'effectif total est pair, la médiane est la moyenne des deux valeurs centrales</div>
+                </div>
+                <div class="example">
+                    <div class="step"><strong>Pour l'exemple 1 :</strong></div>
+                    <div class="step">Effectif total : 25 (impair)</div>
+                    <div class="step">Position de la médiane : <span class="frac"><span class="num">25</span><span class="den">2</span></span> = 12,5 donc la médiane est la <strong>13<span class="exposant">ème</span> valeur</strong>.</div>
+                    <div class="step">Série ordonnée :</div>
+                    <div class="step">
+                        <table style="margin: 0 auto; border: none;">
+                            <tr>
+                                <td style="border: none; text-align: right;">0 ; 0 ; 0 ; 0 ; 1 ; 1 ; 1 ; 1 ; 1 ; 1 ; 1 ; 2</td>
+                                <td style="border: none; text-align: center; color: blue; font-weight: bold;">| 2 |</td>
+                                <td style="border: none; text-align: left;">2 ; 2 ; 2 ; 3 ; 3 ; 3 ; 3 ; 4 ; 4 ; 4 ; 4 ; 5</td>
+                            </tr>
+                            <tr>
+                                <td style="border: none; text-align: center; color: blue; font-weight: bold;">12 valeurs</td>
+                                <td style="border: none; text-align: center; color: blue; font-weight: bold;">13<span class="exposant">ème</span> valeur</td>
+                                <td style="border: none; text-align: center; color: blue; font-weight: bold;">12 valeurs</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="step">La médiane est <strong style="color: blue;">2</strong>.</div>
+                </div>
+                <div class="example">
+                    <div class="step"><strong>Pour l'exemple 2 :</strong></div>
+                    <div class="step">Effectif total : 22 (pair)</div>
+                    <div class="step">Position : <span class="frac"><span class="num">22</span><span class="den">2</span></span> = 11 donc la médiane est entre la <strong>11<span class="exposant">ème</span> et la 12<span class="exposant">ème</span> valeur</strong>.</div>
+                    <div class="step">Série ordonnée :</div>
+                    <div class="step">
+                        <table style="margin: 0 auto; border: none;">
+                            <tr>
+                                <td style="border: none; text-align: right;">0 ; 0 ; 0 ; 0 ; 0 ; 0 ; 0 ; 0 ; 1 ; 1</td>
+                                <td style="border: none; text-align: center; color: blue; font-weight: bold;">| 1 ; 1 |</td>
+                                <td style="border: none; text-align: left;">1 ; 1 ; 1 ; 1 ; 2 ; 2 ; 2 ; 2 ; 2 ; 2 ; 3</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="step">Médiane = <span class="frac"><span class="num">1 + 1</span><span class="den">2</span></span> = <strong style="color: blue;">1</strong></div>
+                </div>
+            </div>
+
+            <!-- Slide 5 : Effectifs cumulés croissants -->
+            <div class="slide">
+                <h2 class="section-title">III. Effectifs cumulés croissants</h2>
+                <div class="definition">
+                    <div class="step"><strong>Définition :</strong> Les <span style="color: red;">effectifs cumulés croissants</span> (ECC) permettent de compter le nombre total d'individus jusqu'à une certaine valeur.</div>
+                    <div class="step">Pour une valeur donnée, l'ECC est la somme de tous les effectifs des valeurs inférieures ou égales à cette valeur.</div>
+                </div>
+                <div class="remarque">
+                    <div class="step"><strong>Utilité :</strong> Les ECC sont particulièrement utiles pour déterminer la médiane quand les effectifs sont grands.</div>
+                </div>
+                <div class="example">
+                    <div class="step"><strong>Exemple :</strong></div>
+                    <div class="step">Une enquête est réalisée auprès de 540 lycéens sur le nombre de leurs sorties au cinéma pendant le mois précédent.</div>
+                    <div class="step">
+                        <table>
+                            <tr>
+                                <th>Nombre de sorties</th>
+                                <th>0</th>
+                                <th>1</th>
+                                <th>2</th>
+                                <th>3</th>
+                                <th>4</th>
+                                <th>5</th>
+                            </tr>
+                            <tr>
+                                <td>Effectif</td>
+                                <td>43</td>
+                                <td>98</td>
+                                <td>125</td>
+                                <td>112</td>
+                                <td>87</td>
+                                <td>75</td>
+                            </tr>
+                            <tr>
+                                <td>ECC</td>
+                                <td>43</td>
+                                <td>141</td>
+                                <td><span class="mark-blue">266</span></td>
+                                <td><span class="mark-green">378</span></td>
+                                <td>465</td>
+                                <td>540</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="step">L'effectif total est 540.</div>
+                    <div class="step">Position de la médiane : <span class="frac"><span class="num">540</span><span class="den">2</span></span> = 270</div>
+                    <div class="step">La médiane est entre la <strong>270<span class="exposant">ème</span> et la 271<span class="exposant">ème</span> valeur</strong>.</div>
+                    <div class="step">D'après le tableau des ECC :</div>
+                    <div class="step">• <span class="mark-blue">Le dernier 2 est la 266<span class="exposant">ème</span> valeur</span></div>
+                    <div class="step">• <span class="mark-green">Le dernier 3 est la 378<span class="exposant">ème</span> valeur</span></div>
+                    <div class="step">La 270<span class="exposant">ème</span> et la 271<span class="exposant">ème</span> valeur sont donc égales à 3.</div>
+                    <div class="step"><strong>La médiane est 3.</strong></div>
+                </div>
+            </div>
+
+            <!-- Slide 6 : Statistiques avec des classes -->
+            <div class="slide">
+                <h2 class="section-title">IV. Statistiques avec des classes</h2>
+                <div class="definition">
+                    <div class="step"><strong>Définition :</strong> Lorsque les données sont très nombreuses, on peut les regrouper en <span style="color: red;">classes</span> pour faciliter leur traitement.</div>
+                    <div class="step">Chaque classe est un intervalle de valeurs.</div>
+                    <div class="step">Le <span style="color: red;">centre de classe</span> est la moyenne des bornes de l'intervalle.</div>
+                </div>
+                <div class="example">
+                    <div class="step"><strong>Exemple :</strong></div>
+                    <div class="step">On interroge les élèves d'une classe sur leur taille en cm. Voici les résultats de l'enquête :</div>
+                    <div class="step">174 – 160 – 161 – 166 – 177 – 172 – 157 – 175 – 162 – 169 – 160 – 165 – 170 – 152 – 168 – 156 – 163 – 167 – 169 – 158 – 164 – 151 – 162 – 166 – 156 – 165 – 179</div>
+                    <div class="step"><strong>1) Calculer l'étendue :</strong></div>
+                    <div class="step">Étendue = 179 − 151 = <strong>28 cm</strong></div>
+                    <div class="step"><strong>2) Regrouper par classes de 5 cm :</strong></div>
+                    <div class="step">
+                        <table>
+                            <tr>
+                                <th>Classe (en cm)</th>
+                                <th>[150 ; 155[</th>
+                                <th>[155 ; 160[</th>
+                                <th>[160 ; 165[</th>
+                                <th>[165 ; 170[</th>
+                                <th>[170 ; 175[</th>
+                                <th>[175 ; 180[</th>
+                            </tr>
+                            <tr>
+                                <td>Centre de classe</td>
+                                <td>152,5</td>
+                                <td>157,5</td>
+                                <td>162,5</td>
+                                <td>167,5</td>
+                                <td>172,5</td>
+                                <td>177,5</td>
+                            </tr>
+                            <tr>
+                                <td>Effectif</td>
+                                <td>2</td>
+                                <td>4</td>
+                                <td>8</td>
+                                <td>8</td>
+                                <td>3</td>
+                                <td>2</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="step"><strong>3) Calculer les fréquences en % :</strong></div>
+                    <div class="step">Effectif total = 27</div>
+                    <div class="step">
+                        <table>
+                            <tr>
+                                <th>Classe (en cm)</th>
+                                <th>[150 ; 155[</th>
+                                <th>[155 ; 160[</th>
+                                <th>[160 ; 165[</th>
+                                <th>[165 ; 170[</th>
+                                <th>[170 ; 175[</th>
+                                <th>[175 ; 180[</th>
+                            </tr>
+                            <tr>
+                                <td>Effectif</td>
+                                <td>2</td>
+                                <td>4</td>
+                                <td>8</td>
+                                <td>8</td>
+                                <td>3</td>
+                                <td>2</td>
+                            </tr>
+                            <tr>
+                                <td>Fréquence (%)</td>
+                                <td><span class="frac"><span class="num">2</span><span class="den">27</span></span> × 100 ≈ 7</td>
+                                <td><span class="frac"><span class="num">4</span><span class="den">27</span></span> × 100 ≈ 15</td>
+                                <td><span class="frac"><span class="num">8</span><span class="den">27</span></span> × 100 ≈ 30</td>
+                                <td><span class="frac"><span class="num">8</span><span class="den">27</span></span> × 100 ≈ 30</td>
+                                <td><span class="frac"><span class="num">3</span><span class="den">27</span></span> × 100 ≈ 11</td>
+                                <td><span class="frac"><span class="num">2</span><span class="den">27</span></span> × 100 ≈ 7</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="step"><strong>4) Calculer la moyenne avec les centres de classe :</strong></div>
+                    <div class="step">Moyenne = <span class="frac"><span class="num">152,5×2 + 157,5×4 + ... + 172,5×3 + 177,5×2</span><span class="den">27</span></span></div>
+                    <div class="step">Moyenne = <span class="frac"><span class="num">305 + 630 + 1300 + 1340 + 517,5 + 355</span><span class="den">27</span></span></div>
+                    <div class="step">Moyenne = <span class="frac"><span class="num">4447,5</span><span class="den">27</span></span> ≈ <strong>164,7 cm</strong></div>
+                    <div class="step"><strong>5) Comparer avec la moyenne exacte :</strong></div>
+                    <div class="step">Somme exacte = 174 + 160 + 161 + 166 + 177 + 172 + 157 + 175 + 162 + 169 + 160 + 165 + 170 + 152 + 168 + 156 + 163 + 167 + 169 + 158 + 164 + 151 + 162 + 166 + 156 + 165 + 179 = 4448</div>
+                    <div class="step">Moyenne exacte = <span class="frac"><span class="num">4448</span><span class="den">27</span></span> ≈ <strong>164,74 cm</strong></div>
+                    <div class="step">La différence est très faible (0,04 cm), le calcul avec les centres de classe donne une bonne approximation de la moyenne réelle.</div>
+                </div>
+                <div class="remarque">
+                    <div class="step"><strong>Remarque :</strong> Lorsqu'on regroupe les données en classes, on perd de la précision mais on gagne en lisibilité.</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Contrôles -->
+        <div class="controls">
+            <div class="controls-left">
+                <button id="prevBtn" onclick="changeSlide(-1)">← Précédent</button>
+                <button class="btn-reset" onclick="resetSlide()">⟲</button>
+            </div>
+            <div class="progress">
+                <span><span id="currentSlide">1</span> / <span id="totalSlides">6</span></span>
+                <span class="step-indicator" id="stepIndicator"></span>
+            </div>
+            <div class="controls-right">
+                <button class="btn-menu" onclick="openMenu()">📋 Menu</button>
+                <button class="btn-menu" onclick="openHelp()">❓ Aide</button>
+                <button id="nextBtn" onclick="changeSlide(1)">Suivant →</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Menu des slides -->
+    <div class="slide-menu" id="slideMenu">
+        <div class="menu-content">
+            <h2>Sélectionner une diapositive</h2>
+            <div class="slide-list" id="slideList"></div>
+            <button class="close-menu" onclick="closeMenu()">Fermer</button>
+        </div>
+    </div>
+
+    <!-- Aide -->
+    <div class="help-overlay" id="helpOverlay">
+        <div class="help-content">
+            <h2>Raccourcis clavier</h2>
+            <ul>
+                <li><kbd>↑</kbd> ou <kbd>Espace</kbd> : Étape/Slide suivante</li>
+                <li><kbd>↓</kbd> : Étape/Slide précédente</li>
+                <li><kbd>M</kbd> : Ouvrir le menu des slides</li>
+                <li><kbd>R</kbd> : Réinitialiser la slide actuelle</li>
+                <li><kbd>H</kbd> ou <kbd>?</kbd> : Afficher cette aide</li>
+                <li><kbd>Échap</kbd> : Fermer les menus</li>
+            </ul>
+            <button class="close-menu" onclick="closeHelp()">Fermer</button>
+        </div>
+    </div>
+
+    <script src="script-statistiques.js"></script>
+</body>
+</html>
