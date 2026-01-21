@@ -705,6 +705,24 @@ h4 {
     text-align: left;
 }
 
+/* Correction pour les titres avec la classe step */
+/* La classe .step a font-size: inherit, donc il faut forcer la taille des titres */
+h1.step {
+    font-size: 5em !important;
+}
+
+h2.step {
+    font-size: 4.5em !important;
+}
+
+h3.step {
+    font-size: 4em !important;
+}
+
+h4.step {
+    font-size: 3em !important;
+}
+
 /* Classe exercice */
 .exercice {
     background: #fce4ec;

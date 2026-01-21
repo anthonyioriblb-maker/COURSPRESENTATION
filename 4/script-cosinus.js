@@ -1,46 +1,39 @@
-// Variables globales
+// Initialisation - attendre que le DOM soit chargé
 let currentSlideIndex = 0;
 let currentStepIndex = 0;
-let slides = null;
-let totalSlides = 0;
+let slides;
+let totalSlides;
 
-// Titres correspondant aux 7 slides du HTML
 const slideTitles = [
-    "Chapitre 6 : Statistiques",                            // Slide 1
-    "I. Vocabulaire",                                        // Slide 2
-    "II. Caractéristiques de position - 1) Moyenne",        // Slide 3
-    "2) Médiane d'une série statistique",                   // Slide 4
-    "III. Caractéristiques de dispersion - 1) Étendue",     // Slide 5
-    "IV. Médiane avec les effectifs cumulés croissants",    // Slide 6
-    "V. Statistiques avec des classes"                      // Slide 7
+    "Chapitre 8 : Cosinus dans le triangle rectangle",
+    "I. Rappels et vocabulaire",
+    "1) Vocabulaire",
+    "Ainsi :",
+    "II. Cosinus d'un angle aigu d'un triangle rectangle",
+    "III. Cosinus et calculatrice",
+    "1) Calculer la valeur d'un cosinus lorsque l'on connaît la valeur de l'angle",
+    "2) Calculer la valeur d'un angle connaissant le cosinus",
+    "IV. Exemples d'utilisation",
+    "1) Calcul de la longueur du côté adjacent à un angle connu",
+    "2) Calcul de la longueur de l'hypoténuse",
+    "3) Calculer la mesure d'un angle"
 ];
 
-// Initialisation - attendre que le DOM soit chargé
+// Attendre que le DOM soit chargé
 document.addEventListener('DOMContentLoaded', function() {
-    console.log('DOM chargé');
     slides = document.querySelectorAll('.slide');
     totalSlides = slides.length;
-    
-    const totalSlidesElement = document.getElementById('totalSlides');
-    if (totalSlidesElement) {
-        totalSlidesElement.textContent = totalSlides;
-    }
-    
+    document.getElementById('totalSlides').textContent = totalSlides;
     updateSlide();
-    console.log('Initialisation terminée');
 });
 
 function initSlideMenu() {
     const slideList = document.getElementById('slideList');
-    if (!slideList) return;
-    
     slideList.innerHTML = '';
     slideTitles.forEach((title, index) => {
         const slideItem = document.createElement('div');
         slideItem.className = 'slide-item';
-        if (index === currentSlideIndex) {
-            slideItem.classList.add('current');
-        }
+        if (index === currentSlideIndex) slideItem.classList.add('current');
         slideItem.innerHTML = `
             <div class="slide-number">Slide ${index + 1}</div>
             <div class="slide-title">${title}</div>
@@ -50,72 +43,44 @@ function initSlideMenu() {
     });
 }
 
-function openMenu() {
-    console.log('Ouverture du menu');
-    initSlideMenu();
-    const menu = document.getElementById('slideMenu');
-    if (menu) {
-        menu.classList.add('active');
-    }
+function openMenu() { 
+    initSlideMenu(); 
+    document.getElementById('slideMenu').classList.add('active'); 
 }
 
-function closeMenu() {
-    console.log('Fermeture du menu');
-    const menu = document.getElementById('slideMenu');
-    if (menu) {
-        menu.classList.remove('active');
-    }
+function closeMenu() { 
+    document.getElementById('slideMenu').classList.remove('active'); 
 }
 
-function openHelp() {
-    console.log('Ouverture de l\'aide');
-    const help = document.getElementById('helpOverlay');
-    if (help) {
-        help.classList.add('active');
-    }
+function openHelp() { 
+    document.getElementById('helpOverlay').classList.add('active'); 
 }
 
-function closeHelp() {
-    console.log('Fermeture de l\'aide');
-    const help = document.getElementById('helpOverlay');
-    if (help) {
-        help.classList.remove('active');
-    }
+function closeHelp() { 
+    document.getElementById('helpOverlay').classList.remove('active'); 
 }
 
-function goToSlide(index) {
-    console.log('Navigation vers la slide', index);
-    currentSlideIndex = index;
-    currentStepIndex = 0;
-    updateSlide();
-    closeMenu();
+function goToSlide(index) { 
+    currentSlideIndex = index; 
+    currentStepIndex = 0; 
+    updateSlide(); 
+    closeMenu(); 
 }
 
-function resetSlide() {
-    console.log('Réinitialisation de la slide');
-    currentStepIndex = 0;
-    updateSlide();
+function resetSlide() { 
+    currentStepIndex = 0; 
+    updateSlide(); 
 }
 
 function updateSlide() {
-    if (!slides || slides.length === 0) {
-        console.error('Slides non initialisées');
-        return;
-    }
-    
     const contentDiv = document.querySelector('.content');
 
-    // Afficher uniquement la slide active
     slides.forEach((slide, index) => {
         slide.classList.remove('active');
-        if (index === currentSlideIndex) {
-            slide.classList.add('active');
-        }
+        if (index === currentSlideIndex) slide.classList.add('active');
     });
 
-    // Gérer les étapes de la slide actuelle
-    const currentSlide = slides[currentSlideIndex];
-    const steps = currentSlide.querySelectorAll('.step');
+    const steps = slides[currentSlideIndex].querySelectorAll('.step');
     const totalSteps = steps.length;
 
     steps.forEach((step, index) => {
@@ -126,19 +91,12 @@ function updateSlide() {
         }
     });
 
-    // Mettre à jour l'indicateur de slide
-    const currentSlideElement = document.getElementById('currentSlide');
-    if (currentSlideElement) {
-        currentSlideElement.textContent = currentSlideIndex + 1;
-    }
-
-    // Désactiver le bouton précédent si on est au début
+    document.getElementById('currentSlide').textContent = currentSlideIndex + 1;
     const prevBtn = document.getElementById('prevBtn');
     if (prevBtn) {
         prevBtn.disabled = currentSlideIndex === 0 && currentStepIndex === 0;
     }
 
-    // Mettre à jour l'indicateur d'étape
     const stepIndicator = document.getElementById('stepIndicator');
     if (stepIndicator) {
         if (totalSteps > 0 && currentStepIndex < totalSteps) {
@@ -149,38 +107,27 @@ function updateSlide() {
         }
     }
 
-    // Gérer le scroll
-    if (currentStepIndex === 0 && contentDiv) {
-        setTimeout(() => {
-            contentDiv.scrollTo({ top: 0, behavior: 'smooth' });
+    if (currentStepIndex === 0) {
+        setTimeout(() => { 
+            contentDiv.scrollTo({ top: 0, behavior: 'smooth' }); 
         }, 50);
     } else if (currentStepIndex > 0) {
         setTimeout(() => {
-            const visibleSteps = currentSlide.querySelectorAll('.step.visible');
+            const visibleSteps = slides[currentSlideIndex].querySelectorAll('.step.visible');
             if (visibleSteps.length > 0) {
                 const lastVisibleStep = visibleSteps[visibleSteps.length - 1];
-                lastVisibleStep.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'center',
-                    inline: 'nearest'
-                });
+                lastVisibleStep.scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'nearest' });
             }
         }, 650);
     }
 }
 
 function changeSlide(direction) {
-    if (!slides || slides.length === 0) {
-        console.error('Slides non initialisées');
-        return;
-    }
-    
     const currentSlide = slides[currentSlideIndex];
     const steps = currentSlide.querySelectorAll('.step');
     const totalSteps = steps.length;
 
     if (direction === 1) {
-        // Avancer
         if (currentStepIndex < totalSteps) {
             currentStepIndex++;
             updateSlide();
@@ -190,7 +137,6 @@ function changeSlide(direction) {
             updateSlide();
         }
     } else {
-        // Reculer
         if (currentStepIndex > 0) {
             currentStepIndex--;
             updateSlide();
@@ -208,28 +154,20 @@ document.addEventListener('keydown', (e) => {
     const slideMenu = document.getElementById('slideMenu');
     const helpOverlay = document.getElementById('helpOverlay');
     
-    // Si un menu est ouvert, gérer uniquement la fermeture
     if (slideMenu && slideMenu.classList.contains('active')) {
-        if (e.key === 'Escape') {
-            closeMenu();
-        }
+        if (e.key === 'Escape') closeMenu();
         return;
     }
-    
     if (helpOverlay && helpOverlay.classList.contains('active')) {
-        if (e.key === 'Escape' || e.key === 'h' || e.key === 'H' || e.key === '?') {
-            closeHelp();
-        }
+        if (e.key === 'Escape' || e.key === 'h' || e.key === 'H' || e.key === '?') closeHelp();
         return;
     }
-    
-    // Navigation normale
     if (e.key === 'ArrowUp' || e.key === ' ') {
         e.preventDefault();
         changeSlide(1);
     } else if (e.key === 'ArrowDown') {
         e.preventDefault();
-        changeSlide(-1);
+        changeSlide(-1); 
     } else if (e.key === 'm' || e.key === 'M') {
         openMenu();
     } else if (e.key === 'r' || e.key === 'R') {

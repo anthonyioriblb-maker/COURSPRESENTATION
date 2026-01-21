@@ -36,54 +36,6 @@
         .frac .den {
             padding: 0 3px;
         }
-        
-        /* Animation progressive des colonnes de tableau */
-        .step.visible th.col-anim,
-        .step.visible td.col-anim {
-            animation: fadeInColumn 0.6s ease-in forwards;
-            opacity: 0;
-        }
-        
-        .step.visible th.col-anim:nth-child(2),
-        .step.visible td.col-anim:nth-child(2) {
-            animation-delay: 0s;
-        }
-        
-        .step.visible th.col-anim:nth-child(3),
-        .step.visible td.col-anim:nth-child(3) {
-            animation-delay: 0.8s;
-        }
-        
-        .step.visible th.col-anim:nth-child(4),
-        .step.visible td.col-anim:nth-child(4) {
-            animation-delay: 1.6s;
-        }
-        
-        .step.visible th.col-anim:nth-child(5),
-        .step.visible td.col-anim:nth-child(5) {
-            animation-delay: 2.4s;
-        }
-        
-        .step.visible th.col-anim:nth-child(6),
-        .step.visible td.col-anim:nth-child(6) {
-            animation-delay: 3.2s;
-        }
-        
-        .step.visible th.col-anim:nth-child(7),
-        .step.visible td.col-anim:nth-child(7) {
-            animation-delay: 4.0s;
-        }
-        
-        @keyframes fadeInColumn {
-            from {
-                opacity: 0;
-                transform: translateY(-10px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
     </style>
 </head>
 <body>
@@ -128,21 +80,21 @@
                         <table>
                             <tr>
                                 <th>Nombre d'animaux</th>
-                                <th class="col-anim">0</th>
-                                <th class="col-anim">1</th>
-                                <th class="col-anim">2</th>
-                                <th class="col-anim">3</th>
-                                <th class="col-anim">4</th>
-                                <th class="col-anim">5</th>
+                                <th>0</th>
+                                <th>1</th>
+                                <th>2</th>
+                                <th>3</th>
+                                <th>4</th>
+                                <th>5</th>
                             </tr>
                             <tr>
                                 <td>Effectif</td>
-                                <td class="col-anim">4</td>
-                                <td class="col-anim">7</td>
-                                <td class="col-anim">5</td>
-                                <td class="col-anim">4</td>
-                                <td class="col-anim">4</td>
-                                <td class="col-anim">1</td>
+                                <td>4</td>
+                                <td>7</td>
+                                <td>5</td>
+                                <td>4</td>
+                                <td>4</td>
+                                <td>1</td>
                             </tr>
                         </table>
                     </div>
@@ -156,17 +108,17 @@
                         <table>
                             <tr>
                                 <th>Nombre d'animaux</th>
-                                <th class="col-anim">0</th>
-                                <th class="col-anim">1</th>
-                                <th class="col-anim">2</th>
-                                <th class="col-anim">3</th>
+                                <th>0</th>
+                                <th>1</th>
+                                <th>2</th>
+                                <th>3</th>
                             </tr>
                             <tr>
                                 <td>Effectif</td>
-                                <td class="col-anim">8</td>
-                                <td class="col-anim">7</td>
-                                <td class="col-anim">6</td>
-                                <td class="col-anim">1</td>
+                                <td>8</td>
+                                <td>7</td>
+                                <td>6</td>
+                                <td>1</td>
                             </tr>
                         </table>
                     </div>
@@ -286,30 +238,30 @@
                         <table>
                             <tr>
                                 <th>Nombre de sorties</th>
-                                <th class="col-anim">0</th>
-                                <th class="col-anim">1</th>
-                                <th class="col-anim">2</th>
-                                <th class="col-anim">3</th>
-                                <th class="col-anim">4</th>
-                                <th class="col-anim">5</th>
+                                <th>0</th>
+                                <th>1</th>
+                                <th>2</th>
+                                <th>3</th>
+                                <th>4</th>
+                                <th>5</th>
                             </tr>
                             <tr>
                                 <td>Effectif</td>
-                                <td class="col-anim">43</td>
-                                <td class="col-anim">98</td>
-                                <td class="col-anim">125</td>
-                                <td class="col-anim">112</td>
-                                <td class="col-anim">87</td>
-                                <td class="col-anim">75</td>
+                                <td>43</td>
+                                <td>98</td>
+                                <td>125</td>
+                                <td>112</td>
+                                <td>87</td>
+                                <td>75</td>
                             </tr>
                             <tr>
                                 <td>Effectifs cumulés croissants</td>
-                                <td class="col-anim">43</td>
-                                <td class="col-anim">141</td>
-                                <td class="col-anim"><span class="mark-blue">266</span></td>
-                                <td class="col-anim"><span class="mark-green">378</span></td>
-                                <td class="col-anim">465</td>
-                                <td class="col-anim">540</td>
+                                <td>43</td>
+                                <td>141</td>
+                                <td><span class="mark-blue">266</span></td>
+                                <td><span class="mark-green">378</span></td>
+                                <td>465</td>
+                                <td>540</td>
                             </tr>
                         </table>
                     </div>
@@ -343,30 +295,30 @@
                         <table>
                             <tr>
                                 <th>Classe (en cm)</th>
-                                <th class="col-anim">[150 ; 155[</th>
-                                <th class="col-anim">[155 ; 160[</th>
-                                <th class="col-anim">[160 ; 165[</th>
-                                <th class="col-anim">[165 ; 170[</th>
-                                <th class="col-anim">[170 ; 175[</th>
-                                <th class="col-anim">[175 ; 180[</th>
+                                <th>[150 ; 155[</th>
+                                <th>[155 ; 160[</th>
+                                <th>[160 ; 165[</th>
+                                <th>[165 ; 170[</th>
+                                <th>[170 ; 175[</th>
+                                <th>[175 ; 180[</th>
                             </tr>
                             <tr>
                                 <td>Centre de classe</td>
-                                <td class="col-anim">152,5</td>
-                                <td class="col-anim">157,5</td>
-                                <td class="col-anim">162,5</td>
-                                <td class="col-anim">167,5</td>
-                                <td class="col-anim">172,5</td>
-                                <td class="col-anim">177,5</td>
+                                <td>152,5</td>
+                                <td>157,5</td>
+                                <td>162,5</td>
+                                <td>167,5</td>
+                                <td>172,5</td>
+                                <td>177,5</td>
                             </tr>
                             <tr>
                                 <td>Effectif</td>
-                                <td class="col-anim">2</td>
-                                <td class="col-anim">4</td>
-                                <td class="col-anim">8</td>
-                                <td class="col-anim">8</td>
-                                <td class="col-anim">3</td>
-                                <td class="col-anim">2</td>
+                                <td>2</td>
+                                <td>4</td>
+                                <td>8</td>
+                                <td>8</td>
+                                <td>3</td>
+                                <td>2</td>
                             </tr>
                         </table>
                     </div>
@@ -376,39 +328,39 @@
                         <table>
                             <tr>
                                 <th>Classe (en cm)</th>
-                                <th class="col-anim">[150 ; 155[</th>
-                                <th class="col-anim">[155 ; 160[</th>
-                                <th class="col-anim">[160 ; 165[</th>
-                                <th class="col-anim">[165 ; 170[</th>
-                                <th class="col-anim">[170 ; 175[</th>
-                                <th class="col-anim">[175 ; 180[</th>
+                                <th>[150 ; 155[</th>
+                                <th>[155 ; 160[</th>
+                                <th>[160 ; 165[</th>
+                                <th>[165 ; 170[</th>
+                                <th>[170 ; 175[</th>
+                                <th>[175 ; 180[</th>
                             </tr>
                             <tr>
                                 <td>Centre de classe</td>
-                                <td class="col-anim">152,5</td>
-                                <td class="col-anim">157,5</td>
-                                <td class="col-anim">162,5</td>
-                                <td class="col-anim">167,5</td>
-                                <td class="col-anim">172,5</td>
-                                <td class="col-anim">177,5</td>
+                                <td>152,5</td>
+                                <td>157,5</td>
+                                <td>162,5</td>
+                                <td>167,5</td>
+                                <td>172,5</td>
+                                <td>177,5</td>
                             </tr>
                             <tr>
                                 <td>Effectif</td>
-                                <td class="col-anim">2</td>
-                                <td class="col-anim">4</td>
-                                <td class="col-anim">8</td>
-                                <td class="col-anim">8</td>
-                                <td class="col-anim">3</td>
-                                <td class="col-anim">2</td>
+                                <td>2</td>
+                                <td>4</td>
+                                <td>8</td>
+                                <td>8</td>
+                                <td>3</td>
+                                <td>2</td>
                             </tr>
                             <tr>
                                 <td>Fréquence (%)</td>
-                                <td class="col-anim"><span class="frac"><span class="num">2</span><span class="fracbar">/</span><span class="den">27</span></span> × 100 ≈ 7%</td>
-                                <td class="col-anim"><span class="frac"><span class="num">4</span><span class="fracbar">/</span><span class="den">27</span></span> × 100 ≈ 15%</td>
-                                <td class="col-anim"><span class="frac"><span class="num">8</span><span class="fracbar">/</span><span class="den">27</span></span> × 100 ≈ 30%</td>
-                                <td class="col-anim"><span class="frac"><span class="num">8</span><span class="fracbar">/</span><span class="den">27</span></span> × 100 ≈ 30%</td>
-                                <td class="col-anim"><span class="frac"><span class="num">3</span><span class="fracbar">/</span><span class="den">27</span></span> × 100 ≈ 11%</td>
-                                <td class="col-anim"><span class="frac"><span class="num">2</span><span class="fracbar">/</span><span class="den">27</span></span> × 100 ≈ 7%</td>
+                                <td><span class="frac"><span class="num">2</span><span class="fracbar">/</span><span class="den">27</span></span> × 100 ≈ 7%</td>
+                                <td><span class="frac"><span class="num">4</span><span class="fracbar">/</span><span class="den">27</span></span> × 100 ≈ 15%</td>
+                                <td><span class="frac"><span class="num">8</span><span class="fracbar">/</span><span class="den">27</span></span> × 100 ≈ 30%</td>
+                                <td><span class="frac"><span class="num">8</span><span class="fracbar">/</span><span class="den">27</span></span> × 100 ≈ 30%</td>
+                                <td><span class="frac"><span class="num">3</span><span class="fracbar">/</span><span class="den">27</span></span> × 100 ≈ 11%</td>
+                                <td><span class="frac"><span class="num">2</span><span class="fracbar">/</span><span class="den">27</span></span> × 100 ≈ 7%</td>
                             </tr>
                         </table>
                     </div>
