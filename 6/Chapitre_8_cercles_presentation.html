@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Cercles et disques - Présentation Interactive</title>
+    <link rel="stylesheet" href="../styles.css">
+    <style>
+        table {
+            font-size: inherit;
+        }
+        table th, table td {
+            font-size: inherit;
+        }
+        .method ol, .example ol, .definition ol {
+            margin-left: 20px;
+            padding-left: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="content">
+            <div class="slide active">
+                <h1>Chapitre 8 : Cercles et disques</h1>
+            </div>
+
+            <div class="slide">
+                <h2><u>I. Définitions</u></h2>
+                <h3><u>1) Le cercle</u></h3>
+                <div class="definition">
+                    <div class="step"><strong>Définition :</strong> Un <strong>cercle</strong> est formé de tous les points situés à la même distance d'un point appelé <strong>centre</strong>.</div>
+                </div>
+                <div class="definition">
+                    <div class="step"><strong>Définition :</strong> Cette distance est appelée le <strong>rayon</strong> du cercle.</div>
+                </div>
+                <div class="remarque">
+                    <div class="step"><strong>Remarque :</strong> Le centre du cercle n'est <strong>pas un point du cercle</strong>.</div>
+                </div>
+                <div class="example">
+                    <div class="step"><strong>Exemple :</strong> Cercle de centre A et de rayon 3 cm</div>
+                    <div class="step"><img src="6-81.png" alt="Cercle de centre A et de rayon 3 cm" style="max-width: 400px;"></div>
+                </div>
+            </div>
+
+            <div class="slide">
+                <h3><u>2) Le disque</u></h3>
+                <div class="definition">
+                    <div class="step"><strong>Définition :</strong> Un <strong>disque</strong> est formé de tous les points situés sur un cercle et à l'intérieur du cercle.</div>
+                    <div class="step">C'est une <strong>surface</strong>.</div>
+                </div>
+                <div class="important">
+                    <div class="step"><strong>⚠ Attention :</strong> Il ne faut pas confondre le <strong>cercle</strong> (qui est la ligne) et le <strong>disque</strong> (qui est la surface).</div>
+                </div>
+                <div class="example">
+                    <div class="step"><strong>Exemple :</strong> Disque de centre A et de rayon 3 cm</div>
+                    <div class="step"><img src="6-82.png" alt="Disque de centre A et de rayon 3 cm" style="max-width: 400px;"></div>
+                </div>
+            </div>
+
+            <div class="slide">
+                <h2><u>II. Vocabulaire</u></h2>
+                <div class="definition">
+                    <div class="step">Sur la figure ci-dessous :</div>
+                </div>
+                <div style="text-align: center; margin: 30px 0;">
+                    <div class="step"><img src="6-83.png" alt="Vocabulaire du cercle" style="max-width: 100%; width: 800px;"></div>
+                </div>
+            </div>
+
+            <div class="slide">
+                <h3><u>1) Le rayon</u></h3>
+                <div class="definition">
+                    <div class="step"><strong>Définition :</strong> Un <strong>rayon</strong> est un segment qui relie le centre du cercle à un point du cercle.</div>
+                </div>
+                <div class="remarque">
+                    <div class="step"><strong>Remarque :</strong> Le mot <strong>"rayon"</strong> peut désigner :</div>
+                    <div class="step">
+                        <ul>
+                            <li>Le <strong>segment</strong> [OA]</li>
+                            <li>La <strong>longueur</strong> OA</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="important">
+                    <div class="step"><strong>Propriété :</strong> Tous les rayons d'un même cercle ont la même longueur.</div>
+                </div>
+            </div>
+
+            <div class="slide">
+                <h3><u>2) Le diamètre</u></h3>
+                <div class="definition">
+                    <div class="step"><strong>Définition :</strong> Un <strong>diamètre</strong> est un segment qui relie deux points du cercle en passant par le centre.</div>
+                </div>
+                <div class="remarque">
+                    <div class="step"><strong>Remarque :</strong> Le mot <strong>"diamètre"</strong> peut désigner :</div>
+                    <div class="step">
+                        <ul>
+                            <li>Le <strong>segment</strong> [BD]</li>
+                            <li>La <strong>longueur</strong> BD</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="important">
+                    <div class="step"><strong>Propriété :</strong> Le diamètre d'un cercle est égal au double du rayon.</div>
+                    <div class="step">Si on note <em>r</em> le rayon et <em>d</em> le diamètre, on a : <strong>d = 2 × r</strong></div>
+                </div>
+                <div class="important">
+                    <div class="step"><strong>Propriété :</strong> Le centre d'un cercle est le milieu de tous ses diamètres.</div>
+                </div>
+            </div>
+
+            <div class="slide">
+                <h3><u>3) La corde</u></h3>
+                <div class="definition">
+                    <div class="step"><strong>Définition :</strong> Une <strong>corde</strong> est un segment qui relie deux points du cercle.</div>
+                </div>
+                <div class="remarque">
+                    <div class="step"><strong>Remarque :</strong> Un diamètre est une corde particulière : c'est la corde qui passe par le centre du cercle.</div>
+                    <div class="step">Le diamètre est la plus grande corde du cercle.</div>
+                </div>
+            </div>
+
+            <div class="slide">
+                <h3><u>4) L'arc de cercle</u></h3>
+                <div class="definition">
+                    <div class="step"><strong>Définition :</strong> Un <strong>arc de cercle</strong> est une portion de cercle délimitée par deux points.</div>
+                </div>
+                <div class="remarque">
+                    <div class="step"><strong>Remarque :</strong> Deux points A et B d'un cercle délimitent toujours <strong>deux arcs de cercle</strong> différents (sauf si A et B sont diamétralement opposés, auquel cas les deux arcs sont égaux : on parle de demi-cercle).</div>
+                </div>
+                <div class="remarque">
+                    <div class="step"><strong>Notation :</strong> On note les deux arcs en plaçant le symbole au-dessus des lettres :</div>
+                    <div class="step">
+                        <ul>
+                            <li><span style="color: red; font-size: 18px;"><span style="position: relative; display: inline-block; padding-top: 12px;">
+                                <svg style="position: absolute; top: 0; left: 50%; transform: translateX(-50%);" width="30" height="12" viewBox="0 0 30 12">
+                                    <path d="M 2 2 Q 15 10, 28 2" stroke="red" stroke-width="2" fill="none"/>
+                                </svg>
+                                AB</span></span> désigne le grand arc</li>
+                            <li><span style="color: red; font-size: 18px;"><span style="position: relative; display: inline-block; padding-top: 12px;">
+                                <svg style="position: absolute; top: 0; left: 50%; transform: translateX(-50%);" width="30" height="12" viewBox="0 0 30 12">
+                                    <path d="M 2 10 Q 15 2, 28 10" stroke="red" stroke-width="2" fill="none"/>
+                                </svg>
+                                AB</span></span> désigne le petit arc</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="slide">
+                <h2><u>III. Construction d'un cercle</u></h2>
+                <h3><u>1) Utilisation du compas</u></h3>
+                <div class="method">
+                    <div class="step"><strong>Méthode :</strong> Pour tracer un cercle de centre O et de rayon 3 cm :</div>
+                    <div class="step">
+                        <ol>
+                            <li>Écarter le compas pour que la distance entre la pointe et la mine soit égale à 3 cm (utiliser une règle graduée)</li>
+                            <li>Placer la pointe du compas sur le point O (le centre)</li>
+                            <li>Faire tourner le compas autour du point O en gardant le même écartement</li>
+                            <li>Tracer le cercle complet</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+
+            <div class="slide">
+                <h3><u>2) Programme de construction</u></h3>
+                <div class="definition">
+                    <div class="step"><strong>Définition :</strong> Un <strong>programme de construction</strong> est une liste d'instructions qui permet de construire une figure géométrique de manière précise.</div>
+                </div>
+                <div class="example">
+                    <div class="step"><strong>Exemple :</strong></div>
+                    <div class="step"><strong>Programme de construction :</strong></div>
+                    <div class="step">
+                        <ol>
+                            <li>Tracer un segment [AB] de longueur 5 cm.</li>
+                            <li>Tracer le cercle de centre A et de rayon 4 cm.</li>
+                            <li>Tracer le cercle de centre B et de rayon 3 cm.</li>
+                            <li>Les deux cercles se coupent en deux points C et D.</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+
+            <div class="slide">
+                <h2><u>V. Appartenance à un cercle</u></h2>
+                <div class="important">
+                    <div class="step"><strong>Propriété :</strong> Un point M appartient au cercle de centre O et de rayon <em>r</em> si et seulement si la distance OM est égale à <em>r</em>.</div>
+                </div>
+                <div class="example">
+                    <div class="step"><strong>Exemple :</strong></div>
+                    <div class="step">Soit un cercle de centre O et de rayon 5 cm. On mesure les distances suivantes :</div>
+                    <div class="step">
+                        <ul>
+                            <li>Si OA = 5 cm alors le point A <strong>appartient</strong> au cercle</li>
+                            <li>Si OB = 3 cm alors le point B est <strong>à l'intérieur</strong> du cercle (dans le disque)</li>
+                            <li>Si OC = 7 cm alors le point C est <strong>à l'extérieur</strong> du cercle</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="important">
+                    <div class="step"><strong>Propriété :</strong> Si deux points A et B appartiennent à un même cercle de centre O, alors : <strong>OA = OB</strong></div>
+                </div>
+                <div class="example">
+                    <div class="step"><strong>Exemple d'utilisation :</strong></div>
+                    <div class="step">Les points A, B et C appartiennent au cercle de centre O et de rayon 4 cm.</div>
+                    <div class="step">On sait que OA = 4 cm.</div>
+                    <div class="step">Quelle est la longueur OB ?</div>
+                    <div class="step"><strong>Réponse :</strong> Comme A et B appartiennent au même cercle de centre O, on a : OA = OB = 4 cm.</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="controls">
+            <div class="controls-left">
+                <button id="prevBtn" onclick="changeSlide(-1)">← Précédent</button>
+                <button class="btn-reset" onclick="resetSlide()">⟲</button>
+            </div>
+            <div class="progress">
+                <span><span id="currentSlide">1</span> / <span id="totalSlides">11</span></span>
+                <span class="step-indicator" id="stepIndicator"></span>
+            </div>
+            <div class="controls-right">
+                <button class="btn-menu" onclick="openMenu()">📋 Menu</button>
+                <button class="btn-menu" onclick="openHelp()">❓ Aide</button>
+                <button id="nextBtn" onclick="changeSlide(1)">Suivant →</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="slide-menu" id="slideMenu">
+        <div class="menu-content">
+            <h2>Sélectionner une diapositive</h2>
+            <div class="slide-list" id="slideList"></div>
+            <button class="close-menu" onclick="closeMenu()">Fermer</button>
+        </div>
+    </div>
+
+    <div class="help-overlay" id="helpOverlay">
+        <div class="help-content">
+            <h2>Raccourcis clavier</h2>
+            <ul>
+                <li><kbd>→</kbd> ou <kbd>Espace</kbd> : Étape/Slide suivante</li>
+                <li><kbd>←</kbd> : Étape/Slide précédente</li>
+                <li><kbd>M</kbd> : Ouvrir le menu des slides</li>
+                <li><kbd>R</kbd> : Réinitialiser la slide actuelle</li>
+                <li><kbd>H</kbd> ou <kbd>?</kbd> : Afficher cette aide</li>
+                <li><kbd>Échap</kbd> : Fermer les menus</li>
+            </ul>
+            <button class="close-menu" onclick="closeHelp()">Fermer</button>
+        </div>
+    </div>
+
+    <script src="script-cercles.js"></script>
+</body>
+</html>
