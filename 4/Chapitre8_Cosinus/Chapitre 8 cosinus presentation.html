@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cosinus dans le triangle rectangle</title>
-    <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="../../styles.css">
     <style>
         table {
             font-size: inherit;
@@ -33,16 +33,28 @@
             <!-- Slide 3 : Vocabulaire -->
             <div class="slide">
                 <h3 class="subsection-title">1) Vocabulaire</h3>
-                <div class="definition step">
-                    <strong>Vocabulaire :</strong> Soit ABC un triangle rectangle en A
-                    <ul>
-                        <li>[BC] est <span style="color: red;">l'hypoténuse</span> du triangle ABC</li>
-                        <li>[AB] est le <span style="color: red;">côté opposé</span> à l'angle <span class="angle">C</span> et le <span style="color: red;">côté adjacent</span> à l'angle <span class="angle">B</span>.</li>
-                        <li>[AC] est le <span style="color: red;">côté opposé</span> à l'angle <span class="angle">B</span> et le <span style="color: red;">côté adjacent</span> à l'angle <span class="angle">C</span>.</li>
-                    </ul>
-                </div>
-                <div class="step">
-                    <img src="4-80.png" alt="Triangle ABC rectangle en A avec vocabulaire" style="max-width: 500px;">
+                <div class="definition">
+                    <div class="step">
+                        <strong>Vocabulaire :</strong> Soit ABC un triangle rectangle en A
+                    </div>
+                    <div class="step">
+                        <ul>
+                            <li>[BC] est <span style="color: red;">l'hypoténuse</span> du triangle ABC</li>
+                        </ul>
+                    </div>
+                    <div class="step">
+                        <ul>
+                            <li>[AB] est le <span style="color: red;">côté opposé</span> à l'angle <span class="angle">C</span> et le <span style="color: red;">côté adjacent</span> à l'angle <span class="angle">B</span>.</li>
+                        </ul>
+                    </div>
+                    <div class="step">
+                        <ul>
+                            <li>[AC] est le <span style="color: red;">côté opposé</span> à l'angle <span class="angle">B</span> et le <span style="color: red;">côté adjacent</span> à l'angle <span class="angle">C</span>.</li>
+                        </ul>
+                    </div>
+                    <div class="step">
+                        <img src="4-80.png" alt="Triangle ABC rectangle en A avec vocabulaire" style="max-width: 500px;">
+                    </div>
                 </div>
             </div>
 
@@ -70,10 +82,11 @@
             <!-- Slide 5 : Section II - Cosinus d'un angle aigu -->
             <div class="slide">
                 <h2 class="section-title">II. Cosinus d'un angle aigu d'un triangle rectangle</h2>
-                <div class="definition step">
-                    <strong>Définition :</strong> Soit un triangle ABC rectangle en A. Le cosinus de l'angle <span class="angle">ABC</span> est le quotient de la longueur du côté adjacent à l'angle <span class="angle">ABC</span> par la longueur de l'hypoténuse :
-                    <br><br>
-                    <div style="text-align: center; font-size: 1.2em; background-color: #ffe6e6; padding: 15px; border: 2px solid red; margin: 10px 0; border-radius: 8px;">
+                <div class="definition">
+                    <div class="step">
+                        <strong>Définition :</strong> Soit un triangle ABC rectangle en A. Le cosinus de l'angle <span class="angle">ABC</span> est le quotient de la longueur du côté adjacent à l'angle <span class="angle">ABC</span> par la longueur de l'hypoténuse :
+                    </div>
+                    <div class="step" style="text-align: center; font-size: 1.2em; background-color: #ffe6e6; padding: 15px; border: 2px solid red; margin: 10px 0; border-radius: 8px;">
                         cos <span class="angle">ABC</span> = <span class="fraction"><span class="numerateur">côté adjacent à l'angle <span class="angle">ABC</span></span><span class="denominateur">hypoténuse du triangle ABC</span></span>
                     </div>
                 </div>
@@ -92,78 +105,75 @@
 
             <!-- Slide 7 : Calculer la valeur d'un cosinus -->
             <div class="slide">
-                <div class="example step">
-                    <strong>1) Calculer la valeur d'un cosinus lorsque l'on connaît la valeur de l'angle</strong>
-                </div>
-                <div class="example step">
-                    <strong>Exemple :</strong> Pour calculer <em>Cos</em> 30°<br><br>
-                    À la calculatrice je dois taper :<br><br>
-                    Avec la Casio :
-                </div>
-                <div class="step">
-                    <img src="4-83.png" alt="Touches Casio : cos 3 0 ) EXE" style="max-width: 500px;">
-                </div>
-                <div class="example step">
-                    Avec la TI :
-                </div>
-                <div class="step">
-                    <img src="4-84.png" alt="Touches TI : cos 3 0 ) enter" style="max-width: 500px;">
-                </div>
-                <div class="important step">
-                    Ainsi <em>Cos</em> 30° = <span class="fraction"><span class="numerateur"><span class="sqrt">3</span></span><span class="denominateur">2</span></span> ≈ 0,87
+                <h3 class="subsection-title">1) Calculer la valeur d'un cosinus lorsque l'on connaît la valeur de l'angle</h3>
+                <div class="example">
+                    <div class="step">
+                        <strong>Exemple :</strong> Pour calculer <em>Cos</em> 30°
+                    </div>
+                    <div class="step">
+                        À la calculatrice je dois taper :
+                    </div>
+                    <div class="step">
+                        Avec la Casio :<br>
+                        <img src="4-83.png" alt="Touches Casio : cos 3 0 ) EXE" style="max-width: 500px; margin: 10px 0;">
+                    </div>
+                    <div class="step">
+                        Avec la TI :<br>
+                        <img src="4-84.png" alt="Touches TI : cos 3 0 ) enter" style="max-width: 500px; margin: 10px 0;">
+                    </div>
+                    <div class="step">
+                        Ainsi <em>Cos</em> 30° = <span class="fraction"><span class="numerateur"><span class="sqrt">3</span></span><span class="denominateur">2</span></span> ≈ 0,87
+                    </div>
                 </div>
             </div>
 
             <!-- Slide 8 : Calculer la valeur d'un angle -->
             <div class="slide">
-                <div class="example step">
-                    <strong>2) Calculer la valeur d'un angle connaissant le cosinus</strong>
-                </div>
-                <div class="example step">
-                    <strong>Exemple :</strong> Pour calculer la mesure de l'angle <span class="angle">ABC</span> tel que <em>Cos</em> <span class="angle">ABC</span> = 0,75<br><br>
-                    À la calculatrice je dois taper :<br><br>
-                    Avec la Casio :
-                </div>
-                <div class="step">
-                    <img src="4-85.png" alt="Touches Casio : SHIFT cos 0 . 7 5 ) EXE" style="max-width: 500px;">
-                </div>
-                <div class="example step">
-                    Avec la TI :
-                </div>
-                <div class="step">
-                    <img src="4-86.png" alt="Touches TI : 2nde cos 0 . 7 5 ) enter" style="max-width: 500px;">
-                </div>
-                <div class="important step">
-                    Ainsi <span class="angle">ABC</span> ≈ 41,4°
+                <h3 class="subsection-title">2) Calculer la valeur d'un angle connaissant le cosinus</h3>
+                <div class="example">
+                    <div class="step">
+                        <strong>Exemple :</strong> Pour calculer la mesure de l'angle <span class="angle">ABC</span> tel que <em>Cos</em> <span class="angle">ABC</span> = 0,75
+                    </div>
+                    <div class="step">
+                        À la calculatrice je dois taper :
+                    </div>
+                    <div class="step">
+                        Avec la Casio :<br>
+                        <img src="4-85.png" alt="Touches Casio : SHIFT cos 0 . 7 5 ) EXE" style="max-width: 500px; margin: 10px 0;">
+                    </div>
+                    <div class="step">
+                        Avec la TI :<br>
+                        <img src="4-86.png" alt="Touches TI : 2nde cos 0 . 7 5 ) enter" style="max-width: 500px; margin: 10px 0;">
+                    </div>
+                    <div class="step">
+                        Ainsi <span class="angle">ABC</span> ≈ 41,4°
+                    </div>
                 </div>
             </div>
 
-            <!-- Slide 9 : Section IV - Exemples d'utilisation -->
+            <!-- Slide 9 : Section IV -->
             <div class="slide">
                 <h2 class="section-title">IV. Exemples d'utilisation</h2>
             </div>
 
-            <!-- Slide 10 : Exemple 1 - Énoncé -->
+            <!-- Slide 10 : Exemple 1 COMPLET -->
             <div class="slide">
-                <div class="example step">
-                    <strong>Exemple 1 : Calcul de la longueur du côté adjacent à un angle connu</strong>
-                </div>
-                <div class="example step">
-                    <strong>Énoncé :</strong><br>
-                    On considère un triangle LEA rectangle en E tel que LA = 5 cm et <span class="angle">ELA</span> = 50°.<br>
-                    Calculer la longueur du côté [LE] arrondie au millimètre.
-                </div>
-                <div class="step">
-                    <img src="4-87.png" alt="Triangle LEA rectangle en E" style="max-width: 500px;">
-                </div>
-            </div>
-
-            <!-- Slide 11 : Exemple 1 - Résolution -->
-            <div class="slide">
-                <div class="method step">
-                    Le triangle LEA est rectangle en E donc :
-                </div>
-                <div class="method">
+                <h3 class="subsection-title">1) Calcul de la longueur du côté adjacent à un angle connu</h3>
+                <div class="example">
+                    <div class="step">
+                        <strong>Exemple :</strong>
+                    </div>
+                    <div class="step">
+                        <strong>Énoncé :</strong><br>
+                        On considère un triangle LEA rectangle en E tel que LA = 5 cm et <span class="angle">ELA</span> = 50°.<br>
+                        Calculer la longueur du côté [LE] arrondie au millimètre.
+                    </div>
+                    <div class="step">
+                        <img src="4-87.png" alt="Triangle LEA rectangle en E" style="max-width: 500px;">
+                    </div>
+                    <div class="step">
+                        Le triangle LEA est rectangle en E donc :
+                    </div>
                     <div class="step">
                         cos <span class="angle">ELA</span> = <span class="fraction"><span class="numerateur">LE</span><span class="denominateur">LA</span></span>
                     </div>
@@ -179,27 +189,24 @@
                 </div>
             </div>
 
-            <!-- Slide 12 : Exemple 2 - Énoncé -->
+            <!-- Slide 11 : Exemple 2 COMPLET -->
             <div class="slide">
-                <div class="example step">
-                    <strong>Exemple 2 : Calcul de la longueur de l'hypoténuse</strong>
-                </div>
-                <div class="example step">
-                    <strong>Énoncé :</strong><br>
-                    On considère un triangle PAT rectangle en T tel que AT = 7 cm et <span class="angle">PAT</span> = 25°.<br>
-                    Calculer la longueur du côté [PA] arrondie au millimètre.
-                </div>
-                <div class="step">
-                    <img src="4-88.png" alt="Triangle PAT rectangle en T" style="max-width: 500px;">
-                </div>
-            </div>
-
-            <!-- Slide 13 : Exemple 2 - Résolution -->
-            <div class="slide">
-                <div class="method step">
-                    Le triangle PAT est rectangle en T donc :
-                </div>
-                <div class="method">
+                <h3 class="subsection-title">2) Calcul de la longueur de l'hypoténuse</h3>
+                <div class="example">
+                    <div class="step">
+                        <strong>Exemple :</strong>
+                    </div>
+                    <div class="step">
+                        <strong>Énoncé :</strong><br>
+                        On considère un triangle PAT rectangle en T tel que AT = 7 cm et <span class="angle">PAT</span> = 25°.<br>
+                        Calculer la longueur du côté [PA] arrondie au millimètre.
+                    </div>
+                    <div class="step">
+                        <img src="4-88.png" alt="Triangle PAT rectangle en T" style="max-width: 500px;">
+                    </div>
+                    <div class="step">
+                        Le triangle PAT est rectangle en T donc :
+                    </div>
                     <div class="step">
                         cos <span class="angle">PAT</span> = <span class="fraction"><span class="numerateur">AT</span><span class="denominateur">AP</span></span>
                     </div>
@@ -215,27 +222,24 @@
                 </div>
             </div>
 
-            <!-- Slide 14 : Exemple 3 - Énoncé -->
+            <!-- Slide 12 : Exemple 3 COMPLET -->
             <div class="slide">
-                <div class="example step">
-                    <strong>Exemple 3 : Calculer la mesure d'un angle</strong>
-                </div>
-                <div class="example step">
-                    <strong>Énoncé :</strong><br>
-                    Soit FUN un triangle rectangle en U tel que NF = 6 cm et UN = 4 cm.<br>
-                    Calculer la mesure de l'angle <span class="angle">UNF</span> arrondie au degré. Déduis-en la valeur approchée au degré près de la mesure de l'autre angle aigu du triangle.
-                </div>
-                <div class="step">
-                    <img src="4-89.png" alt="Triangle FUN rectangle en U" style="max-width: 500px;">
-                </div>
-            </div>
-
-            <!-- Slide 15 : Exemple 3 - Résolution -->
-            <div class="slide">
-                <div class="method step">
-                    Le triangle FUN est rectangle en U donc :
-                </div>
-                <div class="method">
+                <h3 class="subsection-title">3) Calculer la mesure d'un angle</h3>
+                <div class="example">
+                    <div class="step">
+                        <strong>Exemple :</strong>
+                    </div>
+                    <div class="step">
+                        <strong>Énoncé :</strong><br>
+                        Soit FUN un triangle rectangle en U tel que NF = 6 cm et UN = 4 cm.<br>
+                        Calculer la mesure de l'angle <span class="angle">UNF</span> arrondie au degré. Déduis-en la valeur approchée au degré près de la mesure de l'autre angle aigu du triangle.
+                    </div>
+                    <div class="step">
+                        <img src="4-89.png" alt="Triangle FUN rectangle en U" style="max-width: 500px;">
+                    </div>
+                    <div class="step">
+                        Le triangle FUN est rectangle en U donc :
+                    </div>
                     <div class="step">
                         cos <span class="angle">UNF</span> = <span class="fraction"><span class="numerateur">UN</span><span class="denominateur">NF</span></span>
                     </div>
@@ -260,7 +264,7 @@
                 <button class="btn-reset" onclick="resetSlide()">⟲</button>
             </div>
             <div class="progress">
-                <span><span id="currentSlide">1</span> / <span id="totalSlides">15</span></span>
+                <span><span id="currentSlide">1</span> / <span id="totalSlides">12</span></span>
                 <span class="step-indicator" id="stepIndicator"></span>
             </div>
             <div class="controls-right">
