@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notion de fonction - Présentation Interactive</title>
+    <link rel="stylesheet" href="../../styles.css">
+</head>
+<body>
+    <div class="container">
+        <div class="content">
+            <!-- Slide 1 : Titre -->
+            <div class="slide active">
+                <h1>Chapitre 7 : Notion de fonction</h1>
+            </div>
+
+            <!-- Slide 2 : Introduction -->
+            <div class="slide">
+                <h2 class="section-title">Introduction</h2>
+                <div class="example">
+                    <div class="step">Imaginons que nous décidions d'aller à la piscine et que l'on paie toujours à la fin de l'année.</div>
+                    <div class="step">Si nous allons 1 fois à la piscine et que le prix de l'entrée est de 5€, nous paierons une fois 5€.</div>
+                    <div class="step">Si nous allons 4 fois à la piscine, nous paierons 4 fois 5€ soit 20€.</div>
+                    <div class="step">Si nous allons 10 fois à la piscine, nous paierons 50€.</div>
+                    <div class="step">Seulement, nous ne savons pas encore combien de fois nous allons y aller pendant l'année. Disons que nous y allons <span class="math">x</span> fois.</div>
+                    <div class="step">A la fin de l'année, nous paierons <span class="math">x</span> fois 5€, c'est à dire 5<span class="math">x</span> €.</div>
+                    <div class="step">Nous avons donc ici, la <strong>fonction 5<span class="math">x</span></strong> qui nous donne le prix à payer en fonction du nombre de séance <span class="math">x</span>.</div>
+                </div>
+            </div>
+
+            <!-- Slide 3 : Définitions-vocabulaire -->
+            <div class="slide">
+                <h2 class="section-title">I. Définitions-vocabulaire</h2>
+                <div class="definition">
+                    <div class="step"><span style="color: red;">Définition :</span> Une <span style="color: red;">fonction</span> est un processus qui à un nombre donné lui fait correspondre un et un seul autre nombre.</div>
+                </div>
+                <div class="example">
+                    <div class="step"><strong>Exemple :</strong> Voici la fonction <span class="math">f</span> qui à un nombre <span class="math">x</span> associe 5<span class="math">x</span></div>
+                    <div class="step">
+                        <svg width="400" height="280" xmlns="http://www.w3.org/2000/svg" style="display: block; margin: 20px auto;">
+                            <!-- Premier exemple : 0 -> 0 -->
+                            <g transform="translate(50, 20)">
+                                <rect x="0" y="10" width="60" height="40" fill="#e8f4fc" stroke="#3498db" stroke-width="2" rx="5"/>
+                                <text x="30" y="35" text-anchor="middle" font-size="18" font-weight="bold" fill="#3498db">0</text>
+                                <line x1="60" y1="30" x2="90" y2="30" stroke="#2ecc71" stroke-width="3" marker-end="url(#arrowgreen)"/>
+                                
+                                <g transform="translate(90, 0)">
+                                    <rect x="0" y="5" width="110" height="50" fill="#ffd700" stroke="#ff8c00" stroke-width="2" rx="5"/>
+                                    <rect x="5" y="10" width="100" height="40" fill="#fff3cd" stroke="#ffc107" stroke-width="2" rx="3"/>
+                                    
+                                    <g class="gear-left">
+                                        <circle cx="25" cy="30" r="8" fill="none" stroke="#ff8c00" stroke-width="2"/>
+                                        <line x1="25" y1="22" x2="25" y2="38" stroke="#ff8c00" stroke-width="2"/>
+                                        <line x1="17" y1="30" x2="33" y2="30" stroke="#ff8c00" stroke-width="2"/>
+                                        <line x1="19.5" y1="24.5" x2="30.5" y2="35.5" stroke="#ff8c00" stroke-width="2"/>
+                                        <line x1="30.5" y1="24.5" x2="19.5" y2="35.5" stroke="#ff8c00" stroke-width="2"/>
+                                        <circle cx="25" cy="30" r="3" fill="#ff8c00"/>
+                                    </g>
+                                    
+                                    <g class="gear-right">
+                                        <circle cx="85" cy="30" r="8" fill="none" stroke="#ff8c00" stroke-width="2"/>
+                                        <line x1="85" y1="22" x2="85" y2="38" stroke="#ff8c00" stroke-width="2"/>
+                                        <line x1="77" y1="30" x2="93" y2="30" stroke="#ff8c00" stroke-width="2"/>
+                                        <line x1="79.5" y1="24.5" x2="90.5" y2="35.5" stroke="#ff8c00" stroke-width="2"/>
+                                        <line x1="90.5" y1="24.5" x2="79.5" y2="35.5" stroke="#ff8c00" stroke-width="2"/>
+                                        <circle cx="85" cy="30" r="3" fill="#ff8c00"/>
+                                    </g>
+                                    
+                                    <text x="55" y="25" text-anchor="middle" font-size="12" font-weight="bold" fill="#d68910">f</text>
+                                    <text x="55" y="42" text-anchor="middle" font-size="14" font-weight="bold" fill="#d68910">× 5</text>
+                                    
+                                    <circle cx="10" cy="10" r="3" fill="#666"/>
+                                    <circle cx="100" cy="10" r="3" fill="#666"/>
+                                    <circle cx="10" cy="50" r="3" fill="#666"/>
+                                    <circle cx="100" cy="50" r="3" fill="#666"/>
+                                </g>
+                                
+                                <line x1="200" y1="30" x2="230" y2="30" stroke="#e74c3c" stroke-width="3" marker-end="url(#arrowred)"/>
+                                
+                                <rect x="230" y="10" width="60" height="40" fill="#ffe6f0" stroke="#e74c3c" stroke-width="2" rx="5"/>
+                                <text x="260" y="35" text-anchor="middle" font-size="18" font-weight="bold" fill="#e74c3c">0</text>
+                            </g>
+                            
+                            <!-- Deuxième exemple : 5 -> 25 -->
+                            <g transform="translate(50, 100)">
+                                <rect x="0" y="10" width="60" height="40" fill="#e8f4fc" stroke="#3498db" stroke-width="2" rx="5"/>
+                                <text x="30" y="35" text-anchor="middle" font-size="18" font-weight="bold" fill="#3498db">5</text>
+                                <line x1="60" y1="30" x2="90" y2="30" stroke="#2ecc71" stroke-width="3" marker-end="url(#arrowgreen)"/>
+                                
+                                <g transform="translate(90, 0)">
+                                    <rect x="0" y="5" width="110" height="50" fill="#ffd700" stroke="#ff8c00" stroke-width="2" rx="5"/>
+                                    <rect x="5" y="10" width="100" height="40" fill="#fff3cd" stroke="#ffc107" stroke-width="2" rx="3"/>
+                                    
+                                    <g class="gear-left">
+                                        <circle cx="25" cy="30" r="8" fill="none" stroke="#ff8c00" stroke-width="2"/>
+                                        <line x1="25" y1="22" x2="25" y2="38" stroke="#ff8c00" stroke-width="2"/>
+                                        <line x1="17" y1="30" x2="33" y2="30" stroke="#ff8c00" stroke-width="2"/>
+                                        <line x1="19.5" y1="24.5" x2="30.5" y2="35.5" stroke="#ff8c00" stroke-width="2"/>
+                                        <line x1="30.5" y1="24.5" x2="19.5" y2="35.5" stroke="#ff8c00" stroke-width="2"/>
+                                        <circle cx="25" cy="30" r="3" fill="#ff8c00"/>
+                                    </g>
+                                    
+                                    <g class="gear-right">
+                                        <circle cx="85" cy="30" r="8" fill="none" stroke="#ff8c00" stroke-width="2"/>
+                                        <line x1="85" y1="22" x2="85" y2="38" stroke="#ff8c00" stroke-width="2"/>
+                                        <line x1="77" y1="30" x2="93" y2="30" stroke="#ff8c00" stroke-width="2"/>
+                                        <line x1="79.5" y1="24.5" x2="90.5" y2="35.5" stroke="#ff8c00" stroke-width="2"/>
+                                        <line x1="90.5" y1="24.5" x2="79.5" y2="35.5" stroke="#ff8c00" stroke-width="2"/>
+                                        <circle cx="85" cy="30" r="3" fill="#ff8c00"/>
+                                    </g>
+                                    
+                                    <text x="55" y="25" text-anchor="middle" font-size="12" font-weight="bold" fill="#d68910">f</text>
+                                    <text x="55" y="42" text-anchor="middle" font-size="14" font-weight="bold" fill="#d68910">× 5</text>
+                                    
+                                    <circle cx="10" cy="10" r="3" fill="#666"/>
+                                    <circle cx="100" cy="10" r="3" fill="#666"/>
+                                    <circle cx="10" cy="50" r="3" fill="#666"/>
+                                    <circle cx="100" cy="50" r="3" fill="#666"/>
+                                </g>
+                                
+                                <line x1="200" y1="30" x2="230" y2="30" stroke="#e74c3c" stroke-width="3" marker-end="url(#arrowred)"/>
+                                
+                                <rect x="230" y="10" width="60" height="40" fill="#ffe6f0" stroke="#e74c3c" stroke-width="2" rx="5"/>
+                                <text x="260" y="35" text-anchor="middle" font-size="18" font-weight="bold" fill="#e74c3c">25</text>
+                            </g>
+                            
+                            <!-- Troisième exemple : 14 -> 70 -->
+                            <g transform="translate(50, 180)">
+                                <rect x="0" y="10" width="60" height="40" fill="#e8f4fc" stroke="#3498db" stroke-width="2" rx="5"/>
+                                <text x="30" y="35" text-anchor="middle" font-size="18" font-weight="bold" fill="#3498db">14</text>
+                                <line x1="60" y1="30" x2="90" y2="30" stroke="#2ecc71" stroke-width="3" marker-end="url(#arrowgreen)"/>
+                                
+                                <g transform="translate(90, 0)">
+                                    <rect x="0" y="5" width="110" height="50" fill="#ffd700" stroke="#ff8c00" stroke-width="2" rx="5"/>
+                                    <rect x="5" y="10" width="100" height="40" fill="#fff3cd" stroke="#ffc107" stroke-width="2" rx="3"/>
+                                    
+                                    <g class="gear-left">
+                                        <circle cx="25" cy="30" r="8" fill="none" stroke="#ff8c00" stroke-width="2"/>
+                                        <line x1="25" y1="22" x2="25" y2="38" stroke="#ff8c00" stroke-width="2"/>
+                                        <line x1="17" y1="30" x2="33" y2="30" stroke="#ff8c00" stroke-width="2"/>
+                                        <line x1="19.5" y1="24.5" x2="30.5" y2="35.5" stroke="#ff8c00" stroke-width="2"/>
+                                        <line x1="30.5" y1="24.5" x2="19.5" y2="35.5" stroke="#ff8c00" stroke-width="2"/>
+                                        <circle cx="25" cy="30" r="3" fill="#ff8c00"/>
+                                    </g>
+                                    
+                                    <g class="gear-right">
+                                        <circle cx="85" cy="30" r="8" fill="none" stroke="#ff8c00" stroke-width="2"/>
+                                        <line x1="85" y1="22" x2="85" y2="38" stroke="#ff8c00" stroke-width="2"/>
+                                        <line x1="77" y1="30" x2="93" y2="30" stroke="#ff8c00" stroke-width="2"/>
+                                        <line x1="79.5" y1="24.5" x2="90.5" y2="35.5" stroke="#ff8c00" stroke-width="2"/>
+                                        <line x1="90.5" y1="24.5" x2="79.5" y2="35.5" stroke="#ff8c00" stroke-width="2"/>
+                                        <circle cx="85" cy="30" r="3" fill="#ff8c00"/>
+                                    </g>
+                                    
+                                    <text x="55" y="25" text-anchor="middle" font-size="12" font-weight="bold" fill="#d68910">f</text>
+                                    <text x="55" y="42" text-anchor="middle" font-size="14" font-weight="bold" fill="#d68910">× 5</text>
+                                    
+                                    <circle cx="10" cy="10" r="3" fill="#666"/>
+                                    <circle cx="100" cy="10" r="3" fill="#666"/>
+                                    <circle cx="10" cy="50" r="3" fill="#666"/>
+                                    <circle cx="100" cy="50" r="3" fill="#666"/>
+                                </g>
+                                
+                                <line x1="200" y1="30" x2="230" y2="30" stroke="#e74c3c" stroke-width="3" marker-end="url(#arrowred)"/>
+                                
+                                <rect x="230" y="10" width="60" height="40" fill="#ffe6f0" stroke="#e74c3c" stroke-width="2" rx="5"/>
+                                <text x="260" y="35" text-anchor="middle" font-size="18" font-weight="bold" fill="#e74c3c">70</text>
+                            </g>
+                            
+                            <defs>
+                                <marker id="arrowgreen" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
+                                    <path d="M0,0 L0,6 L9,3 z" fill="#2ecc71"/>
+                                </marker>
+                                <marker id="arrowred" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
+                                    <path d="M0,0 L0,6 L9,3 z" fill="#e74c3c"/>
+                                </marker>
+                            </defs>
+                            
+                            <text x="80" y="270" text-anchor="middle" font-size="12" fill="#3498db" font-weight="bold">Nombre de départ</text>
+                            <text x="310" y="270" text-anchor="middle" font-size="12" fill="#e74c3c" font-weight="bold">Nombre à l'arrivée</text>
+                        </svg>
+                    </div>
+                </div>
+                <div class="definition">
+                    <div class="step"><span style="color: red;">Définition :</span> On dit que</div>
+                    <div class="step">• 25 est <span style="color: red;">l'image</span> de 5 par la fonction.</div>
+                    <div class="step">• 14 est <span style="color: red;">un antécédent</span> de 70 par la fonction</div>
+                </div>
+                <div class="remarque">
+                    <div class="step"><strong>Remarque :</strong> Tout nombre ne possède qu'<strong>une seule image</strong> par une fonction.</div>
+                    <div class="step">Ce n'est pas le cas d'un antécédent d'un nombre par une fonction (il peut en avoir aucun, un ou plusieurs).</div>
+                </div>
+            </div>
+
+            <!-- Slide 4 : Détermination par une formule -->
+            <div class="slide">
+                <h2 class="section-title">II. Détermination d'une fonction</h2>
+                <h3>1) Par une formule</h3>
+                <div class="remarque">
+                    <div class="step">Lorsqu'une fonction est définie par une formule, on peut calculer précisément les valeurs à l'arrivée.</div>
+                    <div class="step">On note généralement la fonction par une lettre.</div>
+                    <div class="step">Il existe deux notations différentes.</div>
+                </div>
+                <div class="example">
+                    <div class="step"><strong>Pour notre exemple on a :</strong></div>
+                    <div class="step"><span class="math">f</span> : <span class="math">x</span> ⟼ 5<span class="math">x</span></div>
+                    <div class="step">Qui se lit « fonction <span class="math">f</span> qui à un nombre <span class="math">x</span> associe le nombre 5<span class="math">x</span> ».</div>
+                    <div class="step">Ou bien :</div>
+                    <div class="step"><span class="math">f</span>(<span class="math">x</span>) = 5<span class="math">x</span></div>
+                </div>
+            </div>
+
+            <!-- Slide 5 : Calcul d'images et d'antécédents -->
+            <div class="slide">
+                <h3>2) Calcul d'images et d'antécédents</h3>
+                <div class="example">
+                    <div class="step"><strong>A partir de l'exemple précédent, calculons les images de 2, 7 et 10 :</strong></div>
+                    <div class="step">Image de 2 : <span class="math">f</span>(2) = 5 × 2 = 10</div>
+                    <div class="step">Image de 7 : <span class="math">f</span>(7) = 5 × 7 = 35</div>
+                    <div class="step">Image de 10 : <span class="math">f</span>(10) = 5 × 10 = 50</div>
+                </div>
+                <div class="example">
+                    <div class="step"><strong>A partir de l'exemple précédent, calculons les éventuels antécédents de 75 :</strong></div>
+                    <div class="step">Il faut trouver les nombres de départ (s'ils existent) qui donnent 75.</div>
+                    <div class="step">Pour cela, on va résoudre une équation :</div>
+                    <div class="step">On cherche <span class="math">x</span> tel que :</div>
+                    <div class="step">
+                        <div class="calcul-detail">
+                            <span class="math">f</span>(<span class="math">x</span>) = 75<br>
+                            5<span class="math">x</span> = 75<br>
+                            <span class="math">x</span> = <span class="fraction"><span class="numerateur">75</span><span class="denominateur">5</span></span><br>
+                            <span class="math">x</span> = 15
+                        </div>
+                    </div>
+                    <div class="step">La solution est 15 (on paie 75 € si on a été 15 fois à la piscine dans l'année).</div>
+                </div>
+            </div>
+
+            <!-- Slide 6 : Par un graphique -->
+            <div class="slide">
+                <h3>3) Par un graphique</h3>
+                <div class="definition">
+                    <div class="step"><span style="color: red;">Définition :</span> Un repère étant choisi, on appelle <span style="color: red;">représentation graphique</span> d'une fonction <span class="math">f</span>, l'ensemble des points M de coordonnées (<span class="math">x</span> ; <span class="math">f</span>(<span class="math">x</span>)).</div>
+                    <div class="step">On dit aussi que <span class="math">y</span> = <span class="math">f</span>(<span class="math">x</span>) est une <span style="color: red;">équation de la représentation graphique</span> de <span class="math">f</span> dans ce repère.</div>
+                </div>
+                <div class="example">
+                    <div class="step"><strong>Exemple :</strong> Soit la courbe suivante, représentative d'une nouvelle fonction <span class="math">f</span>, telle que <span class="math">f</span>(<span class="math">x</span>) = 0,08<span class="math">x</span>² :</div>
+                    <div class="step">
+                        <div style="text-align: center; margin: 10px 0;">
+                            <button id="btnImageBlue" onclick="showImageBlue()" style="padding: 8px 15px; font-size: 14px; background-color: #3498db; color: white; border: none; border-radius: 5px; cursor: pointer; font-weight: bold;">
+                                Image de 9
+                            </button>
+                            <button id="btnImageGreen" onclick="showImageGreen()" style="padding: 8px 15px; font-size: 14px; background-color: #27ae60; color: white; border: none; border-radius: 5px; cursor: pointer; font-weight: bold; margin-left: 10px;">
+                                Image de 15
+                            </button>
+                            <button id="btnAntecedentRed" onclick="showAntecedentRed()" style="padding: 8px 15px; font-size: 14px; background-color: #e74c3c; color: white; border: none; border-radius: 5px; cursor: pointer; font-weight: bold; margin-left: 10px;">
+                                Antécédent de 26
+                            </button>
+                            <button id="btnResetGraph" onclick="resetGraphAnimations()" style="padding: 8px 15px; font-size: 14px; background-color: #95a5a6; color: white; border: none; border-radius: 5px; cursor: pointer; font-weight: bold; margin-left: 10px;">
+                                ↻
+                            </button>
+                        </div>
+                        <svg width="700" height="420" xmlns="http://www.w3.org/2000/svg" style="display: block; margin: 10px auto; background: white; border: 1px solid #ddd;">
+                            <defs>
+                                <pattern id="grid" width="29" height="26" patternUnits="userSpaceOnUse" patternTransform="translate(12, 16)">
+                                    <path d="M 29 0 L 0 0 0 26" fill="none" stroke="#e0e0e0" stroke-width="0.5"/>
+                                </pattern>
+                                <marker id="arrowaxis" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+                                    <path d="M0,0 L0,6 L9,3 z" fill="#000"/>
+                                </marker>
+                            </defs>
+                            
+                            <rect width="700" height="420" fill="url(#grid)"/>
+                            
+                            <!-- Axes -->
+                            <line x1="70" y1="380" x2="660" y2="380" stroke="#000" stroke-width="2" marker-end="url(#arrowaxis)"/>
+                            <line x1="70" y1="380" x2="70" y2="25" stroke="#000" stroke-width="2" marker-end="url(#arrowaxis)"/>
+                            
+                            <!-- Graduations X -->
+                            <g font-size="12" text-anchor="middle">
+                                <text x="70" y="395">0</text>
+                                <line x1="128" y1="375" x2="128" y2="385" stroke="#000" stroke-width="1"/>
+                                <text x="128" y="395">2</text>
+                                <line x1="186" y1="375" x2="186" y2="385" stroke="#000" stroke-width="1"/>
+                                <text x="186" y="395">4</text>
+                                <line x1="244" y1="375" x2="244" y2="385" stroke="#000" stroke-width="1"/>
+                                <text x="244" y="395">6</text>
+                                <line x1="302" y1="375" x2="302" y2="385" stroke="#000" stroke-width="1"/>
+                                <text x="302" y="395">8</text>
+                                <line x1="360" y1="375" x2="360" y2="385" stroke="#000" stroke-width="1"/>
+                                <text x="360" y="395">10</text>
+                                <line x1="418" y1="375" x2="418" y2="385" stroke="#000" stroke-width="1"/>
+                                <text x="418" y="395">12</text>
+                                <line x1="476" y1="375" x2="476" y2="385" stroke="#000" stroke-width="1"/>
+                                <text x="476" y="395">14</text>
+                                <line x1="534" y1="375" x2="534" y2="385" stroke="#000" stroke-width="1"/>
+                                <text x="534" y="395">16</text>
+                                <line x1="592" y1="375" x2="592" y2="385" stroke="#000" stroke-width="1"/>
+                                <text x="592" y="395">18</text>
+                            </g>
+                            
+                            <!-- Graduations Y -->
+                            <g font-size="12" text-anchor="end">
+                                <text x="62" y="384">0</text>
+                                <line x1="65" y1="354" x2="75" y2="354" stroke="#000" stroke-width="1"/>
+                                <text x="62" y="358">2</text>
+                                <line x1="65" y1="328" x2="75" y2="328" stroke="#000" stroke-width="1"/>
+                                <text x="62" y="332">4</text>
+                                <line x1="65" y1="302" x2="75" y2="302" stroke="#000" stroke-width="1"/>
+                                <text x="62" y="306">6</text>
+                                <line x1="65" y1="276" x2="75" y2="276" stroke="#000" stroke-width="1"/>
+                                <text x="62" y="280">8</text>
+                                <line x1="65" y1="250" x2="75" y2="250" stroke="#000" stroke-width="1"/>
+                                <text x="62" y="254">10</text>
+                                <line x1="65" y1="224" x2="75" y2="224" stroke="#000" stroke-width="1"/>
+                                <text x="62" y="228">12</text>
+                                <line x1="65" y1="198" x2="75" y2="198" stroke="#000" stroke-width="1"/>
+                                <text x="62" y="202">14</text>
+                                <line x1="65" y1="172" x2="75" y2="172" stroke="#000" stroke-width="1"/>
+                                <text x="62" y="176">16</text>
+                                <line x1="65" y1="146" x2="75" y2="146" stroke="#000" stroke-width="1"/>
+                                <text x="62" y="150">18</text>
+                                <line x1="65" y1="120" x2="75" y2="120" stroke="#000" stroke-width="1"/>
+                                <text x="62" y="124">20</text>
+                                <line x1="65" y1="94" x2="75" y2="94" stroke="#000" stroke-width="1"/>
+                                <text x="62" y="98">22</text>
+                                <line x1="65" y1="68" x2="75" y2="68" stroke="#000" stroke-width="1"/>
+                                <text x="62" y="72">24</text>
+                                <line x1="65" y1="42" x2="75" y2="42" stroke="#000" stroke-width="1"/>
+                                <text x="62" y="46">26</text>
+                            </g>
+                            
+                            <!-- Labels -->
+                            <text x="665" y="392" font-size="14" font-weight="bold">x</text>
+                            <text x="55" y="22" font-size="14" font-weight="bold">y</text>
+                            
+                            <!-- Courbe f(x) = 0.08x² -->
+                            <path d="M 70,380 L 99,379 L 128,375 L 157,370 L 186,363 L 215,354 L 244,343 L 273,330 L 302,315 L 331,298 L 360,279 L 389,258 L 418,235 L 447,210 L 476,183 L 505,154 L 534,123 L 563,90 L 592,55" 
+                                  fill="none" stroke="#2c3e50" stroke-width="2"/>
+                            
+                            <!-- Croix bleue (9, 6.48) -->
+                            <g class="cross-blue" opacity="0">
+                                <line x1="324" y1="286" x2="336" y2="298" stroke="#3498db" stroke-width="3"/>
+                                <line x1="336" y1="286" x2="324" y2="298" stroke="#3498db" stroke-width="3"/>
+                            </g>
+                            
+                            <!-- Flèches bleues (Image de 9) -->
+                            <line class="arrow-blue-v" x1="330" y1="380" x2="330" y2="292" stroke="#3498db" stroke-width="2" stroke-dasharray="88" stroke-dashoffset="88"/>
+                            <polygon class="arrowhead-blue-v" points="330,292 326,302 334,302" fill="#3498db" opacity="0"/>
+                            
+                            <line class="arrow-blue-h" x1="330" y1="292" x2="70" y2="292" stroke="#3498db" stroke-width="2" stroke-dasharray="260" stroke-dashoffset="260"/>
+                            <polygon class="arrowhead-blue-h" points="70,292 80,288 80,296" fill="#3498db" opacity="0"/>
+                            
+                            <!-- Croix verte (15, 18) -->
+                            <g class="cross-green" opacity="0">
+                                <line x1="499" y1="148" x2="511" y2="160" stroke="#27ae60" stroke-width="3"/>
+                                <line x1="511" y1="148" x2="499" y2="160" stroke="#27ae60" stroke-width="3"/>
+                            </g>
+                            
+                            <!-- Flèches vertes (Image de 15) -->
+                            <line class="arrow-green-v" x1="505" y1="380" x2="505" y2="154" stroke="#27ae60" stroke-width="2" stroke-dasharray="226" stroke-dashoffset="226"/>
+                            <polygon class="arrowhead-green-v" points="505,154 501,164 509,164" fill="#27ae60" opacity="0"/>
+                            
+                            <line class="arrow-green-h" x1="505" y1="154" x2="70" y2="154" stroke="#27ae60" stroke-width="2" stroke-dasharray="435" stroke-dashoffset="435"/>
+                            <polygon class="arrowhead-green-h" points="70,154 80,150 80,158" fill="#27ae60" opacity="0"/>
+                            
+                            <!-- Croix rouge (18.03, 26) -->
+                            <g class="cross-red" opacity="0">
+                                <line x1="590" y1="36" x2="602" y2="48" stroke="#e74c3c" stroke-width="3"/>
+                                <line x1="602" y1="36" x2="590" y2="48" stroke="#e74c3c" stroke-width="3"/>
+                            </g>
+                            
+                            <!-- Flèches rouges (Antécédent de 26) -->
+                            <line class="arrow-red-h" x1="70" y1="42" x2="596" y2="42" stroke="#e74c3c" stroke-width="2" stroke-dasharray="526" stroke-dashoffset="526"/>
+                            <polygon class="arrowhead-red-h" points="596,42 586,38 586,46" fill="#e74c3c" opacity="0"/>
+                            
+                            <line class="arrow-red-v" x1="596" y1="42" x2="596" y2="380" stroke="#e74c3c" stroke-width="2" stroke-dasharray="338" stroke-dashoffset="338"/>
+                            <polygon class="arrowhead-red-v" points="596,380 592,370 600,370" fill="#e74c3c" opacity="0"/>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 7 : Par un tableau de valeurs -->
+            <div class="slide">
+                <h3>4) Par un tableau de valeurs</h3>
+                <div class="example">
+                    <div class="step"><strong>Exemple :</strong> Soit <span class="math">f</span>(<span class="math">x</span>) = 0,08<span class="math">x</span>²</div>
+                    <div class="step">On peut créer un tableau de valeurs :</div>
+                    <div class="step">
+                        <table style="margin: 10px auto;">
+                            <tr>
+                                <th><span class="math">x</span></th>
+                                <td>0</td>
+                                <td>4</td>
+                                <td>7</td>
+                                <td>10</td>
+                                <td>15</td>
+                                <td>18</td>
+                                <td>20</td>
+                            </tr>
+                            <tr>
+                                <th><span class="math">f</span>(<span class="math">x</span>)</th>
+                                <td>0</td>
+                                <td>1,28</td>
+                                <td>3,92</td>
+                                <td>8</td>
+                                <td>18</td>
+                                <td>25,92</td>
+                                <td>32</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="step">Pour <span class="math">x</span> = 4 : <span class="math">f</span>(4) = 0,08 × 4² = 0,08 × 16 = 1,28</div>
+                    <div class="step">On peut ensuite tracer l'allure générale de la courbe :</div>
+                    <div class="step">
+                        <div style="text-align: center; margin: 10px 0;">
+                            <button id="btnShowPoints" onclick="showTablePoints()" style="padding: 8px 15px; font-size: 14px; background-color: #3498db; color: white; border: none; border-radius: 5px; cursor: pointer; font-weight: bold;">
+                                ✕ Placer les points
+                            </button>
+                            <button id="btnShowCurve" onclick="showTableCurve()" disabled style="padding: 8px 15px; font-size: 14px; background-color: #95a5a6; color: white; border: none; border-radius: 5px; cursor: not-allowed; font-weight: bold; margin-left: 10px;">
+                                📈 Tracer la courbe
+                            </button>
+                            <button id="btnResetAnimation" onclick="resetTableAnimation()" style="padding: 8px 15px; font-size: 14px; background-color: #e74c3c; color: white; border: none; border-radius: 5px; cursor: pointer; font-weight: bold; margin-left: 10px;">
+                                ↻
+                            </button>
+                        </div>
+                        <svg width="700" height="420" xmlns="http://www.w3.org/2000/svg" style="display: block; margin: 10px auto; background: white; border: 1px solid #ddd;">
+                            <defs>
+                                <pattern id="grid3" width="26.5" height="50" patternUnits="userSpaceOnUse" patternTransform="translate(17, 30)">
+                                    <path d="M 26.5 0 L 0 0 0 50" fill="none" stroke="#e0e0e0" stroke-width="0.5"/>
+                                </pattern>
+                                <marker id="arrowaxis3" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+                                    <path d="M0,0 L0,6 L9,3 z" fill="#000"/>
+                                </marker>
+                            </defs>
+                            
+                            <rect width="700" height="420" fill="url(#grid3)"/>
+                            
+                            <!-- Axes -->
+                            <line x1="70" y1="380" x2="660" y2="380" stroke="#000" stroke-width="2" marker-end="url(#arrowaxis3)"/>
+                            <line x1="70" y1="380" x2="70" y2="25" stroke="#000" stroke-width="2" marker-end="url(#arrowaxis3)"/>
+                            
+                            <!-- Graduations X -->
+                            <g font-size="12" text-anchor="middle">
+                                <text x="70" y="395">0</text>
+                                <line x1="123" y1="375" x2="123" y2="385" stroke="#000" stroke-width="1"/>
+                                <text x="123" y="395">2</text>
+                                <line x1="176" y1="375" x2="176" y2="385" stroke="#000" stroke-width="1"/>
+                                <text x="176" y="395">4</text>
+                                <line x1="229" y1="375" x2="229" y2="385" stroke="#000" stroke-width="1"/>
+                                <text x="229" y="395">6</text>
+                                <line x1="282" y1="375" x2="282" y2="385" stroke="#000" stroke-width="1"/>
+                                <text x="282" y="395">8</text>
+                                <line x1="335" y1="375" x2="335" y2="385" stroke="#000" stroke-width="1"/>
+                                <text x="335" y="395">10</text>
+                                <line x1="388" y1="375" x2="388" y2="385" stroke="#000" stroke-width="1"/>
+                                <text x="388" y="395">12</text>
+                                <line x1="441" y1="375" x2="441" y2="385" stroke="#000" stroke-width="1"/>
+                                <text x="441" y="395">14</text>
+                                <line x1="494" y1="375" x2="494" y2="385" stroke="#000" stroke-width="1"/>
+                                <text x="494" y="395">16</text>
+                                <line x1="547" y1="375" x2="547" y2="385" stroke="#000" stroke-width="1"/>
+                                <text x="547" y="395">18</text>
+                                <line x1="600" y1="375" x2="600" y2="385" stroke="#000" stroke-width="1"/>
+                                <text x="600" y="395">20</text>
+                                <line x1="653" y1="375" x2="653" y2="385" stroke="#000" stroke-width="1"/>
+                                <text x="653" y="395">22</text>
+                            </g>
+                            
+                            <!-- Graduations Y -->
+                            <g font-size="12" text-anchor="end">
+                                <text x="62" y="384">0</text>
+                                <line x1="65" y1="330" x2="75" y2="330" stroke="#000" stroke-width="1"/>
+                                <text x="62" y="334">5</text>
+                                <line x1="65" y1="280" x2="75" y2="280" stroke="#000" stroke-width="1"/>
+                                <text x="62" y="284">10</text>
+                                <line x1="65" y1="230" x2="75" y2="230" stroke="#000" stroke-width="1"/>
+                                <text x="62" y="234">15</text>
+                                <line x1="65" y1="180" x2="75" y2="180" stroke="#000" stroke-width="1"/>
+                                <text x="62" y="184">20</text>
+                                <line x1="65" y1="130" x2="75" y2="130" stroke="#000" stroke-width="1"/>
+                                <text x="62" y="134">25</text>
+                                <line x1="65" y1="80" x2="75" y2="80" stroke="#000" stroke-width="1"/>
+                                <text x="62" y="84">30</text>
+                                <line x1="65" y1="30" x2="75" y2="30" stroke="#000" stroke-width="1"/>
+                                <text x="62" y="34">35</text>
+                            </g>
+                            
+                            <!-- Labels -->
+                            <text x="665" y="392" font-size="14" font-weight="bold">x</text>
+                            <text x="55" y="22" font-size="14" font-weight="bold">y</text>
+                            
+                            <!-- Croix pour les points -->
+                            <g class="table-cross-0" opacity="0">
+                                <line x1="63" y1="373" x2="77" y2="387" stroke="#e74c3c" stroke-width="3"/>
+                                <line x1="77" y1="373" x2="63" y2="387" stroke="#e74c3c" stroke-width="3"/>
+                            </g>
+                            
+                            <g class="table-cross-1" opacity="0">
+                                <line x1="169" y1="365" x2="183" y2="379" stroke="#e74c3c" stroke-width="3"/>
+                                <line x1="183" y1="365" x2="169" y2="379" stroke="#e74c3c" stroke-width="3"/>
+                            </g>
+                            
+                            <g class="table-cross-2" opacity="0">
+                                <line x1="249" y1="340" x2="263" y2="354" stroke="#e74c3c" stroke-width="3"/>
+                                <line x1="263" y1="340" x2="249" y2="354" stroke="#e74c3c" stroke-width="3"/>
+                            </g>
+                            
+                            <g class="table-cross-3" opacity="0">
+                                <line x1="328" y1="300" x2="342" y2="314" stroke="#e74c3c" stroke-width="3"/>
+                                <line x1="342" y1="300" x2="328" y2="314" stroke="#e74c3c" stroke-width="3"/>
+                            </g>
+                            
+                            <g class="table-cross-4" opacity="0">
+                                <line x1="461" y1="200" x2="475" y2="214" stroke="#e74c3c" stroke-width="3"/>
+                                <line x1="475" y1="200" x2="461" y2="214" stroke="#e74c3c" stroke-width="3"/>
+                            </g>
+                            
+                            <g class="table-cross-5" opacity="0">
+                                <line x1="540" y1="120" x2="554" y2="134" stroke="#e74c3c" stroke-width="3"/>
+                                <line x1="554" y1="120" x2="540" y2="134" stroke="#e74c3c" stroke-width="3"/>
+                            </g>
+                            
+                            <g class="table-cross-6" opacity="0">
+                                <line x1="593" y1="60" x2="607" y2="74" stroke="#e74c3c" stroke-width="3"/>
+                                <line x1="607" y1="60" x2="593" y2="74" stroke="#e74c3c" stroke-width="3"/>
+                            </g>
+                            
+                            <!-- Courbe -->
+                            <path class="table-curve" d="M 70,380 L 83,379 L 96,378 L 109,377 L 123,374 L 136,372 L 149,369 L 162,365 L 176,360 L 189,355 L 202,349 L 216,342 L 229,335 L 242,327 L 255,318 L 269,308 L 282,298 L 295,287 L 308,275 L 322,263 L 335,250 L 348,236 L 361,221 L 375,206 L 388,190 L 401,173 L 414,156 L 428,138 L 441,120 L 454,101 L 467,81 L 481,61 L 494,40 L 507,19"
+                                  fill="none" stroke="#2c3e50" stroke-width="2" opacity="0"/>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Contrôles -->
+        <div class="controls">
+            <div class="controls-left">
+                <button id="prevBtn" onclick="changeSlide(-1)">← Précédent</button>
+                <button class="btn-reset" onclick="resetSlide()">⟲</button>
+            </div>
+            <div class="progress">
+                <span><span id="currentSlide">1</span> / <span id="totalSlides">7</span></span>
+                <span class="step-indicator" id="stepIndicator"></span>
+            </div>
+            <div class="controls-right">
+                <button class="btn-menu" onclick="openMenu()">📋 Menu</button>
+                <button class="btn-menu" onclick="openHelp()">❓ Aide</button>
+                <button id="nextBtn" onclick="changeSlide(1)">Suivant →</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Menu des slides -->
+    <div class="slide-menu" id="slideMenu">
+        <div class="menu-content">
+            <h2>Sélectionner une diapositive</h2>
+            <div class="slide-list" id="slideList"></div>
+            <button class="close-menu" onclick="closeMenu()">Fermer</button>
+        </div>
+    </div>
+
+    <!-- Aide -->
+    <div class="help-overlay" id="helpOverlay">
+        <div class="help-content">
+            <h2>Raccourcis clavier</h2>
+            <ul>
+                <li><kbd>↑</kbd> ou <kbd>Espace</kbd> : Étape/Slide suivante</li>
+                <li><kbd>↓</kbd> : Étape/Slide précédente</li>
+                <li><kbd>M</kbd> : Ouvrir le menu des slides</li>
+                <li><kbd>R</kbd> : Réinitialiser la slide actuelle</li>
+                <li><kbd>H</kbd> ou <kbd>?</kbd> : Afficher cette aide</li>
+                <li><kbd>Échap</kbd> : Fermer les menus</li>
+            </ul>
+            <button class="close-menu" onclick="closeHelp()">Fermer</button>
+        </div>
+    </div>
+
+    <script src="script-fonctions.js"></script>
+</body>
+</html>

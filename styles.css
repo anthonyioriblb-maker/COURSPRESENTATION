@@ -770,3 +770,18 @@ h4.step {
     font-weight: bold;
     white-space: nowrap;
 }
+/* ===== ANIMATIONS DES ENGRENAGES (FONCTIONS) ===== */
+@keyframes rotate-gear {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+.gear-left {
+    animation: rotate-gear 4s linear infinite;
+    transform-origin: 25px 30px;
+}
+
+.gear-right {
+    animation: rotate-gear 4s linear infinite reverse;
+    transform-origin: 85px 30px;
+}
