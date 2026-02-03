@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>La translation</title>
+    <link rel="stylesheet" href="../../styles.css">
+    <style>
+        iframe {
+            border: none;
+            border-radius: 5px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin: 10px auto;
+            display: block;
+        }
+        /* Vecteur avec trait et flèche au-dessus */
+        .vecteur {
+            position: relative;
+            display: inline-block;
+            font-weight: bold;
+            padding: 0 4px;
+        }
+        .vecteur::before {
+            content: '';
+            position: absolute;
+            top: -0.15em;
+            left: 0;
+            right: 0;
+            height: 0;
+            border-top: 2.5px solid currentColor;
+        }
+        .vecteur::after {
+            content: '';
+            position: absolute;
+            top: -0.25em;
+            right: -2px;
+            width: 0;
+            height: 0;
+            border-left: 10px solid currentColor;
+            border-top: 5px solid transparent;
+            border-bottom: 5px solid transparent;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="content">
+            <!-- Slide 1 : Titre -->
+            <div class="slide active">
+                <h1>Chapitre 9 : La translation</h1>
+            </div>
+
+            <!-- Slide 2 : I. Définitions (TOUT EN UNE SLIDE) -->
+            <div class="slide">
+                <h2>I. Définitions</h2>
+                <div class="definition">
+                    <div class="step">
+                        <span style="color: red;">Définition :</span> Soient deux points P et P'.
+                    </div>
+                    <div class="step">
+                        On appelle <span style="color: red;">translation qui transforme P en P'</span>, le glissement :
+                    </div>
+                    <div class="step">
+                        <ul>
+                            <li>selon la <span style="color: red;">direction de la droite (PP')</span>,</li>
+                        </ul>
+                    </div>
+                    <div class="step">
+                        <ul>
+                            <li>dans le <span style="color: red;">sens de P vers P'</span>,</li>
+                        </ul>
+                    </div>
+                    <div class="step">
+                        <ul>
+                            <li>d'une <span style="color: red;">longueur égale à PP'</span>.</li>
+                        </ul>
+                    </div>
+                    <div class="step">
+                        <div style="text-align: center; margin: 10px 0;">
+                            <img src="images/4-91.png" alt="Illustration de la translation" style="width: 500px;">
+                        </div>
+                    </div>
+                    <div class="step">
+                        Ici, la figure F' est l'<span style="color: red;">image</span> de la figure F par cette translation.
+                    </div>
+                </div>
+                <div class="remarque step">
+                    <strong>Remarque :</strong> Pour schématiser la translation, on peut tracer une flèche allant de P vers P'. Cette flèche s'appelle un <span style="color: red;">vecteur</span> et on peut noter <span class="vecteur">PP'</span>.
+                </div>
+                <div class="important step">
+                    <span style="color: red;">Vocabulaire :</span> On dit alors que F' est l'image de F par la translation de vecteur <span class="vecteur">PP'</span>.
+                </div>
+            </div>
+
+            <!-- Slide 3 : II. Construction - 1) Avec un quadrillage -->
+            <div class="slide">
+                <h2>II. Construction</h2>
+                <h3>1) Avec un quadrillage</h3>
+                <div class="example step">
+                    <strong>Énoncé :</strong> Construire l'image de ABCD par la translation de vecteur <span class="vecteur">PP'</span>.
+                </div>
+                <div class="step">
+                    <iframe src="animation-quadrillage.html" width="850" height="650" scrolling="no" style="overflow: hidden;"></iframe>
+                </div>
+                <div class="method">
+                    <div class="step">
+                        <strong>Méthode :</strong>
+                    </div>
+                    <div class="step" style="padding-left: 20px;">
+                        Pour aller de P à P', on descend de 3 carreaux et on va de 6 carreaux vers la gauche.
+                    </div>
+                    <div class="step" style="padding-left: 20px;">
+                        On applique donc ce mouvement à A, B, C et D.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 4 : II. Construction - 2a) Méthode des parallèles -->
+            <div class="slide">
+                <h3>2) Sur feuille blanche</h3>
+                <h4>a) Construction avec équerre, règle et compas</h4>
+                <div class="example step">
+                    <strong>Énoncé :</strong> Construire l'image du point M par la translation de vecteur <span class="vecteur">AB</span>.
+                </div>
+                <div class="step">
+                    <iframe src="animation-paralleles.html" width="900" height="750" scrolling="no" style="overflow: hidden;"></iframe>
+                </div>
+                <div class="method">
+                    <div class="step">
+                        <strong>Méthode avec équerre, règle et compas :</strong>
+                    </div>
+                    <div class="step" style="padding-left: 20px;">
+                        1. On pose l'équerre avec un côté de l'angle droit sur la droite (AB)
+                    </div>
+                    <div class="step" style="padding-left: 20px;">
+                        2. On pose la règle le long de l'autre côté de l'angle droit (perpendiculaire à AB)
+                    </div>
+                    <div class="step" style="padding-left: 20px;">
+                        3. On fait glisser l'équerre le long de la règle jusqu'à ce que le côté passe par M
+                    </div>
+                    <div class="step" style="padding-left: 20px;">
+                        4. On trace la parallèle à (AB) le long de ce côté
+                    </div>
+                    <div class="step" style="padding-left: 20px;">
+                        5. Avec le compas, on prend l'écartement AB
+                    </div>
+                    <div class="step" style="padding-left: 20px;">
+                        6. On reporte cet écartement à partir du point M sur la parallèle
+                    </div>
+                    <div class="step" style="padding-left: 20px;">
+                        7. Le point d'intersection de l'arc et de la parallèle est le point M'
+                    </div>
+                    <div class="step" style="padding-left: 20px;">
+                        8. On recommence pour chaque point de la figure
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 5 : II. Construction - 2b) Compas seulement -->
+            <div class="slide">
+                <h4>b) Construction au compas seulement</h4>
+                <div class="example step">
+                    <strong>Énoncé :</strong> Construire l'image du point M par la translation de vecteur <span class="vecteur">AB</span> (uniquement au compas).
+                </div>
+                <div class="step">
+                    <iframe src="animation-compas-simple.html" width="900" height="750" scrolling="no" style="overflow: hidden;"></iframe>
+                </div>
+                <div class="method">
+                    <div class="step">
+                        <strong>Méthode avec le compas uniquement :</strong>
+                    </div>
+                    <div class="step" style="padding-left: 20px;">
+                        1. Avec le compas, on prend l'écartement AM
+                    </div>
+                    <div class="step" style="padding-left: 20px;">
+                        2. On reporte cet écartement à partir du point B
+                    </div>
+                    <div class="step" style="padding-left: 20px;">
+                        3. Avec le compas, on prend l'écartement AB
+                    </div>
+                    <div class="step" style="padding-left: 20px;">
+                        4. On reporte cet écartement à partir du point M
+                    </div>
+                    <div class="step" style="padding-left: 20px;">
+                        5. Le point d'intersection des deux arcs de cercle est le point M'
+                    </div>
+                    <div class="step" style="padding-left: 20px;">
+                        6. On recommence pour chaque point de la figure
+                    </div>
+                </div>
+                <div class="remarque step">
+                    <strong>Remarque :</strong> Le quadrilatère ABM'M est un parallélogramme.
+                </div>
+            </div>
+
+            <!-- Slide 6 : III. Propriétés -->
+            <div class="slide">
+                <h2>III. Propriétés</h2>
+                <div class="important">
+                    <div class="step">
+                        <span style="color: red;">Propriété :</span> La translation conserve :
+                    </div>
+                    <div class="step">
+                        <ul>
+                            <li>l'<span style="color: red;">alignement</span> (donc le parallélisme et la perpendicularité)</li>
+                        </ul>
+                    </div>
+                    <div class="step">
+                        <ul>
+                            <li>les <span style="color: red;">longueurs</span></li>
+                        </ul>
+                    </div>
+                    <div class="step">
+                        <ul>
+                            <li>les <span style="color: red;">angles</span></li>
+                        </ul>
+                    </div>
+                    <div class="step">
+                        <ul>
+                            <li>les <span style="color: red;">aires</span>.</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="remarque">
+                    <div class="step">
+                        <strong>Remarque :</strong> La translation transforme donc :
+                    </div>
+                    <div class="step">
+                        <ul>
+                            <li>un segment en un segment de même longueur,</li>
+                        </ul>
+                    </div>
+                    <div class="step">
+                        <ul>
+                            <li>une droite en une droite parallèle,</li>
+                        </ul>
+                    </div>
+                    <div class="step">
+                        <ul>
+                            <li>un angle en un angle de même mesure,</li>
+                        </ul>
+                    </div>
+                    <div class="step">
+                        <ul>
+                            <li>un cercle en un cercle de même rayon,</li>
+                        </ul>
+                    </div>
+                    <div class="step">
+                        <ul>
+                            <li>une figure en une figure de même aire.</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="example step">
+                    <strong>Exemple :</strong> Si ABC est un triangle rectangle en A tel que AB = 5 cm et <span class="angle">ABC</span> = 40°, alors l'image A'B'C' de ABC par une translation est également un triangle rectangle en A' tel que A'B' = 5 cm et <span class="angle">A'B'C'</span> = 40°.
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Contrôles -->
+        <div class="controls">
+            <div class="controls-left">
+                <button id="prevBtn" onclick="changeSlide(-1)">← Précédent</button>
+                <button class="btn-reset" onclick="resetSlide()">⟲</button>
+            </div>
+            <div class="progress">
+                <span><span id="currentSlide">1</span> / <span id="totalSlides">6</span></span>
+                <span class="step-indicator" id="stepIndicator"></span>
+            </div>
+            <div class="controls-right">
+                <button class="btn-menu" onclick="openMenu()">📋 Menu</button>
+                <button class="btn-menu" onclick="openHelp()">❓ Aide</button>
+                <button id="nextBtn" onclick="changeSlide(1)">Suivant →</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Menu des slides -->
+    <div id="slideMenu" class="slide-menu">
+        <div class="menu-content">
+            <h2>Navigation</h2>
+            <div id="slideList" class="slide-list"></div>
+            <button onclick="closeMenu()" class="close-menu">Fermer</button>
+        </div>
+    </div>
+
+    <!-- Aide -->
+    <div id="helpOverlay" class="help-overlay">
+        <div class="help-content">
+            <h2>Raccourcis clavier</h2>
+            <ul>
+                <li><kbd>↑</kbd> ou <kbd>Espace</kbd> : Étape/Slide suivante</li>
+                <li><kbd>↓</kbd> : Étape/Slide précédente</li>
+                <li><kbd>M</kbd> : Ouvrir le menu des slides</li>
+                <li><kbd>R</kbd> : Réinitialiser la slide actuelle</li>
+                <li><kbd>H</kbd> ou <kbd>?</kbd> : Afficher cette aide</li>
+                <li><kbd>Échap</kbd> : Fermer les menus</li>
+            </ul>
+            <button onclick="closeHelp()" class="close-menu">Fermer</button>
+        </div>
+    </div>
+
+    <script src="script-translation.js"></script>
+</body>
+</html>

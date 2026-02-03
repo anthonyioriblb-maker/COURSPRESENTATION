@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Animation : Translation au compas</title>
+    <style>
+        body {
+            margin: 0; padding: 0; background-color: #fafafa;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        .container { max-width: 900px; margin: 0 auto; padding: 10px; }
+        svg { display: block; margin: 0 auto; background: #fafafa; border: 2px solid #ddd; border-radius: 8px; }
+        .controls { text-align: center; margin: 20px 0; }
+        button {
+            background-color: #3498db; color: white; border: none;
+            padding: 14px 28px; margin: 8px; border-radius: 6px;
+            cursor: pointer; font-size: 17px; font-weight: bold;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2); transition: all 0.3s;
+        }
+        button:hover {
+            background-color: #2980b9; transform: translateY(-2px); box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+        }
+        button:disabled { background-color: #bdc3c7; cursor: not-allowed; transform: none; }
+        button.reset { background-color: #e74c3c; }
+        button.reset:hover { background-color: #c0392b; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <svg id="animationSVG" width="850" height="550" viewBox="0 0 850 550">
+        <defs>
+            <marker id="arrowhead" markerWidth="12" markerHeight="12" refX="10" refY="4" orient="auto">
+                <polygon points="0 0, 12 4, 0 8" fill="black"/>
+            </marker>
+        </defs>
+        
+        <!-- Point A -->
+        <line x1="95" y1="376" x2="105" y2="386" stroke="black" stroke-width="3"/>
+        <line x1="105" y1="376" x2="95" y2="386" stroke="black" stroke-width="3"/>
+        <text x="70" y="375" font-size="22" fill="black" font-weight="bold">A</text>
+        
+        <!-- Vecteur AB -->
+        <line x1="100" y1="381" x2="343" y2="271" stroke="black" stroke-width="3" marker-end="url(#arrowhead)"/>
+        
+        <!-- Point B -->
+        <line x1="345" y1="266" x2="355" y2="276" stroke="black" stroke-width="3"/>
+        <line x1="355" y1="266" x2="345" y2="276" stroke="black" stroke-width="3"/>
+        <text x="360" y="265" font-size="22" fill="black" font-weight="bold">B</text>
+        
+        <!-- Point M -->
+        <line x1="247" y1="427" x2="257" y2="437" stroke="black" stroke-width="3"/>
+        <line x1="257" y1="427" x2="247" y2="437" stroke="black" stroke-width="3"/>
+        <text x="222" y="425" font-size="22" fill="black" font-weight="bold">M</text>
+        
+        <path id="arcAM" d="" stroke="#27ae60" stroke-width="3" fill="none" opacity="0"/>
+        <path id="arcAB" d="" stroke="#27ae60" stroke-width="3" fill="none" opacity="0"/>
+        
+        <g id="pointMPrime" opacity="0">
+            <line x1="499" y1="313" x2="509" y2="323" stroke="blue" stroke-width="3"/>
+            <line x1="509" y1="313" x2="499" y2="323" stroke="blue" stroke-width="3"/>
+            <text x="514" y="310" font-size="22" fill="blue" font-weight="bold">M'</text>
+        </g>
+        
+        <g id="parallelogram" opacity="0">
+            <line x1="100" y1="381" x2="350" y2="269" stroke="#e67e22" stroke-width="2.5" stroke-dasharray="5,5"/>
+            <line x1="350" y1="269" x2="504" y2="318" stroke="#e67e22" stroke-width="2.5" stroke-dasharray="5,5"/>
+            <line x1="504" y1="318" x2="252" y2="432" stroke="#e67e22" stroke-width="2.5" stroke-dasharray="5,5"/>
+            <line x1="252" y1="432" x2="100" y2="381" stroke="#e67e22" stroke-width="2.5" stroke-dasharray="5,5"/>
+            
+            <g stroke="red" stroke-width="3" stroke-linecap="round">
+                <line x1="222" y1="322" x2="228" y2="328"/>
+                <line x1="376" y1="372" x2="382" y2="378"/>
+                <line x1="173" y1="403" x2="167" y2="409"/>
+                <line x1="181" y1="409" x2="175" y2="415"/>
+                <line x1="425" y1="291" x2="419" y2="297"/>
+                <line x1="433" y1="297" x2="427" y2="303"/>
+            </g>
+        </g>
+        
+        <g id="compass" opacity="0">
+            <circle id="compassHinge" cx="0" cy="0" r="10" fill="#ff8c00" stroke="#cc6600" stroke-width="2"/>
+            <line id="compassPointBranch" x1="0" y1="0" x2="-5" y2="60" stroke="#ff8c00" stroke-width="6"/>
+            <circle id="compassPointTip" cx="-5" cy="60" r="6" fill="#222" stroke="#000" stroke-width="2"/>
+            <line id="compassPencilBranch" x1="0" y1="0" x2="5" y2="60" stroke="#ff8c00" stroke-width="6"/>
+            <rect id="compassPencilBody" x="0" y="50" width="10" height="25" fill="#ff4444" stroke="#cc0000" stroke-width="2" rx="2"/>
+            <polygon id="compassPencilTip" points="5,75 0,85 10,85" fill="#333"/>
+            <circle id="compassPencilPoint" cx="5" cy="85" r="3" fill="#000"/>
+        </g>
+    </svg>
+    
+    <div class="controls">
+        <button id="nextBtn" onclick="nextStep()">▶ Étape suivante</button>
+        <button class="reset" onclick="resetAnimation()">🔄 Recommencer</button>
+    </div>
+</div>
+
+<script>
+const A = {x: 98, y: 379};
+const B = {x: 350, y: 269};
+const M = {x: 252, y: 432};
+const MPrime = {x: 504, y: 318};
+
+let currentStep = 0;
+
+function distance(p1, p2) {
+    return Math.sqrt((p2.x - p1.x)**2 + (p2.y - p1.y)**2);
+}
+
+function setCompass(tipPoint, pencilPoint) {
+    const hinge = {
+        x: (tipPoint.x + pencilPoint.x) / 2,
+        y: (tipPoint.y + pencilPoint.y) / 2
+    };
+    
+    document.getElementById('compassHinge').setAttribute('cx', hinge.x);
+    document.getElementById('compassHinge').setAttribute('cy', hinge.y);
+    
+    document.getElementById('compassPointBranch').setAttribute('x1', hinge.x);
+    document.getElementById('compassPointBranch').setAttribute('y1', hinge.y);
+    document.getElementById('compassPointBranch').setAttribute('x2', tipPoint.x);
+    document.getElementById('compassPointBranch').setAttribute('y2', tipPoint.y);
+    
+    document.getElementById('compassPointTip').setAttribute('cx', tipPoint.x);
+    document.getElementById('compassPointTip').setAttribute('cy', tipPoint.y);
+    
+    document.getElementById('compassPencilBranch').setAttribute('x1', hinge.x);
+    document.getElementById('compassPencilBranch').setAttribute('y1', hinge.y);
+    document.getElementById('compassPencilBranch').setAttribute('x2', pencilPoint.x);
+    document.getElementById('compassPencilBranch').setAttribute('y2', pencilPoint.y);
+    
+    const angle = Math.atan2(pencilPoint.y - hinge.y, pencilPoint.x - hinge.x) * 180 / Math.PI + 90;
+    const pencilX = pencilPoint.x;
+    const pencilY = pencilPoint.y - 15;
+    
+    document.getElementById('compassPencilBody').setAttribute('transform', 
+        `translate(${pencilX},${pencilY}) rotate(${angle})`);
+    document.getElementById('compassPencilTip').setAttribute('transform', 
+        `translate(${pencilPoint.x - 5},${pencilPoint.y}) rotate(${angle} 5 0)`);
+    document.getElementById('compassPencilPoint').setAttribute('cx', pencilPoint.x);
+    document.getElementById('compassPencilPoint').setAttribute('cy', pencilPoint.y);
+}
+
+async function animateCompassOpening(centerPoint, targetPoint, durationMs) {
+    const steps = 30;
+    const stepDuration = durationMs / steps;
+    
+    for (let i = 0; i <= steps; i++) {
+        const t = i / steps;
+        const currentPencil = {
+            x: centerPoint.x + (targetPoint.x - centerPoint.x) * t,
+            y: centerPoint.y + (targetPoint.y - centerPoint.y) * t
+        };
+        setCompass(centerPoint, currentPencil);
+        await new Promise(resolve => setTimeout(resolve, stepDuration));
+    }
+}
+
+async function animateCompassMovement(tip1, pencil1, tip2, pencil2, durationMs) {
+    const steps = 40;
+    const stepDuration = durationMs / steps;
+    
+    for (let i = 0; i <= steps; i++) {
+        const t = i / steps;
+        const currentTip = {
+            x: tip1.x + (tip2.x - tip1.x) * t,
+            y: tip1.y + (tip2.y - tip1.y) * t
+        };
+        const currentPencil = {
+            x: pencil1.x + (pencil2.x - pencil1.x) * t,
+            y: pencil1.y + (pencil2.y - pencil1.y) * t
+        };
+        setCompass(currentTip, currentPencil);
+        await new Promise(resolve => setTimeout(resolve, stepDuration));
+    }
+}
+
+function drawArc(center, radius, startAngle, endAngle, arcId) {
+    let path = '';
+    const steps = 60;
+    
+    for (let i = 0; i <= steps; i++) {
+        const t = i / steps;
+        const angle = startAngle + (endAngle - startAngle) * t;
+        const x = center.x + radius * Math.cos(angle);
+        const y = center.y + radius * Math.sin(angle);
+        
+        if (i === 0) {
+            path += `M ${x} ${y}`;
+        } else {
+            path += ` L ${x} ${y}`;
+        }
+    }
+    
+    document.getElementById(arcId).setAttribute('d', path);
+    document.getElementById(arcId).style.opacity = '1';
+}
+
+async function nextStep() {
+    const nextBtn = document.getElementById('nextBtn');
+    
+    if (currentStep >= 5) return;
+    nextBtn.disabled = true;
+    
+    if (currentStep === 0) {
+        document.getElementById('compass').style.opacity = '1';
+        setCompass(A, A);
+        await new Promise(resolve => setTimeout(resolve, 600));
+        await animateCompassOpening(A, M, 1500);
+        await new Promise(resolve => setTimeout(resolve, 1000));
+        currentStep = 1;
+    }
+    else if (currentStep === 1) {
+        await animateCompassMovement(A, M, B, MPrime, 1600);
+        await new Promise(resolve => setTimeout(resolve, 700));
+        const radiusAM = distance(A, M);
+        const angleMPrime = Math.atan2(MPrime.y - B.y, MPrime.x - B.x);
+        drawArc(B, radiusAM, angleMPrime - 0.3, angleMPrime + 0.3, 'arcAM');
+        await new Promise(resolve => setTimeout(resolve, 1200));
+        currentStep = 2;
+    }
+    else if (currentStep === 2) {
+        await animateCompassMovement(B, MPrime, A, B, 1600);
+        await new Promise(resolve => setTimeout(resolve, 700));
+        await animateCompassOpening(A, B, 1500);
+        await new Promise(resolve => setTimeout(resolve, 1000));
+        currentStep = 3;
+    }
+    else if (currentStep === 3) {
+        await animateCompassMovement(A, B, M, MPrime, 1600);
+        await new Promise(resolve => setTimeout(resolve, 700));
+        const radiusAB = distance(A, B);
+        const angleMPrimeFromM = Math.atan2(MPrime.y - M.y, MPrime.x - M.x);
+        drawArc(M, radiusAB, angleMPrimeFromM - 0.3, angleMPrimeFromM + 0.3, 'arcAB');
+        await new Promise(resolve => setTimeout(resolve, 1200));
+        currentStep = 4;
+    }
+    else if (currentStep === 4) {
+        document.getElementById('compass').style.opacity = '0';
+        await new Promise(resolve => setTimeout(resolve, 500));
+        document.getElementById('pointMPrime').style.opacity = '1';
+        await new Promise(resolve => setTimeout(resolve, 900));
+        document.getElementById('parallelogram').style.opacity = '1';
+        await new Promise(resolve => setTimeout(resolve, 600));
+        currentStep = 5;
+        nextBtn.textContent = '✓ Terminé';
+    }
+    
+    nextBtn.disabled = false;
+}
+
+function resetAnimation() {
+    document.getElementById('compass').style.opacity = '0';
+    document.getElementById('arcAM').style.opacity = '0';
+    document.getElementById('arcAM').setAttribute('d', '');
+    document.getElementById('arcAB').style.opacity = '0';
+    document.getElementById('arcAB').setAttribute('d', '');
+    document.getElementById('pointMPrime').style.opacity = '0';
+    document.getElementById('parallelogram').style.opacity = '0';
+    
+    const nextBtn = document.getElementById('nextBtn');
+    nextBtn.textContent = '▶ Étape suivante';
+    nextBtn.disabled = false;
+    
+    currentStep = 0;
+}
+</script>
+</body>
+</html>
