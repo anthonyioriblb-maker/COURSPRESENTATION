@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cours de Mathématiques</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 30px 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            color: white;
+        }
+
+        header h1 {
+            font-size: 2.6rem;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+
+        header p {
+            margin-top: 8px;
+            font-size: 1.1rem;
+            opacity: 0.85;
+        }
+
+        .search-bar {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 35px;
+        }
+
+        .search-bar input {
+            width: 100%;
+            max-width: 460px;
+            padding: 13px 20px;
+            border-radius: 50px;
+            border: none;
+            font-size: 1rem;
+            background: rgba(255,255,255,0.95);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+            outline: none;
+            color: #333;
+        }
+
+        .search-bar input::placeholder {
+            color: #999;
+        }
+
+        .tabs {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .tab {
+            padding: 10px 28px;
+            border-radius: 50px;
+            border: 2px solid rgba(255,255,255,0.6);
+            background: rgba(255,255,255,0.15);
+            color: white;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            backdrop-filter: blur(6px);
+        }
+
+        .tab:hover {
+            background: rgba(255,255,255,0.3);
+            border-color: white;
+        }
+
+        .tab.active {
+            background: white;
+            color: #764ba2;
+            border-color: white;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        .grade-section {
+            display: none;
+            animation: fadeIn 0.35s ease;
+        }
+
+        .grade-section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .chapters-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .chapter-card {
+            background: white;
+            border-radius: 16px;
+            padding: 24px;
+            box-shadow: 0 6px 25px rgba(0,0,0,0.12);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .chapter-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 35px rgba(0,0,0,0.18);
+        }
+
+        .chapter-card .badge {
+            display: inline-block;
+            padding: 3px 10px;
+            border-radius: 20px;
+            font-size: 0.78rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .chapter-card h3 {
+            font-size: 1.05rem;
+            color: #2d2d2d;
+            line-height: 1.4;
+        }
+
+        .chapter-card a {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 10px 18px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: white;
+            transition: opacity 0.2s;
+            align-self: flex-start;
+            margin-top: auto;
+        }
+
+        .chapter-card a:hover {
+            opacity: 0.85;
+        }
+
+        .chapter-card a svg {
+            width: 16px;
+            height: 16px;
+        }
+
+        /* Animations sublinks */
+        .chapter-card .animations {
+            border-top: 1px solid #f0f0f0;
+            padding-top: 10px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+
+        .chapter-card .anim-link {
+            padding: 5px 12px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 0.8rem;
+            font-weight: 500;
+            border: 1.5px solid;
+            transition: background 0.2s, color 0.2s;
+        }
+
+        /* Couleurs par niveau */
+        .grade-6e .badge { background: #e0f2fe; color: #0284c7; }
+        .grade-6e a.main-link { background: #0284c7; }
+        .grade-6e .anim-link { color: #0284c7; border-color: #0284c7; }
+        .grade-6e .anim-link:hover { background: #0284c7; color: white; }
+
+        .grade-5e .badge { background: #dcfce7; color: #16a34a; }
+        .grade-5e a.main-link { background: #16a34a; }
+        .grade-5e .anim-link { color: #16a34a; border-color: #16a34a; }
+        .grade-5e .anim-link:hover { background: #16a34a; color: white; }
+
+        .grade-4e .badge { background: #fff7ed; color: #ea580c; }
+        .grade-4e a.main-link { background: #ea580c; }
+        .grade-4e .anim-link { color: #ea580c; border-color: #ea580c; }
+        .grade-4e .anim-link:hover { background: #ea580c; color: white; }
+
+        .grade-3e .badge { background: #fdf2f8; color: #9333ea; }
+        .grade-3e a.main-link { background: #9333ea; }
+        .grade-3e .anim-link { color: #9333ea; border-color: #9333ea; }
+        .grade-3e .anim-link:hover { background: #9333ea; color: white; }
+
+        /* Vue "tous" */
+        .all-view .grade-label {
+            color: white;
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin: 28px 0 14px;
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+            padding-left: 4px;
+        }
+
+        .no-results {
+            text-align: center;
+            color: white;
+            font-size: 1.1rem;
+            margin-top: 50px;
+            opacity: 0.8;
+        }
+
+        footer {
+            text-align: center;
+            color: rgba(255,255,255,0.6);
+            font-size: 0.85rem;
+            margin-top: 50px;
+        }
+
+        @media (max-width: 600px) {
+            header h1 { font-size: 1.8rem; }
+            .chapters-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Cours de Mathématiques</h1>
+    <p>6e · 5e · 4e · 3e — Sélectionne ta classe et ton chapitre</p>
+</header>
+
+<div class="search-bar">
+    <input type="text" id="searchInput" placeholder="Rechercher un chapitre... (ex: fractions, pythagore)" oninput="filterChapters(this.value)">
+</div>
+
+<div class="tabs" id="tabs">
+    <button class="tab active" onclick="showGrade('all', this)">Tous</button>
+    <button class="tab" onclick="showGrade('6e', this)">6e</button>
+    <button class="tab" onclick="showGrade('5e', this)">5e</button>
+    <button class="tab" onclick="showGrade('4e', this)">4e</button>
+    <button class="tab" onclick="showGrade('3e', this)">3e</button>
+</div>
+
+<div id="content"></div>
+
+<footer>
+    <p>Cours de mathématiques — Collège</p>
+</footer>
+
+<script>
+const data = {
+    "6e": [
+        {
+            num: 4,
+            titre: "Statistiques",
+            lien: "6/Chapitre4_Statistiques/Chapitre 4 statistiques presentation.html"
+        },
+        {
+            num: 5,
+            titre: "Droites parallèles et perpendiculaires",
+            lien: "6/Chapitre5_Droites_Paralleles_Perpendiculaires/Chapitre 5 droites paralleles et perpendiculaires presentation.html"
+        },
+        {
+            num: 6,
+            titre: "Fractions",
+            lien: "6/Chapitre6_Fractions/Chapitre 6 fractions presentation.html"
+        },
+        {
+            num: 7,
+            titre: "Proportionnalité",
+            lien: "6/Chapitre7_Proportionnalite/Chapitre 7 proportionnalite presentation.html"
+        },
+        {
+            num: 8,
+            titre: "Cercles",
+            lien: "6/Chapitre8_Cercles/Chapitre_8_cercles_presentation.html"
+        },
+        {
+            num: 9,
+            titre: "Opérations",
+            lien: "6/Chapitre9_Opérations/Chapitre_9_operations_presentation.html"
+        }
+    ],
+    "5e": [
+        {
+            num: 4,
+            titre: "Nombres relatifs",
+            lien: "5/Chapitre4_Relatifs/Chapitre 4 relatifs presentation.html"
+        },
+        {
+            num: 5,
+            titre: "Angles et parallélisme",
+            lien: "5/Chapitre5_Angles_Parallelisme/Chapitre 5 angles_et_parallelisme_presentation.html"
+        },
+        {
+            num: 6,
+            titre: "Calcul littéral",
+            lien: "5/Chapitre6_Calcul_Litteral/Chapitre_6_calcul_litteral_presentation.html"
+        },
+        {
+            num: 7,
+            titre: "Opérations sur les relatifs",
+            lien: "5/Chapitre7_Opérations _relatifs/Chapitre_9_relatifs_presentation.html"
+        }
+    ],
+    "4e": [
+        {
+            num: 4,
+            titre: "Théorème de Pythagore",
+            lien: "4/Chapitre4_Pythagore/Chapitre 4 Pythagore2 presentation.html"
+        },
+        {
+            num: 5,
+            titre: "Écriture fractionnaire",
+            lien: "4/Chapitre5_Fractions/Chapitre 5 ecriture fractionnaire partie 2 presentation.html"
+        },
+        {
+            num: 6,
+            titre: "Statistiques et probabilités",
+            lien: "4/Chapitre6_Statistiques_Probabilites/Chapitre 6 statistiques et probabilite presentation.html"
+        },
+        {
+            num: 7,
+            titre: "Géométrie dans l'espace",
+            lien: "4/Chapitre7_Geometrie_Espace/Chapitre 7 geometrie espace presentation.html"
+        },
+        {
+            num: 8,
+            titre: "Cosinus",
+            lien: "4/Chapitre8_Cosinus/Chapitre 8 cosinus presentation.html"
+        },
+        {
+            num: 9,
+            titre: "Translation",
+            lien: "4/Chapitre9_Translation/Chapitre_9_translation_presentation.html",
+            animations: [
+                { titre: "Compas", lien: "4/Chapitre9_Translation/animation-compas-simple.html" },
+                { titre: "Parallèles", lien: "4/Chapitre9_Translation/animation-paralleles.html" },
+                { titre: "Quadrillage", lien: "4/Chapitre9_Translation/animation-quadrillage.html" }
+            ]
+        },
+        {
+            num: 10,
+            titre: "Puissances",
+            lien: "4/Chapitre10-Puissances/Chapitre_10_puissances_presentation.html"
+        }
+    ],
+    "3e": [
+        {
+            num: 3,
+            titre: "Calcul littéral",
+            lien: "3/Chapitre3_Calcul_Litteral/Chapitre 3 calcul littéral presentation.html"
+        },
+        {
+            num: 4,
+            titre: "Trigonométrie",
+            lien: "3/Chapitre4_Trigonometrie/Chapitre 4 trigonometrie presentation.html"
+        },
+        {
+            num: 5,
+            titre: "Équations",
+            lien: "3/Chapitre5_Equations/Chapitre 5 equation presentation.html"
+        },
+        {
+            num: 6,
+            titre: "Statistiques",
+            lien: "3/Chapitre6_Statistiques/Chapitre_6_statistiques_presentation.html"
+        },
+        {
+            num: 7,
+            titre: "Notion de fonction",
+            lien: "3/Chapitre7_notion de fonction/Chapitre_7_fonctions_presentation.html"
+        },
+        {
+            num: 8,
+            titre: "Probabilités",
+            lien: "3/Chapitre8_Probabilité/Chapitre_8_probabilites_presentation.html"
+        }
+    ]
+};
+
+const arrowIcon = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>`;
+
+function buildCard(grade, chapter) {
+    const animSection = chapter.animations
+        ? `<div class="animations">
+            ${chapter.animations.map(a =>
+                `<a href="${a.lien}" class="anim-link" target="_blank">▶ ${a.titre}</a>`
+            ).join('')}
+           </div>`
+        : '';
+
+    return `
+        <div class="chapter-card grade-${grade}" data-title="${chapter.titre.toLowerCase()}" data-grade="${grade}">
+            <span class="badge">Chapitre ${chapter.num}</span>
+            <h3>${chapter.titre}</h3>
+            <a href="${chapter.lien}" class="main-link" target="_blank">${arrowIcon} Ouvrir le cours</a>
+            ${animSection}
+        </div>`;
+}
+
+let currentGrade = 'all';
+
+function buildAll() {
+    const container = document.getElementById('content');
+    let html = '';
+    for (const [grade, chapters] of Object.entries(data)) {
+        html += `
+            <div class="grade-section ${currentGrade === 'all' || currentGrade === grade ? 'active' : ''}" data-grade="${grade}">
+                <div class="all-view">
+                    <div class="grade-label">${grade}</div>
+                    <div class="chapters-grid">
+                        ${chapters.map(ch => buildCard(grade, ch)).join('')}
+                    </div>
+                </div>
+            </div>`;
+    }
+    container.innerHTML = html;
+}
+
+function showGrade(grade, btn) {
+    currentGrade = grade;
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    btn.classList.add('active');
+
+    document.getElementById('searchInput').value = '';
+
+    const sections = document.querySelectorAll('.grade-section');
+    sections.forEach(s => {
+        if (grade === 'all' || s.dataset.grade === grade) {
+            s.classList.add('active');
+        } else {
+            s.classList.remove('active');
+        }
+    });
+
+    // Afficher/masquer les grade labels selon le mode
+    document.querySelectorAll('.grade-label').forEach(label => {
+        label.style.display = grade === 'all' ? 'block' : 'none';
+    });
+}
+
+function filterChapters(query) {
+    const q = query.toLowerCase().trim();
+
+    // Réinitialiser tous les onglets en mode "tous" lors de la recherche
+    if (q) {
+        document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+        document.querySelector('.tab').classList.add('active');
+    }
+
+    const sections = document.querySelectorAll('.grade-section');
+    sections.forEach(section => section.classList.add('active'));
+
+    const cards = document.querySelectorAll('.chapter-card');
+    let anyVisible = false;
+
+    cards.forEach(card => {
+        const title = card.dataset.title;
+        const grade = card.dataset.grade;
+        const match = !q || title.includes(q) || grade.includes(q) ||
+                      card.querySelector('.badge').textContent.toLowerCase().includes(q);
+        card.style.display = match ? '' : 'none';
+        if (match) anyVisible = true;
+    });
+
+    // Afficher/masquer les sections vides
+    sections.forEach(section => {
+        const visibleCards = [...section.querySelectorAll('.chapter-card')]
+            .filter(c => c.style.display !== 'none');
+        section.classList.toggle('active', visibleCards.length > 0);
+    });
+
+    // Message si aucun résultat
+    let noRes = document.getElementById('no-results');
+    if (!anyVisible) {
+        if (!noRes) {
+            noRes = document.createElement('div');
+            noRes.id = 'no-results';
+            noRes.className = 'no-results';
+            noRes.textContent = 'Aucun chapitre trouvé.';
+            document.getElementById('content').after(noRes);
+        }
+    } else {
+        if (noRes) noRes.remove();
+    }
+
+    // Afficher les labels de classe selon le mode
+    document.querySelectorAll('.grade-label').forEach(label => {
+        label.style.display = q || currentGrade === 'all' ? 'block' : 'none';
+    });
+}
+
+// Init
+buildAll();
+showGrade('all', document.querySelector('.tab'));
+</script>
+
+</body>
+</html>
