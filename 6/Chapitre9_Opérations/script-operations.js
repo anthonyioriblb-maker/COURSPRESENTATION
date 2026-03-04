@@ -114,8 +114,8 @@ function changeSlide(direction) {
 document.addEventListener('keydown', (e) => {
     if (document.getElementById('slideMenu').classList.contains('active')) { if (e.key === 'Escape') closeMenu(); return; }
     if (document.getElementById('helpOverlay').classList.contains('active')) { if (e.key === 'Escape') closeHelp(); return; }
-    if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); changeSlide(1); }
-    else if (e.key === 'ArrowLeft') { e.preventDefault(); changeSlide(-1); }
+    if (e.key === 'ArrowUp' || e.key === ' ') { e.preventDefault(); changeSlide(1); }
+    else if (e.key === 'ArrowDown') { e.preventDefault(); changeSlide(-1); }
     else if (e.key === 'm' || e.key === 'M') openMenu();
     else if (e.key === 'r' || e.key === 'R') resetSlide();
     else if (e.key === 'h' || e.key === 'H' || e.key === '?') openHelp();
