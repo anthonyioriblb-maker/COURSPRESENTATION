@@ -188,10 +188,10 @@ document.addEventListener('keydown', (e) => {
         return;
     }
 
-    if (e.key === 'ArrowRight' || e.key === ' ') {
+    if (e.key === 'ArrowUp' || e.key === ' ') {
         e.preventDefault();
         changeSlide(1);
-    } else if (e.key === 'ArrowLeft') {
+    } else if (e.key === 'ArrowDown') {
         e.preventDefault();
         changeSlide(-1);
     } else if (e.key === 'm' || e.key === 'M') {
