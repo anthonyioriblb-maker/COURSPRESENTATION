@@ -5,6 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Chapitre 7 - Calculs avec les nombres relatifs</title>
     <link rel="stylesheet" href="../../styles.css">
+    <style>
+        /* Le résultat est caché jusqu'à ce qu'il reçoive la classe visible */
+        .step-inline {
+            opacity: 0;
+            transition: opacity 0.5s;
+        }
+        .step-inline.visible {
+            opacity: 1;
+        }
+    </style>
 </head>
 <body>
     <div class="container">
@@ -35,18 +45,10 @@
                 </div>
                 <div class="example">
                     <div class="step"><strong>Exemples :</strong></div>
-
-                    <div class="step">( +2 ) + ( +5 ) =</div>
-                    <div class="step"><span style="color:red;"><strong>+7</strong></span></div>
-
-                    <div class="step">( −2 ) + ( −5 ) =</div>
-                    <div class="step"><span style="color:red;"><strong>−7</strong></span></div>
-
-                    <div class="step">( +3 ) + ( +9 ) =</div>
-                    <div class="step"><span style="color:red;"><strong>+12</strong></span></div>
-
-                    <div class="step">( −8 ) + ( −7 ) =</div>
-                    <div class="step"><span style="color:red;"><strong>−15</strong></span></div>
+                    <div class="step">( +2 ) + ( +5 ) = <span class="step-inline" style="color:red;"><strong>+7</strong></span></div>
+                    <div class="step">( −2 ) + ( −5 ) = <span class="step-inline" style="color:red;"><strong>−7</strong></span></div>
+                    <div class="step">( +3 ) + ( +9 ) = <span class="step-inline" style="color:red;"><strong>+12</strong></span></div>
+                    <div class="step">( −8 ) + ( −7 ) = <span class="step-inline" style="color:red;"><strong>−15</strong></span></div>
                 </div>
             </div>
 
@@ -60,18 +62,10 @@
                 </div>
                 <div class="example">
                     <div class="step"><strong>Exemples :</strong></div>
-
-                    <div class="step">( −2 ) + ( +6 ) =</div>
-                    <div class="step"><span style="color:red;"><strong>+4</strong></span></div>
-
-                    <div class="step">( −5 ) + ( +2 ) =</div>
-                    <div class="step"><span style="color:red;"><strong>−3</strong></span></div>
-
-                    <div class="step">( +4 ) + ( −11 ) =</div>
-                    <div class="step"><span style="color:red;"><strong>−7</strong></span></div>
-
-                    <div class="step">( +8 ) + ( −2 ) =</div>
-                    <div class="step"><span style="color:red;"><strong>+6</strong></span></div>
+                    <div class="step">( −2 ) + ( +6 ) = <span class="step-inline" style="color:red;"><strong>+4</strong></span></div>
+                    <div class="step">( −5 ) + ( +2 ) = <span class="step-inline" style="color:red;"><strong>−3</strong></span></div>
+                    <div class="step">( +4 ) + ( −11 ) = <span class="step-inline" style="color:red;"><strong>−7</strong></span></div>
+                    <div class="step">( +8 ) + ( −2 ) = <span class="step-inline" style="color:red;"><strong>+6</strong></span></div>
                 </div>
             </div>
 
@@ -83,23 +77,14 @@
                 </div>
                 <div class="example">
                     <div class="step"><strong>Exemples :</strong></div>
-
-                    <div class="step">L'opposé de +3 est</div>
-                    <div class="step"><span style="color:red;"><strong>−3</strong></span></div>
-
-                    <div class="step">L'opposé de −7 est</div>
-                    <div class="step"><span style="color:red;"><strong>+7</strong></span></div>
-
-                    <div class="step">L'opposé de +11 est</div>
-                    <div class="step"><span style="color:red;"><strong>−11</strong></span></div>
-
-                    <div class="step">L'opposé de −5 est</div>
-                    <div class="step"><span style="color:red;"><strong>+5</strong></span></div>
+                    <div class="step">L'opposé de +3 est <span class="step-inline" style="color:red;"><strong>−3</strong></span></div>
+                    <div class="step">L'opposé de −7 est <span class="step-inline" style="color:red;"><strong>+7</strong></span></div>
+                    <div class="step">L'opposé de +11 est <span class="step-inline" style="color:red;"><strong>−11</strong></span></div>
+                    <div class="step">L'opposé de −5 est <span class="step-inline" style="color:red;"><strong>+5</strong></span></div>
                 </div>
                 <div class="remarque">
                     <div class="step"><strong>💡 Remarque :</strong> La somme d'un nombre et de son opposé est toujours égale à <strong>0</strong>.</div>
-                    <div class="step">Exemple : ( +3 ) + ( −3 ) =</div>
-                    <div class="step"><span style="color:red;"><strong>0</strong></span></div>
+                    <div class="step">Exemple : ( +3 ) + ( −3 ) = <span class="step-inline" style="color:red;"><strong>0</strong></span></div>
                 </div>
             </div>
 
@@ -111,18 +96,10 @@
                 </div>
                 <div class="example">
                     <div class="step"><strong>Exemples :</strong></div>
-
-                    <div class="step">( +2 ) − ( +3 ) = ( +2 ) + ( −3 ) =</div>
-                    <div class="step"><span style="color:red;"><strong>−1</strong></span></div>
-
-                    <div class="step">( +2 ) − ( −3 ) = ( +2 ) + ( +3 ) =</div>
-                    <div class="step"><span style="color:red;"><strong>+5</strong></span></div>
-
-                    <div class="step">( −5 ) − ( +8 ) = ( −5 ) + ( −8 ) =</div>
-                    <div class="step"><span style="color:red;"><strong>−13</strong></span></div>
-
-                    <div class="step">( −5 ) − ( −8 ) = ( −5 ) + ( +8 ) =</div>
-                    <div class="step"><span style="color:red;"><strong>+3</strong></span></div>
+                    <div class="step">( +2 ) − ( +3 ) = ( +2 ) + ( −3 ) = <span class="step-inline" style="color:red;"><strong>−1</strong></span></div>
+                    <div class="step">( +2 ) − ( −3 ) = ( +2 ) + ( +3 ) = <span class="step-inline" style="color:red;"><strong>+5</strong></span></div>
+                    <div class="step">( −5 ) − ( +8 ) = ( −5 ) + ( −8 ) = <span class="step-inline" style="color:red;"><strong>−13</strong></span></div>
+                    <div class="step">( −5 ) − ( −8 ) = ( −5 ) + ( +8 ) = <span class="step-inline" style="color:red;"><strong>+3</strong></span></div>
                 </div>
             </div>
 

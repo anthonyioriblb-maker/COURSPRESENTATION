@@ -18,6 +18,18 @@ const slideTitles = [
     "II. Exemple de calcul"                                 // Slide 10
 ];
 
+// Construit la liste à plat des étapes : chaque .step suivi de ses .step-inline enfants
+function buildStepsArray(slide) {
+    const steps = [];
+    slide.querySelectorAll('.step').forEach(step => {
+        steps.push(step);
+        step.querySelectorAll('.step-inline').forEach(inline => {
+            steps.push(inline);
+        });
+    });
+    return steps;
+}
+
 // Initialisation - attendre que le DOM soit chargé
 document.addEventListener('DOMContentLoaded', function() {
     slides = document.querySelectorAll('.slide');
@@ -95,7 +107,7 @@ function updateSlide() {
     });
 
     const currentSlide = slides[currentSlideIndex];
-    const steps = currentSlide.querySelectorAll('.step');
+    const steps = buildStepsArray(currentSlide);
     const totalSteps = steps.length;
 
     steps.forEach((step, index) => {
@@ -149,7 +161,7 @@ function changeSlide(direction) {
     if (!slides || slides.length === 0) return;
 
     const currentSlide = slides[currentSlideIndex];
-    const steps = currentSlide.querySelectorAll('.step');
+    const steps = buildStepsArray(currentSlide);
     const totalSteps = steps.length;
 
     if (direction === 1) {
@@ -167,7 +179,7 @@ function changeSlide(direction) {
             updateSlide();
         } else if (currentSlideIndex > 0) {
             currentSlideIndex--;
-            const prevSteps = slides[currentSlideIndex].querySelectorAll('.step');
+            const prevSteps = buildStepsArray(slides[currentSlideIndex]);
             currentStepIndex = prevSteps.length;
             updateSlide();
         }

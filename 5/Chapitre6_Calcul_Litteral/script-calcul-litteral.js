@@ -1,3 +1,15 @@
+// Construit la liste à plat des étapes : chaque .step suivi de ses .step-inline enfants
+function buildStepsArray(slide) {
+    const steps = [];
+    slide.querySelectorAll('.step').forEach(step => {
+        steps.push(step);
+        step.querySelectorAll('.step-inline').forEach(inline => {
+            steps.push(inline);
+        });
+    });
+    return steps;
+}
+
 // Initialisation
 let currentSlideIndex = 0;
 let currentStepIndex = 0;
@@ -70,7 +82,7 @@ function updateSlide() {
         if (index === currentSlideIndex) slide.classList.add('active');
     });
 
-    const steps = slides[currentSlideIndex].querySelectorAll('.step');
+    const steps = buildStepsArray(slides[currentSlideIndex]);
     const totalSteps = steps.length;
 
     steps.forEach((step, index) => {
@@ -109,7 +121,7 @@ function updateSlide() {
 
 function changeSlide(direction) {
     const currentSlide = slides[currentSlideIndex];
-    const steps = currentSlide.querySelectorAll('.step');
+    const steps = buildStepsArray(currentSlide);
     const totalSteps = steps.length;
 
     if (direction === 1) {
@@ -127,7 +139,7 @@ function changeSlide(direction) {
             updateSlide();
         } else if (currentSlideIndex > 0) {
             currentSlideIndex--;
-            const prevSteps = slides[currentSlideIndex].querySelectorAll('.step');
+            const prevSteps = buildStepsArray(slides[currentSlideIndex]);
             currentStepIndex = prevSteps.length;
             updateSlide();
         }

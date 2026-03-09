@@ -16,6 +16,19 @@ const slideTitles = [
     "IV. Enchaînement d'opérations — Exemple"          // Slide 8
 ];
 
+// Construit la liste à plat de toutes les étapes d'une slide :
+// chaque .step est suivi de ses .step-inline enfants (résultats inline)
+function buildStepsArray(slide) {
+    const steps = [];
+    slide.querySelectorAll('.step').forEach(step => {
+        steps.push(step);
+        step.querySelectorAll('.step-inline').forEach(inline => {
+            steps.push(inline);
+        });
+    });
+    return steps;
+}
+
 // Initialisation - attendre que le DOM soit chargé
 document.addEventListener('DOMContentLoaded', function() {
     slides = document.querySelectorAll('.slide');
@@ -93,9 +106,9 @@ function updateSlide() {
         if (index === currentSlideIndex) slide.classList.add('active');
     });
 
-    // Gérer les étapes de la slide actuelle
+    // Construire la liste à plat des étapes (steps + step-inline)
     const currentSlide = slides[currentSlideIndex];
-    const steps = currentSlide.querySelectorAll('.step');
+    const steps = buildStepsArray(currentSlide);
     const totalSteps = steps.length;
 
     steps.forEach((step, index) => {
@@ -153,7 +166,7 @@ function changeSlide(direction) {
     if (!slides || slides.length === 0) return;
 
     const currentSlide = slides[currentSlideIndex];
-    const steps = currentSlide.querySelectorAll('.step');
+    const steps = buildStepsArray(currentSlide);
     const totalSteps = steps.length;
 
     if (direction === 1) {
@@ -171,7 +184,7 @@ function changeSlide(direction) {
             updateSlide();
         } else if (currentSlideIndex > 0) {
             currentSlideIndex--;
-            const prevSteps = slides[currentSlideIndex].querySelectorAll('.step');
+            const prevSteps = buildStepsArray(slides[currentSlideIndex]);
             currentStepIndex = prevSteps.length;
             updateSlide();
         }

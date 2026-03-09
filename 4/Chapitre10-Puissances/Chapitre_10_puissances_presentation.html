@@ -5,6 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Chapitre 10 - Les puissances</title>
     <link rel="stylesheet" href="../../styles.css">
+    <style>
+        .step-inline { opacity: 0; transition: opacity 0.5s; }
+        .step-inline.visible { opacity: 1; }
+    </style>
 </head>
 <body>
     <div class="container">
@@ -50,7 +54,7 @@
                     <div class="step">Pour calculer <span class="math">3<span class="exposant">7</span></span> à la calculatrice :</div>
                     <div class="step">• Sur <strong>Casio</strong> : taper <kbd style="background:#555;color:white;padding:3px 8px;border-radius:4px;">3</kbd> <kbd style="background:#555;color:white;padding:3px 8px;border-radius:4px;">x□</kbd> <kbd style="background:#555;color:white;padding:3px 8px;border-radius:4px;">7</kbd> <kbd style="background:#555;color:white;padding:3px 8px;border-radius:4px;">EXE</kbd></div>
                     <div class="step">• Sur <strong>TI</strong> : taper <kbd style="background:#555;color:white;padding:3px 8px;border-radius:4px;">3</kbd> <kbd style="background:#555;color:white;padding:3px 8px;border-radius:4px;">^</kbd> <kbd style="background:#555;color:white;padding:3px 8px;border-radius:4px;">7</kbd> <kbd style="background:#555;color:white;padding:3px 8px;border-radius:4px;">ENTER</kbd></div>
-                    <div class="step">On trouve <span class="math">3<span class="exposant">7</span> = <strong>2187</strong></span></div>
+                    <div class="step">On trouve <span class="math">3<span class="exposant">7</span> = <span class="step-inline" style="color:red;"><strong>2 187</strong></span></span></div>
                 </div>
             </div>
 
@@ -64,15 +68,15 @@
                 </div>
                 <div class="example">
                     <div class="step"><strong>Exemples :</strong></div>
-                    <div class="step"><span class="math">(−3)<span class="exposant">4</span> = (−3) × (−3) × (−3) × (−3) = <strong style="color:green;">+81</strong></span></div>
-                    <div class="step"><span class="math">(−8)<span class="exposant">6</span> = … = <strong style="color:green;">+262 144</strong></span></div>
-                    <div class="step"><span class="math">(−3)<span class="exposant">5</span> = (−3) × (−3) × (−3) × (−3) × (−3) = <strong style="color:red;">−243</strong></span></div>
-                    <div class="step"><span class="math">(−8)<span class="exposant">3</span> = (−8) × (−8) × (−8) = <strong style="color:red;">−512</strong></span></div>
+                    <div class="step"><span class="math">(−3)<span class="exposant">4</span> = (−3) × (−3) × (−3) × (−3) = <span class="step-inline"><strong style="color:green;">+81</strong></span></span></div>
+                    <div class="step"><span class="math">(−8)<span class="exposant">6</span> = … = <span class="step-inline"><strong style="color:green;">+262 144</strong></span></span></div>
+                    <div class="step"><span class="math">(−3)<span class="exposant">5</span> = (−3) × (−3) × (−3) × (−3) × (−3) = <span class="step-inline"><strong style="color:red;">−243</strong></span></span></div>
+                    <div class="step"><span class="math">(−8)<span class="exposant">3</span> = (−8) × (−8) × (−8) = <span class="step-inline"><strong style="color:red;">−512</strong></span></span></div>
                 </div>
                 <div class="remarque">
                     <div class="step"><strong>⚠️ Attention !</strong></div>
-                    <div class="step"><span class="math">(−3)<span class="exposant">6</span> = <strong style="color:green;">+729</strong></span> &nbsp;(parenthèses : le signe moins est present 6 fois)</div>
-                    <div class="step"><span class="math">−3<span class="exposant">6</span> = <strong style="color:red;">−729</strong></span> &nbsp;(sans parenthèses : le signe moins est présent une seule fois)</div>
+                    <div class="step"><span class="math">(−3)<span class="exposant">6</span> = <span class="step-inline"><strong style="color:green;">+729</strong></span></span> &nbsp;(parenthèses : le signe moins est present 6 fois)</div>
+                    <div class="step"><span class="math">−3<span class="exposant">6</span> = <span class="step-inline"><strong style="color:red;">−729</strong></span></span> &nbsp;(sans parenthèses : le signe moins est présent une seule fois)</div>
                 </div>
             </div>
 
@@ -121,10 +125,10 @@
                 </div>
                 <div class="example">
                     <div class="step"><strong>Exemples :</strong></div>
-                    <div class="step"><span class="math">2,145 × 100 = 214,5</span></div>
-                    <div class="step"><span class="math">3,2 × 1000 = 3200</span></div>
-                    <div class="step"><span class="math">35 × 0,01 = 0,35</span></div>
-                    <div class="step"><span class="math">4,8 × 0,01 = 0,048</span></div>
+                    <div class="step"><span class="math">2,145 × 100 = <span class="step-inline" style="color:red;"><strong>214,5</strong></span></span></div>
+                    <div class="step"><span class="math">3,2 × 1 000 = <span class="step-inline" style="color:red;"><strong>3 200</strong></span></span></div>
+                    <div class="step"><span class="math">35 × 0,01 = <span class="step-inline" style="color:red;"><strong>0,35</strong></span></span></div>
+                    <div class="step"><span class="math">4,8 × 0,01 = <span class="step-inline" style="color:red;"><strong>0,048</strong></span></span></div>
                 </div>
             </div>
 
@@ -191,8 +195,8 @@
                 </div>
                 <div class="example">
                     <div class="step"><strong>Exemples :</strong></div>
-                    <div class="step"><span class="math">0,00023 = <strong>2,3 × 10<span class="exposant">−4</span></strong></span></div>
-                    <div class="step"><span class="math">5874 = <strong>5,874 × 10<span class="exposant">3</span></strong></span></div>
+                    <div class="step"><span class="math">0,00023 = <span class="step-inline"><strong>2,3 × 10<span class="exposant">−4</span></strong></span></span></div>
+                    <div class="step"><span class="math">5 874 = <span class="step-inline"><strong>5,874 × 10<span class="exposant">3</span></strong></span></span></div>
                 </div>
             </div>
 
