@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arithmétique - Présentation 3e</title>
+    <style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh; display: flex; justify-content: center; align-items: center;
+    color: blue; overflow: hidden;
+}
+.container { width: 95%; height: 95vh; background: white; border-radius: 20px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.3); display: flex; flex-direction: column; overflow: hidden; }
+.content { flex: 1; display: flex; flex-direction: column; justify-content: flex-start;
+    align-items: center; padding: 20px 40px 30px 40px; overflow-y: auto; scroll-behavior: smooth; }
+.slide { display: none; text-align: center; max-width: 1600px; width: 100%; padding-top: 0; }
+.slide.active { display: block; animation: fadeIn 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(20px) scale(0.98); } to { opacity: 1; transform: translateY(0) scale(1); } }
+h1 { font-size: 5em; color: #c0392b; margin-bottom: 20px; margin-top: 0; border-bottom: 5px solid #c0392b; padding-bottom: 15px; }
+h2 { font-size: 4.5em; color: #c0392b; margin-bottom: 25px; text-decoration: underline; }
+h3 { font-size: 4em; color: #c0392b; margin-bottom: 18px; }
+h1.step { font-size: 5em !important; }
+h2.step { font-size: 4.5em !important; }
+h3.step { font-size: 4em !important; }
+.step {
+    opacity: 0;
+    transform: translateX(-30px);
+    transition: opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1), transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    margin: 12px 0; will-change: transform, opacity; font-size: inherit;
+}
+.step.visible { opacity: 1; transform: translateX(0); }
+
+.definition, .example, .property, .remarque, .method, .important {
+    font-size: 2.5em; padding: 18px 30px; border-radius: 12px; margin: 12px 0;
+    text-align: left; line-height: 1.5; box-shadow: 0 3px 10px rgba(0,0,0,0.15);
+    opacity: 0;
+    transition: opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.definition:has(.step.visible),
+.example:has(.step.visible),
+.property:has(.step.visible),
+.remarque:has(.step.visible),
+.method:has(.step.visible),
+.important:has(.step.visible) { opacity: 1; }
+
+.definition { background: #d4ebf7; border-left: 6px solid #2980b9; color: blue; }
+.example { background: #e8f8f0; border-left: 6px solid #27ae60; color: black; }
+.important { background: #fff3b8; border-left: 6px solid #f39c12; color: blue; }
+.remarque { background: #e8e8e8; border-left: 6px solid #555; color: black; }
+.method { background: #c8c8c8; border-left: 6px solid #000; color: black; }
+.property { background: #fff3b8; border-left: 6px solid #f39c12; color: black; }
+.math { font-family: 'Times New Roman', serif; font-style: italic; font-weight: normal; font-size: 1.1em; }
+.frac { display: inline-block; vertical-align: middle; text-align: center; margin: 0 4px; }
+.num { display: block; border-bottom: 2px solid currentColor; padding: 2px 8px 4px; line-height: 1.2; }
+.den { display: block; padding: 4px 8px 2px; line-height: 1.2; }
+.mark-blue { background: lightblue; font-weight: bold; padding: 2px 5px; border-radius: 3px; }
+.mark-green { background: lightgreen; font-weight: bold; padding: 2px 5px; border-radius: 3px; }
+.fc1 { background: #ffe0b2; font-weight: bold; padding: 1px 4px; border-radius: 3px; color: #e65100; }
+.fc2 { background: #c8e6c9; font-weight: bold; padding: 1px 4px; border-radius: 3px; color: #1b5e20; }
+.fc3 { background: #bbdefb; font-weight: bold; padding: 1px 4px; border-radius: 3px; color: #0d47a1; }
+.strikethrough-red { text-decoration: line-through; color: red; }
+.strikethrough-blue { text-decoration: line-through; color: blue; }
+
+/* ── Décomposition animée en diagonale ── */
+.decomp-wrap { display: inline-block; vertical-align: top; margin: 5px 30px 5px 0; }
+.decomp { font-family: 'Courier New', monospace; font-size: 0.85em; display: inline-block; }
+.decomp-row { display: flex; align-items: center; height: 1.65em; }
+/* Chaque ligne (nombre) glisse depuis la gauche */
+.decomp-row.step {
+    transform: translateX(-20px) !important;
+    transition: opacity 0.3s ease, transform 0.3s ease !important;
+    margin: 0 !important;
+}
+.decomp-row.step.visible { transform: translateX(0) !important; }
+/* Le nombre : visible dès que la ligne apparaît */
+.decomp-n { min-width: 48px; text-align: right; padding-right: 6px; color: blue; font-weight: bold; border-right: 2px solid #333; }
+/* Le diviseur : apparaît en décalé après le nombre → effet diagonal */
+.decomp-d {
+    padding-left: 8px; min-width: 25px; color: red; font-weight: bold;
+    opacity: 0;
+    transition: opacity 0.25s ease 0.35s; /* délai de 0.35s après l'apparition du nombre */
+}
+.decomp-row.step.visible .decomp-d { opacity: 1; }
+
+.controls { background: #2c3e50; padding: 12px; display: flex; justify-content: space-between; align-items: center; gap: 20px; }
+.controls-left, .controls-right { display: flex; gap: 10px; align-items: center; }
+button { background: #3498db; color: white; border: none; padding: 10px 20px; font-size: 1.1em;
+    border-radius: 10px; cursor: pointer; font-weight: bold; transition: background-color 0.2s, transform 0.2s; }
+button:hover { transform: translateY(-2px); box-shadow: 0 4px 8px rgba(0,0,0,0.2); }
+.btn-menu { background: #e67e22; }
+.btn-reset { background: #e74c3c; padding: 10px 18px; }
+.progress { color: white; font-size: 1.2em; font-weight: bold; display: flex; align-items: center; gap: 15px; }
+.step-indicator { background: rgba(255,255,255,0.2); padding: 5px 15px; border-radius: 5px; font-size: 0.8em; }
+.slide-menu { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.8); z-index: 1000; justify-content: center; align-items: center; }
+.slide-menu.active { display: flex; }
+.menu-content { background: white; padding: 40px; border-radius: 20px; max-width: 1200px;
+    max-height: 80vh; overflow-y: auto; box-shadow: 0 10px 50px rgba(0,0,0,0.5); }
+.menu-content h2 { font-size: 3em; margin-bottom: 30px; color: #2c3e50; border-bottom: 3px solid #3498db; padding-bottom: 15px; text-decoration: none; }
+.slide-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 15px; margin-top: 20px; }
+.slide-item { background: #ecf0f1; padding: 20px; border-radius: 10px; cursor: pointer;
+    transition: background-color 0.25s, color 0.25s, transform 0.25s, box-shadow 0.25s;
+    border: 3px solid transparent; text-align: left; }
+.slide-item:hover { background: #3498db; color: white; transform: translateY(-5px); box-shadow: 0 5px 15px rgba(52,152,219,0.4); }
+.slide-item.current { border-color: #e74c3c; background: #ffe6e6; }
+.close-menu { margin-top: 30px; background: #e74c3c; padding: 15px 40px; font-size: 1.2em; }
+.help-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.9); z-index: 2000; justify-content: center; align-items: center; }
+.help-overlay.active { display: flex; }
+.help-content { background: white; padding: 40px; border-radius: 20px; max-width: 600px; box-shadow: 0 10px 50px rgba(0,0,0,0.5); }
+.help-content h2 { font-size: 3em; margin-bottom: 30px; color: #2c3e50; border-bottom: 3px solid #3498db; padding-bottom: 15px; text-decoration: none; }
+.help-content ul { list-style: none; padding: 0; }
+.help-content li { padding: 15px; margin: 10px 0; background: #ecf0f1; border-radius: 10px; font-size: 1.4em; color: black; }
+.help-content kbd { background: #3498db; color: white; padding: 5px 10px; border-radius: 5px; font-weight: bold; font-family: monospace; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="content">
+
+        <!-- Slide 1 : Titre -->
+        <div class="slide active">
+            <h1>Chapitre 9 : Arithmétique</h1>
+        </div>
+
+        <!-- Slide 2 : Types de nombres - Entiers naturels et relatifs -->
+        <div class="slide">
+            <h2>I. Les différents types de nombres</h2>
+            <h3>1) Entiers naturels et relatifs</h3>
+            <div class="definition">
+                <div class="step"><span style="color:red;">Définition :</span> Les <strong>entiers naturels</strong> sont les nombres entiers positifs.</div>
+                <div class="step"><em>Exemples : 0 ; 1 ; 2 ; 3 ; 4 …</em></div>
+            </div>
+            <div class="definition">
+                <div class="step"><span style="color:red;">Définition :</span> Les <strong>entiers relatifs</strong> sont les nombres entiers positifs et les nombres entiers négatifs.</div>
+                <div class="step"><em>Exemples : −6 ; 7 ; −624</em></div>
+            </div>
+        </div>
+
+        <!-- Slide 3 : Nombres décimaux -->
+        <div class="slide">
+            <h3>2) Nombres décimaux</h3>
+            <div class="definition">
+                <div class="step"><span style="color:red;">Définition :</span> Les <strong>nombres décimaux</strong> sont les nombres qui peuvent s'écrire sous la forme d'un quotient d'un entier relatif par une <strong>puissance de dix</strong>.</div>
+                <div class="step" style="text-align:center; margin-top:10px;">
+                    <em>Exemples :&nbsp; 3,4 =
+                    <span class="frac"><span class="num">34</span><span class="den">10</span></span>
+                    &nbsp;&nbsp;;&nbsp;&nbsp;
+                    −9,87 =
+                    <span class="frac"><span class="num">−987</span><span class="den">10²</span></span>
+                    &nbsp;&nbsp;;&nbsp;&nbsp;
+                    4 =
+                    <span class="frac"><span class="num">4</span><span class="den">10⁰</span></span>
+                    </em>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 4 : Nombres rationnels -->
+        <div class="slide">
+            <h3>3) Nombres rationnels</h3>
+            <div class="definition">
+                <div class="step"><span style="color:red;">Définition :</span> Les <strong>nombres rationnels</strong> sont les nombres qui peuvent s'écrire sous la forme d'un quotient de deux entiers relatifs (dénominateur non nul).</div>
+                <div class="step" style="text-align:center; margin-top:10px;">
+                    <em>Exemples :&nbsp;
+                    <span class="frac"><span class="num">8</span><span class="den">9</span></span>
+                    &nbsp;&nbsp;;&nbsp;&nbsp;
+                    −<span class="frac"><span class="num">5</span><span class="den">7</span></span>
+                    </em>
+                </div>
+            </div>
+            <div class="remarque">
+                <div class="step"><span style="color:red;">Remarque :</span> Tout nombre décimal est un nombre rationnel, mais la réciproque est fausse.</div>
+                <div class="step">Un rationnel s'écrit en décimal avec une partie décimale <strong>finie</strong> ou <strong>périodique</strong>.</div>
+                <div class="step" style="text-align:center;">
+                    <em>Exemple :
+                    <span class="frac"><span class="num">2</span><span class="den">7</span></span>
+                    ≈ 0,<u>285714</u> <u>285714</u> … (période 285714)
+                    </em>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 5 : Nombres irrationnels -->
+        <div class="slide">
+            <h3>4) Nombres irrationnels</h3>
+            <div class="definition">
+                <div class="step"><span style="color:red;">Définition :</span> Les <strong>nombres irrationnels</strong> sont les nombres qui <strong>ne peuvent pas</strong> s'écrire comme quotient de deux entiers.</div>
+                <div class="step">Leur écriture décimale est <strong>infinie et sans période</strong>.</div>
+                <div class="step"><em>Exemple : π ≈ 3,14159265358979… (infini, sans répétition)</em></div>
+            </div>
+            <div class="important">
+                <div class="step">Tout entier et tout décimal est rationnel. Mais certains nombres (comme π ou √2) ne sont <strong>pas</strong> rationnels : ce sont des <strong>irrationnels</strong>.</div>
+            </div>
+        </div>
+
+        <!-- Slide 6 : Divisibilité - définition -->
+        <div class="slide">
+            <h2>II. Divisibilité</h2>
+            <h3>1) Diviseurs et multiples</h3>
+            <div class="definition">
+                <div class="step"><span style="color:red;">Définition :</span> Un entier <em>a</em> est <strong>divisible</strong> par un entier <em>b</em> (non nul) lorsque le <strong>reste de la division euclidienne</strong> de <em>a</em> par <em>b</em> est <strong>nul</strong>.</div>
+                <div class="step">On dit alors que <em>b</em> est un <strong>diviseur</strong> de <em>a</em>, et que <em>a</em> est un <strong>multiple</strong> de <em>b</em>.</div>
+            </div>
+            <div class="example">
+                <div class="step"><strong>Exemple :</strong> 18 est divisible par 6 car 18 ÷ 6 = 3 reste <strong>0</strong>.</div>
+                <div class="step">→ 6 est un <strong>diviseur</strong> de 18 &nbsp;|&nbsp; 18 est un <strong>multiple</strong> de 6.</div>
+                <div class="step">Les diviseurs de 18 sont : <span class="mark-green">1, 2, 3, 6, 9, 18</span>.</div>
+            </div>
+            <div class="remarque">
+                <div class="step"><span style="color:red;">Remarque :</span> 1 est un diviseur de tout entier, et chaque entier est divisible par lui-même.</div>
+            </div>
+        </div>
+
+        <!-- Slide 7 : Critères de divisibilité -->
+        <div class="slide">
+            <h3>2) Critères de divisibilité</h3>
+            <div class="property">
+                <div class="step"><span style="color:red;">Propriété :</span> Un nombre entier est divisible :</div>
+                <div class="step">— <strong>par 2</strong> : si son chiffre des unités est <strong>pair</strong> (0, 2, 4, 6 ou 8). &nbsp;<em>Ex : 348</em></div>
+                <div class="step">— <strong>par 5</strong> : si son chiffre des unités est <strong>0 ou 5</strong>. &nbsp;<em>Ex : 245</em></div>
+                <div class="step">— <strong>par 10</strong> : si son chiffre des unités est <strong>0</strong>. &nbsp;<em>Ex : 560</em></div>
+                <div class="step">— <strong>par 3</strong> : si la <strong>somme de ses chiffres</strong> est divisible par 3. &nbsp;<em>Ex : 312 → 3+1+2 = 6</em></div>
+                <div class="step">— <strong>par 9</strong> : si la <strong>somme de ses chiffres</strong> est divisible par 9. &nbsp;<em>Ex : 729 → 7+2+9 = 18</em></div>
+            </div>
+            <div class="example">
+                <div class="step"><strong>Exemple :</strong> 75 204 est-il divisible par 2, 3 et 9 ?</div>
+                <div class="step">Par 2 : chiffre des unités = 4 (pair) → <strong>oui</strong>.</div>
+                <div class="step">Somme des chiffres : 7+5+2+0+4 = <strong>18</strong>. &nbsp;18 est divisible par 9 et par 3 → divisible par <strong>3 et par 9</strong>.</div>
+            </div>
+        </div>
+
+        <!-- Slide 8 : Nombres premiers -->
+        <div class="slide">
+            <h3>3) Nombres premiers</h3>
+            <div class="definition">
+                <div class="step"><span style="color:red;">Définition :</span> Un entier naturel est <strong>premier</strong> s'il possède exactement <strong>deux diviseurs distincts positifs : 1 et lui-même</strong>.</div>
+            </div>
+            <div class="example">
+                <div class="step"><strong>Exemples :</strong> 2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71… sont des nombres premiers.</div>
+                <div class="step">Cette liste est <strong>infinie</strong>.</div>
+            </div>
+            <div class="remarque">
+                <div class="step"><span style="color:red;">Remarque :</span> 1 n'est <strong>pas</strong> premier car il ne possède qu'un seul diviseur positif : lui-même.</div>
+            </div>
+            <div class="example">
+                <div class="step"><strong>Application :</strong> 12 est-il premier ?</div>
+                <div class="step">12 est divisible par 1, 2, 3, 4, 6 et 12. Il possède plus de deux diviseurs.</div>
+                <div class="step">→ <strong>12 n'est pas un nombre premier.</strong></div>
+            </div>
+        </div>
+
+        <!-- Slide 9 : Décomposition en facteurs premiers - méthode + exemple 252 ligne par ligne -->
+        <div class="slide">
+            <h2>III. Décomposition en facteurs premiers</h2>
+            <div class="property">
+                <div class="step"><span style="color:red;">Propriété :</span> Tout entier naturel supérieur à 1 peut s'écrire comme un <strong>produit de facteurs premiers</strong>.</div>
+                <div class="step">Cette décomposition est <strong>unique</strong> (à l'ordre des facteurs près).</div>
+            </div>
+            <div class="method">
+                <div class="step"><strong>Méthode :</strong> On divise successivement par les nombres premiers dans l'ordre croissant (2, 3, 5, 7, 11, …) jusqu'à obtenir 1.</div>
+                <div class="step"><strong>Exemple : décomposer 252 en facteurs premiers.</strong></div>
+                <div style="text-align:center; margin: 10px 0;">
+                    <div class="decomp-wrap">
+                        <div class="decomp">
+                            <div class="decomp-row step"><span class="decomp-n">252</span><span class="decomp-d">2</span></div>
+                            <div class="decomp-row step"><span class="decomp-n">126</span><span class="decomp-d">2</span></div>
+                            <div class="decomp-row step"><span class="decomp-n">63</span><span class="decomp-d">3</span></div>
+                            <div class="decomp-row step"><span class="decomp-n">21</span><span class="decomp-d">3</span></div>
+                            <div class="decomp-row step"><span class="decomp-n">7</span><span class="decomp-d">7</span></div>
+                            <div class="decomp-row step"><span class="decomp-n">1</span><span class="decomp-d"></span></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="step" style="text-align:center;">252 = 2 × 2 × 3 × 3 × 7 = <strong>2² × 3² × 7</strong></div>
+            </div>
+        </div>
+
+        <!-- Slide 10 : Autres exemples de décomposition ligne par ligne -->
+        <div class="slide">
+            <h3>Autres exemples de décomposition</h3>
+            <div class="example">
+                <div class="step"><strong>Décomposer 180 :</strong></div>
+                <div style="text-align:center; margin: 8px 0;">
+                    <div class="decomp-wrap">
+                        <div class="decomp">
+                            <div class="decomp-row step"><span class="decomp-n">180</span><span class="decomp-d">2</span></div>
+                            <div class="decomp-row step"><span class="decomp-n">90</span><span class="decomp-d">2</span></div>
+                            <div class="decomp-row step"><span class="decomp-n">45</span><span class="decomp-d">3</span></div>
+                            <div class="decomp-row step"><span class="decomp-n">15</span><span class="decomp-d">3</span></div>
+                            <div class="decomp-row step"><span class="decomp-n">5</span><span class="decomp-d">5</span></div>
+                            <div class="decomp-row step"><span class="decomp-n">1</span><span class="decomp-d"></span></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="step" style="text-align:center;">180 = 2 × 2 × 3 × 3 × 5 = <strong>2² × 3² × 5</strong></div>
+                <div class="step"><strong>Décomposer 105 :</strong></div>
+                <div style="text-align:center; margin: 8px 0;">
+                    <div class="decomp-wrap">
+                        <div class="decomp">
+                            <div class="decomp-row step"><span class="decomp-n">105</span><span class="decomp-d">3</span></div>
+                            <div class="decomp-row step"><span class="decomp-n">35</span><span class="decomp-d">5</span></div>
+                            <div class="decomp-row step"><span class="decomp-n">7</span><span class="decomp-d">7</span></div>
+                            <div class="decomp-row step"><span class="decomp-n">1</span><span class="decomp-d"></span></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="step" style="text-align:center;">105 = 3 × 5 × 7</div>
+            </div>
+        </div>
+
+        <!-- Slide 11 : PGCD définition et méthode -->
+        <div class="slide">
+            <h2>IV. Plus Grand Commun Diviseur (PGCD)</h2>
+            <div class="definition">
+                <div class="step"><span style="color:red;">Définition :</span> Le <strong>Plus Grand Commun Diviseur</strong> de deux entiers <em>a</em> et <em>b</em> est le plus grand entier qui divise à la fois <em>a</em> et <em>b</em>. On le note <strong>PGCD(<em>a</em> ; <em>b</em>)</strong>.</div>
+            </div>
+            <div class="method">
+                <div class="step"><strong>Méthode :</strong> Calcul du PGCD par décomposition en facteurs premiers.</div>
+                <div class="step">① Décomposer chaque nombre en produit de facteurs premiers.</div>
+                <div class="step">② Identifier les facteurs premiers <strong>communs</strong> aux deux décompositions.</div>
+                <div class="step">③ Le PGCD est le produit de ces facteurs communs, chacun avec le plus <strong>petit exposant</strong>.</div>
+            </div>
+        </div>
+
+        <!-- Slide 12 : PGCD exemple (60 ; 126) -->
+        <div class="slide">
+            <h3>Exemple : PGCD(60 ; 126)</h3>
+            <div class="method">
+                <div class="step"><strong>Décomposons 60 et 126 :</strong></div>
+                <div style="text-align:center; margin: 10px 0; display:flex; justify-content:center; gap:60px;">
+                    <div class="decomp-wrap">
+                        <div class="decomp">
+                            <div class="decomp-row step"><span class="decomp-n">60</span><span class="decomp-d">2</span></div>
+                            <div class="decomp-row step"><span class="decomp-n">30</span><span class="decomp-d">2</span></div>
+                            <div class="decomp-row step"><span class="decomp-n">15</span><span class="decomp-d">3</span></div>
+                            <div class="decomp-row step"><span class="decomp-n">5</span><span class="decomp-d">5</span></div>
+                            <div class="decomp-row step"><span class="decomp-n">1</span><span class="decomp-d"></span></div>
+                        </div>
+                    </div>
+                    <div class="decomp-wrap">
+                        <div class="decomp">
+                            <div class="decomp-row step"><span class="decomp-n">126</span><span class="decomp-d">2</span></div>
+                            <div class="decomp-row step"><span class="decomp-n">63</span><span class="decomp-d">3</span></div>
+                            <div class="decomp-row step"><span class="decomp-n">21</span><span class="decomp-d">3</span></div>
+                            <div class="decomp-row step"><span class="decomp-n">7</span><span class="decomp-d">7</span></div>
+                            <div class="decomp-row step"><span class="decomp-n">1</span><span class="decomp-d"></span></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="step">60 = <span class="fc1">2</span> × 2 × <span class="fc2">3</span> × 5 &nbsp;&nbsp; et &nbsp;&nbsp; 126 = <span class="fc1">2</span> × <span class="fc2">3</span> × 3 × 7</div>
+                <div class="step">Facteurs communs : <span class="fc1">2</span> (exposant min = 1) et <span class="fc2">3</span> (exposant min = 1).</div>
+                <div class="step" style="text-align:center; font-size:1.1em;"><strong>PGCD(60 ; 126) = 2 × 3 = 6</strong></div>
+            </div>
+        </div>
+
+        <!-- Slide 13 : PGCD application partage équitable -->
+        <div class="slide">
+            <h3>Application — Partage équitable</h3>
+            <div class="example">
+                <div class="step">Une association dispose de <strong>96 carnets</strong> et <strong>60 stylos</strong> à distribuer. Elle veut constituer des lots <em>tous identiques</em>, en utilisant <strong>tous</strong> les carnets et tous les stylos. Quel est le nombre maximal de lots ?</div>
+                <div class="step"><strong>Décomposons 96 et 60 :</strong></div>
+                <div style="text-align:center; margin: 10px 0; display:flex; justify-content:center; gap:60px;">
+                    <div class="decomp-wrap">
+                        <div class="decomp">
+                            <div class="decomp-row step"><span class="decomp-n">96</span><span class="decomp-d">2</span></div>
+                            <div class="decomp-row step"><span class="decomp-n">48</span><span class="decomp-d">2</span></div>
+                            <div class="decomp-row step"><span class="decomp-n">24</span><span class="decomp-d">2</span></div>
+                            <div class="decomp-row step"><span class="decomp-n">12</span><span class="decomp-d">2</span></div>
+                            <div class="decomp-row step"><span class="decomp-n">6</span><span class="decomp-d">2</span></div>
+                            <div class="decomp-row step"><span class="decomp-n">3</span><span class="decomp-d">3</span></div>
+                            <div class="decomp-row step"><span class="decomp-n">1</span><span class="decomp-d"></span></div>
+                        </div>
+                    </div>
+                    <div class="decomp-wrap">
+                        <div class="decomp">
+                            <div class="decomp-row step"><span class="decomp-n">60</span><span class="decomp-d">2</span></div>
+                            <div class="decomp-row step"><span class="decomp-n">30</span><span class="decomp-d">2</span></div>
+                            <div class="decomp-row step"><span class="decomp-n">15</span><span class="decomp-d">3</span></div>
+                            <div class="decomp-row step"><span class="decomp-n">5</span><span class="decomp-d">5</span></div>
+                            <div class="decomp-row step"><span class="decomp-n">1</span><span class="decomp-d"></span></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="step">96 = <span class="fc1">2</span> × <span class="fc1">2</span> × 2 × 2 × 2 × <span class="fc2">3</span> &nbsp;&nbsp; et &nbsp;&nbsp; 60 = <span class="fc1">2</span> × <span class="fc1">2</span> × <span class="fc2">3</span> × 5</div>
+                <div class="step">Facteurs communs : 2² et 3 → <strong>PGCD(96 ; 60) = 4 × 3 = 12</strong></div>
+                <div class="step">L'association peut former <strong>12 lots</strong>, chacun contenant 96 ÷ 12 = <strong>8 carnets</strong> et 60 ÷ 12 = <strong>5 stylos</strong>.</div>
+            </div>
+        </div>
+
+        <!-- Slide 14 : PPCM définition et méthode -->
+        <div class="slide">
+            <h2>V. Plus Petit Commun Multiple (PPCM)</h2>
+            <div class="definition">
+                <div class="step"><span style="color:red;">Définition :</span> Le <strong>Plus Petit Commun Multiple</strong> de deux entiers <em>a</em> et <em>b</em> est le plus petit entier strictement positif multiple à la fois de <em>a</em> et de <em>b</em>. On le note <strong>PPCM(<em>a</em> ; <em>b</em>)</strong>.</div>
+            </div>
+            <div class="method">
+                <div class="step"><strong>Méthode :</strong> Calcul du PPCM par décomposition en facteurs premiers.</div>
+                <div class="step">① Décomposer chaque nombre en produit de facteurs premiers.</div>
+                <div class="step">② Relever <strong>tous</strong> les facteurs premiers qui apparaissent dans l'une ou l'autre décomposition.</div>
+                <div class="step">③ Le PPCM est le produit de tous ces facteurs, chacun avec le plus <strong>grand exposant</strong>.</div>
+                <div class="step"><strong>Exemple : PPCM(60 ; 126).</strong></div>
+                <div class="step">60 = <span class="fc1">2²</span> × <span class="fc2">3</span> × <span class="fc3">5</span> &nbsp;&nbsp; et &nbsp;&nbsp; 126 = <span class="fc1">2</span> × <span class="fc2">3²</span> × <strong>7</strong></div>
+                <div class="step">Facteurs : 2 (exp. max = 2), 3 (exp. max = 2), 5 (exp. 1), 7 (exp. 1).</div>
+                <div class="step" style="text-align:center;"><strong>PPCM(60 ; 126) = 2² × 3² × 5 × 7 = 4 × 9 × 5 × 7 = 1 260</strong></div>
+            </div>
+        </div>
+
+        <!-- Slide 15 : PPCM application clignotants -->
+        <div class="slide">
+            <h3>Application — Problème de clignotants</h3>
+            <div class="example">
+                <div class="step">Deux guirlandes lumineuses s'allument simultanément à minuit. La première s'allume toutes les <strong>84 secondes</strong>, la seconde toutes les <strong>90 secondes</strong>. Au bout de combien de secondes s'allumeront-elles à nouveau <strong>en même temps</strong> ?</div>
+                <div class="step">On cherche le plus petit multiple commun → <strong>PPCM(84 ; 90)</strong>.</div>
+                <div style="text-align:center; margin: 10px 0; display:flex; justify-content:center; gap:60px;">
+                    <div class="decomp-wrap">
+                        <div class="decomp">
+                            <div class="decomp-row step"><span class="decomp-n">84</span><span class="decomp-d">2</span></div>
+                            <div class="decomp-row step"><span class="decomp-n">42</span><span class="decomp-d">2</span></div>
+                            <div class="decomp-row step"><span class="decomp-n">21</span><span class="decomp-d">3</span></div>
+                            <div class="decomp-row step"><span class="decomp-n">7</span><span class="decomp-d">7</span></div>
+                            <div class="decomp-row step"><span class="decomp-n">1</span><span class="decomp-d"></span></div>
+                        </div>
+                    </div>
+                    <div class="decomp-wrap">
+                        <div class="decomp">
+                            <div class="decomp-row step"><span class="decomp-n">90</span><span class="decomp-d">2</span></div>
+                            <div class="decomp-row step"><span class="decomp-n">45</span><span class="decomp-d">3</span></div>
+                            <div class="decomp-row step"><span class="decomp-n">15</span><span class="decomp-d">3</span></div>
+                            <div class="decomp-row step"><span class="decomp-n">5</span><span class="decomp-d">5</span></div>
+                            <div class="decomp-row step"><span class="decomp-n">1</span><span class="decomp-d"></span></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="step">84 = 2² × 3 × 7 &nbsp;&nbsp; et &nbsp;&nbsp; 90 = 2 × 3² × 5</div>
+                <div class="step">Facteurs : 2 (exp. max = 2), 3 (exp. max = 2), 5 (exp. 1), 7 (exp. 1).</div>
+                <div class="step">PPCM(84 ; 90) = 2² × 3² × 5 × 7 = 4 × 9 × 5 × 7 = <strong>1 260</strong></div>
+                <div class="step">Les deux guirlandes s'allumeront à nouveau ensemble après <strong>1 260 secondes, soit 21 minutes</strong>.</div>
+            </div>
+        </div>
+
+        <!-- Slide 16 : Fractions irréductibles -->
+        <div class="slide">
+            <h2>VI. Application aux fractions</h2>
+            <h3>Fraction irréductible</h3>
+            <div class="definition">
+                <div class="step"><span style="color:red;">Définition :</span> Une fraction est <strong>irréductible</strong> lorsque son numérateur et son dénominateur sont <strong>premiers entre eux</strong>, c'est-à-dire que leur PGCD est égal à 1.</div>
+            </div>
+            <div class="method">
+                <div class="step"><strong>Méthode :</strong> ① Calculer le PGCD du numérateur et du dénominateur. &nbsp; ② Diviser les deux par ce PGCD.</div>
+                <div class="step"><strong>Exemple : rendre irréductible
+                    <span class="frac"><span class="num">56</span><span class="den">42</span></span>.
+                </strong></div>
+                <div style="text-align:center; margin: 10px 0; display:flex; justify-content:center; gap:60px;">
+                    <div class="decomp-wrap">
+                        <div class="decomp">
+                            <div class="decomp-row step"><span class="decomp-n">56</span><span class="decomp-d">2</span></div>
+                            <div class="decomp-row step"><span class="decomp-n">28</span><span class="decomp-d">2</span></div>
+                            <div class="decomp-row step"><span class="decomp-n">14</span><span class="decomp-d">2</span></div>
+                            <div class="decomp-row step"><span class="decomp-n">7</span><span class="decomp-d">7</span></div>
+                            <div class="decomp-row step"><span class="decomp-n">1</span><span class="decomp-d"></span></div>
+                        </div>
+                    </div>
+                    <div class="decomp-wrap">
+                        <div class="decomp">
+                            <div class="decomp-row step"><span class="decomp-n">42</span><span class="decomp-d">2</span></div>
+                            <div class="decomp-row step"><span class="decomp-n">21</span><span class="decomp-d">3</span></div>
+                            <div class="decomp-row step"><span class="decomp-n">7</span><span class="decomp-d">7</span></div>
+                            <div class="decomp-row step"><span class="decomp-n">1</span><span class="decomp-d"></span></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="step">56 = <span class="fc1">2</span> × 2 × 2 × <span class="fc2">7</span> &nbsp;&nbsp; et &nbsp;&nbsp; 42 = <span class="fc1">2</span> × 3 × <span class="fc2">7</span></div>
+                <div class="step">PGCD(56 ; 42) = 2 × 7 = <strong>14</strong></div>
+                <div class="step" style="text-align:center;">
+                    <span class="frac"><span class="num">56</span><span class="den">42</span></span>
+                    &nbsp;=&nbsp;
+                    <span class="frac">
+                        <span class="num"><span class="strikethrough-red">2</span> × 2 × 2 × <span class="strikethrough-blue">7</span></span>
+                        <span class="den"><span class="strikethrough-red">2</span> × 3 × <span class="strikethrough-blue">7</span></span>
+                    </span>
+                    &nbsp;=&nbsp;
+                    <span class="frac"><span class="num">4</span><span class="den">3</span></span>
+                    &nbsp;&nbsp; (irréductible car PGCD(4 ; 3) = 1)
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 17 : Application - le chocolatier -->
+        <div class="slide">
+            <h3>Application — Le chocolatier de la Saint-Valentin</h3>
+            <div class="example">
+                <div class="step">Un chocolatier dispose de <strong>1 155 chocolats cœur</strong> et <strong>255 chocolats Cupidon</strong>. Il veut réaliser des ballotins <em>tous de même composition</em>, en utilisant <strong>tous</strong> ses chocolats.</div>
+                <div class="step"><strong>1)</strong> Peut-il réaliser <strong>15 ballotins</strong> ?</div>
+                <div class="step">1 155 ÷ 15 = 77 &nbsp; et &nbsp; 255 ÷ 15 = 17. Les deux divisions sont exactes → <strong>Oui.</strong></div>
+                <div class="step"><strong>2)</strong> Peut-il réaliser <strong>25 ballotins</strong> ?</div>
+                <div class="step">255 ÷ 25 = 10,2 : ce n'est pas un entier → <strong>Non.</strong></div>
+                <div class="step"><strong>3)</strong> Nombre <strong>maximal</strong> de ballotins = <strong>PGCD(1 155 ; 255)</strong>.</div>
+                <div class="step">1 155 = 3 × 5 × 7 × 11 &nbsp;&nbsp; et &nbsp;&nbsp; 255 = 3 × 5 × 17</div>
+                <div class="step">Facteurs communs : <span class="fc1">3</span> et <span class="fc2">5</span> → <strong>PGCD = 3 × 5 = 15</strong></div>
+                <div class="step">Maximum <strong>15 ballotins</strong>, contenant chacun <strong>77 chocolats cœur</strong> et <strong>17 chocolats Cupidon</strong>.</div>
+            </div>
+        </div>
+
+    </div><!-- fin .content -->
+
+    <div class="controls">
+        <div class="controls-left">
+            <button id="prevBtn" onclick="changeSlide(-1)">← Précédent</button>
+            <button class="btn-reset" onclick="resetSlide()">⟲</button>
+        </div>
+        <div class="progress">
+            <span><span id="currentSlide">1</span> / <span id="totalSlides">17</span></span>
+            <span class="step-indicator" id="stepIndicator"></span>
+        </div>
+        <div class="controls-right">
+            <button class="btn-menu" onclick="openMenu()">📋 Menu</button>
+            <button class="btn-menu" onclick="openHelp()">❓ Aide</button>
+            <button id="nextBtn" onclick="changeSlide(1)">Suivant →</button>
+        </div>
+    </div>
+</div>
+
+<div class="slide-menu" id="slideMenu">
+    <div class="menu-content">
+        <h2>Sélectionner une diapositive</h2>
+        <div class="slide-list" id="slideList"></div>
+        <button class="close-menu" onclick="closeMenu()">Fermer</button>
+    </div>
+</div>
+
+<div class="help-overlay" id="helpOverlay">
+    <div class="help-content">
+        <h2>Raccourcis clavier</h2>
+        <ul>
+            <li><kbd>↑</kbd> ou <kbd>Espace</kbd> : Étape/Slide suivante</li>
+            <li><kbd>↓</kbd> : Étape/Slide précédente</li>
+            <li><kbd>M</kbd> : Ouvrir le menu des slides</li>
+            <li><kbd>R</kbd> : Réinitialiser la slide actuelle</li>
+            <li><kbd>H</kbd> ou <kbd>?</kbd> : Afficher cette aide</li>
+            <li><kbd>Échap</kbd> : Fermer les menus</li>
+        </ul>
+        <button class="close-menu" onclick="closeHelp()">Fermer</button>
+    </div>
+</div>
+
+<script>
+let currentSlideIndex = 0;
+let currentStepIndex = 0;
+let slides = null;
+let totalSlides = 0;
+
+const slideTitles = [
+    "Chapitre 9 : Arithmétique",
+    "I. Types de nombres — Entiers naturels et relatifs",
+    "Nombres décimaux",
+    "Nombres rationnels",
+    "Nombres irrationnels",
+    "II. Divisibilité — Définition",
+    "Critères de divisibilité",
+    "Nombres premiers",
+    "III. Décomposition en facteurs premiers",
+    "Autres exemples de décomposition",
+    "IV. PGCD — Définition et méthode",
+    "PGCD(60 ; 126) — Exemple",
+    "PGCD — Application (partage équitable)",
+    "V. PPCM — Définition et méthode",
+    "PPCM — Application (clignotants)",
+    "VI. Fractions irréductibles",
+    "Application — Le chocolatier"
+];
+
+document.addEventListener('DOMContentLoaded', function() {
+    slides = document.querySelectorAll('.slide');
+    totalSlides = slides.length;
+    document.getElementById('totalSlides').textContent = totalSlides;
+    updateSlide();
+});
+
+function initSlideMenu() {
+    const slideList = document.getElementById('slideList');
+    if (!slideList) return;
+    slideList.innerHTML = '';
+    slideTitles.forEach((title, index) => {
+        const slideItem = document.createElement('div');
+        slideItem.className = 'slide-item' + (index === currentSlideIndex ? ' current' : '');
+        slideItem.innerHTML = '<div style="font-size:0.85em;color:#999;">Slide ' + (index+1) + '</div><div style="font-weight:bold;">' + title + '</div>';
+        slideItem.onclick = () => goToSlide(index);
+        slideList.appendChild(slideItem);
+    });
+}
+
+function openMenu() { initSlideMenu(); document.getElementById('slideMenu').classList.add('active'); }
+function closeMenu() { document.getElementById('slideMenu').classList.remove('active'); }
+function openHelp() { document.getElementById('helpOverlay').classList.add('active'); }
+function closeHelp() { document.getElementById('helpOverlay').classList.remove('active'); }
+function goToSlide(index) { currentSlideIndex = index; currentStepIndex = 0; updateSlide(); closeMenu(); }
+function resetSlide() { currentStepIndex = 0; updateSlide(); }
+
+function updateSlide() {
+    if (!slides || slides.length === 0) return;
+    const contentDiv = document.querySelector('.content');
+    slides.forEach((slide, index) => {
+        slide.classList.remove('active');
+        if (index === currentSlideIndex) slide.classList.add('active');
+    });
+    const currentSlide = slides[currentSlideIndex];
+    const steps = currentSlide.querySelectorAll('.step');
+    const totalSteps = steps.length;
+    steps.forEach((step, index) => {
+        if (index < currentStepIndex) step.classList.add('visible');
+        else step.classList.remove('visible');
+    });
+    document.getElementById('currentSlide').textContent = currentSlideIndex + 1;
+    const prevBtn = document.getElementById('prevBtn');
+    if (prevBtn) prevBtn.disabled = currentSlideIndex === 0 && currentStepIndex === 0;
+    const stepIndicator = document.getElementById('stepIndicator');
+    if (stepIndicator) {
+        if (totalSteps > 0 && currentStepIndex < totalSteps) {
+            stepIndicator.textContent = 'Étape ' + currentStepIndex + '/' + totalSteps;
+            stepIndicator.classList.remove('hidden');
+        } else { stepIndicator.classList.add('hidden'); }
+    }
+    if (currentStepIndex === 0 && contentDiv) {
+        setTimeout(() => contentDiv.scrollTo({ top: 0, behavior: 'smooth' }), 50);
+    } else if (currentStepIndex > 0) {
+        setTimeout(() => {
+            const visibleSteps = currentSlide.querySelectorAll('.step.visible');
+            if (visibleSteps.length > 0) visibleSteps[visibleSteps.length - 1].scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }, 650);
+    }
+}
+
+function changeSlide(direction) {
+    if (!slides || slides.length === 0) return;
+    const currentSlide = slides[currentSlideIndex];
+    const steps = currentSlide.querySelectorAll('.step');
+    const totalSteps = steps.length;
+    if (direction === 1) {
+        if (currentStepIndex < totalSteps) { currentStepIndex++; updateSlide(); }
+        else if (currentSlideIndex < totalSlides - 1) { currentSlideIndex++; currentStepIndex = 0; updateSlide(); }
+    } else {
+        if (currentStepIndex > 0) { currentStepIndex--; updateSlide(); }
+        else if (currentSlideIndex > 0) {
+            currentSlideIndex--;
+            const prevSteps = slides[currentSlideIndex].querySelectorAll('.step');
+            currentStepIndex = prevSteps.length;
+            updateSlide();
+        }
+    }
+}
+
+document.addEventListener('keydown', (e) => {
+    const slideMenu = document.getElementById('slideMenu');
+    const helpOverlay = document.getElementById('helpOverlay');
+    if (slideMenu && slideMenu.classList.contains('active')) { if (e.key === 'Escape') closeMenu(); return; }
+    if (helpOverlay && helpOverlay.classList.contains('active')) { if (e.key === 'Escape' || e.key === 'h' || e.key === 'H' || e.key === '?') closeHelp(); return; }
+    if (e.key === 'ArrowUp' || e.key === ' ') { e.preventDefault(); changeSlide(1); }
+    else if (e.key === 'ArrowDown') { e.preventDefault(); changeSlide(-1); }
+    else if (e.key === 'm' || e.key === 'M') openMenu();
+    else if (e.key === 'r' || e.key === 'R') resetSlide();
+    else if (e.key === 'h' || e.key === 'H' || e.key === '?') openHelp();
+});
+
+document.addEventListener('click', (e) => {
+    if (e.target.id === 'slideMenu') closeMenu();
+    if (e.target.id === 'helpOverlay') closeHelp();
+});
+</script>
+</body>
+</html>
