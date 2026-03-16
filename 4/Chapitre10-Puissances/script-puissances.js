@@ -15,7 +15,8 @@ const slideTitles = [
     "II. Puissances de 10 — Rappels",                       // Slide 7
     "II. 2) Puissance de 10 — Propriété",                   // Slide 8
     "II. 3) La notation scientifique",                      // Slide 9
-    "II. Exemple de calcul"                                 // Slide 10
+    "II. Exemple de calcul",                                // Slide 10
+    "Préfixes des unités de mesure"                         // Slide 11  2190 AJOUTÉ
 ];
 
 // Construit la liste à plat des étapes : chaque .step suivi de ses .step-inline enfants
