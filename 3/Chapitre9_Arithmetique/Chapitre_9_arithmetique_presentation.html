@@ -66,13 +66,14 @@ h3.step { font-size: 4em !important; }
 }
 /* ── Tableaux de décomposition animés en diagonale ── */
 .decomp-side { display: flex; justify-content: center; gap: 60px; margin: 12px 0; }
-.decomp-anim { font-family: 'Courier New', monospace; font-size: 0.85em; display: inline-block; }
+.decomp-anim { font-family: 'Courier New', monospace; font-size: 0.85em; display: inline-block; position: relative; }
+.decomp-anim::before { content: ''; position: absolute; top: 0; bottom: 0; left: 92px; width: 2px; background: #333; }
 .decomp-anim .decomp-row { display: flex; align-items: center; height: 1.65em;
     opacity: 0; transition: opacity 0.25s ease; }
-.decomp-anim .decomp-n { min-width: 52px; text-align: right; padding-right: 6px;
-    color: blue; font-weight: bold; border-right: 2px solid #333; }
+.decomp-anim .decomp-n { min-width: 80px; text-align: right; padding-right: 12px;
+    color: blue; font-weight: bold; }
 /* Le diviseur part invisible — JS le révèle au MÊME moment que le nombre suivant */
-.decomp-anim .decomp-d { padding-left: 8px; min-width: 25px; color: red; font-weight: bold;
+.decomp-anim .decomp-d { padding-left: 14px; min-width: 25px; color: red; font-weight: bold;
     opacity: 0; transition: opacity 0.25s ease; }
 
 .controls { background: #2c3e50; padding: 12px; display: flex; justify-content: space-between; align-items: center; gap: 20px; }
@@ -356,11 +357,16 @@ button:hover { transform: translateY(-2px); box-shadow: 0 4px 8px rgba(0,0,0,0.2
             <h3>Exemple : PGCD(60 ; 126)</h3>
             <div class="method">
                 <div class="step"><strong>Décomposons 60 et 126 :</strong></div>
-                <span class="step decomp-ghost" data-decomp="dc60a dc126a"></span>
-                <span class="step decomp-ghost" data-decomp="dc60a dc126a"></span>
-                <span class="step decomp-ghost" data-decomp="dc60a dc126a"></span>
-                <span class="step decomp-ghost" data-decomp="dc60a dc126a"></span>
-                <span class="step decomp-ghost" data-decomp="dc60a dc126a"></span>
+                <span class="step decomp-ghost" data-decomp="dc60a"></span>
+                <span class="step decomp-ghost" data-decomp="dc60a"></span>
+                <span class="step decomp-ghost" data-decomp="dc60a"></span>
+                <span class="step decomp-ghost" data-decomp="dc60a"></span>
+                <span class="step decomp-ghost" data-decomp="dc60a"></span>
+                <span class="step decomp-ghost" data-decomp="dc126a"></span>
+                <span class="step decomp-ghost" data-decomp="dc126a"></span>
+                <span class="step decomp-ghost" data-decomp="dc126a"></span>
+                <span class="step decomp-ghost" data-decomp="dc126a"></span>
+                <span class="step decomp-ghost" data-decomp="dc126a"></span>
                 <div class="decomp-side">
                     <div class="decomp-anim" id="dc60a">
                         <div class="decomp-row"><span class="decomp-n">60</span><span class="decomp-d">2</span></div>
@@ -392,13 +398,18 @@ button:hover { transform: translateY(-2px); box-shadow: 0 4px 8px rgba(0,0,0,0.2
             <div class="example">
                 <div class="step">Une association dispose de <strong>96 carnets</strong> et <strong>60 stylos</strong> à distribuer. Elle veut constituer des lots <em>tous identiques</em>, en utilisant <strong>tous</strong> les carnets et tous les stylos. Quel est le nombre maximal de lots ?</div>
                 <div class="step"><strong>Décomposons 96 et 60 :</strong></div>
-                <span class="step decomp-ghost" data-decomp="dc96 dc60b"></span>
-                <span class="step decomp-ghost" data-decomp="dc96 dc60b"></span>
-                <span class="step decomp-ghost" data-decomp="dc96 dc60b"></span>
-                <span class="step decomp-ghost" data-decomp="dc96 dc60b"></span>
-                <span class="step decomp-ghost" data-decomp="dc96 dc60b"></span>
-                <span class="step decomp-ghost" data-decomp="dc96 dc60b"></span>
-                <span class="step decomp-ghost" data-decomp="dc96 dc60b"></span>
+                <span class="step decomp-ghost" data-decomp="dc96"></span>
+                <span class="step decomp-ghost" data-decomp="dc96"></span>
+                <span class="step decomp-ghost" data-decomp="dc96"></span>
+                <span class="step decomp-ghost" data-decomp="dc96"></span>
+                <span class="step decomp-ghost" data-decomp="dc96"></span>
+                <span class="step decomp-ghost" data-decomp="dc96"></span>
+                <span class="step decomp-ghost" data-decomp="dc96"></span>
+                <span class="step decomp-ghost" data-decomp="dc60b"></span>
+                <span class="step decomp-ghost" data-decomp="dc60b"></span>
+                <span class="step decomp-ghost" data-decomp="dc60b"></span>
+                <span class="step decomp-ghost" data-decomp="dc60b"></span>
+                <span class="step decomp-ghost" data-decomp="dc60b"></span>
                 <div class="decomp-side">
                     <div class="decomp-anim" id="dc96">
                         <div class="decomp-row"><span class="decomp-n">96</span><span class="decomp-d">2</span></div>
@@ -450,11 +461,16 @@ button:hover { transform: translateY(-2px); box-shadow: 0 4px 8px rgba(0,0,0,0.2
             <div class="example">
                 <div class="step">Deux guirlandes lumineuses s'allument simultanément à minuit. La première s'allume toutes les <strong>84 secondes</strong>, la seconde toutes les <strong>90 secondes</strong>. Au bout de combien de secondes s'allumeront-elles à nouveau <strong>en même temps</strong> ?</div>
                 <div class="step">On cherche le plus petit multiple commun → <strong>PPCM(84 ; 90)</strong>.</div>
-                <span class="step decomp-ghost" data-decomp="dc84 dc90"></span>
-                <span class="step decomp-ghost" data-decomp="dc84 dc90"></span>
-                <span class="step decomp-ghost" data-decomp="dc84 dc90"></span>
-                <span class="step decomp-ghost" data-decomp="dc84 dc90"></span>
-                <span class="step decomp-ghost" data-decomp="dc84 dc90"></span>
+                <span class="step decomp-ghost" data-decomp="dc84"></span>
+                <span class="step decomp-ghost" data-decomp="dc84"></span>
+                <span class="step decomp-ghost" data-decomp="dc84"></span>
+                <span class="step decomp-ghost" data-decomp="dc84"></span>
+                <span class="step decomp-ghost" data-decomp="dc84"></span>
+                <span class="step decomp-ghost" data-decomp="dc90"></span>
+                <span class="step decomp-ghost" data-decomp="dc90"></span>
+                <span class="step decomp-ghost" data-decomp="dc90"></span>
+                <span class="step decomp-ghost" data-decomp="dc90"></span>
+                <span class="step decomp-ghost" data-decomp="dc90"></span>
                 <div class="decomp-side">
                     <div class="decomp-anim" id="dc84">
                         <div class="decomp-row"><span class="decomp-n">84</span><span class="decomp-d">2</span></div>
@@ -493,11 +509,15 @@ button:hover { transform: translateY(-2px); box-shadow: 0 4px 8px rgba(0,0,0,0.2
                 <div class="step"><strong>Exemple : rendre irréductible
                     <span class="frac"><span class="num">56</span><span class="den">42</span></span>.
                 </strong></div>
-                <span class="step decomp-ghost" data-decomp="dc56 dc42"></span>
-                <span class="step decomp-ghost" data-decomp="dc56 dc42"></span>
-                <span class="step decomp-ghost" data-decomp="dc56 dc42"></span>
-                <span class="step decomp-ghost" data-decomp="dc56 dc42"></span>
-                <span class="step decomp-ghost" data-decomp="dc56 dc42"></span>
+                <span class="step decomp-ghost" data-decomp="dc56"></span>
+                <span class="step decomp-ghost" data-decomp="dc56"></span>
+                <span class="step decomp-ghost" data-decomp="dc56"></span>
+                <span class="step decomp-ghost" data-decomp="dc56"></span>
+                <span class="step decomp-ghost" data-decomp="dc56"></span>
+                <span class="step decomp-ghost" data-decomp="dc42"></span>
+                <span class="step decomp-ghost" data-decomp="dc42"></span>
+                <span class="step decomp-ghost" data-decomp="dc42"></span>
+                <span class="step decomp-ghost" data-decomp="dc42"></span>
                 <div class="decomp-side">
                     <div class="decomp-anim" id="dc56">
                         <div class="decomp-row"><span class="decomp-n">56</span><span class="decomp-d">2</span></div>

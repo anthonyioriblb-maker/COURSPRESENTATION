@@ -10,6 +10,12 @@
         .step-inline.visible { opacity: 1; }
         tr.step { display: table-row !important; opacity: 0; transition: opacity 0.5s; }
         tr.step.visible { opacity: 1; }
+
+        /* Animations pleine largeur */
+        .anim-fullbleed {
+            display: block;
+            width: 100%;
+        }
     </style>
 </head>
 <body>
@@ -91,8 +97,8 @@
                                 ↻ Réinitialiser
                             </button>
                         </div>
-                        <svg width="600" height="460" viewBox="0 0 600 460"
-                             style="display:block;margin:10px auto;border:1px solid #ddd;">
+                        <svg class="anim-fullbleed" viewBox="0 0 600 460"
+                             style="border:1px solid #ddd;max-height:70vh;">
                             <defs>
                                 <pattern id="grid" width="80" height="24" patternUnits="userSpaceOnUse" x="70" y="20">
                                     <path d="M 80 0 L 0 0 0 24" fill="none" stroke="#d5d5d5" stroke-width="0.7"/>
@@ -139,11 +145,7 @@
                             <text id="graph-eq-lbl" x="475" y="76" font-size="13" fill="#2980b9" font-weight="bold">y = 2,5x</text>
                             <text id="lbl-origine" x="78" y="372" font-size="12" fill="#27ae60" font-weight="bold">Origine (0;0)</text>
                         </svg>
-                        <div style="text-align:center;margin-top:6px;font-size:0.95em;">
-                            <span style="color:#e74c3c;font-weight:bold;">✕ points du tableau</span>
-                            &nbsp;&nbsp;
-                            <span style="color:#2980b9;font-weight:bold;">— droite passant par l'origine</span>
-                        </div>
+
                     </div>
                 </div>
             </div>
@@ -162,7 +164,7 @@
                 </div>
             </div>
 
-            <!-- ═══ Slide 5 : II. Remplir — présentation du problème + méthode 1 ═══ -->
+            <!-- ═══ Slide 5 : II. Remplir — présentation du problème ═══ -->
             <div class="slide">
                 <h2>II. Remplir un tableau de proportionnalité</h2>
                 <div class="example">
@@ -183,6 +185,10 @@
                     </div>
                     <div class="step">Il faut trouver la valeur de <span class="math">a</span> et de <span class="math">b</span>.</div>
                 </div>
+            </div>
+
+            <!-- ═══ Slide 6 : Méthode 1 — coefficient (pilules) ═══ -->
+            <div class="slide">
                 <h3>1) Première méthode : le coefficient de proportionnalité</h3>
                 <div class="method">
                     <div class="step">Le coefficient de proportionnalité peut être calculé à partir de la première colonne :</div>
@@ -193,27 +199,13 @@
                     </div>
                     <div class="step">Ce qui donne :</div>
                 </div>
-            </div>
-
-            <!-- ═══ Slide 6 : Diagramme coefficient (pilules) ═══ -->
-            <div class="slide">
                 <div class="example">
                     <div class="step">
-                        <div style="margin-bottom:12px;text-align:center;">
-                            <button id="btnPilules" onclick="showPilules()"
-                                style="padding:9px 18px;font-size:14px;background:#e67e22;color:white;border:none;border-radius:5px;cursor:pointer;font-weight:bold;">
-                                Afficher le schéma
-                            </button>
-                            <button onclick="resetPilules()"
-                                style="padding:9px 18px;font-size:14px;background:#95a5a6;color:white;border:none;border-radius:5px;cursor:pointer;font-weight:bold;margin-left:8px;">
-                                ↻ Réinitialiser
-                            </button>
-                        </div>
-                        <div style="display:flex;gap:40px;justify-content:center;flex-wrap:wrap;margin:10px 0;align-items:flex-start;">
+                        <div style="display:flex;gap:20px;justify-content:center;margin:10px 0;align-items:flex-start;">
 
                             <!-- Tableau 1 : coefficient 3/7 -->
-                            <div style="text-align:center;">
-                                <svg id="svgCoeff1" width="340" height="155" viewBox="0 0 340 155" style="display:block;overflow:visible;">
+                            <div style="text-align:center;flex:1;">
+                                <svg id="svgCoeff1" viewBox="0 0 340 155" style="display:block;overflow:visible;width:100%;">
                                     <rect x="70"  y="25" width="180" height="50" fill="#dbeafe" opacity="0.5"/>
                                     <rect x="70"  y="75" width="180" height="50" fill="#fef9c3" opacity="0.5"/>
                                     <rect x="70"  y="25" width="180" height="100" fill="none" stroke="#2c3e50" stroke-width="2"/>
@@ -226,9 +218,9 @@
                                     <text x="100" y="107" font-size="18" text-anchor="middle" font-weight="bold" fill="#854d0e">3</text>
                                     <text x="160" y="107" font-size="18" text-anchor="middle" font-weight="bold" fill="#854d0e">11</text>
                                     <text x="220" y="107" font-size="18" text-anchor="middle" font-weight="bold" fill="#c0392b">b</text>
-                                    <path id="arcD1" d="M 68 40 C 25 40 25 110 68 110" fill="none" stroke="#e67e22" stroke-width="2.8"/>
+                                    <path id="arcD1" d="M 68 40 C 25 40 25 110 60 110" fill="none" stroke="#e67e22" stroke-width="2.8"/>
                                     <polygon id="ptrD1" points="58,106 58,114 68,110" fill="#e67e22" opacity="0"/>
-                                    <path id="arcU1" d="M 252 110 C 295 110 295 40 252 40" fill="none" stroke="#27ae60" stroke-width="2.8"/>
+                                    <path id="arcU1" d="M 252 110 C 295 110 295 40 260 40" fill="none" stroke="#27ae60" stroke-width="2.8"/>
                                     <polygon id="ptrU1" points="262,36 262,44 252,40" fill="#27ae60" opacity="0"/>
                                     <g id="lblD1" opacity="0">
                                         <text x="15" y="64" font-size="14" text-anchor="middle" fill="#e67e22" font-weight="bold">× 3</text>
@@ -257,8 +249,8 @@
                             </div>
 
                             <!-- Tableau 2 : coefficient 7/3 -->
-                            <div style="text-align:center;">
-                                <svg id="svgCoeff2" width="340" height="155" viewBox="0 0 340 155" style="display:block;overflow:visible;">
+                            <div style="text-align:center;flex:1;">
+                                <svg id="svgCoeff2" viewBox="0 0 340 155" style="display:block;overflow:visible;width:100%;">
                                     <rect x="70"  y="25" width="180" height="50" fill="#dbeafe" opacity="0.5"/>
                                     <rect x="70"  y="75" width="180" height="50" fill="#fef9c3" opacity="0.5"/>
                                     <rect x="70"  y="25" width="180" height="100" fill="none" stroke="#2c3e50" stroke-width="2"/>
@@ -271,9 +263,9 @@
                                     <text x="100" y="107" font-size="18" text-anchor="middle" font-weight="bold" fill="#854d0e">3</text>
                                     <text x="160" y="107" font-size="18" text-anchor="middle" font-weight="bold" fill="#854d0e">11</text>
                                     <text x="220" y="107" font-size="18" text-anchor="middle" font-weight="bold" fill="#c0392b">b</text>
-                                    <path id="arcD2" d="M 68 40 C 25 40 25 110 68 110" fill="none" stroke="#e67e22" stroke-width="2.8"/>
+                                    <path id="arcD2" d="M 68 40 C 25 40 25 110 60 110" fill="none" stroke="#e67e22" stroke-width="2.8"/>
                                     <polygon id="ptrD2" points="58,106 58,114 68,110" fill="#e67e22" opacity="0"/>
-                                    <path id="arcU2" d="M 252 110 C 295 110 295 40 252 40" fill="none" stroke="#27ae60" stroke-width="2.8"/>
+                                    <path id="arcU2" d="M 252 110 C 295 110 295 40 260 40" fill="none" stroke="#27ae60" stroke-width="2.8"/>
                                     <polygon id="ptrU2" points="262,36 262,44 252,40" fill="#27ae60" opacity="0"/>
                                     <g id="lblD2" opacity="0">
                                         <text x="15" y="64" font-size="14" text-anchor="middle" fill="#e67e22" font-weight="bold">÷ 7</text>
@@ -302,10 +294,13 @@
                             </div>
                         </div>
                     </div>
+                    <!-- Steps déclencheurs d'animation (invisibles) -->
+                    <div class="step pilule-trigger" data-pid="1" style="height:0;overflow:hidden;margin:0;padding:0;"></div>
+                    <div class="step pilule-trigger" data-pid="2" style="height:0;overflow:hidden;margin:0;padding:0;"></div>
+                    <div class="step pilule-trigger" data-pid="3" style="height:0;overflow:hidden;margin:0;padding:0;"></div>
+                    <div class="step pilule-trigger" data-pid="4" style="height:0;overflow:hidden;margin:0;padding:0;"></div>
                 </div>
             </div>
-
-            <!-- ═══ Slide 7 : Deuxième méthode — Produit en croix ═══ -->
             <div class="slide">
                 <h3>2) Deuxième méthode : le produit en croix</h3>
                 <div class="example">
@@ -320,7 +315,7 @@
                                 ↻ Réinitialiser
                             </button>
                         </div>
-                        <svg width="580" height="200" viewBox="0 0 580 200" style="display:block;margin:0 auto;">
+                        <svg class="anim-fullbleed" viewBox="0 0 580 200">
                             <defs>
                                 <marker id="mCroixV" markerWidth="7" markerHeight="7" refX="6" refY="3" orient="auto">
                                     <path d="M0,0 L0,6 L6,3 z" fill="#9b59b6"/>
@@ -330,6 +325,7 @@
                                 </marker>
                             </defs>
                             <!-- Tableau gauche : pour a -->
+                            <g transform="translate(63,0)">
                             <text x="90" y="18" font-size="13" text-anchor="middle" fill="#555">Pour trouver a :</text>
                             <rect x="20"  y="28" width="70" height="38" fill="#dbeafe" stroke="#2c3e50" stroke-width="1.5"/>
                             <rect x="20"  y="66" width="70" height="38" fill="#fef9c3" stroke="#2c3e50" stroke-width="1.5"/>
@@ -378,6 +374,7 @@
                                 <text x="423" y="143" font-size="14" text-anchor="middle" fill="#c0392b" font-weight="bold">45</text>
                                 <line x1="411" y1="147" x2="435" y2="147" stroke="#c0392b" stroke-width="1.5"/>
                                 <text x="423" y="163" font-size="14" text-anchor="middle" fill="#c0392b" font-weight="bold">7</text>
+                            </g>
                             </g>
                         </svg>
                     </div>

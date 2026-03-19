@@ -10,8 +10,8 @@ const slideTitles = [
     "I. Reconnaître — Dans un tableau",                           // Slide 2
     "I. Sur un graphique",                                        // Slide 3
     "I. Dans une formule",                                        // Slide 4
-    "II. Remplir — Première méthode : coefficient",               // Slide 5
-    "II. Diagramme coefficient (schéma interactif)",              // Slide 6
+    "II. Remplir un tableau de proportionnalité",                  // Slide 5
+    "II. 1) Première méthode : coefficient de proportionnalité",  // Slide 6
     "II. Deuxième méthode : produit en croix",                    // Slide 7
     "III. Applications — Appliquer un taux de pourcentage",       // Slide 8
     "III. Calculer un pourcentage",                               // Slide 9
@@ -166,6 +166,13 @@ function updateSlide() {
             }
         }, 650);
     }
+
+    // Sync animation pilules si on est sur la slide 6 (index 5)
+    const triggers = currentSlide.querySelectorAll('.pilule-trigger');
+    if (triggers.length > 0) {
+        const n = [...triggers].filter(el => el.classList.contains('visible')).length;
+        syncPiluleAnim(n);
+    }
 }
 
 function changeSlide(direction) {
@@ -313,72 +320,86 @@ function resetGraph() {
 }
 
 // ====================================================
-// ANIMATION 2 : Coefficient de proportionnalité (Slide 5)
+// ANIMATION 2 : Coefficient de proportionnalité (Slide 6)
 // ====================================================
 function initPilules() {
-    ['arcD1','arcU1','arcD2','arcU2'].forEach(id => {
+    const arcIds = ['arcD1','arcU1','arcD2','arcU2'];
+    arcIds.forEach(id => {
         const el = document.getElementById(id);
         if (!el) return;
         const len = Math.round(el.getTotalLength()) + 5;
+        el.style.transition = 'none';
         el.style.strokeDasharray  = len;
         el.style.strokeDashoffset = len;
     });
     ['lblD1','lblU1','lblD2','lblU2','ptrD1','ptrU1','ptrD2','ptrU2','calculs1','calculs2'].forEach(id => {
         const el = document.getElementById(id);
-        if (el) el.style.opacity = '0';
+        if (el) { el.style.transition = 'none'; el.style.opacity = '0'; }
     });
 }
 
-function showPilules() {
-    const btn = document.getElementById('btnPilules');
-    if (btn) btn.disabled = true;
-
-    const seq = [
-        { arc:'arcD1', ptr:'ptrD1', lbl:'lblD1' },
-        { arc:'arcU1', ptr:'ptrU1', lbl:'lblU1' },
-        { arc:'arcD2', ptr:'ptrD2', lbl:'lblD2' },
-        { arc:'arcU2', ptr:'ptrU2', lbl:'lblU2' }
+function syncPiluleAnim(n) {
+    const stepElems = [
+        [],
+        ['arcD1', 'ptrD1', 'lblD1'],
+        ['arcU1', 'ptrU1', 'lblU1', 'calculs1'],
+        ['arcD2', 'ptrD2', 'lblD2'],
+        ['arcU2', 'ptrU2', 'lblU2', 'calculs2'],
     ];
-    seq.forEach(({ arc, ptr, lbl }, i) => {
-        const t = 50 + i * 1200;
-        setTimeout(() => {
-            const a = document.getElementById(arc);
-            if (a) { a.style.transition = 'stroke-dashoffset 0.8s ease-out'; a.style.strokeDashoffset = '0'; }
-        }, t);
-        setTimeout(() => {
-            const p = document.getElementById(ptr);
-            if (p) { p.style.transition = 'opacity 0.15s'; p.style.opacity = '1'; }
-        }, t + 820);
-        setTimeout(() => {
-            const l = document.getElementById(lbl);
-            if (l) { l.style.transition = 'opacity 0.4s'; l.style.opacity = '1'; }
-        }, t + 980);
-    });
 
-    setTimeout(() => {
-        const c1 = document.getElementById('calculs1');
-        if (c1) { c1.style.transition = 'opacity 0.5s'; c1.style.opacity = '1'; }
-    }, 50 + 1*1200 + 980 + 400);
+    const arcIds   = new Set(['arcD1','arcU1','arcD2','arcU2']);
+    const ptrIds   = new Set(['ptrD1','ptrU1','ptrD2','ptrU2']);
+    const shown    = new Set();
+    for (let i = 1; i <= n; i++) stepElems[i].forEach(id => shown.add(id));
 
-    setTimeout(() => {
-        const c2 = document.getElementById('calculs2');
-        if (c2) { c2.style.transition = 'opacity 0.5s'; c2.style.opacity = '1'; }
-    }, 50 + 3*1200 + 980 + 400);
-}
+    const allIds = ['arcD1','arcU1','arcD2','arcU2',
+                    'ptrD1','ptrU1','ptrD2','ptrU2',
+                    'lblD1','lblU1','lblD2','lblU2',
+                    'calculs1','calculs2'];
 
-function resetPilules() {
-    const btn = document.getElementById('btnPilules');
-    if (btn) btn.disabled = false;
-    ['lblD1','lblU1','lblD2','lblU2','ptrD1','ptrU1','ptrD2','ptrU2','calculs1','calculs2'].forEach(id => {
-        const el = document.getElementById(id);
-        if (el) { el.style.transition='none'; el.style.opacity='0'; }
-    });
-    ['arcD1','arcU1','arcD2','arcU2'].forEach(id => {
+    allIds.forEach(id => {
         const el = document.getElementById(id);
         if (!el) return;
-        const len = Math.round(el.getTotalLength()) + 5;
-        el.style.transition = 'none';
-        el.style.strokeDashoffset = len;
+
+        if (shown.has(id)) {
+            if (arcIds.has(id)) {
+                if (el.style.strokeDashoffset !== '0') {
+                    const len = Math.round(el.getTotalLength()) + 5;
+                    el.style.strokeDasharray  = len;
+                    el.style.strokeDashoffset = len;
+                    requestAnimationFrame(() => {
+                        el.style.transition = 'stroke-dashoffset 0.8s ease-out';
+                        el.style.strokeDashoffset = '0';
+                    });
+                }
+            } else if (ptrIds.has(id)) {
+                // Pointe après fin de l'arc (0.8s)
+                if (el.style.opacity !== '1') {
+                    setTimeout(() => {
+                        el.style.transition = 'opacity 0.15s';
+                        el.style.opacity = '1';
+                    }, 850);
+                }
+            } else {
+                // Labels et calculs après la pointe
+                if (el.style.opacity !== '1') {
+                    setTimeout(() => {
+                        el.style.transition = 'opacity 0.4s';
+                        el.style.opacity = '1';
+                    }, 1050);
+                }
+            }
+        } else {
+            if (arcIds.has(id)) {
+                const len = Math.round(el.getTotalLength()) + 5;
+                el.style.transition = 'none';
+                el.style.strokeDasharray  = len;
+                el.style.strokeDashoffset = len;
+            } else {
+                el.style.transition = 'none';
+                el.style.opacity = '0';
+            }
+        }
     });
 }
 
