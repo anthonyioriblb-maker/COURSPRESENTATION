@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Chapitre 8 - Les triangles</title>
+    <link rel="stylesheet" href="../../styles.css">
+</head>
+<body>
+    <div class="container">
+        <div class="content">
+
+            <!-- ═══════════════════════════════════════════════════════════ -->
+            <!-- Slide 1 : Titre -->
+            <div class="slide active">
+                <h1>Les triangles</h1>
+            </div>
+
+            <!-- ═══════════════════════════════════════════════════════════ -->
+            <!-- Slide 2 : I. Somme des angles -->
+            <div class="slide">
+                <h2>I. Somme des angles d'un triangle</h2>
+                <div class="important">
+                    <div class="step"><span style="color:red;">Propriété :</span> Dans tout triangle ABC, la somme des mesures des trois angles est égale à <strong style="color:red;">180°</strong>.</div>
+                    <div class="step" style="text-align:center; font-size:1.1em; margin-top:10px;">
+                        <span class="angle">BAC</span> + <span class="angle">ABC</span> + <span class="angle">BCA</span> = 180°
+                    </div>
+                </div>
+                <div class="example">
+                    <div class="step"><strong>Exemple :</strong> Dans le triangle ci-dessous, <span class="angle">BAC</span> = 70° et <span class="angle">ABC</span> = 50°. Calculer la mesure de l'angle <span class="angle">BCA</span>.</div>
+                    <div class="step" style="text-align:center; background:white; padding:10px; border-radius:5px;">
+                        <svg width="480" height="240" viewBox="0 0 480 240" style="max-width:100%; height:auto;">
+                            <!-- Triangle A=(230,35) B=(70,215) C=(390,215) -->
+                            <line x1="230" y1="35"  x2="70"  y2="215" stroke="black" stroke-width="2.5"/>
+                            <line x1="230" y1="35"  x2="390" y2="215" stroke="black" stroke-width="2.5"/>
+                            <line x1="70"  y1="215" x2="390" y2="215" stroke="black" stroke-width="2.5"/>
+                            <text x="230" y="23"  text-anchor="middle" font-size="20" font-weight="bold">A</text>
+                            <text x="48"  y="228" text-anchor="middle" font-size="20" font-weight="bold">B</text>
+                            <text x="412" y="228" text-anchor="middle" font-size="20" font-weight="bold">C</text>
+                            <!-- Arc à A (rouge) -->
+                            <path d="M 247 57 A 25 25 0 0 1 213 57" stroke="#e74c3c" stroke-width="2.5" fill="rgba(231,76,60,0.15)"/>
+                            <text x="230" y="80" text-anchor="middle" font-size="14" fill="#e74c3c" font-weight="bold">70°</text>
+                            <!-- Arc à B (bleu) -->
+                            <path d="M 98 215 A 25 25 0 0 0 89 194" stroke="#2980b9" stroke-width="2.5" fill="rgba(52,152,219,0.15)"/>
+                            <text x="111" y="205" font-size="14" fill="#2980b9" font-weight="bold">50°</text>
+                            <!-- Arc à C (vert, ?) -->
+                            <path d="M 362 215 A 25 25 0 0 1 372 194" stroke="#27ae60" stroke-width="2.5" fill="rgba(39,174,96,0.15)" opacity="0.5"/>
+                            <text x="350" y="205" font-size="14" fill="#27ae60" font-weight="bold">?</text>
+                        </svg>
+                    </div>
+                    <div style="background:#e8f8f0; border-left:6px solid #27ae60; border-radius:12px; padding:14px 22px; margin:10px 0; font-size:1em; color:black; box-shadow:0 3px 10px rgba(0,0,0,0.1);">
+                        <div class="step"><strong>Solution :</strong></div>
+                        <div class="step">La somme des angles d'un triangle est de 180°, donc :</div>
+                        <div class="step"><span class="angle">BCA</span> = 180° − <span class="angle">BAC</span> − <span class="angle">ABC</span></div>
+                        <div class="step"><span class="angle">BCA</span> = 180° − 70° − 50°</div>
+                        <div class="step"><span class="angle">BCA</span> = <strong style="color:red;">60°</strong></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ═══════════════════════════════════════════════════════════ -->
+            <!-- Slide 3 : II. Inégalité triangulaire -->
+            <div class="slide">
+                <h2>II. Inégalité triangulaire</h2>
+                <div class="important">
+                    <div class="step"><span style="color:red;">Propriété (inégalité triangulaire) :</span></div>
+                    <div class="step">Trois longueurs <em>a</em>, <em>b</em> et <em>c</em> permettent de construire un triangle si et seulement si chaque longueur est <strong>strictement inférieure à la somme des deux autres</strong>.</div>
+                    <div class="step" style="text-align:center; margin-top:8px;">
+                        <em>a</em> &lt; <em>b</em> + <em>c</em> &nbsp;&nbsp; <strong>et</strong> &nbsp;&nbsp;
+                        <em>b</em> &lt; <em>a</em> + <em>c</em> &nbsp;&nbsp; <strong>et</strong> &nbsp;&nbsp;
+                        <em>c</em> &lt; <em>a</em> + <em>b</em>
+                    </div>
+                </div>
+                <div class="remarque">
+                    <div class="step"><strong>Remarque pratique :</strong> Il suffit de vérifier que le <span style="color:red; font-weight:bold;">plus grand côté</span> est strictement inférieur à la somme des deux autres.</div>
+                </div>
+                <div class="example">
+                    <div class="step"><strong>Exemples :</strong> Peut-on construire un triangle avec les longueurs suivantes ?</div>
+                    <div class="step" style="padding-left:20px; margin-top:6px;">
+                        <span style="color:#27ae60; font-weight:bold;">• 5 cm ; 6 cm ; 7 cm :</span>
+                        Peut-on construire ce triangle ?
+                    </div>
+                    <div class="step" style="padding-left:40px; margin-top:4px;">
+                        Le plus grand est 7. On vérifie : 7 &lt; 5 + 6 = 11 ✓ → <strong>On peut construire le triangle.</strong>
+                    </div>
+                    <div class="step" style="padding-left:20px; margin-top:6px;">
+                        <span style="color:#e74c3c; font-weight:bold;">• 2 cm ; 3 cm ; 6 cm :</span>
+                        Peut-on construire ce triangle ?
+                    </div>
+                    <div class="step" style="padding-left:40px; margin-top:4px;">
+                        Le plus grand est 6. On vérifie : 6 &lt; 2 + 3 = 5 ? Non ! ✗ → <strong>On ne peut pas construire ce triangle.</strong>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ═══════════════════════════════════════════════════════════ -->
+            <!-- Slide 4 : III.1 Construction 3 côtés -->
+            <div class="slide">
+                <h2>III. Construction d'un triangle</h2>
+                <h3>1) Connaissant les trois côtés</h3>
+                <div class="example">
+                    <div class="step"><strong>Énoncé :</strong> Construire un triangle ABC tel que AB = 6 cm, BC = 4,5 cm et AC = 5 cm.</div>
+
+                    <div class="step" style="background:#e3f2fd; border-left:5px solid #2196f3; padding:12px 18px; margin:8px 0; color:#1565c0; font-size:0.85em; font-weight:500; min-height:44px; display:flex; align-items:center;">
+                        <span id="stepTextTri">Cliquez sur « Étape suivante » pour voir la construction.</span>
+                    </div>
+
+                    <div class="step" style="text-align:center; background:white; padding:6px; border-radius:5px; border:2px solid #ddd;">
+                        <svg id="triSVG" width="520" height="320" viewBox="0 0 520 320" style="max-width:100%; height:auto; background:#fafafa; display:block; margin:0 auto;">
+                            <g id="groupAB_tri" opacity="0">
+                                <line id="segAB_tri" x1="75" y1="285" x2="75" y2="285" stroke="black" stroke-width="2.5"/>
+                                <line x1="70" y1="280" x2="80" y2="290" stroke="black" stroke-width="2.5"/>
+                                <line x1="80" y1="280" x2="70" y2="290" stroke="black" stroke-width="2.5"/>
+                                <text x="52" y="283" font-size="19" font-weight="bold">A</text>
+                                <line x1="400" y1="280" x2="410" y2="290" stroke="black" stroke-width="2.5"/>
+                                <line x1="410" y1="280" x2="400" y2="290" stroke="black" stroke-width="2.5"/>
+                                <text x="416" y="283" font-size="19" font-weight="bold">B</text>
+                                <text x="237" y="305" text-anchor="middle" font-size="14" fill="#333">AB = 6 cm</text>
+                            </g>
+                            <path id="arcB_tri" d="" stroke="#e74c3c" stroke-width="2.5" fill="none" stroke-dasharray="7,4" opacity="0"/>
+                            <path id="arcA_tri" d="" stroke="#3498db" stroke-width="2.5" fill="none" stroke-dasharray="7,4" opacity="0"/>
+                            <text id="labelBC" x="424" y="195" font-size="13" fill="#e74c3c" opacity="0">BC = 4,5 cm</text>
+                            <text id="labelAC" x="112" y="165" font-size="13" fill="#3498db" opacity="0">AC = 5 cm</text>
+                            <g id="pointC_tri" opacity="0">
+                                <line x1="252" y1="88" x2="262" y2="98" stroke="black" stroke-width="2.5"/>
+                                <line x1="262" y1="88" x2="252" y2="98" stroke="black" stroke-width="2.5"/>
+                                <text x="268" y="88" font-size="19" font-weight="bold">C</text>
+                            </g>
+                            <line id="sideBC" x1="405" y1="285" x2="257" y2="93" stroke="black" stroke-width="2.5" opacity="0"/>
+                            <line id="sideAC" x1="75" y1="285" x2="257" y2="93" stroke="black" stroke-width="2.5" opacity="0"/>
+                            <g id="compassTri" opacity="0">
+                                <circle id="cHinge" cx="0" cy="0" r="10" fill="#ff8c00" stroke="#cc6600" stroke-width="2"/>
+                                <line id="cPointBranch" x1="0" y1="0" x2="-5" y2="60" stroke="#ff8c00" stroke-width="6"/>
+                                <circle id="cPointTip" cx="-5" cy="60" r="6" fill="#222" stroke="#000" stroke-width="2"/>
+                                <line id="cPencilBranch" x1="0" y1="0" x2="5" y2="60" stroke="#ff8c00" stroke-width="6"/>
+                                <rect id="cPencilBody" x="0" y="50" width="10" height="22" fill="#ff4444" stroke="#cc0000" stroke-width="2" rx="2"/>
+                                <polygon id="cPencilTip" points="5,72 0,82 10,82" fill="#333"/>
+                                <circle id="cPencilPoint" cx="5" cy="82" r="3" fill="#000"/>
+                            </g>
+                            <g id="rul1" opacity="0" transform="translate(0,-200)"></g>
+                        </svg>
+                    </div>
+
+                    <div class="step" style="text-align:center; margin-top:8px; display:flex; justify-content:center; gap:10px;">
+                        <button id="btnNextTri" onclick="nextStepTri()" style="background:#3498db;color:white;border:none;padding:8px 20px;border-radius:6px;cursor:pointer;font-size:0.85em;font-weight:bold;">Étape suivante ▶</button>
+                        <button onclick="resetTri()" style="background:#e74c3c;color:white;border:none;padding:8px 20px;border-radius:6px;cursor:pointer;font-size:0.85em;font-weight:bold;">Recommencer ↺</button>
+                    </div>
+
+                    <div style="background:#e8f8f0; border-left:6px solid #27ae60; border-radius:12px; padding:14px 22px; margin-top:12px; font-size:1em; color:black; box-shadow:0 3px 10px rgba(0,0,0,0.1);">
+                        <div class="step"><strong>Protocole :</strong></div>
+                        <div class="step">1. Tracer le segment [AB] de longueur 6 cm.</div>
+                        <div class="step">2. Compas ouvert à BC = 4,5 cm, pointe en B → tracer un arc.</div>
+                        <div class="step">3. Compas ouvert à AC = 5 cm, pointe en A → tracer un arc.</div>
+                        <div class="step">4. C est l'intersection des deux arcs.</div>
+                        <div class="step">5. Tracer [BC] et [AC] pour compléter le triangle.</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ═══════════════════════════════════════════════════════════ -->
+            <!-- Slide 5 : III.2 Construction angle + 2 côtés adjacents -->
+            <div class="slide">
+                <h3>2) Connaissant un angle et les deux côtés adjacents</h3>
+                <div class="example">
+                    <div class="step"><strong>Énoncé :</strong> Construire le triangle ABC tel que <span class="angle">BAC</span> = 50°, AB = 5 cm et AC = 4 cm.</div>
+
+                    <div class="step" style="background:#e3f2fd; border-left:5px solid #2196f3; padding:12px 18px; margin:8px 0; color:#1565c0; font-size:0.85em; font-weight:500; min-height:44px; display:flex; align-items:center;">
+                        <span id="st2">Cliquez sur « Étape suivante » pour voir la construction.</span>
+                    </div>
+
+                    <div class="step" style="text-align:center; background:white; padding:6px; border-radius:5px; border:2px solid #ddd;">
+                        <svg id="svg2" width="520" height="330" viewBox="0 0 520 330" style="max-width:100%;height:auto;background:#fafafa;display:block;margin:0 auto;">
+                            <line id="segAB2" x1="90" y1="270" x2="90" y2="270" stroke="black" stroke-width="2.5" opacity="0"/>
+                            <g id="labsAB2" opacity="0">
+                                <line x1="85" y1="265" x2="95" y2="275" stroke="black" stroke-width="2"/>
+                                <line x1="95" y1="265" x2="85" y2="275" stroke="black" stroke-width="2"/>
+                                <text x="67" y="269" font-size="19" font-weight="bold">A</text>
+                                <line x1="335" y1="265" x2="345" y2="275" stroke="black" stroke-width="2"/>
+                                <line x1="345" y1="265" x2="335" y2="275" stroke="black" stroke-width="2"/>
+                                <text x="350" y="269" font-size="19" font-weight="bold">B</text>
+                                <text x="215" y="292" text-anchor="middle" font-size="13" fill="#555">AB = 5 cm</text>
+                            </g>
+                            <g id="rul2" opacity="0" transform="translate(0,-150)"></g>
+                            <g id="rap2" opacity="0" transform="translate(90,270)"></g>
+                            <path id="amk2" d="M 118 270 A 28 28 0 0 0 108 249 L 90 270 Z" stroke="#e74c3c" stroke-width="2" fill="rgba(231,76,60,0.12)" opacity="0"/>
+                            <text id="atx2" x="123" y="248" font-size="13" fill="#e74c3c" font-weight="bold" opacity="0">50°</text>
+                            <line id="ray2" x1="90" y1="270" x2="248" y2="81" stroke="#27ae60" stroke-width="1.8" stroke-dasharray="8,4" opacity="0"/>
+                            <g id="cmp2" opacity="0">
+                                <circle id="c2h"  cx="0" cy="0" r="9" fill="#ff8c00" stroke="#cc6600" stroke-width="2"/>
+                                <line id="c2pb" x1="0" y1="0" x2="0" y2="50" stroke="#ff8c00" stroke-width="5"/>
+                                <circle id="c2pt" cx="0" cy="50" r="5" fill="#222" stroke="#000" stroke-width="1.5"/>
+                                <line id="c2nb" x1="0" y1="0" x2="0" y2="50" stroke="#ff8c00" stroke-width="5"/>
+                                <rect id="c2bd" x="-4" y="44" width="8" height="18" fill="#e74c3c" stroke="#cc0000" stroke-width="1.5" rx="2"/>
+                                <polygon id="c2tp" points="0,62 -4,70 4,70" fill="#333"/>
+                                <circle id="c2pp" cx="0" cy="70" r="3" fill="#000"/>
+                            </g>
+                            <path id="arcAC2" d="" stroke="#9b59b6" stroke-width="2.5" fill="none" stroke-dasharray="7,4" opacity="0"/>
+                            <g id="ptC2" opacity="0">
+                                <line x1="210" y1="110" x2="220" y2="120" stroke="black" stroke-width="2.5"/>
+                                <line x1="220" y1="110" x2="210" y2="120" stroke="black" stroke-width="2.5"/>
+                                <text x="226" y="112" font-size="19" font-weight="bold">C</text>
+                            </g>
+                            <text id="labAC2" x="145" y="195" font-size="13" fill="#9b59b6" opacity="0">AC = 4 cm</text>
+                            <line id="sdBC2" x1="340" y1="270" x2="215" y2="115" stroke="black" stroke-width="2.5" opacity="0"/>
+                            <line id="sdAC2" x1="90" y1="270" x2="215" y2="115" stroke="black" stroke-width="2.5" opacity="0"/>
+                        </svg>
+                    </div>
+
+                    <div class="step" style="text-align:center; margin-top:8px; display:flex; justify-content:center; gap:10px;">
+                        <button id="btn2" onclick="next2()" style="background:#3498db;color:white;border:none;padding:8px 20px;border-radius:6px;cursor:pointer;font-size:0.85em;font-weight:bold;">Étape suivante ▶</button>
+                        <button onclick="reset2()" style="background:#e74c3c;color:white;border:none;padding:8px 20px;border-radius:6px;cursor:pointer;font-size:0.85em;font-weight:bold;">Recommencer ↺</button>
+                    </div>
+
+                    <div style="background:#e8f8f0; border-left:6px solid #27ae60; border-radius:12px; padding:14px 22px; margin-top:12px; font-size:1em; color:black; box-shadow:0 3px 10px rgba(0,0,0,0.1);">
+                        <div class="step"><strong>Protocole :</strong></div>
+                        <div class="step">1. Tracer le segment [AB] de longueur 5 cm.</div>
+                        <div class="step">2. Rapporteur en A (0° vers B) : repérer 50°.</div>
+                        <div class="step">3. Tracer la demi-droite [AC) dans la direction 50°.</div>
+                        <div class="step">4. Compas ouvert à AC = 4 cm, pointe en A → arc sur [AC).</div>
+                        <div class="step">5. C est l'intersection. Tracer [BC].</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ═══════════════════════════════════════════════════════════ -->
+            <!-- Slide 6 : III.3 Construction 2 angles + côté compris -->
+            <div class="slide">
+                <h3>3) Connaissant deux angles et le côté compris</h3>
+                <div class="example">
+                    <div class="step"><strong>Énoncé :</strong> Construire le triangle ABC tel que BC = 5 cm, <span class="angle">ABC</span> = 40° et <span class="angle">BCA</span> = 65°.</div>
+
+                    <div class="step" style="background:#e3f2fd; border-left:5px solid #2196f3; padding:12px 18px; margin:8px 0; color:#1565c0; font-size:0.85em; font-weight:500; min-height:44px; display:flex; align-items:center;">
+                        <span id="st3">Cliquez sur « Étape suivante » pour voir la construction.</span>
+                    </div>
+
+                    <div class="step" style="text-align:center; background:white; padding:6px; border-radius:5px; border:2px solid #ddd;">
+                        <svg id="svg3" width="520" height="330" viewBox="0 0 520 330" style="max-width:100%;height:auto;background:#fafafa;display:block;margin:0 auto;">
+                            <line id="segBC3" x1="90" y1="270" x2="90" y2="270" stroke="black" stroke-width="2.5" opacity="0"/>
+                            <g id="labsBC3" opacity="0">
+                                <line x1="85" y1="265" x2="95" y2="275" stroke="black" stroke-width="2"/>
+                                <line x1="95" y1="265" x2="85" y2="275" stroke="black" stroke-width="2"/>
+                                <text x="67" y="269" font-size="19" font-weight="bold">B</text>
+                                <line x1="335" y1="265" x2="345" y2="275" stroke="black" stroke-width="2"/>
+                                <line x1="345" y1="265" x2="335" y2="275" stroke="black" stroke-width="2"/>
+                                <text x="350" y="269" font-size="19" font-weight="bold">C</text>
+                                <text x="215" y="292" text-anchor="middle" font-size="13" fill="#555">BC = 5 cm</text>
+                            </g>
+                            <g id="rul3" opacity="0" transform="translate(0,-150)"></g>
+                            <g id="rapB3" opacity="0" transform="translate(90,270)"></g>
+                            <path id="amkB3" d="M 118 270 A 28 28 0 0 0 111 250 L 90 270 Z" stroke="#3498db" stroke-width="2" fill="rgba(52,152,219,0.12)" opacity="0"/>
+                            <text id="atxB3" x="126" y="252" font-size="13" fill="#3498db" font-weight="bold" opacity="0">40°</text>
+                            <line id="rayBA3" x1="90" y1="270" x2="273" y2="126" stroke="#3498db" stroke-width="1.8" stroke-dasharray="8,4" opacity="0"/>
+                            <g id="rapC3" opacity="0" transform="translate(340,270) scale(-1,1)"></g>
+                            <path id="amkC3" d="M 340 270 L 312 270 A 28 28 0 0 1 327.2 246.4 Z" stroke="#27ae60" stroke-width="2" fill="rgba(39,174,96,0.12)" opacity="0"/>
+                            <text id="atxC3" x="288" y="246" font-size="13" fill="#27ae60" font-weight="bold" opacity="0">65°</text>
+                            <line id="rayCA3" x1="340" y1="270" x2="243" y2="95" stroke="#27ae60" stroke-width="1.8" stroke-dasharray="8,4" opacity="0"/>
+                            <g id="ptA3" opacity="0">
+                                <line x1="257" y1="118" x2="267" y2="128" stroke="black" stroke-width="2.5"/>
+                                <line x1="267" y1="118" x2="257" y2="128" stroke="black" stroke-width="2.5"/>
+                                <text x="250" y="113" font-size="19" font-weight="bold">A</text>
+                            </g>
+                            <line id="sdAB3" x1="90" y1="270" x2="262" y2="123" stroke="black" stroke-width="2.5" opacity="0"/>
+                            <line id="sdAC3" x1="340" y1="270" x2="262" y2="123" stroke="black" stroke-width="2.5" opacity="0"/>
+                        </svg>
+                    </div>
+
+                    <div class="step" style="text-align:center; margin-top:8px; display:flex; justify-content:center; gap:10px;">
+                        <button id="btn3" onclick="next3()" style="background:#3498db;color:white;border:none;padding:8px 20px;border-radius:6px;cursor:pointer;font-size:0.85em;font-weight:bold;">Étape suivante ▶</button>
+                        <button onclick="reset3()" style="background:#e74c3c;color:white;border:none;padding:8px 20px;border-radius:6px;cursor:pointer;font-size:0.85em;font-weight:bold;">Recommencer ↺</button>
+                    </div>
+
+                    <div style="background:#e8f8f0; border-left:6px solid #27ae60; border-radius:12px; padding:14px 22px; margin-top:12px; font-size:1em; color:black; box-shadow:0 3px 10px rgba(0,0,0,0.1);">
+                        <div class="step"><strong>Protocole :</strong></div>
+                        <div class="step">1. Tracer le segment [BC] de longueur 5 cm.</div>
+                        <div class="step">2. Rapporteur en B (0° vers C) : repérer 40° → demi-droite [BA).</div>
+                        <div class="step">3. Rapporteur en C (0° vers B) : repérer 65° → demi-droite [CA).</div>
+                        <div class="step">4. A est l'intersection des deux demi-droites. Tracer [AB] et [AC].</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ═══════════════════════════════════════════════════════════ -->
+            <!-- Slide 7 : IV. La médiatrice - Définition et propriétés -->
+            <div class="slide">
+                <h2>IV. La médiatrice d'un segment</h2>
+                <div class="definition">
+                    <div class="step"><span style="color:red;">Définition :</span> La <span style="color:red; font-weight:bold;">médiatrice</span> d'un segment [AB] est la droite :</div>
+                    <div class="step">• <strong>perpendiculaire</strong> au segment [AB],</div>
+                    <div class="step">• passant par le <strong>milieu</strong> du segment [AB].</div>
+                </div>
+                <div class="step" style="text-align:center; margin:12px 0;">
+                    <svg width="340" height="200" viewBox="0 0 340 200" style="max-width:100%; height:auto; background:#fafafa; border-radius:8px; border:2px solid #ddd;">
+                        <!-- Segment AB -->
+                        <line x1="50" y1="130" x2="290" y2="130" stroke="black" stroke-width="2.5"/>
+                        <text x="30" y="135" font-size="18" font-weight="bold">A</text>
+                        <text x="296" y="135" font-size="18" font-weight="bold">B</text>
+                        <!-- Milieu I -->
+                        <line x1="165" y1="125" x2="175" y2="135" stroke="black" stroke-width="2"/>
+                        <line x1="175" y1="125" x2="165" y2="135" stroke="black" stroke-width="2"/>
+                        <text x="177" y="150" font-size="14" fill="#555">I</text>
+                        <!-- Angle droit -->
+                        <polyline points="170,130 170,118 182,118" stroke="black" stroke-width="1.8" fill="none"/>
+                        <!-- Médiatrice -->
+                        <line x1="170" y1="20" x2="170" y2="185" stroke="#e74c3c" stroke-width="2.5" stroke-dasharray="9,4"/>
+                        <!-- Ticks égalité -->
+                        <line x1="108" y1="123" x2="108" y2="137" stroke="red" stroke-width="2.5" stroke-linecap="round"/>
+                        <line x1="232" y1="123" x2="232" y2="137" stroke="red" stroke-width="2.5" stroke-linecap="round"/>
+                        <!-- Label médiatrice -->
+                        <text x="178" y="28" font-size="13" fill="#e74c3c" font-weight="bold">médiatrice</text>
+                    </svg>
+                </div>
+            </div>
+
+            <!-- ═══════════════════════════════════════════════════════════ -->
+            <!-- Slide 8 : IV. Médiatrice - Méthode équerre -->
+            <div class="slide">
+                <h3>Construction à l'équerre et à la règle</h3>
+                <div class="example">
+                    <div class="step"><strong>Énoncé :</strong> Construire la médiatrice du segment [AB] de longueur 6 cm.</div>
+
+                    <div class="step" style="background:#e3f2fd; border-left:5px solid #2196f3; padding:12px 18px; margin:8px 0; color:#1565c0; font-size:0.85em; font-weight:500; min-height:44px; display:flex; align-items:center;">
+                        <span id="stME">Cliquez sur « Étape suivante » pour voir la construction.</span>
+                    </div>
+
+                    <div class="step" style="text-align:center; background:white; padding:6px; border-radius:5px; border:2px solid #ddd;">
+                        <svg id="svgME" width="470" height="280" viewBox="0 0 470 280" style="max-width:100%;height:auto;background:#fafafa;display:block;margin:0 auto;">
+                            <g id="grpABme" opacity="0">
+                                <line id="segABme" x1="70" y1="210" x2="70" y2="210" stroke="black" stroke-width="2.5"/>
+                                <line x1="65" y1="205" x2="75" y2="215" stroke="black" stroke-width="2"/>
+                                <line x1="75" y1="205" x2="65" y2="215" stroke="black" stroke-width="2"/>
+                                <text x="48" y="208" font-size="19" font-weight="bold">A</text>
+                                <line x1="365" y1="205" x2="375" y2="215" stroke="black" stroke-width="2"/>
+                                <line x1="375" y1="205" x2="365" y2="215" stroke="black" stroke-width="2"/>
+                                <text x="380" y="208" font-size="19" font-weight="bold">B</text>
+                            </g>
+                            <g id="milme" opacity="0">
+                                <line x1="215" y1="205" x2="225" y2="215" stroke="black" stroke-width="2"/>
+                                <line x1="225" y1="205" x2="215" y2="215" stroke="black" stroke-width="2"/>
+                                <text x="227" y="228" font-size="14" fill="#555">I</text>
+                                <line x1="143" y1="203" x2="143" y2="217" stroke="red" stroke-width="2.5" stroke-linecap="round"/>
+                                <line x1="297" y1="203" x2="297" y2="217" stroke="red" stroke-width="2.5" stroke-linecap="round"/>
+                            </g>
+                            <g id="eqme" opacity="0" transform="translate(70,210)"></g>
+                            <line id="medme" x1="220" y1="55" x2="220" y2="265" stroke="#e74c3c" stroke-width="2.5" stroke-dasharray="9,4" opacity="0"/>
+                            <g id="adme" opacity="0">
+                                <polyline points="220,210 220,198 232,198" stroke="black" stroke-width="1.8" fill="none"/>
+                            </g>
+                            <g id="rulME" opacity="0" transform="translate(0,-150)"></g>
+                            <g id="rulME2" opacity="0" transform="translate(0,-150)"></g>
+                        </svg>
+                    </div>
+
+                    <div class="step" style="text-align:center; margin-top:8px; display:flex; justify-content:center; gap:10px;">
+                        <button id="btnME" onclick="nextME()" style="background:#3498db;color:white;border:none;padding:8px 20px;border-radius:6px;cursor:pointer;font-size:0.85em;font-weight:bold;">Étape suivante ▶</button>
+                        <button onclick="resetME()" style="background:#e74c3c;color:white;border:none;padding:8px 20px;border-radius:6px;cursor:pointer;font-size:0.85em;font-weight:bold;">Recommencer ↺</button>
+                    </div>
+
+                    <div style="background:#e8f8f0; border-left:6px solid #27ae60; border-radius:12px; padding:14px 22px; margin-top:12px; font-size:1em; color:black; box-shadow:0 3px 10px rgba(0,0,0,0.1);">
+                        <div class="step"><strong>Protocole :</strong></div>
+                        <div class="step">1. Tracer le segment [AB] de longueur 6 cm.</div>
+                        <div class="step">2. Mesurer AB = 6 cm → reporter AB÷2 = 3 cm depuis A pour trouver le milieu I.</div>
+                        <div class="step">3. Placer l'équerre en I : angle droit sur I, un côté le long de [AB].</div>
+                        <div class="step">4. Tracer la médiatrice le long du côté perpendiculaire.</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ═══════════════════════════════════════════════════════════ -->
+            <!-- Slide 9 : IV. Médiatrice - Propriétés -->
+            <div class="slide">
+                <h3>Propriétés</h3>
+                <div class="important">
+                    <div class="step"><span style="color:red;">Propriété :</span> Si un point M est sur la médiatrice du segment [AB], alors <strong>MA = MB</strong> (M est équidistant de A et de B).</div>
+                </div>
+                <div class="important">
+                    <div class="step"><span style="color:red;">Réciproque :</span> Si un point M vérifie <strong>MA = MB</strong>, alors M est sur la <strong>médiatrice</strong> du segment [AB].</div>
+                </div>
+            </div>
+
+            <!-- ═══════════════════════════════════════════════════════════ -->
+            <!-- Slide 10 : IV. Médiatrice - Méthode compas -->
+            <div class="slide">
+                <h3>Construction au compas</h3>
+                <div class="example">
+                    <div class="step"><strong>Énoncé :</strong> Construire la médiatrice du segment [AB].</div>
+
+                    <div class="step" style="background:#e3f2fd; border-left:5px solid #2196f3; padding:12px 18px; margin:8px 0; color:#1565c0; font-size:0.85em; font-weight:500; min-height:44px; display:flex; align-items:center;">
+                        <span id="stMC">Cliquez sur « Étape suivante » pour voir la construction.</span>
+                    </div>
+
+                    <div class="step" style="text-align:center; background:white; padding:6px; border-radius:5px; border:2px solid #ddd;">
+                        <svg id="svgMC" width="470" height="290" viewBox="0 0 470 290" style="max-width:100%;height:auto;background:#fafafa;display:block;margin:0 auto;">
+                            <g id="grpABmc" opacity="0">
+                                <line id="segABmc" x1="70" y1="210" x2="70" y2="210" stroke="black" stroke-width="2.5"/>
+                                <line x1="65" y1="205" x2="75" y2="215" stroke="black" stroke-width="2"/>
+                                <line x1="75" y1="205" x2="65" y2="215" stroke="black" stroke-width="2"/>
+                                <text x="48" y="208" font-size="19" font-weight="bold">A</text>
+                                <line x1="375" y1="205" x2="385" y2="215" stroke="black" stroke-width="2"/>
+                                <line x1="385" y1="205" x2="375" y2="215" stroke="black" stroke-width="2"/>
+                                <text x="390" y="208" font-size="19" font-weight="bold">B</text>
+                            </g>
+                            <path id="arcAmc" d="" stroke="#e74c3c" stroke-width="2" fill="none" stroke-dasharray="6,3" opacity="0"/>
+                            <path id="arcBmc" d="" stroke="#3498db" stroke-width="2" fill="none" stroke-dasharray="6,3" opacity="0"/>
+                            <g id="ptsmc" opacity="0">
+                                <line x1="223" y1="148" x2="233" y2="158" stroke="black" stroke-width="2"/>
+                                <line x1="233" y1="148" x2="223" y2="158" stroke="black" stroke-width="2"/>
+                                <line x1="223" y1="262" x2="233" y2="272" stroke="black" stroke-width="2"/>
+                                <line x1="233" y1="262" x2="223" y2="272" stroke="black" stroke-width="2"/>
+                            </g>
+                            <line id="medmc" x1="228" y1="55" x2="228" y2="278" stroke="#e74c3c" stroke-width="2.5" stroke-dasharray="9,4" opacity="0"/>
+                            <g id="milmc" opacity="0">
+                                <line x1="223" y1="205" x2="233" y2="215" stroke="black" stroke-width="2"/>
+                                <line x1="233" y1="205" x2="223" y2="215" stroke="black" stroke-width="2"/>
+                                <text x="236" y="228" font-size="14" fill="#555">I</text>
+                                <polyline points="228,210 228,198 240,198" stroke="black" stroke-width="1.8" fill="none"/>
+                            </g>
+                            <g id="cmpMC" opacity="0">
+                                <circle id="mcH"  cx="0" cy="0" r="9" fill="#ff8c00" stroke="#cc6600" stroke-width="2"/>
+                                <line id="mcPb" x1="0" y1="0" x2="0" y2="50" stroke="#ff8c00" stroke-width="5"/>
+                                <circle id="mcPt" cx="0" cy="50" r="5" fill="#222" stroke="#000" stroke-width="1.5"/>
+                                <line id="mcNb" x1="0" y1="0" x2="0" y2="50" stroke="#ff8c00" stroke-width="5"/>
+                                <rect id="mcBd" x="-4" y="44" width="8" height="18" fill="#e74c3c" stroke="#cc0000" stroke-width="1.5" rx="2"/>
+                                <polygon id="mcTp" points="0,62 -4,70 4,70" fill="#333"/>
+                                <circle id="mcPp" cx="0" cy="70" r="3" fill="#000"/>
+                            </g>
+                            <g id="rulMC" opacity="0" transform="translate(0,-150)"></g>
+                        </svg>
+                    </div>
+
+                    <div class="step" style="text-align:center; margin-top:8px; display:flex; justify-content:center; gap:10px;">
+                        <button id="btnMC" onclick="nextMC()" style="background:#3498db;color:white;border:none;padding:8px 20px;border-radius:6px;cursor:pointer;font-size:0.85em;font-weight:bold;">Étape suivante ▶</button>
+                        <button onclick="resetMC()" style="background:#e74c3c;color:white;border:none;padding:8px 20px;border-radius:6px;cursor:pointer;font-size:0.85em;font-weight:bold;">Recommencer ↺</button>
+                    </div>
+
+                    <div style="background:#e8f8f0; border-left:6px solid #27ae60; border-radius:12px; padding:14px 22px; margin-top:12px; font-size:1em; color:black; box-shadow:0 3px 10px rgba(0,0,0,0.1);">
+                        <div class="step"><strong>Protocole :</strong></div>
+                        <div class="step">1. Tracer le segment [AB].</div>
+                        <div class="step">2. Compas ouvert à plus de la moitié de AB, pointe en A → arc de part et d'autre de [AB].</div>
+                        <div class="step">3. Même écartement, pointe en B → second arc.</div>
+                        <div class="step">4. La médiatrice passe par les deux intersections des arcs.</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ═══════════════════════════════════════════════════════════ -->
+            <!-- Slide 10 : IV. Cercle circonscrit -->
+            <div class="slide">
+                <h3>Cercle circonscrit à un triangle</h3>
+                <div class="important">
+                    <div class="step"><span style="color:red;">Propriété :</span> Les trois médiatrices d'un triangle sont <span style="color:red; font-weight:bold;">concourantes</span> : elles se coupent en un même point appelé le <span style="color:red; font-weight:bold;">centre du cercle circonscrit</span> (le cercle passant par les trois sommets).</div>
+                </div>
+
+                <div class="example">
+                    <div class="step"><strong>Construction :</strong> Trouver le centre du cercle circonscrit au triangle ABC.</div>
+
+                    <div class="step" style="background:#e3f2fd; border-left:5px solid #2196f3; padding:12px 18px; margin:8px 0; color:#1565c0; font-size:0.85em; font-weight:500; min-height:44px; display:flex; align-items:center;">
+                        <span id="stCC">Cliquez sur « Étape suivante » pour voir la construction.</span>
+                    </div>
+
+                    <div class="step" style="text-align:center; background:white; padding:6px; border-radius:5px; border:2px solid #ddd;">
+                        <svg id="svgCC" width="470" height="370" viewBox="0 0 470 370" style="max-width:100%;height:auto;background:#fafafa;display:block;margin:0 auto;">
+                            <!-- Triangle A=(225,35) B=(65,245) C=(355,210) -->
+                            <line x1="225" y1="35"  x2="65"  y2="245" stroke="black" stroke-width="2.5"/>
+                            <line x1="65"  y1="245" x2="355" y2="210" stroke="black" stroke-width="2.5"/>
+                            <line x1="355" y1="210" x2="225" y2="35"  stroke="black" stroke-width="2.5"/>
+                            <text x="219" y="25"  font-size="18" font-weight="bold">A</text>
+                            <text x="45"  y="260" font-size="18" font-weight="bold">B</text>
+                            <text x="362" y="223" font-size="18" font-weight="bold">C</text>
+
+                            <path id="arcA1cc" d="" stroke="#e74c3c" stroke-width="1.8" fill="none" stroke-dasharray="5,3" opacity="0"/>
+                            <path id="arcB1cc" d="" stroke="#e74c3c" stroke-width="1.8" fill="none" stroke-dasharray="5,3" opacity="0"/>
+                            <line id="medABcc" x1="28" y1="52" x2="268" y2="228" stroke="#e74c3c" stroke-width="2" stroke-dasharray="9,4" opacity="0"/>
+                            <g id="sqABcc" opacity="0">
+                                <polyline points="150.2,131.8 158.4,136 154.2,144.2 146,140" stroke="#e74c3c" stroke-width="1.6" fill="none"/>
+                            </g>
+
+                            <path id="arcB2cc" d="" stroke="#3498db" stroke-width="1.8" fill="none" stroke-dasharray="5,3" opacity="0"/>
+                            <path id="arcC2cc" d="" stroke="#3498db" stroke-width="1.8" fill="none" stroke-dasharray="5,3" opacity="0"/>
+                            <line id="medBCcc" x1="198" y1="75" x2="228" y2="315" stroke="#3498db" stroke-width="2" stroke-dasharray="9,4" opacity="0"/>
+                            <g id="sqBCcc" opacity="0">
+                                <polyline points="208.6,217.7 215.9,215.6 218,222.9 210.7,225" stroke="#3498db" stroke-width="1.6" fill="none"/>
+                            </g>
+
+                            <g id="ptOcc" opacity="0">
+                                <line x1="205" y1="172" x2="215" y2="182" stroke="#8e44ad" stroke-width="2.5"/>
+                                <line x1="215" y1="172" x2="205" y2="182" stroke="#8e44ad" stroke-width="2.5"/>
+                                <text x="219" y="173" font-size="14" font-weight="bold" fill="#8e44ad">O</text>
+                            </g>
+                            <path id="circCC" d="" stroke="#888" stroke-width="2" stroke-dasharray="8,5" fill="none" opacity="0"/>
+                            <g id="cmpCC" opacity="0">
+                                <circle id="ccH"  cx="0" cy="0" r="9" fill="#ff8c00" stroke="#cc6600" stroke-width="2"/>
+                                <line id="ccPb" x1="0" y1="0" x2="0" y2="50" stroke="#ff8c00" stroke-width="5"/>
+                                <circle id="ccPt" cx="0" cy="50" r="5" fill="#222" stroke="#000" stroke-width="1.5"/>
+                                <line id="ccNb" x1="0" y1="0" x2="0" y2="50" stroke="#ff8c00" stroke-width="5"/>
+                                <rect id="ccBd" x="-4" y="44" width="8" height="18" fill="#e74c3c" stroke="#cc0000" stroke-width="1.5" rx="2"/>
+                                <polygon id="ccTp" points="0,62 -4,70 4,70" fill="#333"/>
+                                <circle id="ccPp" cx="0" cy="70" r="3" fill="#000"/>
+                            </g>
+                        </svg>
+                    </div>
+
+                    <div class="step" style="text-align:center; margin-top:8px; display:flex; justify-content:center; gap:10px;">
+                        <button id="btnCC" onclick="nextCC()" style="background:#3498db;color:white;border:none;padding:8px 20px;border-radius:6px;cursor:pointer;font-size:0.85em;font-weight:bold;">Étape suivante ▶</button>
+                        <button onclick="resetCC()" style="background:#e74c3c;color:white;border:none;padding:8px 20px;border-radius:6px;cursor:pointer;font-size:0.85em;font-weight:bold;">Recommencer ↺</button>
+                    </div>
+
+                    <div style="background:#e8f8f0; border-left:6px solid #27ae60; border-radius:12px; padding:14px 22px; margin-top:12px; font-size:1em; color:black; box-shadow:0 3px 10px rgba(0,0,0,0.1);">
+                        <div class="step"><strong>Protocole :</strong></div>
+                        <div class="step">1. Construire la médiatrice de [AB] (en rouge).</div>
+                        <div class="step">2. Construire la médiatrice de [BC] (en bleu).</div>
+                        <div class="step">3. O est leur intersection → c'est le centre du cercle circonscrit.</div>
+                        <div class="step">4. Tracer le cercle de centre O et de rayon OA = OB = OC.</div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Contrôles -->
+        <div class="controls">
+            <div class="controls-left">
+                <button class="btn-menu" onclick="openMenu()">☰ Menu</button>
+                <button onclick="openHelp()">❓ Aide</button>
+            </div>
+            <div class="progress">
+                <span id="stepIndicator" class="step-indicator hidden">Étape 0/0</span>
+                <span>Slide <span id="currentSlide">1</span> / <span id="totalSlides">0</span></span>
+            </div>
+            <div class="controls-right">
+                <button class="btn-reset" onclick="resetSlide()">↻ Réinitialiser</button>
+                <button id="prevBtn" onclick="changeSlide(-1)">◀ Précédent</button>
+                <button onclick="changeSlide(1)">Suivant ▶</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Menu des slides -->
+    <div id="slideMenu" class="slide-menu">
+        <div class="menu-content">
+            <h2>Navigation</h2>
+            <div id="slideList" class="slide-list"></div>
+            <button class="close-menu" onclick="closeMenu()">Fermer</button>
+        </div>
+    </div>
+
+    <!-- Overlay d'aide -->
+    <div id="helpOverlay" class="help-overlay">
+        <div class="help-content">
+            <h2>Raccourcis clavier</h2>
+            <ul>
+                <li><kbd>→</kbd> ou <kbd>Espace</kbd> : Suivant</li>
+                <li><kbd>←</kbd> : Précédent</li>
+                <li><kbd>M</kbd> : Ouvrir le menu</li>
+                <li><kbd>R</kbd> : Réinitialiser la slide</li>
+                <li><kbd>H</kbd> ou <kbd>?</kbd> : Ouvrir/fermer l'aide</li>
+                <li><kbd>Échap</kbd> : Fermer les overlays</li>
+            </ul>
+            <button class="close-menu" onclick="closeHelp()">Fermer</button>
+        </div>
+    </div>
+
+    <script src="script-triangles.js"></script>
+    <script src="animations-triangles.js"></script>
+</body>
+</html>
