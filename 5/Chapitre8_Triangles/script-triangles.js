@@ -123,9 +123,9 @@ document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape' || e.key === 'h' || e.key === 'H' || e.key === '?') closeHelp();
         return;
     }
-    if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === ' ') {
+    if (e.key === 'ArrowRight' || e.key === 'ArrowUp' || e.key === ' ') {
         e.preventDefault(); changeSlide(1);
-    } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+    } else if (e.key === 'ArrowLeft' || e.key === 'ArrowDown') {
         e.preventDefault(); changeSlide(-1);
     } else if (e.key === 'm' || e.key === 'M') {
         openMenu();
