@@ -1,0 +1,791 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Les angles — Présentation Interactive</title>
+    <link rel="stylesheet" href="../../styles.css">
+    <style>
+        /* ── Styles spécifiques rapporteur / animations ── */
+        .step-box {
+            background: #e3f2fd;
+            border-left: 5px solid #2196f3;
+            padding: 10px 16px;
+            margin-bottom: 8px;
+            color: #1565c0;
+            font-size: 0.75em;
+            font-weight: 500;
+            min-height: 40px;
+            display: flex;
+            align-items: center;
+            border-radius: 6px;
+            line-height: 2;
+        }
+        /* Espace au-dessus du chapeau dans tous les contextes de la présentation */
+        .definition .angle,
+        .example .angle,
+        .important .angle,
+        .remarque .angle,
+        .method .angle,
+        .step-box .angle {
+            padding-top: 0.55em;
+        }
+        .svg-wrap {
+            text-align: center;
+            background: white;
+            padding: 6px;
+            border-radius: 5px;
+            border: 2px solid #ddd;
+        }
+        .anim-controls-row {
+            text-align: center;
+            margin-top: 8px;
+        }
+        .anim-btn {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 8px 18px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.75em;
+            font-weight: normal;
+            margin: 4px;
+            transform: none !important;
+        }
+        .anim-btn:hover { background-color: #2980b9; transform: none !important; }
+        .anim-btn.anim-reset { background-color: #e74c3c; }
+        .anim-btn.anim-reset:hover { background-color: #c0392b; }
+
+        /* ── Cartes nature des angles ── */
+        .angle-cards-row {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        .angle-card {
+            display: inline-block;
+            text-align: center;
+            padding: 10px 14px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            background: white;
+            width: 200px;
+            vertical-align: top;
+            font-size: 0.75em;
+        }
+
+        /* ── Animations rapporteur (depuis cours.html) ── */
+        @keyframes rapArrive {
+            0%   { transform: translate(260px,-70px); opacity: 0; }
+            35%  { opacity: 1; }
+            100% { transform: translate(0,0); opacity: 1; }
+        }
+        @keyframes rapAlign {
+            0%   { transform: translate(0,0) rotate(0deg);  opacity: 1; }
+            18%  { transform: translate(0,0) rotate(-9deg); opacity: 1; }
+            36%  { transform: translate(0,0) rotate(6deg);  opacity: 1; }
+            54%  { transform: translate(0,0) rotate(-4deg); opacity: 1; }
+            72%  { transform: translate(0,0) rotate(2deg);  opacity: 1; }
+            100% { transform: translate(0,0) rotate(0deg);  opacity: 1; }
+        }
+        #rapporteur { transform-origin: 200px 280px; }
+        #rapporteur.rap-hidden { opacity: 0; }
+        #rapporteur.arrive { animation: rapArrive 1.2s cubic-bezier(0.22,1,0.36,1) forwards; }
+        #rapporteur.aligne { animation: rapAlign 1.4s ease-in-out forwards; }
+
+        @keyframes rapTracArrive {
+            0%   { transform: translate(320px,-90px); opacity: 0; }
+            30%  { opacity: 1; }
+            55%  { transform: translate(0,0); opacity: 1; }
+            65%  { transform: translate(0,0) rotate(-8deg); opacity: 1; }
+            75%  { transform: translate(0,0) rotate(5deg);  opacity: 1; }
+            85%  { transform: translate(0,0) rotate(-3deg); opacity: 1; }
+            93%  { transform: translate(0,0) rotate(1deg);  opacity: 1; }
+            100% { transform: translate(0,0) rotate(0deg);  opacity: 1; }
+        }
+        @keyframes rapTracDisparait {
+            0%   { opacity: 1; }
+            100% { opacity: 0; }
+        }
+        #rapTrac { transform-origin: 100px 260px; }
+        #rapTrac.rap-hidden   { opacity: 0; }
+        #rapTrac.trac-arrive  { animation: rapTracArrive 2.2s cubic-bezier(0.22,1,0.36,1) forwards; }
+        #rapTrac.trac-cache   { animation: rapTracDisparait 0.4s ease-in forwards; }
+
+        @keyframes sweepScan {
+            0%   { transform: rotate(0deg);   opacity: 1; }
+            20%  { transform: rotate(-25deg); opacity: 1; }
+            45%  { transform: rotate(-55deg); opacity: 1; }
+            65%  { transform: rotate(-78deg); opacity: 1; }
+            80%  { transform: rotate(-65deg); opacity: 1; }
+            91%  { transform: rotate(-74deg); opacity: 1; }
+            96%  { transform: rotate(-72deg); opacity: 1; }
+            100% { transform: rotate(-72deg); opacity: 0; }
+        }
+        @keyframes fadeInMark {
+            0%   { opacity: 0; }
+            100% { opacity: 1; }
+        }
+        #sweepLine72 { transform-origin: 100px 260px; }
+        #sweepLine72.sweep-active { animation: sweepScan 1.8s ease-in-out 2.2s forwards; }
+        #mark72 { opacity: 0; }
+        #mark72.mark-show { animation: fadeInMark 0.4s ease-out forwards; }
+
+        @keyframes brRapArrive {
+            0%   { transform: translate(280px,-70px); opacity: 0; }
+            25%  { opacity: 1; }
+            55%  { transform: translate(0,0); opacity: 1; }
+            67%  { transform: translate(0,0) rotate(-7deg); opacity: 1; }
+            78%  { transform: translate(0,0) rotate(5deg);  opacity: 1; }
+            88%  { transform: translate(0,0) rotate(-3deg); opacity: 1; }
+            95%  { transform: translate(0,0) rotate(1deg);  opacity: 1; }
+            100% { transform: translate(0,0) rotate(0deg);  opacity: 1; }
+        }
+        @keyframes brRapDisparait {
+            0%   { opacity: 1; }
+            100% { opacity: 0; }
+        }
+        @keyframes brPencilDown {
+            0%   { transform: translateY(-28px); opacity: 0; }
+            35%  { opacity: 1; }
+            100% { transform: translateY(0px); opacity: 1; }
+        }
+        @keyframes brDotPop {
+            0%   { opacity: 0; transform: scale(0); }
+            60%  { opacity: 1; transform: scale(1.4); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+        #brRapporteur { transform-origin: 130px 270px; }
+        #brRapporteur.br-hidden  { opacity: 0; }
+        #brRapporteur.br-arrive  { animation: brRapArrive 2.2s cubic-bezier(0.22,1,0.36,1) forwards; }
+        #brRapporteur.br-cache   { animation: brRapDisparait 0.4s ease-in forwards; }
+        #brPencil { transform-origin: 199px 212px; }
+        #brPencil.pencil-draw    { animation: brPencilDown 0.7s ease-out forwards; }
+        #brDot40  { transform-origin: 199px 212px; }
+        #brDot40.dot-pop         { animation: brDotPop 0.4s ease-out forwards; }
+        #pencilTrac { transform-origin: 131px 165px; }
+        #pencilTrac.ptrac-draw   { animation: brPencilDown 0.7s ease-out forwards; }
+        @keyframes brPencilUp {
+            0%   { transform: translateY(0px);   opacity: 1; }
+            100% { transform: translateY(-32px); opacity: 0; }
+        }
+        #pencilTrac.ptrac-hide { animation: brPencilUp 0.5s ease-in forwards; }
+        #brPencil.pencil-hide  { animation: brPencilUp 0.5s ease-in forwards; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="content">
+
+            <!-- ===== SLIDE 1 : TITRE ===== -->
+            <div class="slide active">
+                <h1>Chapitre 10 : Les angles</h1>
+            </div>
+
+            <!-- ===== SLIDE 2 : VOCABULAIRE ===== -->
+            <div class="slide">
+                <h2><u>I. Vocabulaire</u></h2>
+                <div class="definition">
+                    <div class="step"><strong>Définition :</strong> Un <strong>angle</strong> est formé par deux <strong>demi-droites</strong> de même origine.</div>
+
+                    <div class="step" style="margin-top:10px;">
+                        <div style="display:flex; flex-wrap:wrap; align-items:center; gap:16px; background:white; padding:12px; border-radius:8px;">
+                            <div style="flex:0 0 auto; text-align:center;">
+                                <svg id="svgVoc" width="280" height="190" viewBox="0 0 340 230" style="display:block;">
+                                    <line x1="80" y1="185" x2="312" y2="185" stroke="black" stroke-width="2.5"/>
+                                    <line x1="80" y1="185" x2="210" y2="25" stroke="black" stroke-width="2.5"/>
+                                    <line x1="74" y1="179" x2="86" y2="191" stroke="black" stroke-width="2.2"/>
+                                    <line x1="86" y1="179" x2="74" y2="191" stroke="black" stroke-width="2.2"/>
+                                    <text x="56"  y="190" font-size="22" font-weight="bold" fill="black">O</text>
+                                    <line x1="306" y1="179" x2="318" y2="191" stroke="black" stroke-width="2"/>
+                                    <line x1="318" y1="179" x2="306" y2="191" stroke="black" stroke-width="2"/>
+                                    <text x="318" y="190" font-size="22" font-weight="bold" fill="black">A</text>
+                                    <line x1="204" y1="19" x2="216" y2="31" stroke="black" stroke-width="2"/>
+                                    <line x1="216" y1="19" x2="204" y2="31" stroke="black" stroke-width="2"/>
+                                    <text x="215" y="21"  font-size="22" font-weight="bold" fill="black">B</text>
+                                    <g id="vocLblSommet" opacity="0">
+                                        <circle cx="80" cy="185" r="16" fill="none" stroke="#e74c3c" stroke-width="2.5"/>
+                                        <text x="102" y="175" font-size="14" fill="#e74c3c" font-weight="bold">sommet</text>
+                                    </g>
+                                    <g id="vocLblOA" opacity="0">
+                                        <text x="196" y="207" text-anchor="middle" font-size="14" fill="#2980b9" font-weight="bold">côté [OA)</text>
+                                    </g>
+                                    <g id="vocLblOB" opacity="0">
+                                        <text x="158" y="102" font-size="14" fill="#2980b9" font-weight="bold">côté [OB)</text>
+                                    </g>
+                                    <path id="vocArc" d="M 145 185 A 65 65 0 0 0 121 135"
+                                          stroke="#e74c3c" stroke-width="2.5" fill="rgba(231,76,60,0.15)" opacity="0"/>
+                                    <g id="vocNotation" opacity="0">
+                                        <foreignObject x="136" y="130" width="68" height="46">
+                                            <div xmlns="http://www.w3.org/1999/xhtml" style="padding-top:14px;">
+                                                <span class="angle" style="color:#e74c3c; font-weight:bold; font-size:13px; font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;">AOB</span>
+                                            </div>
+                                        </foreignObject>
+                                    </g>
+                                </svg>
+                            </div>
+                            <div style="flex:1; min-width:180px; font-size:0.8em; color:#333; line-height:2;">
+                                <div id="vocTxt0" style="opacity:0; transition:opacity 0.5s; color:#555; font-style:italic;">Cliquez sur le bouton pour découvrir le vocabulaire ↓</div>
+                                <div id="vocTxt1" style="opacity:0; transition:opacity 0.6s; margin-bottom:4px;">🔴 <strong style="color:#e74c3c;">O</strong> est le <strong>sommet</strong> de l'angle</div>
+                                <div id="vocTxt2" style="opacity:0; transition:opacity 0.6s; margin-bottom:4px;">🔵 [OA) et [OB) sont les <strong>côtés</strong> de l'angle</div>
+                                <div id="vocTxt3" style="opacity:0; transition:opacity 0.6s; margin-bottom:4px;">L'angle se note <strong><span class="angle">AOB</span></strong> ou <strong><span class="angle">BOA</span></strong><br><span style="font-size:0.85em; color:#666;">(lettre du milieu = sommet)</span></div>
+                            </div>
+                        </div>
+                        <div style="text-align:center; margin-top:6px;">
+                            <button class="anim-btn" onclick="nextStepVoc()">Étape suivante ▶</button>
+                            <button class="anim-btn anim-reset" onclick="resetVoc()">Recommencer ↺</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="remarque step">
+                    <strong>Attention :</strong> la lettre du <strong>milieu</strong> indique le <strong>sommet</strong> de l'angle.
+                </div>
+            </div>
+
+            <!-- ===== SLIDE 3 : EXEMPLE TRIANGLE ===== -->
+            <div class="slide">
+                <h3><u>Exemple : angles d'un triangle</u></h3>
+                <div class="example">
+                    <strong>Exemple :</strong> Dans le triangle ABC, on peut nommer trois angles différents.
+                    <div style="text-align:center; background:white; padding:8px; border-radius:5px; margin-top:8px;">
+                        <svg id="svgTriEx" width="440" height="260" viewBox="-15 -15 530 320" style="max-width:100%; height:auto;">
+                            <line x1="60" y1="250" x2="250" y2="25"  stroke="black" stroke-width="2.5"/>
+                            <line x1="250" y1="25"  x2="440" y2="250" stroke="black" stroke-width="2.5"/>
+                            <line x1="60" y1="250"  x2="440" y2="250" stroke="black" stroke-width="2.5"/>
+                            <line x1="54" y1="244" x2="66" y2="256" stroke="black" stroke-width="2"/>
+                            <line x1="66" y1="244" x2="54" y2="256" stroke="black" stroke-width="2"/>
+                            <text x="36"  y="265" font-size="22" font-weight="bold" fill="black">A</text>
+                            <line x1="244" y1="19" x2="256" y2="31" stroke="black" stroke-width="2"/>
+                            <line x1="256" y1="19" x2="244" y2="31" stroke="black" stroke-width="2"/>
+                            <text x="240" y="18"  font-size="22" font-weight="bold" fill="black">B</text>
+                            <line x1="434" y1="244" x2="446" y2="256" stroke="black" stroke-width="2"/>
+                            <line x1="446" y1="244" x2="434" y2="256" stroke="black" stroke-width="2"/>
+                            <text x="448" y="265" font-size="22" font-weight="bold" fill="black">C</text>
+                            <g id="exAngleA" opacity="0" style="transition:opacity 0.6s;">
+                                <path d="M 60 250 L 100 250 A 40 40 0 0 0 86 219 Z" fill="rgba(231,76,60,0.2)" stroke="none"/>
+                                <path d="M 100 250 A 40 40 0 0 0 86 219" stroke="#e74c3c" stroke-width="2.8" fill="none"/>
+                                <foreignObject x="100" y="215" width="68" height="46">
+                                    <div xmlns="http://www.w3.org/1999/xhtml" style="padding-top:14px;">
+                                        <span class="angle" style="color:#e74c3c; font-weight:bold; font-size:13px; font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;">BAC</span>
+                                    </div>
+                                </foreignObject>
+                            </g>
+                            <g id="exAngleB" opacity="0" style="transition:opacity 0.6s;">
+                                <path d="M 250 25 L 227 52 A 36 36 0 0 0 273 52 Z" fill="rgba(52,152,219,0.2)" stroke="none"/>
+                                <path d="M 227 52 A 36 36 0 0 0 273 52" stroke="#2980b9" stroke-width="2.8" fill="none"/>
+                                <foreignObject x="222" y="55" width="68" height="46">
+                                    <div xmlns="http://www.w3.org/1999/xhtml" style="padding-top:14px;">
+                                        <span class="angle" style="color:#2980b9; font-weight:bold; font-size:13px; font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;">ABC</span>
+                                    </div>
+                                </foreignObject>
+                            </g>
+                            <g id="exAngleC" opacity="0" style="transition:opacity 0.6s;">
+                                <path d="M 440 250 L 400 250 A 40 40 0 0 1 414 219 Z" fill="rgba(39,174,96,0.2)" stroke="none"/>
+                                <path d="M 400 250 A 40 40 0 0 1 414 219" stroke="#27ae60" stroke-width="2.8" fill="none"/>
+                                <foreignObject x="356" y="215" width="68" height="46">
+                                    <div xmlns="http://www.w3.org/1999/xhtml" style="padding-top:14px;">
+                                        <span class="angle" style="color:#27ae60; font-weight:bold; font-size:13px; font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;">BCA</span>
+                                    </div>
+                                </foreignObject>
+                            </g>
+                        </svg>
+                        <div id="exTxtAngle" style="min-height:24px; font-size:0.75em; color:#555; font-style:italic; margin:4px 0 6px;">
+                            Cliquez sur « Étape suivante » pour faire apparaître les angles.
+                        </div>
+                        <button class="anim-btn" onclick="nextStepTriEx()">Étape suivante ▶</button>
+                        <button class="anim-btn anim-reset" onclick="resetTriEx()">Recommencer ↺</button>
+                    </div>
+                    <div id="exRecap" style="opacity:0; transition:opacity 0.6s; margin-top:6px; font-size:0.85em;">
+                        Les trois angles sont :
+                        <span class="angle" style="color:#e74c3c;">BAC</span>,
+                        <span class="angle" style="color:#2980b9;">ABC</span>,
+                        <span class="angle" style="color:#27ae60;">BCA</span>.
+                    </div>
+                </div>
+            </div>
+
+            <!-- ===== SLIDE 4 : MESURE D'UN ANGLE ===== -->
+            <div class="slide">
+                <h2><u>II. Mesure d'un angle</u></h2>
+                <div class="definition step">
+                    L'unité de mesure d'un angle est le <strong>degré</strong> (symbole : <strong>°</strong>).<br>
+                    Pour mesurer un angle, on utilise un <strong>rapporteur</strong>.<br>
+                    Un angle peut mesurer entre <strong>0°</strong> et <strong>180°</strong>.
+                </div>
+                <div class="example step">
+                    <strong>Méthode pour mesurer l'angle <span class="angle">AOB</span> :</strong>
+                    <div class="step-box"><span id="stepMes">Cliquez sur « Étape suivante » pour voir comment mesurer l'angle <span class="angle">AOB</span>.</span></div>
+                    <div class="svg-wrap">
+                        <svg id="svgMes" width="500" height="280" viewBox="0 0 580 340" style="max-width:100%; height:auto; background:#fafafa; display:block; margin:0 auto;">
+                            <line x1="200" y1="280" x2="480" y2="280" stroke="black" stroke-width="2.5"/>
+                            <line x1="200" y1="280" x2="417" y2="155" stroke="black" stroke-width="2.5"/>
+                            <line x1="194" y1="274" x2="206" y2="286" stroke="black" stroke-width="2"/>
+                            <line x1="206" y1="274" x2="194" y2="286" stroke="black" stroke-width="2"/>
+                            <text x="178" y="282" font-size="20" font-weight="bold">O</text>
+                            <line x1="474" y1="274" x2="486" y2="286" stroke="black" stroke-width="2"/>
+                            <line x1="486" y1="274" x2="474" y2="286" stroke="black" stroke-width="2"/>
+                            <text x="487" y="285" font-size="20" font-weight="bold">A</text>
+                            <line x1="411" y1="149" x2="423" y2="161" stroke="black" stroke-width="2"/>
+                            <line x1="423" y1="149" x2="411" y2="161" stroke="black" stroke-width="2"/>
+                            <text x="422" y="148" font-size="20" font-weight="bold">B</text>
+                            <g id="rapporteur" class="rap-hidden">
+                                <path d="M 80 280 A 120 120 0 0 1 320 280 Z" fill="rgba(120,228,235,0.82)" stroke="#0a8090" stroke-width="2"/>
+                                <line x1="80" y1="280" x2="320" y2="280" stroke="#0a8090" stroke-width="1.5"/>
+                                <rect x="190" y="279" width="20" height="11" rx="4" fill="rgba(80,200,215,0.9)" stroke="#0a8090" stroke-width="1.2"/>
+                                <circle cx="200" cy="280" r="8" fill="white" stroke="#222" stroke-width="1.4"/>
+                                <circle cx="200" cy="280" r="2" fill="#222"/>
+                                <line x1="192" y1="280" x2="208" y2="280" stroke="#222" stroke-width="1"/>
+                                <line x1="200" y1="272" x2="200" y2="288" stroke="#222" stroke-width="1"/>
+                                <g id="ticks"></g>
+                                <g id="labels"></g>
+                                <g id="labels2"></g>
+                                <rect x="184" y="155" width="32" height="17" rx="3" fill="black"/>
+                                <text x="200" y="167" text-anchor="middle" font-size="11" fill="white" font-weight="bold">90°</text>
+                                <text x="322" y="292" font-size="10" fill="#1565c0" font-weight="bold">0</text>
+                                <text x="320" y="278" font-size="8"  fill="#c0392b">180</text>
+                                <text x="48"  y="292" font-size="10" fill="#1565c0" font-weight="bold">180</text>
+                                <text x="56"  y="278" font-size="8"  fill="#c0392b">0</text>
+                            </g>
+                            <line id="zeroline" x1="200" y1="280" x2="340" y2="280" stroke="#ff8c00" stroke-width="2.5" stroke-dasharray="8,4" opacity="0"/>
+                            <path id="arcMes" d="M 280 280 A 80 80 0 0 0 269 240" stroke="#e74c3c" stroke-width="2.5" fill="rgba(231,76,60,0.15)" opacity="0"/>
+                            <line id="mark30" x1="200" y1="280" x2="304" y2="220" stroke="#e74c3c" stroke-width="3" stroke-dasharray="6,3" opacity="0"/>
+                            <circle id="dot30" cx="304" cy="220" r="5" fill="#e74c3c" opacity="0"/>
+                            <text id="label30" x="286" y="252" font-size="16" fill="#e74c3c" font-weight="bold" opacity="0">30°</text>
+                            <g id="result" opacity="0">
+                                <foreignObject x="90" y="14" width="220" height="52">
+                                    <div xmlns="http://www.w3.org/1999/xhtml" style="text-align:center; color:#c0392b; font-weight:bold; font-size:17px; font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif; padding-top:16px;">
+                                        <span class="angle">AOB</span> = 30°
+                                    </div>
+                                </foreignObject>
+                            </g>
+                        </svg>
+                    </div>
+                    <div class="anim-controls-row">
+                        <button class="anim-btn" onclick="nextStepMes()">Étape suivante ▶</button>
+                        <button class="anim-btn anim-reset" onclick="resetMes()">Recommencer ↺</button>
+                    </div>
+                    <div style="margin-top:8px; font-size:0.8em;">
+                        <strong>Résumé :</strong>
+                        <div class="step">① Placer le <strong>centre du rapporteur</strong> sur le <strong>sommet</strong>.</div>
+                        <div class="step">② Aligner le <strong>0°</strong> sur un des côtés.</div>
+                        <div class="step">③ Lire la mesure là où l'<strong>autre côté</strong> coupe le rapporteur.</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ===== SLIDE 5 : NATURE DES ANGLES ===== -->
+            <div class="slide">
+                <h3><u>Nature des angles</u></h3>
+                <div class="definition step">
+                    On classe les angles selon leur mesure :
+                </div>
+                <div class="example step">
+                    <div class="angle-cards-row">
+                        <!-- Angle nul -->
+                        <div class="angle-card" style="border-color:#27ae60;">
+                            <svg width="160" height="110" viewBox="-10 -10 200 150" style="max-width:100%;">
+                                <line x1="30" y1="100" x2="160" y2="100" stroke="black" stroke-width="2.5"/>
+                                <text x="75" y="88" font-size="13" fill="#27ae60" font-weight="bold">0°</text>
+                                <line x1="24" y1="94" x2="36" y2="106" stroke="black" stroke-width="1.5"/>
+                                <line x1="36" y1="94" x2="24" y2="106" stroke="black" stroke-width="1.5"/>
+                                <text x="90" y="120" text-anchor="middle" font-size="10" fill="#27ae60" font-style="italic">côtés confondus</text>
+                            </svg>
+                            <p style="color:#27ae60; font-weight:bold; margin:0; font-size:1.1em;">Angle nul</p>
+                            <p style="color:#333; margin:2px 0 0; font-size:0.95em;">mesure = 0°</p>
+                        </div>
+                        <!-- Angle aigu -->
+                        <div class="angle-card" style="border-color:#e74c3c;">
+                            <svg width="160" height="110" viewBox="-10 -10 200 150" style="max-width:100%;">
+                                <line x1="30" y1="100" x2="160" y2="100" stroke="black" stroke-width="2.5"/>
+                                <line x1="30" y1="100" x2="110" y2="20" stroke="black" stroke-width="2.5"/>
+                                <path d="M 80 100 A 50 50 0 0 0 64 62" stroke="#e74c3c" stroke-width="2" fill="rgba(231,76,60,0.18)"/>
+                                <text x="86" y="85" font-size="13" fill="#e74c3c" font-weight="bold">45°</text>
+                                <line x1="24" y1="94" x2="36" y2="106" stroke="black" stroke-width="1.5"/>
+                                <line x1="36" y1="94" x2="24" y2="106" stroke="black" stroke-width="1.5"/>
+                            </svg>
+                            <p style="color:#e74c3c; font-weight:bold; margin:0; font-size:1.1em;">Angle aigu</p>
+                            <p style="color:#333; margin:2px 0 0; font-size:0.95em;">0° &lt; mesure &lt; 90°</p>
+                        </div>
+                        <!-- Angle droit -->
+                        <div class="angle-card" style="border-color:#17375e;">
+                            <svg width="160" height="110" viewBox="-10 -10 200 150" style="max-width:100%;">
+                                <line x1="30" y1="100" x2="160" y2="100" stroke="black" stroke-width="2.5"/>
+                                <line x1="30" y1="100" x2="30" y2="20" stroke="black" stroke-width="2.5"/>
+                                <rect x="30" y="80" width="20" height="20" fill="none" stroke="#17375e" stroke-width="2.5"/>
+                                <line x1="24" y1="94" x2="36" y2="106" stroke="black" stroke-width="1.5"/>
+                                <line x1="36" y1="94" x2="24" y2="106" stroke="black" stroke-width="1.5"/>
+                                <text x="55" y="92" font-size="13" fill="#17375e" font-weight="bold">90°</text>
+                            </svg>
+                            <p style="color:#17375e; font-weight:bold; margin:0; font-size:1.1em;">Angle droit</p>
+                            <p style="color:#333; margin:2px 0 0; font-size:0.95em;">mesure = 90°</p>
+                        </div>
+                        <!-- Angle obtus -->
+                        <div class="angle-card" style="border-color:#2e75b6;">
+                            <svg width="160" height="110" viewBox="-10 -10 200 150" style="max-width:100%;">
+                                <line x1="70" y1="100" x2="30" y2="31" stroke="black" stroke-width="2.5"/>
+                                <line x1="70" y1="100" x2="155" y2="100" stroke="black" stroke-width="2.5"/>
+                                <path d="M 115 100 A 45 45 0 0 0 47 64" stroke="#2e75b6" stroke-width="2" fill="rgba(46,117,182,0.18)"/>
+                                <text x="86" y="80" font-size="13" fill="#2e75b6" font-weight="bold">120°</text>
+                                <line x1="64" y1="94" x2="76" y2="106" stroke="black" stroke-width="1.5"/>
+                                <line x1="76" y1="94" x2="64" y2="106" stroke="black" stroke-width="1.5"/>
+                            </svg>
+                            <p style="color:#2e75b6; font-weight:bold; margin:0; font-size:1.1em;">Angle obtus</p>
+                            <p style="color:#333; margin:2px 0 0; font-size:0.95em;">90° &lt; mesure &lt; 180°</p>
+                        </div>
+                        <!-- Angle plat -->
+                        <div class="angle-card" style="border-color:#7030a0;">
+                            <svg width="160" height="110" viewBox="-10 -10 200 150" style="max-width:100%;">
+                                <line x1="10" y1="80" x2="170" y2="80" stroke="black" stroke-width="2.5"/>
+                                <path d="M 50 80 A 40 40 0 0 0 130 80" stroke="#7030a0" stroke-width="2" fill="rgba(112,48,160,0.15)"/>
+                                <text x="90" y="64" text-anchor="middle" font-size="13" fill="#7030a0" font-weight="bold">180°</text>
+                                <line x1="84" y1="74" x2="96" y2="86" stroke="black" stroke-width="1.5"/>
+                                <line x1="96" y1="74" x2="84" y2="86" stroke="black" stroke-width="1.5"/>
+                            </svg>
+                            <p style="color:#7030a0; font-weight:bold; margin:0; font-size:1.1em;">Angle plat</p>
+                            <p style="color:#333; margin:2px 0 0; font-size:0.95em;">mesure = 180°</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ===== SLIDE 6 : TRACER UN ANGLE ===== -->
+            <div class="slide">
+                <h2><u>III. Tracer un angle de mesure donnée</u></h2>
+                <div class="example">
+                    <strong>Méthode pour tracer <span class="angle">BAC</span> = 72° :</strong>
+                    <div class="step-box"><span id="stepTrac">Cliquez sur « Étape suivante » pour voir la construction.</span></div>
+                    <div class="svg-wrap">
+                        <svg id="svgTrac" width="500" height="260" viewBox="0 0 580 320" style="max-width:100%; height:auto; background:#fafafa; display:block; margin:0 auto;">
+                            <line x1="94" y1="254" x2="106" y2="266" stroke="black" stroke-width="2" opacity="0" id="tA1"/>
+                            <line x1="106" y1="254" x2="94" y2="266" stroke="black" stroke-width="2" opacity="0" id="tA2"/>
+                            <text x="78" y="262" font-size="20" font-weight="bold" opacity="0" id="tAl">A</text>
+                            <g id="rayAB" opacity="0">
+                                <line x1="100" y1="260" x2="450" y2="260" stroke="black" stroke-width="2.5"/>
+                                <line x1="444" y1="254" x2="456" y2="266" stroke="black" stroke-width="1.8"/>
+                                <line x1="456" y1="254" x2="444" y2="266" stroke="black" stroke-width="1.8"/>
+                                <text x="456" y="265" font-size="18" font-weight="bold">B</text>
+                                <text x="280" y="290" text-anchor="middle" font-size="13" fill="#1565c0">On trace la demi-droite [AB)</text>
+                            </g>
+                            <g id="rapTrac" class="rap-hidden">
+                                <path d="M 0 260 A 100 100 0 0 1 200 260 Z" fill="rgba(120,228,235,0.82)" stroke="#0a8090" stroke-width="2"/>
+                                <line x1="0" y1="260" x2="200" y2="260" stroke="#0a8090" stroke-width="1.5"/>
+                                <rect x="90" y="259" width="20" height="10" rx="4" fill="rgba(80,200,215,0.9)" stroke="#0a8090" stroke-width="1.2"/>
+                                <circle cx="100" cy="260" r="7" fill="white" stroke="#222" stroke-width="1.4"/>
+                                <circle cx="100" cy="260" r="2" fill="#222"/>
+                                <line x1="93" y1="260" x2="107" y2="260" stroke="#222" stroke-width="1"/>
+                                <line x1="100" y1="253" x2="100" y2="267" stroke="#222" stroke-width="1"/>
+                                <g id="ticksTrac"></g>
+                                <g id="labelsTrac"></g>
+                                <g id="labels2Trac"></g>
+                                <rect x="85" y="156" width="30" height="16" rx="3" fill="black"/>
+                                <text x="100" y="168" text-anchor="middle" font-size="10" fill="white" font-weight="bold">90°</text>
+                                <text x="201" y="272" font-size="9" fill="#1565c0" font-weight="bold">0</text>
+                                <text x="200" y="258" font-size="7" fill="#c0392b">180</text>
+                                <text x="-16" y="272" font-size="9" fill="#1565c0" font-weight="bold">180</text>
+                                <text x="-8"  y="258" font-size="7" fill="#c0392b">0</text>
+                                <line id="sweepLine72" x1="100" y1="260" x2="193" y2="260" stroke="#e74c3c" stroke-width="2.2"/>
+                                <g id="mark72">
+                                    <line x1="100" y1="260" x2="131" y2="165" stroke="#e74c3c" stroke-width="2.5" stroke-dasharray="5,3"/>
+                                    <circle cx="131" cy="165" r="5" fill="#e74c3c"/>
+                                    <text x="136" y="162" font-size="13" fill="#e74c3c" font-weight="bold">72°</text>
+                                </g>
+                                <text x="94" y="308" text-anchor="middle" font-size="12" fill="#1565c0">Rapporteur centré en A, 0° sur [AB), on repère 72°</text>
+                            </g>
+                            <g id="pencilTrac" opacity="0">
+                                <g transform="translate(131,165) rotate(18)">
+                                    <polygon points="-3.5,0 3.5,0 0,11" fill="#d4a76a"/>
+                                    <line x1="0" y1="7" x2="0" y2="11" stroke="#222" stroke-width="1.5"/>
+                                    <rect x="-3.5" y="-28" width="7" height="28" fill="#f7dc6f" stroke="#d4ac0d" stroke-width="0.8"/>
+                                    <rect x="-3.5" y="-35" width="7" height="8" fill="#e8a0a0" stroke="#d4ac0d" stroke-width="0.8"/>
+                                </g>
+                            </g>
+                            <g id="rulerTrac" opacity="0" transform="translate(100,260) rotate(-71.9)">
+                                <rect x="-12" y="0" width="228" height="18" fill="rgba(210,235,255,0.90)" stroke="#4a80a8" stroke-width="1.5" rx="2"/>
+                                <line x1="-12" y1="0" x2="216" y2="0" stroke="#4a80a8" stroke-width="1.5"/>
+                                <line x1="0"   y1="0" x2="0"   y2="18" stroke="#4a80a8" stroke-width="1.5"/>
+                                <line x1="20"  y1="0" x2="20"  y2="7"  stroke="#4a80a8" stroke-width="0.8"/>
+                                <line x1="40"  y1="0" x2="40"  y2="11" stroke="#4a80a8" stroke-width="1.2"/>
+                                <line x1="60"  y1="0" x2="60"  y2="7"  stroke="#4a80a8" stroke-width="0.8"/>
+                                <line x1="80"  y1="0" x2="80"  y2="11" stroke="#4a80a8" stroke-width="1.2"/>
+                                <line x1="100" y1="0" x2="100" y2="18" stroke="#4a80a8" stroke-width="1.5"/>
+                                <line x1="120" y1="0" x2="120" y2="7"  stroke="#4a80a8" stroke-width="0.8"/>
+                                <line x1="140" y1="0" x2="140" y2="11" stroke="#4a80a8" stroke-width="1.2"/>
+                                <line x1="160" y1="0" x2="160" y2="7"  stroke="#4a80a8" stroke-width="0.8"/>
+                                <line x1="180" y1="0" x2="180" y2="11" stroke="#4a80a8" stroke-width="1.2"/>
+                                <line x1="200" y1="0" x2="200" y2="18" stroke="#4a80a8" stroke-width="1.5"/>
+                            </g>
+                            <g id="trait72" opacity="0">
+                                <line x1="100" y1="260" x2="162" y2="70" stroke="#e74c3c" stroke-width="2" stroke-dasharray="6,4"/>
+                                <circle cx="162" cy="70" r="5" fill="#e74c3c"/>
+                                <text x="280" y="305" text-anchor="middle" font-size="13" fill="#1565c0">Rapporteur enlevé — trait de repère à 72°</text>
+                            </g>
+                            <g id="rayAC" opacity="0">
+                                <line x1="100" y1="260" x2="162" y2="70" stroke="black" stroke-width="2.5"/>
+                                <line x1="156" y1="64" x2="168" y2="76" stroke="black" stroke-width="1.8"/>
+                                <line x1="168" y1="64" x2="156" y2="76" stroke="black" stroke-width="1.8"/>
+                                <text x="167" y="65" font-size="18" font-weight="bold">C</text>
+                                <path d="M 160 260 A 60 60 0 0 0 119 203" stroke="#e74c3c" stroke-width="2" fill="rgba(231,76,60,0.12)"/>
+                                <text x="168" y="235" font-size="16" fill="#e74c3c" font-weight="bold">72°</text>
+                                <text x="280" y="305" text-anchor="middle" font-size="13" fill="#1565c0">On trace la demi-droite [AC) à 72° de [AB)</text>
+                            </g>
+                        </svg>
+                    </div>
+                    <div class="anim-controls-row">
+                        <button class="anim-btn" onclick="nextStepTrac()">Étape suivante ▶</button>
+                        <button class="anim-btn anim-reset" onclick="resetTrac()">Recommencer ↺</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ===== SLIDE 7 : ANGLES SUPPLÉMENTAIRES ===== -->
+            <div class="slide">
+                <h2><u>IV. Angles supplémentaires</u></h2>
+                <div class="definition">
+                    <div class="step"><strong>Définition :</strong> Deux angles sont <span class="red-text">supplémentaires</span> si la somme de leurs mesures est égale à <span class="red-text">180°</span>.</div>
+                </div>
+                <div class="example step">
+                    <svg width="300" height="120" viewBox="-10 -22 340 162" style="display:block; margin:auto; max-width:100%;">
+                        <line x1="20" y1="90" x2="300" y2="90" stroke="black" stroke-width="2"/>
+                        <line x1="160" y1="90" x2="240" y2="20" stroke="black" stroke-width="2"/>
+                        <path d="M 160 90 L 120 90 A 40 40 0 0 1 190 64 Z" fill="rgba(0,0,200,0.12)" stroke="none"/>
+                        <path d="M 120 90 A 40 40 0 0 1 190 64" fill="none" stroke="blue" stroke-width="2"/>
+                        <text x="110" y="60" font-size="16" fill="blue">α</text>
+                        <path d="M 160 90 L 190 64 A 40 40 0 0 1 200 90 Z" fill="rgba(0,160,0,0.12)" stroke="none"/>
+                        <path d="M 190 64 A 40 40 0 0 1 200 90" fill="none" stroke="green" stroke-width="2"/>
+                        <text x="196" y="71" font-size="16" fill="green">β</text>
+                        <line x1="156" y1="86" x2="164" y2="94" stroke="black" stroke-width="1.8"/>
+                        <line x1="164" y1="86" x2="156" y2="94" stroke="black" stroke-width="1.8"/>
+                        <text x="25" y="118" font-size="13" fill="black">α + β = 180° → α et β sont supplémentaires</text>
+                    </svg>
+                </div>
+                <div class="remarque step">
+                    <strong>Remarque :</strong> Deux angles supplémentaires <strong>adjacents</strong> forment ensemble un <span class="red-text">angle plat</span>.
+                </div>
+                <h2 class="step"><u>V. Angles adjacents</u></h2>
+                <div class="definition step">
+                    <strong>Définition :</strong> Deux angles sont <span class="red-text">adjacents</span> si :<br>
+                    • ils ont le <span class="red-text">même sommet</span>,<br>
+                    • ils ont un <span class="red-text">côté commun</span>,<br>
+                    • ils sont de <span class="red-text">part et d'autre</span> de ce côté commun.
+                </div>
+                <div class="example step">
+                    <svg width="280" height="160" viewBox="-18 -12 346 200" style="display:block; margin:auto; max-width:100%;">
+                        <line x1="150" y1="145" x2="35" y2="65" stroke="black" stroke-width="2"/>
+                        <line x1="150" y1="145" x2="249" y2="46" stroke="red" stroke-width="2"/>
+                        <line x1="150" y1="145" x2="290" y2="145" stroke="black" stroke-width="2"/>
+                        <path d="M 150 145 L 121 125 A 35 35 0 0 1 175 120 Z" fill="rgba(0,0,200,0.12)" stroke="none"/>
+                        <path d="M 121 125 A 35 35 0 0 1 175 120" fill="none" stroke="blue" stroke-width="2"/>
+                        <foreignObject x="100" y="62" width="62" height="44">
+                            <div xmlns="http://www.w3.org/1999/xhtml" style="padding-top:14px;">
+                                <span class="angle" style="color:blue; font-weight:bold; font-size:12px; font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;">AOB</span>
+                            </div>
+                        </foreignObject>
+                        <path d="M 150 145 L 175 120 A 35 35 0 0 1 185 145 Z" fill="rgba(0,160,0,0.12)" stroke="none"/>
+                        <path d="M 175 120 A 35 35 0 0 1 185 145" fill="none" stroke="green" stroke-width="2"/>
+                        <foreignObject x="182" y="96" width="62" height="44">
+                            <div xmlns="http://www.w3.org/1999/xhtml" style="padding-top:14px;">
+                                <span class="angle" style="color:green; font-weight:bold; font-size:12px; font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;">BOC</span>
+                            </div>
+                        </foreignObject>
+                        <line x1="146" y1="141" x2="154" y2="149" stroke="black" stroke-width="1.8"/>
+                        <line x1="154" y1="141" x2="146" y2="149" stroke="black" stroke-width="1.8"/>
+                        <text x="140" y="162" font-size="14" font-weight="bold">O</text>
+                        <line x1="31" y1="61" x2="39" y2="69" stroke="black" stroke-width="1.8"/>
+                        <line x1="39" y1="61" x2="31" y2="69" stroke="black" stroke-width="1.8"/>
+                        <text x="22" y="59" font-size="14" font-weight="bold">A</text>
+                        <line x1="245" y1="42" x2="253" y2="50" stroke="red" stroke-width="1.8"/>
+                        <line x1="253" y1="42" x2="245" y2="50" stroke="red" stroke-width="1.8"/>
+                        <text x="255" y="41" font-size="14" font-weight="bold" fill="red">B</text>
+                        <line x1="286" y1="141" x2="294" y2="149" stroke="black" stroke-width="1.8"/>
+                        <line x1="294" y1="141" x2="286" y2="149" stroke="black" stroke-width="1.8"/>
+                        <text x="296" y="141" font-size="14" font-weight="bold">C</text>
+                    </svg>
+                    <p style="text-align:center; font-size:0.8em; margin-top:4px;">
+                        Les angles <span class="angle">AOB</span> et <span class="angle">BOC</span> sont <strong>adjacents</strong> ([OB) est le côté commun en rouge).
+                    </p>
+                </div>
+            </div>
+
+            <!-- ===== SLIDE 8 : ANGLES OPPOSÉS + BISSECTRICE ===== -->
+            <div class="slide">
+                <h2><u>VI. Angles opposés par le sommet</u></h2>
+                <div class="definition">
+                    <div class="step"><strong>Définition :</strong> Deux angles sont <span class="red-text">opposés par le sommet</span> si ils ont le <span class="red-text">même sommet</span> et si les côtés de l'un sont le <span class="red-text">prolongement</span> des côtés de l'autre.</div>
+                </div>
+                <div class="two-columns">
+                    <div class="column">
+                        <div class="example step">
+                            <svg width="240" height="160" viewBox="-15 -12 330 224" style="display:block; margin:auto; max-width:100%;">
+                                <line x1="30" y1="50" x2="270" y2="155" stroke="black" stroke-width="2"/>
+                                <line x1="270" y1="50" x2="30" y2="155" stroke="black" stroke-width="2"/>
+                                <path d="M 150 102 L 130 93 A 22 22 0 0 1 170 93 Z" fill="rgba(220,0,0,0.2)" stroke="none"/>
+                                <path d="M 130 93 A 22 22 0 0 1 170 93" fill="none" stroke="red" stroke-width="2"/>
+                                <text x="142" y="86" font-size="15" fill="red">α</text>
+                                <path d="M 150 102 L 170 111 A 22 22 0 0 1 130 111 Z" fill="rgba(220,0,0,0.2)" stroke="none"/>
+                                <path d="M 170 111 A 22 22 0 0 1 130 111" fill="none" stroke="red" stroke-width="2"/>
+                                <text x="142" y="128" font-size="15" fill="red">α</text>
+                                <line x1="144" y1="96" x2="156" y2="108" stroke="black" stroke-width="1.8"/>
+                                <line x1="156" y1="96" x2="144" y2="108" stroke="black" stroke-width="1.8"/>
+                                <text x="157" y="106" font-size="14" font-weight="bold">O</text>
+                                <text x="30" y="182" font-size="12" fill="black">Les deux angles rouges sont OPS.</text>
+                            </svg>
+                        </div>
+                        <div class="important step">
+                            <span class="red-text">Propriété :</span> Deux angles <span class="red-text">opposés par le sommet</span> sont toujours <span class="red-text">égaux</span>.
+                        </div>
+                    </div>
+                    <div class="column">
+                        <h2 class="step"><u>VII. Bissectrice</u></h2>
+                        <div class="definition step">
+                            <strong>Définition :</strong> La <strong>bissectrice</strong> d'un angle est la demi-droite issue du <strong>sommet</strong> qui partage l'angle en deux angles <strong>adjacents de même mesure</strong>.
+                        </div>
+                        <div class="important step">
+                            <span class="red-text">Propriété :</span> Si [OD) est la bissectrice de <span class="angle">AOB</span> :<br>
+                            <div style="text-align:center; margin-top:6px;">
+                                <span class="angle">AOD</span> = <span class="angle">DOB</span> = <span class="angle">AOB</span> ÷ 2
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ===== SLIDE 9 : TRACER LA BISSECTRICE ===== -->
+            <div class="slide">
+                <h3><u>Tracer la bissectrice au rapporteur</u></h3>
+                <div class="method">
+                    <div class="step"><strong>Méthode :</strong></div>
+                    <div class="step">① Mesurer l'angle <span class="angle">AOB</span> au rapporteur.</div>
+                    <div class="step">② Diviser cette mesure par <strong>2</strong>.</div>
+                    <div class="step">③ Tracer la demi-droite [OD) faisant un angle égal à la moitié de <span class="angle">AOB</span> avec [OA).</div>
+                    <div class="step"><strong>Exemple :</strong> Si <span class="angle">AOB</span> = 80°, la bissectrice fait un angle de 80° ÷ 2 = <strong>40°</strong> avec [OA).</div>
+                </div>
+                <div class="example step">
+                    <strong>Exemple animé : bissectrice de <span class="angle">AOB</span> = 80° au rapporteur</strong>
+                    <div class="step-box"><span id="stepBisRap">Cliquez sur « Étape suivante » pour voir la construction.</span></div>
+                    <div class="svg-wrap">
+                        <svg id="svgBisRap" width="440" height="280" viewBox="-15 -15 530 350" style="max-width:100%; height:auto; background:#fafafa; display:block; margin:0 auto;">
+                            <g id="brOA" opacity="0">
+                                <line x1="130" y1="270" x2="420" y2="270" stroke="black" stroke-width="2.5"/>
+                                <line x1="416" y1="266" x2="424" y2="274" stroke="black" stroke-width="1.8"/>
+                                <line x1="424" y1="266" x2="416" y2="274" stroke="black" stroke-width="1.8"/>
+                                <text x="428" y="275" font-size="18" font-weight="bold">A</text>
+                            </g>
+                            <g id="brOB" opacity="0">
+                                <line x1="130" y1="270" x2="165" y2="73" stroke="black" stroke-width="2.5"/>
+                                <line x1="161" y1="69" x2="169" y2="77" stroke="black" stroke-width="1.8"/>
+                                <line x1="169" y1="69" x2="161" y2="77" stroke="black" stroke-width="1.8"/>
+                                <text x="170" y="70" font-size="18" font-weight="bold">B</text>
+                            </g>
+                            <g id="brO" opacity="0">
+                                <line x1="124" y1="264" x2="136" y2="276" stroke="black" stroke-width="2"/>
+                                <line x1="136" y1="264" x2="124" y2="276" stroke="black" stroke-width="2"/>
+                                <text x="108" y="274" font-size="18" font-weight="bold">O</text>
+                            </g>
+                            <g id="brArcAOB" opacity="0">
+                                <path d="M 130 270 L 200 270 A 70 70 0 0 0 142 201 Z" fill="rgba(52,152,219,0.12)" stroke="none"/>
+                                <path d="M 200 270 A 70 70 0 0 0 142 201" fill="none" stroke="#2980b9" stroke-width="2"/>
+                                <text x="214" y="236" font-size="15" fill="#2980b9" font-weight="bold">80°</text>
+                            </g>
+                            <g id="brRapporteur" class="br-hidden">
+                                <path d="M 40 270 A 90 90 0 0 1 220 270 Z" fill="rgba(120,228,235,0.82)" stroke="#0a8090" stroke-width="2"/>
+                                <line x1="40" y1="270" x2="220" y2="270" stroke="#0a8090" stroke-width="1.5"/>
+                                <rect x="120" y="269" width="20" height="10" rx="4" fill="rgba(80,200,215,0.9)" stroke="#0a8090" stroke-width="1.2"/>
+                                <circle cx="130" cy="270" r="7" fill="white" stroke="#222" stroke-width="1.4"/>
+                                <circle cx="130" cy="270" r="2" fill="#222"/>
+                                <line x1="123" y1="270" x2="137" y2="270" stroke="#222" stroke-width="1"/>
+                                <line x1="130" y1="263" x2="130" y2="277" stroke="#222" stroke-width="1"/>
+                                <g id="ticksBR"></g>
+                                <g id="labelsBR"></g>
+                                <g id="labels2BR"></g>
+                                <rect x="115" y="178" width="30" height="15" rx="3" fill="black"/>
+                                <text x="130" y="190" text-anchor="middle" font-size="10" fill="white" font-weight="bold">90°</text>
+                                <text x="222" y="282" font-size="9" fill="#1565c0" font-weight="bold">0</text>
+                                <text x="220" y="268" font-size="7" fill="#c0392b">180</text>
+                                <text x="22"  y="282" font-size="9" fill="#1565c0" font-weight="bold">180</text>
+                                <text x="30"  y="268" font-size="7" fill="#c0392b">0</text>
+                                <line x1="130" y1="270" x2="144" y2="189" stroke="#e74c3c" stroke-width="2" stroke-dasharray="5,3" id="brLine80"/>
+                                <text x="146" y="183" font-size="11" fill="#e74c3c" font-weight="bold">80°</text>
+                                <line x1="130" y1="270" x2="199" y2="212" stroke="#27ae60" stroke-width="2.5" opacity="0" id="brLine40"/>
+                                <text x="202" y="208" font-size="12" fill="#27ae60" font-weight="bold" opacity="0" id="brLabel40">40°</text>
+                            </g>
+                            <g id="brPencil" opacity="0">
+                                <g transform="translate(199,212) rotate(22)">
+                                    <polygon points="-3.5,0 3.5,0 0,11" fill="#d4a76a"/>
+                                    <line x1="0" y1="7" x2="0" y2="11" stroke="#222" stroke-width="1.5"/>
+                                    <rect x="-3.5" y="-28" width="7" height="28" fill="#f7dc6f" stroke="#d4ac0d" stroke-width="0.8"/>
+                                    <rect x="-3.5" y="-35" width="7" height="8" fill="#e8a0a0" stroke="#d4ac0d" stroke-width="0.8"/>
+                                </g>
+                            </g>
+                            <circle id="brDot40" cx="199" cy="212" r="4" fill="#e74c3c" opacity="0"/>
+                            <text id="brResult" x="230" y="170" font-size="13" fill="#c0392b" font-weight="bold" opacity="0">80° ÷ 2 = <tspan font-size="15">40°</tspan></text>
+                            <g id="brOD" opacity="0">
+                                <line x1="130" y1="270" x2="283" y2="141" stroke="#e74c3c" stroke-width="2.5"/>
+                                <line x1="279" y1="137" x2="287" y2="145" stroke="#e74c3c" stroke-width="1.8"/>
+                                <line x1="287" y1="137" x2="279" y2="145" stroke="#e74c3c" stroke-width="1.8"/>
+                                <text x="288" y="138" font-size="18" font-weight="bold" fill="#e74c3c">D</text>
+                            </g>
+                            <g id="brArcsEqual" opacity="0">
+                                <path d="M 130 270 L 185 270 A 55 55 0 0 0 172 235 Z" fill="rgba(39,174,96,0.18)" stroke="none"/>
+                                <path d="M 185 270 A 55 55 0 0 0 172 235" fill="none" stroke="#27ae60" stroke-width="2.5"/>
+                                <text x="196" y="258" font-size="13" fill="#27ae60" font-weight="bold">40°</text>
+                                <path d="M 130 270 L 191 219 A 80 80 0 0 0 144 191 Z" fill="rgba(52,152,219,0.18)" stroke="none"/>
+                                <path d="M 191 219 A 80 80 0 0 0 144 191" fill="none" stroke="#2980b9" stroke-width="2.5"/>
+                                <text x="157" y="208" font-size="13" fill="#2980b9" font-weight="bold">40°</text>
+                            </g>
+                        </svg>
+                    </div>
+                    <div class="anim-controls-row">
+                        <button class="anim-btn" onclick="nextStepBisRap()">Étape suivante ▶</button>
+                        <button class="anim-btn anim-reset" onclick="resetBisRap()">Recommencer ↺</button>
+                    </div>
+                </div>
+            </div>
+
+        </div><!-- fin .content -->
+
+        <div class="controls">
+            <div class="controls-left">
+                <button id="prevBtn" onclick="changeSlide(-1)">← Précédent</button>
+                <button class="btn-reset" onclick="resetSlide()">⟲</button>
+            </div>
+            <div class="progress">
+                <span><span id="currentSlide">1</span> / <span id="totalSlides">9</span></span>
+                <span class="step-indicator" id="stepIndicator"></span>
+            </div>
+            <div class="controls-right">
+                <button class="btn-menu" onclick="openMenu()">📋 Menu</button>
+                <button class="btn-menu" onclick="openHelp()">❓ Aide</button>
+                <button id="nextBtn" onclick="changeSlide(1)">Suivant →</button>
+            </div>
+        </div>
+    </div><!-- fin .container -->
+
+    <div class="slide-menu" id="slideMenu">
+        <div class="menu-content">
+            <h2>Sélectionner une diapositive</h2>
+            <div class="slide-list" id="slideList"></div>
+            <button class="close-menu" onclick="closeMenu()">Fermer</button>
+        </div>
+    </div>
+
+    <div class="help-overlay" id="helpOverlay">
+        <div class="help-content">
+            <h2>Raccourcis clavier</h2>
+            <ul>
+                <li><kbd>↑</kbd> ou <kbd>Espace</kbd> : Étape/Slide suivante</li>
+                <li><kbd>↓</kbd> : Étape/Slide précédente</li>
+                <li><kbd>M</kbd> : Ouvrir le menu des slides</li>
+                <li><kbd>R</kbd> : Réinitialiser la slide actuelle</li>
+                <li><kbd>H</kbd> ou <kbd>?</kbd> : Afficher cette aide</li>
+                <li><kbd>Échap</kbd> : Fermer les menus</li>
+            </ul>
+            <button class="close-menu" onclick="closeHelp()">Fermer</button>
+        </div>
+    </div>
+
+    <script src="script-angles.js"></script>
+</body>
+</html>
