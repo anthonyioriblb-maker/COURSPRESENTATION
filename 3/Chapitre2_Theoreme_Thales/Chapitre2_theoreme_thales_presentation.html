@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Chapitre 2 - Théorème de Thalès</title>
+    <link rel="stylesheet" href="../../styles.css">
+</head>
+<body>
+    <div class="container">
+        <div class="content">
+
+            <!-- Slide 1 : Titre -->
+            <div class="slide active">
+                <h1>Chapitre 2 : Théorème de Thalès</h1>
+            </div>
+
+            <!-- Slide 2 : Produit en croix -->
+            <div class="slide">
+                <h2>I. Produit en croix</h2>
+                <div class="remarque">
+                    <div class="step">Pour utiliser le théorème de Thalès, il faut maîtriser le <strong>produit en croix</strong> (règle de trois).</div>
+                    <div class="step">On l'utilise pour résoudre des équations du style : <span class="fraction"><span class="numerateur"><em>x</em></span><span class="denominateur">3</span></span> = <span class="fraction"><span class="numerateur">5</span><span class="denominateur">6</span></span></div>
+                </div>
+                <div class="example">
+                    <div class="step"><strong>Exemple :</strong> <span class="fraction"><span class="numerateur"><em>x</em></span><span class="denominateur">3</span></span> = <span class="fraction"><span class="numerateur">5</span><span class="denominateur">6</span></span></div>
+                    <div class="step">On obtient : 6 × <em>x</em> = 3 × 5</div>
+                    <div class="step">puis <em>x</em> = <span class="fraction"><span class="numerateur">3 × 5</span><span class="denominateur">6</span></span> = <span class="fraction"><span class="numerateur">15</span><span class="denominateur">6</span></span> = <span class="mark-blue">2,5</span></div>
+                </div>
+            </div>
+
+            <!-- Slide 3 : Théorème de Thalès -->
+            <div class="slide">
+                <h2>II. Théorème de Thalès</h2>
+                <div class="important">
+                    <div class="step"><span style="color:red;">Propriété :</span> Soient deux droites (d) et (d') sécantes au point A.</div>
+                    <div class="step">Soient B, M deux points de (d) et C, N deux points de (d'), distincts de A.</div>
+                    <div class="step"><strong>Si</strong> (BC) ∥ (MN), <strong>alors</strong> :</div>
+                    <div class="step" style="text-align:center; font-size:1.1em;">
+                        <span class="fraction"><span class="numerateur">AM</span><span class="denominateur">AB</span></span> = <span class="fraction"><span class="numerateur">AN</span><span class="denominateur">AC</span></span> = <span class="fraction"><span class="numerateur">MN</span><span class="denominateur">BC</span></span>
+                    </div>
+                </div>
+                <div class="remarque">
+                    <div class="step">Il existe deux configurations : les droites peuvent se croiser ou ne pas se croiser entre les droites parallèles (configuration papillon).</div>
+                </div>
+            </div>
+
+            <!-- Slide 4 : Exemples Thalès -->
+            <div class="slide">
+                <h2>Exemples d'application de Thalès</h2>
+                <div class="example">
+                    <div class="step"><strong>Exemple 1 :</strong> (MN) ∥ (FG), EM = 2, EF = 5, EG = 7, FG = 8. Calculer EN et MN.</div>
+                    <div class="step">D'après le théorème de Thalès : <span class="fraction"><span class="numerateur">EM</span><span class="denominateur">EF</span></span> = <span class="fraction"><span class="numerateur">EN</span><span class="denominateur">EG</span></span> = <span class="fraction"><span class="numerateur">MN</span><span class="denominateur">FG</span></span></div>
+                    <div class="step">Soit : <span class="fraction"><span class="numerateur">2</span><span class="denominateur">5</span></span> = <span class="fraction"><span class="numerateur">EN</span><span class="denominateur">7</span></span> = <span class="fraction"><span class="numerateur">MN</span><span class="denominateur">8</span></span></div>
+                    <div class="step">EN = <span class="fraction"><span class="numerateur">2 × 7</span><span class="denominateur">5</span></span> = <span class="mark-blue">2,8</span> &nbsp;&nbsp; MN = <span class="fraction"><span class="numerateur">2 × 8</span><span class="denominateur">5</span></span> = <span class="mark-blue">3,2</span></div>
+                </div>
+                <div class="example">
+                    <div class="step"><strong>Exemple 2 :</strong> (FA) ∥ (CN), ON = 4, OF = 6, AF = 7. Calculer CN.</div>
+                    <div class="step"><span class="fraction"><span class="numerateur">OC</span><span class="denominateur">OA</span></span> = <span class="fraction"><span class="numerateur">ON</span><span class="denominateur">OF</span></span> = <span class="fraction"><span class="numerateur">CN</span><span class="denominateur">AF</span></span> soit <span class="fraction"><span class="numerateur">4</span><span class="denominateur">6</span></span> = <span class="fraction"><span class="numerateur">CN</span><span class="denominateur">7</span></span></div>
+                    <div class="step">CN = <span class="fraction"><span class="numerateur">4 × 7</span><span class="denominateur">6</span></span> = <span class="fraction"><span class="numerateur">28</span><span class="denominateur">6</span></span> ≈ <span class="mark-blue">4,67</span></div>
+                </div>
+            </div>
+
+            <!-- Slide 5 : Réciproque -->
+            <div class="slide">
+                <h2>III. Réciproque du théorème de Thalès</h2>
+                <div class="important">
+                    <div class="step"><span style="color:red;">Propriété :</span> Soient deux droites (d) et (d') sécantes en A, B, M ∈ (d), C, N ∈ (d') distincts de A.</div>
+                    <div class="step"><strong>Si</strong> A, M, B sont alignés dans cet ordre <strong>et</strong> A, N, C dans cet ordre,</div>
+                    <div class="step"><strong>et si</strong> <span class="fraction"><span class="numerateur">AM</span><span class="denominateur">AB</span></span> = <span class="fraction"><span class="numerateur">AN</span><span class="denominateur">AC</span></span></div>
+                    <div class="step"><strong>Alors</strong> les droites (BC) et (MN) sont <strong>parallèles</strong>.</div>
+                </div>
+                <div class="example">
+                    <div class="step"><strong>Exemple :</strong> AM = 3, AB = 8, AN = 2,4, AC = 6,4. Montrer que (BC) ∥ (MN).</div>
+                    <div class="step"><span class="fraction"><span class="numerateur">AM</span><span class="denominateur">AB</span></span> = <span class="fraction"><span class="numerateur">3</span><span class="denominateur">8</span></span> &nbsp;&nbsp; et &nbsp;&nbsp; <span class="fraction"><span class="numerateur">AN</span><span class="denominateur">AC</span></span> = <span class="fraction"><span class="numerateur">2,4</span><span class="denominateur">6,4</span></span> = <span class="fraction"><span class="numerateur">24</span><span class="denominateur">64</span></span> = <span class="fraction"><span class="numerateur">3</span><span class="denominateur">8</span></span></div>
+                    <div class="step"><span class="fraction"><span class="numerateur">AM</span><span class="denominateur">AB</span></span> = <span class="fraction"><span class="numerateur">AN</span><span class="denominateur">AC</span></span> et les points sont dans le bon ordre.</div>
+                    <div class="step">D'après la réciproque du théorème de Thalès : <span class="mark-green">(BC) ∥ (MN)</span>.</div>
+                </div>
+            </div>
+
+            <!-- Slide 6 : Contraposée -->
+            <div class="slide">
+                <h2>IV. Contraposée du théorème de Thalès</h2>
+                <div class="important">
+                    <div class="step"><span style="color:red;">Propriété :</span> Dans la même configuration,</div>
+                    <div class="step"><strong>Si</strong> <span class="fraction"><span class="numerateur">AM</span><span class="denominateur">AB</span></span> ≠ <span class="fraction"><span class="numerateur">AN</span><span class="denominateur">AC</span></span></div>
+                    <div class="step"><strong>Alors</strong> les droites (BC) et (MN) <span style="color:red;">ne sont pas parallèles</span>.</div>
+                </div>
+                <div class="example">
+                    <div class="step"><strong>Exemple :</strong> ON = 6, OB = 8, OM = 8,1, OA = 10,7. (NM) ∥ (AB) ?</div>
+                    <div class="step"><span class="fraction"><span class="numerateur">ON</span><span class="denominateur">OB</span></span> = <span class="fraction"><span class="numerateur">6</span><span class="denominateur">8</span></span> &nbsp;&nbsp; et &nbsp;&nbsp; <span class="fraction"><span class="numerateur">OM</span><span class="denominateur">OA</span></span> = <span class="fraction"><span class="numerateur">8,1</span><span class="denominateur">10,7</span></span></div>
+                    <div class="step">6 × 10,7 = 64,2 &nbsp; et &nbsp; 8 × 8,1 = 64,8 &nbsp; donc <span class="fraction"><span class="numerateur">6</span><span class="denominateur">8</span></span> ≠ <span class="fraction"><span class="numerateur">8,1</span><span class="denominateur">10,7</span></span></div>
+                    <div class="step">D'après la contraposée : <span class="mark-pink">(MN) et (BA) ne sont pas parallèles</span>.</div>
+                </div>
+            </div>
+
+            <!-- Slide 7 : Agrandissement / Réduction -->
+            <div class="slide">
+                <h2>V. Agrandissement et réduction</h2>
+                <div class="definition">
+                    <div class="step"><span style="color:red;">Définitions :</span></div>
+                    <div class="step">• <span style="color:red;">Agrandissement</span> : on multiplie toutes les dimensions par <em>k</em> &gt; 1.</div>
+                    <div class="step">• <span style="color:red;">Réduction</span> : on multiplie toutes les longueurs par <em>k</em> &lt; 1.</div>
+                    <div class="step"><em>k</em> est le <strong>rapport d'agrandissement/réduction</strong>.</div>
+                </div>
+                <div class="important">
+                    <div class="step"><span style="color:red;">Propriété :</span> Dans un agrandissement/réduction de rapport <em>k</em> :</div>
+                    <div class="step">• Le <strong>périmètre</strong> est multiplié par <em>k</em></div>
+                    <div class="step">• L'<strong>aire</strong> est multipliée par <em>k</em>²</div>
+                    <div class="step">• Le <strong>volume</strong> est multiplié par <em>k</em>³</div>
+                </div>
+                <div class="example">
+                    <div class="step"><strong>Exemple :</strong> ADE est un agrandissement de ACB avec AD = 9 et AC = 3.</div>
+                    <div class="step"><em>k</em> = <span class="fraction"><span class="numerateur">AD</span><span class="denominateur">AC</span></span> = <span class="fraction"><span class="numerateur">9</span><span class="denominateur">3</span></span> = <span class="mark-blue">3</span></div>
+                    <div class="step">L'aire de ADE est <strong>9 fois</strong> plus grande que celle de ACB.</div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Contrôles -->
+        <div class="controls">
+            <div class="controls-left">
+                <button class="btn-menu" onclick="openMenu()">☰ Menu</button>
+                <button onclick="openHelp()">❓ Aide</button>
+            </div>
+            <div class="progress">
+                <span id="stepIndicator" class="step-indicator hidden">Étape 0/0</span>
+                <span>Slide <span id="currentSlide">1</span> / <span id="totalSlides">0</span></span>
+            </div>
+            <div class="controls-right">
+                <button class="btn-reset" onclick="resetSlide()">↻ Réinitialiser</button>
+                <button id="prevBtn" onclick="changeSlide(-1)">◀ Précédent</button>
+                <button onclick="changeSlide(1)">Suivant ▶</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Menu des slides -->
+    <div id="slideMenu" class="slide-menu">
+        <div class="menu-content">
+            <h2>Navigation</h2>
+            <div id="slideList" class="slide-list"></div>
+            <button class="close-menu" onclick="closeMenu()">Fermer</button>
+        </div>
+    </div>
+
+    <!-- Overlay d'aide -->
+    <div id="helpOverlay" class="help-overlay">
+        <div class="help-content">
+            <h2>Raccourcis clavier</h2>
+            <ul>
+                <li><kbd>→</kbd> ou <kbd>Espace</kbd> : Suivant</li>
+                <li><kbd>←</kbd> : Précédent</li>
+                <li><kbd>M</kbd> : Ouvrir le menu</li>
+                <li><kbd>R</kbd> : Réinitialiser la slide</li>
+                <li><kbd>H</kbd> ou <kbd>?</kbd> : Ouvrir/fermer l'aide</li>
+                <li><kbd>Échap</kbd> : Fermer les overlays</li>
+            </ul>
+            <button class="close-menu" onclick="closeHelp()">Fermer</button>
+        </div>
+    </div>
+
+    <script src="script-thales.js"></script>
+</body>
+</html>

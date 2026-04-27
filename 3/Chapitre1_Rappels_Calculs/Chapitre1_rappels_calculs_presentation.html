@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Chapitre 1 - Rappels de calculs</title>
+    <link rel="stylesheet" href="../../styles.css">
+</head>
+<body>
+    <div class="container">
+        <div class="content">
+
+            <!-- Slide 1 : Titre -->
+            <div class="slide active">
+                <h1>Chapitre 1 : Rappels de calculs</h1>
+            </div>
+
+            <!-- Slide 2 : Priorités de calcul -->
+            <div class="slide">
+                <h2>I. Priorités de calcul et fractions</h2>
+                <div class="remarque">
+                    <div class="step"><strong>Rappel :</strong> Dans un calcul avec plusieurs opérations, il faut respecter l'ordre suivant :</div>
+                    <div class="step">1. Les calculs entre <strong>parenthèses</strong></div>
+                    <div class="step">2. Les <strong>multiplications et divisions</strong> (de gauche à droite)</div>
+                    <div class="step">3. Les <strong>additions et soustractions</strong> (de gauche à droite)</div>
+                </div>
+                <div class="important">
+                    <div class="step"><span style="color:red;">Propriété :</span> Pour <strong>additionner ou soustraire</strong> des fractions, il faut les mettre au même dénominateur.</div>
+                    <div class="step">Pour <strong>multiplier</strong> : <span class="frac"><span class="num"><em>a</em></span><span class="den"><em>b</em></span></span> × <span class="frac"><span class="num"><em>c</em></span><span class="den"><em>d</em></span></span> = <span class="frac"><span class="num"><em>a</em> × <em>c</em></span><span class="den"><em>b</em> × <em>d</em></span></span></div>
+                    <div class="step">Pour <strong>diviser</strong> : <span class="frac"><span class="num"><em>a</em></span><span class="den"><em>b</em></span></span> ÷ <span class="frac"><span class="num"><em>c</em></span><span class="den"><em>d</em></span></span> = <span class="frac"><span class="num"><em>a</em></span><span class="den"><em>b</em></span></span> × <span class="frac"><span class="num"><em>d</em></span><span class="den"><em>c</em></span></span></div>
+                </div>
+            </div>
+
+            <!-- Slide 3 : Exemple 1 fractions -->
+            <div class="slide">
+                <h2>Exemple 1 : calcul avec fractions</h2>
+                <div class="example">
+                    <div class="step"><strong>Calculer et simplifier :</strong> <em>A</em> = <span class="frac"><span class="num">7</span><span class="den">3</span></span> − <span class="frac"><span class="num">−5</span><span class="den">3</span></span> × <span class="frac"><span class="num">2</span><span class="den">11</span></span></div>
+                    <div class="step"><em>A</em> = <span class="frac"><span class="num">7</span><span class="den">3</span></span> − <span class="frac"><span class="num">−10</span><span class="den">33</span></span> &nbsp;&nbsp;<span style="color:#888;font-size:0.8em;">(on multiplie d'abord)</span></div>
+                    <div class="step"><em>A</em> = <span class="frac"><span class="num">7 <span style="color:blue;">× 11</span></span><span class="den">3 <span style="color:blue;">× 11</span></span></span> − <span class="frac"><span class="num">−10</span><span class="den">33</span></span> &nbsp;&nbsp;<span style="color:#888;font-size:0.8em;">(mise au même dénominateur)</span></div>
+                    <div class="step"><em>A</em> = <span class="frac"><span class="num">77</span><span class="den">33</span></span> − <span class="frac"><span class="num">−10</span><span class="den">33</span></span> = <span class="frac"><span class="num">87</span><span class="den">33</span></span></div>
+                    <div class="step"><em>A</em> = <span class="frac"><span class="num"><span class="strikethrough-red">3</span> × 29</span><span class="den"><span class="strikethrough-red">3</span> × 11</span></span> = <span class="frac"><span class="num">29</span><span class="den">11</span></span></div>
+                </div>
+            </div>
+
+            <!-- Slide 4 : Exemple 2 fractions complexes -->
+            <div class="slide">
+                <h2>Exemples 2 et 3 : calculs complexes</h2>
+                <div class="example">
+                    <div class="step"><strong>Exemple 2 :</strong> <em>B</em> = <span class="frac"><span class="num">−5</span><span class="den">3 + <span class="frac"><span class="num">7</span><span class="den">5</span></span></span></span></div>
+                    <div class="step"><em>B</em> = <span class="frac"><span class="num">−5</span><span class="den"><span class="frac"><span class="num">15</span><span class="den">5</span></span> + <span class="frac"><span class="num">7</span><span class="den">5</span></span></span></span> = <span class="frac"><span class="num">−5</span><span class="den"><span class="frac"><span class="num">22</span><span class="den">5</span></span></span></span> = −5 × <span class="frac"><span class="num">5</span><span class="den">22</span></span> = <span class="frac"><span class="num">−25</span><span class="den">22</span></span></div>
+                </div>
+                <div class="example">
+                    <div class="step"><strong>Exemple 3 :</strong> <em>C</em> = (<span class="frac"><span class="num">−2</span><span class="den">7</span></span> − <span class="frac"><span class="num">−4</span><span class="den">21</span></span>) ÷ (<span class="frac"><span class="num">3</span><span class="den">2</span></span> + <span class="frac"><span class="num">1</span><span class="den">2</span></span> × <span class="frac"><span class="num">7</span><span class="den">−9</span></span>)</div>
+                    <div class="step"><em>C</em> = (<span class="frac"><span class="num">−6</span><span class="den">21</span></span> + <span class="frac"><span class="num">4</span><span class="den">21</span></span>) ÷ (<span class="frac"><span class="num">27</span><span class="den">18</span></span> − <span class="frac"><span class="num">7</span><span class="den">18</span></span>) = <span class="frac"><span class="num">−2</span><span class="den">21</span></span> ÷ <span class="frac"><span class="num">20</span><span class="den">18</span></span></div>
+                    <div class="step"><em>C</em> = <span class="frac"><span class="num">−2</span><span class="den">21</span></span> × <span class="frac"><span class="num">18</span><span class="den">20</span></span> = <span class="frac"><span class="num"><span class="strikethrough-red">−2</span> × <span class="strikethrough-blue">3</span> × <span class="strikethrough-green">3</span></span><span class="den"><span class="strikethrough-blue">3</span> × 7 × <span class="strikethrough-red">2</span> × 2 × 5 × <span class="strikethrough-green">3</span></span></span> = <span class="frac"><span class="num">−1</span><span class="den">70</span></span></div>
+                </div>
+            </div>
+
+            <!-- Slide 5 : Puissances positives -->
+            <div class="slide">
+                <h2>II. Puissances</h2>
+                <h3>1) Puissances positives</h3>
+                <div class="definition">
+                    <div class="step"><span style="color:red;">Définition :</span> Pour <em>a</em> un nombre et <em>n</em> un entier positif :</div>
+                    <div class="step" style="text-align:center; font-size:1.1em;"><em>a</em><sup>n</sup> = <em>a</em> × <em>a</em> × ... × <em>a</em> &nbsp;(<em>n</em> facteurs)</div>
+                </div>
+                <div class="remarque">
+                    <div class="step"><strong>Cas particuliers :</strong></div>
+                    <div class="step">• <em>a</em><sup>1</sup> = <em>a</em> pour tout nombre <em>a</em></div>
+                    <div class="step">• <em>a</em><sup>0</sup> = 1 pour tout nombre <em>a</em> non nul</div>
+                    <div class="step">• <em>a</em><sup>−n</sup> = <span class="frac"><span class="num">1</span><span class="den"><em>a</em><sup>n</sup></span></span> (puissance négative = inverse)</div>
+                </div>
+                <div class="example">
+                    <div class="step"><strong>Exemple :</strong> <em>A</em> = 7 × 7 × 7 × 7 = 7<sup>4</sup></div>
+                    <div class="step"><strong>Exemple :</strong> <em>B</em> = <span class="frac"><span class="num">1</span><span class="den">3 × 3 × 3 × 3 × 3</span></span> = <span class="frac"><span class="num">1</span><span class="den">3<sup>5</sup></span></span> = 3<sup>−5</sup></div>
+                </div>
+            </div>
+
+            <!-- Slide 6 : Règles de calcul puissances -->
+            <div class="slide">
+                <h3>2) Règles de calcul sur les puissances</h3>
+                <div class="important">
+                    <div class="step"><span style="color:red;">Propriété :</span> Pour <em>a</em>, <em>b</em> non nuls et <em>n</em>, <em>p</em> entiers relatifs :</div>
+                    <div class="step">• <em>a</em><sup>n</sup> × <em>a</em><sup>p</sup> = <em>a</em><sup>n+p</sup></div>
+                    <div class="step">• <span class="frac"><span class="num"><em>a</em><sup>n</sup></span><span class="den"><em>a</em><sup>p</sup></span></span> = <em>a</em><sup>n−p</sup></div>
+                    <div class="step">• (<em>a</em><sup>n</sup>)<sup>p</sup> = <em>a</em><sup>n×p</sup></div>
+                    <div class="step">• (<em>a</em> × <em>b</em>)<sup>n</sup> = <em>a</em><sup>n</sup> × <em>b</em><sup>n</sup></div>
+                    <div class="step">• (<span class="frac"><span class="num"><em>a</em></span><span class="den"><em>b</em></span></span>)<sup>n</sup> = <span class="frac"><span class="num"><em>a</em><sup>n</sup></span><span class="den"><em>b</em><sup>n</sup></span></span></div>
+                </div>
+                <div class="example">
+                    <div class="step"><strong>Exemples :</strong></div>
+                    <div class="step"><em>A</em> = 5<sup>3</sup> × 5<sup>7</sup> = 5<sup>10</sup></div>
+                    <div class="step"><em>B</em> = <span class="frac"><span class="num">7<sup>8</sup></span><span class="den">7<sup>5</sup></span></span> = 7<sup>3</sup> &nbsp;|&nbsp; <em>C</em> = (2<sup>3</sup>)<sup>4</sup> = 2<sup>12</sup> &nbsp;|&nbsp; <em>D</em> = (<span class="frac"><span class="num">2</span><span class="den">5</span></span>)<sup>3</sup> = <span class="frac"><span class="num">8</span><span class="den">125</span></span></div>
+                </div>
+            </div>
+
+            <!-- Slide 7 : Notation scientifique -->
+            <div class="slide">
+                <h2>III. Notation scientifique</h2>
+                <div class="definition">
+                    <div class="step"><span style="color:red;">Définition :</span> Un nombre est en <span style="color:red;">notation scientifique</span> s'il s'écrit sous la forme <em>a</em> × 10<sup>n</sup> avec :</div>
+                    <div class="step">• <em>a</em> : nombre tel que 1 ≤ |<em>a</em>| &lt; 10</div>
+                    <div class="step">• <em>n</em> : entier relatif</div>
+                </div>
+                <div class="example">
+                    <div class="step"><strong>Exemple 1 :</strong> <em>E</em> = 7,5 × 10<sup>5</sup> × 4 × 8,2 × (10<sup>−1</sup>)<sup>2</sup></div>
+                    <div class="step"><em>E</em> = (7,5 × 4 × 8,2) × (10<sup>5</sup> × 10<sup>−2</sup>) = 246 × 10<sup>3</sup></div>
+                    <div class="step"><em>E</em> = <span class="mark-blue">2,46 × 10<sup>5</sup></span> (notation scientifique) = 246 000</div>
+                </div>
+                <div class="example">
+                    <div class="step"><strong>Exemple 2 :</strong> <em>F</em> = <span class="frac"><span class="num">3 × 10<sup>3</sup> × 7 × 10<sup>2</sup></span><span class="den">50 × 10<sup>−6</sup></span></span> = <span class="frac"><span class="num">21</span><span class="den">50</span></span> × 10<sup>11</sup> = 0,42 × 10<sup>11</sup></div>
+                    <div class="step"><em>F</em> = <span class="mark-blue">4,2 × 10<sup>10</sup></span> (notation scientifique) = 42 000 000 000</div>
+                </div>
+                <div class="example">
+                    <div class="step"><strong>Exemple 3 :</strong> <em>G</em> = 8 × 10<sup>2</sup> + 6 × 10<sup>−3</sup> = 800 + 0,006 = 800,006</div>
+                    <div class="step"><em>G</em> = <span class="mark-blue">8,00006 × 10<sup>2</sup></span></div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Contrôles -->
+        <div class="controls">
+            <div class="controls-left">
+                <button class="btn-menu" onclick="openMenu()">☰ Menu</button>
+                <button onclick="openHelp()">❓ Aide</button>
+            </div>
+            <div class="progress">
+                <span id="stepIndicator" class="step-indicator hidden">Étape 0/0</span>
+                <span>Slide <span id="currentSlide">1</span> / <span id="totalSlides">0</span></span>
+            </div>
+            <div class="controls-right">
+                <button class="btn-reset" onclick="resetSlide()">↻ Réinitialiser</button>
+                <button id="prevBtn" onclick="changeSlide(-1)">◀ Précédent</button>
+                <button onclick="changeSlide(1)">Suivant ▶</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Menu des slides -->
+    <div id="slideMenu" class="slide-menu">
+        <div class="menu-content">
+            <h2>Navigation</h2>
+            <div id="slideList" class="slide-list"></div>
+            <button class="close-menu" onclick="closeMenu()">Fermer</button>
+        </div>
+    </div>
+
+    <!-- Overlay d'aide -->
+    <div id="helpOverlay" class="help-overlay">
+        <div class="help-content">
+            <h2>Raccourcis clavier</h2>
+            <ul>
+                <li><kbd>→</kbd> ou <kbd>Espace</kbd> : Suivant</li>
+                <li><kbd>←</kbd> : Précédent</li>
+                <li><kbd>M</kbd> : Ouvrir le menu</li>
+                <li><kbd>R</kbd> : Réinitialiser la slide</li>
+                <li><kbd>H</kbd> ou <kbd>?</kbd> : Ouvrir/fermer l'aide</li>
+                <li><kbd>Échap</kbd> : Fermer les overlays</li>
+            </ul>
+            <button class="close-menu" onclick="closeHelp()">Fermer</button>
+        </div>
+    </div>
+
+    <script src="script-rappels-calculs.js"></script>
+</body>
+</html>
