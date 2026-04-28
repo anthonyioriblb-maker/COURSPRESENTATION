@@ -6,13 +6,14 @@ const totalSlides = slides.length;
 
 const slideTitles = [
     "Chapitre 6 : Les fractions - Partie 1",
-    "I. Écriture fractionnaire",
+    "I. Écriture fractionnaire — 1) Partage",
+    "I. Écriture fractionnaire — 2) Vocabulaire",
     "II. Fraction et nombres",
     "III. Quotients égaux",
     "IV. Fractions et demi-droite graduée",
-    "V. Comparaison de fractions",
-    "2) Comparer les fractions",
-    "3) Encadrer une fraction par deux entiers consécutifs"
+    "V. Comparaison de fractions — 1) Mettre des fractions au même dénominateur",
+    "V. Comparaison de fractions — 2) Comparer les fractions",
+    "V. Comparaison de fractions — 3) Encadrer une fraction par deux entiers consécutifs"
 ];
 
 document.getElementById('totalSlides').textContent = totalSlides;

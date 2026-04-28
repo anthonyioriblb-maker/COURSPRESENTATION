@@ -8,10 +8,10 @@ const slideTitles = [
     "Chapitre 3 : Les nombres décimaux",
     "I. Les fractions décimales",
     "II. Les nombres décimaux — 1) Définitions",
-    "2) Rang des chiffres",
-    "3) Les différentes décompositions",
+    "II. Les nombres décimaux — 2) Rang des chiffres",
+    "II. Les nombres décimaux — 3) Les différentes décompositions",
     "III. Comparaison des nombres décimaux — 1) Méthodologie",
-    "2) Encadrer et intercaler"
+    "III. Comparaison des nombres décimaux — 2) Encadrer et intercaler"
 ];
 
 document.getElementById('totalSlides').textContent = totalSlides;

@@ -6,16 +6,16 @@ const totalSlides = slides.length;
 
 const slideTitles = [
     "Les nombres relatifs",
-    "I. Qu'est-ce qu'un nombre relatif ?",
-    "2) Distance à zéro",
-    "3) Nombres opposés",
-    "II. Repérage sur une droite graduée",
-    "III. Comparaison de nombres relatifs",
-    "2) Comparaison de nombres de signes différents",
-    "3) Comparaison de nombres positifs",
-    "4) Comparaison de nombres négatifs",
-    "IV. Repérage dans le plan",
-    "2) Coordonnées d'un point"
+    "I. Qu'est-ce qu'un nombre relatif ? — 1) Les nombres relatifs",
+    "I. Qu'est-ce qu'un nombre relatif ? — 2) Distance à zéro",
+    "I. Qu'est-ce qu'un nombre relatif ? — 3) Nombres opposés",
+    "II. Repérage sur une droite graduée — 1) Droite graduée",
+    "III. Comparaison de nombres relatifs — 1) Règle générale",
+    "III. Comparaison de nombres relatifs — 2) Comparaison de nombres de signes différents",
+    "III. Comparaison de nombres relatifs — 3) Comparaison de nombres positifs",
+    "III. Comparaison de nombres relatifs — 4) Comparaison de nombres négatifs",
+    "IV. Repérage dans le plan — 1) Repère du plan",
+    "IV. Repérage dans le plan — 2) Coordonnées d'un point"
 ];
 
 document.getElementById('totalSlides').textContent = totalSlides;

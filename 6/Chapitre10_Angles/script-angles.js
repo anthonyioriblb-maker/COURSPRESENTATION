@@ -6,14 +6,14 @@ const totalSlides = slides.length;
 const slideTitles = [
     "Chapitre 10 : Les angles",
     "I. Vocabulaire",
-    "II. Mesure d'un angle – 1) Mesure en degrés",
-    "II. Mesure d'un angle – 2) Nature des angles",
-    "II. Mesure d'un angle – 3) Tracer un angle de mesure donnée",
+    "II. Mesure d'un angle — 1) Mesure en degrés",
+    "II. Mesure d'un angle — 2) Nature des angles",
+    "II. Mesure d'un angle — 3) Tracer un angle de mesure donnée",
     "III. Angles supplémentaires",
     "IV. Angles adjacents",
     "V. Angles opposés par le sommet",
-    "VI. La bissectrice – 1) Définition",
-    "VI. La bissectrice – 2) Tracer la bissectrice au rapporteur"
+    "VI. La bissectrice — 1) Définition",
+    "VI. La bissectrice — 2) Tracer la bissectrice au rapporteur"
 ];
 
 document.getElementById('totalSlides').textContent = totalSlides;

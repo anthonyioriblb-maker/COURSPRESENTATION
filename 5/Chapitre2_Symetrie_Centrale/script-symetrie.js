@@ -13,8 +13,6 @@ const slideTitles = [
     "IV. Centre de symétrie et axes de symétrie de figures usuelles"
 ];
 
-const slideTitles = ["Symétrie centrale","I. Symétrique d un point","Construction sur feuille blanche","Construction dans un quadrillage","II. Symétrique d une figure","III. Propriétés","IV. Centres de symétrie"];
-
 document.addEventListener('DOMContentLoaded', function() {
     slides = document.querySelectorAll('.slide');
     totalSlides = slides.length;

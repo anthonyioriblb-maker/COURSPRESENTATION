@@ -2,17 +2,8 @@
 const slideTitles = [
     "Chapitre 1 : Les nombres entiers",
     "I. Numération décimale",
-    "I. Numération décimale — Position des chiffres",
-    "I. Numération décimale — Centaines",
-    "I. Numération décimale — Exemple",
     "II. Comparer des nombres entiers",
-    "II. Comparer des nombres entiers — Règle 1",
-    "II. Comparer des nombres entiers — Règle 2",
-    "II. Comparer des nombres entiers — Règle 3",
-    "III. Repérage sur une demi-droite graduée — Définition",
-    "III. Repérage sur une demi-droite graduée — Exemple",
-    "III. Repérage sur une demi-droite graduée — Abscisse",
-    "III. Repérage sur une demi-droite graduée — Exemple d'abscisse"
+    "III. Repérage sur une demi-droite graduée"
 ];
 
 let currentSlideIndex = 0;

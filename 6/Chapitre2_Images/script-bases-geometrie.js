@@ -2,20 +2,9 @@
 const slideTitles = [
     "Chapitre 2 : Les bases de géométrie",
     "I. Rappels",
-    "I. Rappels (suite)",
     "II. Points alignés et droites",
-    "II. Points alignés et droites — Appartenance",
-    "II. Points alignés et droites — Points alignés",
     "III. Position relative de deux droites — 1) Définitions",
-    "III. Position relative de deux droites — 1) Droites sécantes",
-    "III. Position relative de deux droites — 1) Droites parallèles",
-    "III. Position relative de deux droites — 1) Exemples",
-    "III. Position relative de deux droites — 1) Remarque",
-    "III. Position relative de deux droites — 2) Angles formés",
-    "III. Position relative de deux droites — 2) Exemple d'angles",
-    "III. Position relative de deux droites — 2) Notation des angles",
-    "III. Position relative de deux droites — 2) Droites perpendiculaires",
-    "III. Position relative de deux droites — 2) Exemple perpendiculaires"
+    "III. Position relative de deux droites — 2) Angles formés par deux droites"
 ];
 
 let currentSlideIndex = 0;

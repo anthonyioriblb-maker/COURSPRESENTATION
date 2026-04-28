@@ -6,10 +6,10 @@ const totalSlides = slides.length;
 
 const slideTitles = [
     "Chapitre 5 : Construire des droites parallèles et perpendiculaires",
-    "I. Rappels : Relations de perpendicularité et de parallélisme",
+    "I. Rappels : Relations de perpendicularité et de parallélisme — 1) Droites perpendiculaires et 2) Droites parallèles",
     "II. Construire une perpendiculaire",
     "III. Construire une parallèle",
-    "IV. Distance d'un point à une droite"
+    "IV. Distance d'un point à une droite — 1) Définition de la distance"
 ];
 
 document.getElementById('totalSlides').textContent = totalSlides;

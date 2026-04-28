@@ -9,6 +9,8 @@
         .image-slide { text-align: center; margin: 20px 0; }
         img { max-width: 90%; height: auto; border-radius: 6px; }
         .step { margin: 12px 0; }
+        .math { font-style: italic; }
+        .math.angle { font-style: italic; }
     </style>
 </head>
 <body>
@@ -20,140 +22,83 @@
                 <h1>Chapitre 2 : Les bases de géométrie</h1>
             </div>
 
-            <!-- Slide 2 : Rappels -->
+            <!-- Slide 2 : I. Rappels -->
             <div class="slide">
                 <h2>I. Rappels</h2>
                 <div class="image-slide">
                     <div class="step"><img src="6-21.png" alt="Notations géométriques" style="max-width: 500px;"></div>
-                </div>
-            </div>
-
-            <!-- Slide 3 : Rappels (suite) -->
-            <div class="slide">
-                <h2>I. Rappels</h2>
-                <div class="image-slide">
                     <div class="step"><img src="6-22.png" alt="Notations géométriques (suite)" style="max-width: 500px;"></div>
                 </div>
             </div>
 
-            <!-- Slide 4 : Points alignés et droites -->
+            <!-- Slide 3 : II. Points alignés et droites -->
             <div class="slide">
                 <h2>II. Points alignés et droites</h2>
                 <div class="image-slide">
                     <div class="step"><img src="6-23.png" alt="Points alignés et droites" style="max-width: 400px;"></div>
                 </div>
-            </div>
-
-            <!-- Slide 5 : Appartenance d'un point à une droite -->
-            <div class="slide">
-                <h2>II. Points alignés et droites</h2>
                 <div class="definition">
-                    <div class="step">Le point D est sur la droite (AB), on dit que « <strong>D appartient à la droite (AB)</strong> » et on note <strong style="color:red;">D ∈ (AB)</strong>.</div>
-                    <div class="step">Le point C n'est pas sur la droite (AB), on dit que « <strong>C n'appartient pas à la droite (AB)</strong> » et on note <strong style="color:red;">C ∉ (AB)</strong>.</div>
+                    <div class="step"><p>Le point D est sur la droite (AB), on dit que "<span style="color: red;">D appartient à la droite (AB)</span>" et on note <span style="color: red;">D ∈ (AB)</span>.</p></div>
+                    <div class="step"><p>Le point C n'est pas sur la droite (AB), on dit que "<span style="color: red;">C n'appartient pas à la droite (AB)</span>" et on note <span style="color: red;">C ∉ (AB)</span>.</p></div>
+                </div>
+                <div class="definition">
+                    <div class="step">Lorsque trois points sont sur une même droite, on dit qu'ils sont <span style="color: red;">alignés</span>. Ici, A, B, et D sont alignés.</div>
                 </div>
             </div>
 
-            <!-- Slide 6 : Points alignés -->
-            <div class="slide">
-                <h2>II. Points alignés et droites</h2>
-                <div class="definition">
-                    <div class="step">Lorsque trois points sont sur une même droite, on dit qu'ils sont <strong>alignés</strong>.</div>
-                    <div class="step">Ici, A, B, et D sont alignés.</div>
-                </div>
-            </div>
-
-            <!-- Slide 7 : Position relative de deux droites - Définitions -->
+            <!-- Slide 4 : III. Position relative de deux droites — 1) Définitions -->
             <div class="slide">
                 <h2>III. Position relative de deux droites</h2>
                 <h3>1) Définitions</h3>
                 <div class="definition">
-                    <div class="step">Lorsque deux droites ont un seul point en commun, on dit qu'elles sont <strong>sécantes</strong>.</div>
-                    <div class="step">Le point où elles se rencontrent s'appelle le <strong>point d'intersection</strong>.</div>
+                    <div class="step">Lorsque deux droites ont un seul point en commun, on dit qu'elles sont <span style="color: red;">sécantes</span>. Le point où elles se rencontrent s'appelle le <span style="color: red;">point d'intersection</span>.</div>
                 </div>
-            </div>
-
-            <!-- Slide 8 : Droites parallèles -->
-            <div class="slide">
-                <h2>III. Position relative de deux droites</h2>
-                <h3>1) Définitions</h3>
                 <div class="definition">
-                    <div class="step">Deux droites qui ne sont pas sécantes sont <strong>parallèles</strong>.</div>
+                    <div class="step">Deux droites qui ne sont pas sécantes sont <span style="color: red;">parallèles</span>.</div>
                 </div>
-            </div>
-
-            <!-- Slide 9 : Exemples de droites sécantes et parallèles -->
-            <div class="slide">
-                <h2>III. Position relative de deux droites</h2>
-                <h3>1) Définitions</h3>
                 <div class="example">
                     <div class="step"><strong>Exemples :</strong></div>
                     <div class="image-slide">
                         <div class="step"><img src="6-24.png" alt="Droites sécantes et parallèles" style="max-width: 500px;"></div>
                     </div>
                 </div>
-            </div>
-
-            <!-- Slide 10 : Remarque -->
-            <div class="slide">
-                <h2>III. Position relative de deux droites</h2>
-                <h3>1) Définitions</h3>
                 <div class="remarque">
                     <div class="step"><strong>Remarque :</strong> Lorsque l'on parle de deux droites, elles sont soit sécantes, soit parallèles.</div>
                 </div>
             </div>
 
-            <!-- Slide 11 : Angles formés par deux droites -->
+            <!-- Slide 5 : III. Position relative de deux droites — 2) Angles formés par deux droites -->
             <div class="slide">
                 <h2>III. Position relative de deux droites</h2>
                 <h3>2) Angles formés par deux droites</h3>
                 <div class="definition">
-                    <div class="step">Deux droites sont sécantes si elles ont un point d'intersection. Elles forment alors <strong>quatre angles</strong>.</div>
+                    <div class="step">Deux droites sont sécantes si elles ont un point d'intersection. Elles forment alors quatre angles.</div>
                 </div>
-            </div>
-
-            <!-- Slide 12 : Exemple d'angles -->
-            <div class="slide">
-                <h2>III. Position relative de deux droites</h2>
-                <h3>2) Angles formés par deux droites</h3>
                 <div class="example">
                     <div class="step"><strong>Exemple :</strong></div>
                     <div class="image-slide">
                         <div class="step"><img src="6-25.png" alt="Angles formés par deux droites" style="max-width: 300px;"></div>
                     </div>
                 </div>
-            </div>
-
-            <!-- Slide 13 : Notation des angles -->
-            <div class="slide">
-                <h2>III. Position relative de deux droites</h2>
-                <h3>2) Angles formés par deux droites</h3>
                 <div class="definition">
-                    <div class="step"><strong>On note ces quatre angles de la manière suivante :</strong></div>
-                    <div class="step"><span style="color:red;">∠BEC</span> ou <span style="color:red;">∠CEB</span></div>
-                    <div class="step"><span style="color:blue;">∠BED</span> ou <span style="color:blue;">∠DEB</span></div>
-                    <div class="step"><span style="color:black;">∠DEA</span> ou <span style="color:black;">∠AED</span></div>
-                    <div class="step"><span style="color:green;">∠CEA</span> ou <span style="color:green;">∠AEC</span></div>
+                    <div class="step"><p>On note ces quatre angles de la manière suivante :</p></div>
+                    <div class="step"><p style="text-align: center;">
+                        <span style="color: red;"><span class="math angle">BEC</span></span> ou <span style="color: red;"><span class="math angle">CEB</span></span> ;
+                        <span style="color: blue;"><span class="math angle">BED</span></span> ou <span style="color: blue;"><span class="math angle">DEB</span></span> ;
+                        <span style="color: black;"><span class="math angle">DEA</span></span> ou <span style="color: black;"><span class="math angle">AED</span></span> ;
+                        <span style="color: green;"><span class="math angle">CEA</span></span> ou <span style="color: green;"><span class="math angle">AEC</span></span>
+                    </p></div>
                 </div>
-            </div>
-
-            <!-- Slide 14 : Droites perpendiculaires -->
-            <div class="slide">
-                <h2>III. Position relative de deux droites</h2>
-                <h3>2) Angles formés par deux droites</h3>
                 <div class="definition">
-                    <div class="step">Deux droites sont <strong>perpendiculaires</strong> si elles sont sécantes et forment <strong>quatre angles égaux</strong>.</div>
-                    <div class="step">Dans ce cas, on dit que chacun de ces angles est un <strong>angle droit</strong>.</div>
+                    <div class="step">Deux droites sont <span style="color: red;">perpendiculaires</span> si elles sont sécantes et forment quatre angles égaux. Dans ce cas, on dit que chacun de ces angles est un <span style="color: red;">angle droit</span>.</div>
                 </div>
-            </div>
-
-            <!-- Slide 15 : Exemple de droites perpendiculaires -->
-            <div class="slide">
-                <h2>III. Position relative de deux droites</h2>
-                <h3>2) Angles formés par deux droites</h3>
                 <div class="example">
                     <div class="step"><strong>Exemple :</strong></div>
-                    <div class="step">On code un angle droit en faisant un <strong>petit carré</strong> sur la figure.</div>
-                    <div class="step">On dit que les droites (DC) et (AB) sont <strong>perpendiculaires en K</strong> et on note <strong style="color:red;">(DC) ⊥ (AB)</strong>.</div>
+                    <div class="image-slide">
+                        <div class="step"><img src="6-26.png" alt="Droites perpendiculaires" style="max-width: 300px;"></div>
+                    </div>
+                    <div class="step"><p>On code un angle droit en faisant un petit carré sur la figure.</p></div>
+                    <div class="step"><p>On dit que les droites (DC) et (AB) sont perpendiculaires en K et on note <span style="color: red;">(DC) ⊥ (AB)</span>.</p></div>
                 </div>
             </div>
 

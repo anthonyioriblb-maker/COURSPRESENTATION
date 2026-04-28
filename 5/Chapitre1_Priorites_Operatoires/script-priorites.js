@@ -3,7 +3,7 @@ let currentStepIndex = 0;
 let slides = null;
 let totalSlides = 0;
 
-const slideTitles = ["Priorités opératoires","I. Vocabulaire","II. Calculs sans parenthèses","III. Calculs avec parenthèses"];
+const slideTitles = ["Priorités opératoires","I. Rappels vocabulaire","II. Calculs sans parenthèses","III. Calculs avec des parenthèses"];
 
 document.addEventListener('DOMContentLoaded', function() {
     slides = document.querySelectorAll('.slide');

@@ -6,7 +6,7 @@ let totalSlides = 0;
 
 // Titres correspondant aux 7 slides du HTML
 const slideTitles = [
-    "Chapitre 7 : Opérations avec les relatifs",
+    "Chapitre 9 : Calculs avec les nombres relatifs",
     "I. Addition de nombres relatifs",
     "I. Addition de nombres relatifs — 1) Même signe",
     "I. Addition de nombres relatifs — 2) Signes contraires",

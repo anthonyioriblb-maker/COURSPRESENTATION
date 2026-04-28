@@ -6,9 +6,11 @@
     <title>Chapitre 3 - Les nombres décimaux</title>
     <link rel="stylesheet" href="../../styles.css">
     <style>
-        .frac { display: inline-block; position: relative; vertical-align: middle; margin: 0 2px; }
-        .num { display: block; border-bottom: 1px solid #000; text-align: center; padding: 2px 6px; }
-        .den { display: block; text-align: center; padding: 2px 6px; }
+        .fraction { display: inline-block; position: relative; vertical-align: middle; margin: 0 2px; }
+        .numerateur { display: block; border-bottom: 1px solid #000; text-align: center; padding: 2px 6px; }
+        .denominateur { display: block; text-align: center; padding: 2px 6px; }
+        table.tableau-decimaux { width: 100%; border-collapse: collapse; margin: 10px 0; }
+        table.tableau-decimaux img { display: block; margin: 0 auto; }
     </style>
 </head>
 <body>
@@ -20,113 +22,130 @@
                 <h1>Chapitre 3 : Les nombres décimaux</h1>
             </div>
 
-            <!-- Slide 2 : Les fractions décimales — Définition -->
+            <!-- Slide 2 : I. Les fractions décimales -->
             <div class="slide">
                 <h2>I. Les fractions décimales</h2>
+
                 <div class="definition">
                     <div class="step"><span style="color:red;">Définition :</span> En divisant une unité en 10, en 100 ou en 1 000, on obtient :</div>
                     <div class="step"><img src="6-31.png" width="100%" alt="Fractions décimales"></div>
                 </div>
+
                 <div class="definition">
-                    <div class="step"><span style="color:red;">Définition :</span> Une <strong>fraction décimale</strong> est une fraction dont le dénominateur est 10, 100, 1 000, 10 000, ...</div>
+                    <div class="step"><span style="color:red;">Définition :</span> Une <span style="color:red;">fraction décimale</span> est une fraction dont le dénominateur est 10, 100, 1 000, 10 000, ...</div>
                 </div>
+
                 <div class="remarque">
-                    <div class="step"><strong>Remarque :</strong> 1 = <span class="frac"><span class="num">10</span><span class="den">10</span></span> = <span class="frac"><span class="num">100</span><span class="den">100</span></span> = <span class="frac"><span class="num">1 000</span><span class="den">1 000</span></span> = ...</div>
+                    <div class="step"><strong>Remarque :</strong> 1 = <span class="fraction"><span class="numerateur">10</span><span class="denominateur">10</span></span> = <span class="fraction"><span class="numerateur">100</span><span class="denominateur">100</span></span> = <span class="fraction"><span class="numerateur">1 000</span><span class="denominateur">1 000</span></span> = ...</div>
                     <div class="step">C'est-à-dire : 1 unité = 10 dixièmes = 100 centièmes = 1 000 millièmes = ....</div>
                 </div>
             </div>
 
-            <!-- Slide 3 : Les nombres décimaux — Définitions -->
+            <!-- Slide 3 : II. Les nombres décimaux — 1) Définitions -->
             <div class="slide">
-                <h2>II. Les nombres décimaux</h2>
-                <h3>1) Définitions</h3>
+                <h2>II. Les nombres décimaux — 1) Définitions</h2>
+
                 <div class="definition">
-                    <div class="step"><span style="color:red;">Définition :</span> Un <strong>nombre décimal</strong> est un nombre qui peut s'écrire sous la forme d'une fraction décimale.</div>
+                    <div class="step"><span style="color:red;">Définition :</span> Un <span style="color:red;">nombre décimal</span> est un nombre qui peut s'écrire sous la forme d'une fraction décimale.</div>
                 </div>
+
                 <div class="example">
-                    <div class="step"><strong>Exemple :</strong> 12,3406 = <span class="frac"><span class="num">123 406</span><span class="den">10 000</span></span></div>
+                    <div class="step"><strong>Exemple :</strong></div>
+                    <div class="step">12,3406 = <span class="fraction"><span class="numerateur">123 406</span><span class="denominateur">10 000</span></span></div>
                 </div>
+
                 <div class="definition">
-                    <div class="step"><span style="color:red;">Définition :</span> L'écriture décimale d'un nombre est composée d'une <strong>partie entière</strong> et d'une <strong>partie décimale</strong>.</div>
-                    <div class="step"><img src="6-33.png" width="50%" alt="Partie entière et décimale"></div>
+                    <div class="step"><span style="color:red;">Définition :</span> L'écriture décimale d'un nombre est composée d'une <span style="color:red;">partie entière</span> et d'une <span style="color:red;">partie décimale</span>.</div>
+                    <div class="step"><p align="center"><img src="6-33.png" width="50%" alt="Partie entière et partie décimale"></p></div>
                 </div>
+
                 <div class="remarque">
                     <div class="step"><strong>Remarque :</strong> Un nombre entier est un nombre décimal dont la partie décimale est nulle (égale à 0).</div>
                 </div>
             </div>
 
-            <!-- Slide 4 : Rang des chiffres -->
+            <!-- Slide 4 : II. — 2) Rang des chiffres -->
             <div class="slide">
-                <h3>2) Rang des chiffres</h3>
+                <h2>II. Les nombres décimaux — 2) Rang des chiffres</h2>
+
                 <div class="definition">
-                    <div class="step"><img src="6-32.png" width="100%" alt="Rang des chiffres"></div>
+                    <div class="step"><img src="6-32.png" width="100%" alt="Tableau rang des chiffres"></div>
                 </div>
+
                 <div class="example">
                     <div class="step"><strong>Exemple :</strong> Le chiffre des millièmes est 4 et le nombre de centièmes est 523 960.</div>
                 </div>
             </div>
 
-            <!-- Slide 5 : Les différentes décompositions -->
+            <!-- Slide 5 : II. — 3) Les différentes décompositions -->
             <div class="slide">
-                <h3>3) Les différentes décompositions</h3>
+                <h2>II. Les nombres décimaux — 3) Les différentes décompositions</h2>
+
                 <div class="important">
                     <div class="step"><span style="color:red;">Propriété :</span> Un nombre décimal admet plusieurs décompositions.</div>
                 </div>
+
                 <div class="example">
                     <div class="step"><strong>Exemple :</strong> 153 unités, 4 dixièmes et 6 centièmes</div>
                     <div class="step">• Écriture décimale : 153,46</div>
                     <div class="step">• Somme de la partie entière et de la partie décimale : 153 + 0,46</div>
-                    <div class="step">• Somme de la partie entière et d'une fraction décimale : 153 + <span class="frac"><span class="num">46</span><span class="den">100</span></span></div>
-                    <div class="step">• Somme de la partie entière et de fractions décimales : 153 + <span class="frac"><span class="num">4</span><span class="den">10</span></span> + <span class="frac"><span class="num">6</span><span class="den">100</span></span></div>
-                    <div class="step">• Fraction décimale : <span class="frac"><span class="num">15 346</span><span class="den">100</span></span></div>
+                    <div class="step">• Somme de la partie entière et d'une fraction décimale : 153 + <span class="fraction"><span class="numerateur">46</span><span class="denominateur">100</span></span></div>
+                    <div class="step">• Somme de la partie entière et de fractions décimales : 153 + <span class="fraction"><span class="numerateur">4</span><span class="denominateur">10</span></span> + <span class="fraction"><span class="numerateur">6</span><span class="denominateur">100</span></span></div>
+                    <div class="step">• Fraction décimale : <span class="fraction"><span class="numerateur">15 346</span><span class="denominateur">100</span></span></div>
                     <div class="step">• Décomposition selon le rang des chiffres : (1 × 100) + (5 × 10) + (3 × 1) + (4 × 0,1) + (6 × 0,01)</div>
                 </div>
             </div>
 
-            <!-- Slide 6 : Comparaison — Méthodologie -->
+            <!-- Slide 6 : III. Comparaison — 1) Méthodologie -->
             <div class="slide">
-                <h2>III. Comparaison des nombres décimaux</h2>
-                <h3>1) Méthodologie</h3>
+                <h2>III. Comparaison des nombres décimaux — 1) Méthodologie</h2>
+
                 <div class="method">
                     <div class="step">Pour comparer deux nombres, on commence par <strong>comparer leurs parties entières</strong> :</div>
                     <div class="step">- Si elles sont <strong>différentes</strong> : les deux nombres sont rangés dans le même ordre que leurs parties entières.</div>
                     <div class="step">- Si elles sont <strong>égales</strong> : on <strong>compare leurs parties décimales</strong> chiffre après chiffre en commençant par les dixièmes, puis les centièmes, puis les millièmes...</div>
                 </div>
+
                 <div class="example">
                     <div class="step"><strong>Exemples :</strong> Comparer les nombres suivants : 179,83 et 181 ; 2,8 et 2,13 ; 7,23 et 7,3</div>
-                    <div class="step">179,83 < 181</div>
-                    <div class="step">2,8 > 2,13</div>
-                    <div class="step">7,23 < 7,3</div>
+                    <div class="step">179,83 &lt; 181</div>
+                    <div class="step">2,8 &gt; 2,13</div>
+                    <div class="step">7,23 &lt; 7,3</div>
                 </div>
+
                 <div class="example">
                     <div class="step"><strong>Exemple :</strong> Ranger dans l'ordre croissant les nombres : 8,88 ; 38,8 ; 88,8 ; 8,08 ; 888,0 ; 8,808</div>
-                    <div class="step">8,08 < 8,808 < 8,88 < 38,8 < 88,8 < 888,0</div>
+                    <div class="step">8,08 &lt; 8,808 &lt; 8,88 &lt; 38,8 &lt; 88,8 &lt; 888,0</div>
                 </div>
             </div>
 
-            <!-- Slide 7 : Encadrer et intercaler -->
+            <!-- Slide 7 : III. — 2) Encadrer et intercaler -->
             <div class="slide">
-                <h3>2) Encadrer et intercaler</h3>
+                <h2>III. Comparaison des nombres décimaux — 2) Encadrer et intercaler</h2>
+
                 <div class="definition">
                     <div class="step">Il existe différents types d'encadrement :</div>
-                    <div class="step">• <strong>Encadrement à l'unité :</strong> 2 < 2,9888 < 3</div>
-                    <div class="step">Les deux nombres sont des entiers qui se suivent.</div>
-                    <div class="step">• <strong>Encadrement au dixième :</strong> 2,9 < 2,9888 < 3,0</div>
-                    <div class="step">Les deux nombres ont chacun un chiffre après la virgule qui se suivent.</div>
-                    <div class="step">• <strong>Encadrement au centième :</strong> 2,98 < 2,9888 < 2,99</div>
-                    <div class="step">Les deux nombres ont chacun deux chiffres après la virgule et les chiffres des centièmes se suivent.</div>
+                    <div class="step">• <strong>Encadrement à l'unité :</strong> 2 &lt; 2,9888 &lt; 3</div>
+                    <div class="step">&nbsp;&nbsp;&nbsp;Les deux nombres sont des entiers qui se suivent.</div>
+                    <div class="step">• <strong>Encadrement au dixième :</strong> 2,9 &lt; 2,9888 &lt; 3,0</div>
+                    <div class="step">&nbsp;&nbsp;&nbsp;Les deux nombres ont chacun un chiffre après la virgule qui se suivent.</div>
+                    <div class="step">• <strong>Encadrement au centième :</strong> 2,98 &lt; 2,9888 &lt; 2,99</div>
+                    <div class="step">&nbsp;&nbsp;&nbsp;Les deux nombres ont chacun deux chiffres après la virgule et les chiffres des centièmes se suivent.</div>
                 </div>
+
                 <div class="example">
                     <div class="step"><strong>Exemples :</strong></div>
-                    <div class="step">• Encadre au dixième 36,457 : 36,4 < 36,457 < 36,5</div>
-                    <div class="step">• Encadre au centième 5,235 : 5,23 < 5,235 < 5,24</div>
-                    <div class="step">• Encadre à l'unité 236,56 : 236 < 236,56 < 237</div>
+                    <div class="step">• Encadre au dixième 36,457 : 36,4 &lt; 36,457 &lt; 36,5</div>
+                    <div class="step">• Encadre au centième 5,235 : 5,23 &lt; 5,235 &lt; 5,24</div>
+                    <div class="step">• Encadre à l'unité 236,56 : 236 &lt; 236,56 &lt; 237</div>
                 </div>
+
                 <div class="definition">
                     <div class="step"><span style="color:red;">Définition : Intercaler un nombre</span>, c'est trouver un nombre à placer entre deux autres nombres donnés.</div>
                 </div>
+
                 <div class="example">
-                    <div class="step"><strong>Exemples :</strong> 256 < ................. < 257 ; 32,5 < ................. < 32,7 ; 5,8 < ................. < 5,9</div>
+                    <div class="step"><strong>Exemples :</strong> 256 &lt; ................. &lt; 257 ; 32,5 &lt; ................. &lt; 32,7 ; 5,8 &lt; ................. &lt; 5,9</div>
                 </div>
             </div>
 

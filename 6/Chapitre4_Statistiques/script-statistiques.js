@@ -8,10 +8,10 @@ const slideTitles = [
     "Chapitre 4 : Statistiques et Organisation de données",
     "I. Introduction aux statistiques",
     "II. Utilisation de tableaux — 1) Tableau à simple entrée",
-    "2) Tableau à double entrée",
+    "II. Utilisation de tableaux — 2) Tableau à double entrée",
     "III. Représentations graphiques — 1) Diagramme en bâtons",
-    "2) Diagramme circulaire",
-    "3) Courbes"
+    "III. Représentations graphiques — 2) Diagramme circulaire",
+    "III. Représentations graphiques — 3) Courbes"
 ];
 
 document.getElementById('totalSlides').textContent = totalSlides;
