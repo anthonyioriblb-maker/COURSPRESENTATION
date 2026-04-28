@@ -5,11 +5,11 @@ let totalSlides = 0;
 
 const slideTitles = [
     "Fonctions affines et linéaires",
-    "Fonction linéaire — Proportionnalité et fonction linéaire",
-    "Définition et représentation graphique",
-    "Fonctions affines",
-    "Trouver l'expression algébrique — Proportionnalité des accroissements",
-    "Par lecture graphique"
+    "I. Fonction linéaire — 1) Proportionnalité et fonction linéaire",
+    "I. Fonction linéaire — 2) Définition et représentation graphique",
+    "II. Fonctions affines",
+    "III. Trouver l'expression algébrique — 1) Proportionnalité des accroissements",
+    "III. Trouver l'expression algébrique — 2) Par lecture graphique"
 ];
 
 document.addEventListener('DOMContentLoaded', function() {
