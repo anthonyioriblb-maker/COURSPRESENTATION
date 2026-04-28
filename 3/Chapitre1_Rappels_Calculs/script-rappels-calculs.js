@@ -4,12 +4,11 @@ let slides = null;
 let totalSlides = 0;
 
 const slideTitles = [
-    "Rappels de calculs",
-    "I. Priorités et fractions",
-    "Exemple 1 : calcul avec fractions",
-    "Exemples 2 et 3",
-    "II. Puissances positives",
-    "Règles de calcul sur les puissances",
+    "Calculs numériques",
+    "I. Priorités de calculs et fractions",
+    "II. Puissances — 1) Puissances positives",
+    "II. Puissances — 2) Puissances d'exposant négatif",
+    "II. Puissances — 3) Règles de calcul sur les puissances",
     "III. Notation scientifique"
 ];
 

@@ -5,18 +5,16 @@ let slides;
 let totalSlides;
 
 const slideTitles = [
-    "Chapitre 8 : Cosinus dans le triangle rectangle",
-    "I. Rappels et vocabulaire",
-    "1) Vocabulaire",
-    "Ainsi :",
-    "II. Cosinus d'un angle aigu d'un triangle rectangle",
-    "III. Cosinus et calculatrice",
-    "1) Calculer la valeur d'un cosinus lorsque l'on connaît la valeur de l'angle",
-    "2) Calculer la valeur d'un angle connaissant le cosinus",
-    "IV. Exemples d'utilisation",
-    "1) Calcul de la longueur du côté adjacent à un angle connu",
-    "2) Calcul de la longueur de l'hypoténuse",
-    "3) Calculer la mesure d'un angle"
+    "Chapitre 8 : Cosinus d'un angle aigu",                                              // Slide 1
+    "I. Rappels et vocabulaire",                                                          // Slide 2
+    "II. Cosinus d'un angle aigu d'un triangle rectangle",                               // Slide 3
+    "III. Cosinus et calculatrice",                                                       // Slide 4
+    "1) Calculer la valeur d'un cosinus lorsque l'on connaît la valeur de l'angle",     // Slide 5
+    "2) Calculer la valeur d'un angle connaissant le cosinus",                           // Slide 6
+    "IV. Exemples d'utilisation",                                                        // Slide 7
+    "1) Calcul de la longueur du côté adjacent à un angle connu",                       // Slide 8
+    "2) Calcul de la longueur de l'hypoténuse",                                         // Slide 9
+    "3) Calculer la mesure d'un angle"                                                   // Slide 10
 ];
 
 // Attendre que le DOM soit chargé

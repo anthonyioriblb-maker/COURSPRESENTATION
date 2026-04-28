@@ -4,22 +4,12 @@ let currentStepIndex = 0;
 let slides = null;
 let totalSlides = 0;
 
-// Titres correspondant aux 14 slides du HTML
+// Titres correspondant aux 4 slides du HTML
 const slideTitles = [
     "Chapitre 5 : Écriture fractionnaire partie 2",    // Slide 1
     "I. Notion d'inverse",                              // Slide 2
-    "Propriété inverse d'une fraction",                 // Slide 3
-    "Remarques",                                        // Slide 4
-    "II. Divisions",                                    // Slide 5
-    "2) Division de fractions",                         // Slide 6
-    "Exemples 1 et 2",                                  // Slide 7
-    "Exemples 3 et 4",                                  // Slide 8
-    "III. Produit en croix",                            // Slide 9
-    "Schéma du produit en croix",                       // Slide 10
-    "2) Exemples",                                      // Slide 11
-    "Exemple 2",                                        // Slide 12
-    "Méthode 1",                                        // Slide 13
-    "Méthode 2"                                         // Slide 14
+    "II. Divisions",                                    // Slide 3
+    "III. Produit en croix"                             // Slide 4
 ];
 
 // Initialisation - attendre que le DOM soit chargé

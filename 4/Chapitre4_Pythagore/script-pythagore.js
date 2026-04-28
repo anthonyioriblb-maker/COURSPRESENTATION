@@ -5,19 +5,13 @@ let slides;
 let totalSlides;
 
 const slideTitles = [
-    "Théorème de Pythagore (2)",
-    "I. Notion de réciproque",
-    "1) Partons du français",
-    "2) Construction grammaticale de la réciproque",
-    "3) Comment construire une réciproque ?",
-    "4) Contraposée",
-    "5) Exemple de contraposée",
-    "6) Oui mais en maths du coup ?",
-    "7) Exemple avec un quadrilatère",
+    "Chapitre 4 : Théorème de Pythagore (2)",
+    "I. Notion de réciproque — 1) Partons du français",
+    "I. Notion de réciproque — 2) Construction grammaticale de la réciproque",
+    "I. Notion de réciproque — 3) Contraposée",
+    "I. Notion de réciproque — 4) Oui mais en maths du coup ?",
     "II. Réciproque du théorème de Pythagore",
-    "2) Exemple",
-    "III. Contraposée du théorème de Pythagore",
-    "2) Exemple"
+    "III. Contraposée du théorème de Pythagore"
 ];
 
 // Attendre que le DOM soit chargé

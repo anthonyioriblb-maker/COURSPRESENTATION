@@ -3,7 +3,12 @@ let currentStepIndex = 0;
 let slides = null;
 let totalSlides = 0;
 
-const slideTitles = ["Théorème de Pythagore (1)","I. Le théorème","II. Carré et racine carrée","III. Calcul de l hypoténuse","Calcul d un côté de l angle droit"];
+const slideTitles = [
+    "Chapitre 2 : Théorème de Pythagore (1)",
+    "I. Théorème de Pythagore",
+    "II. Carré et racine carrée",
+    "III. Calculer une longueur"
+];
 
 document.addEventListener('DOMContentLoaded', function() {
     slides = document.querySelectorAll('.slide');

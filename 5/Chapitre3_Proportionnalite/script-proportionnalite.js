@@ -3,7 +3,14 @@ let currentStepIndex = 0;
 let slides = null;
 let totalSlides = 0;
 
-const slideTitles = ["Proportionnalité et ratio","I. Reconnaître une proportionnalité","Représentation graphique","II. Compléter un tableau","III. Les pourcentages","Calculer un pourcentage","IV. Échelles","V. Ratio"];
+const slideTitles = [
+    "Chapitre 3 : Proportionnalité et ratio",
+    "I. Situation de proportionnalité — 1) Reconnaître une situation de proportionnalité",
+    "I. Situation de proportionnalité — 2) Compléter un tableau de proportionnalité",
+    "II. Exemples d'utilisations de la proportionnalité — 1) Les pourcentages",
+    "II. Exemples d'utilisations de la proportionnalité — 2) Échelles",
+    "III. Ratio"
+];
 
 document.addEventListener('DOMContentLoaded', function() {
     slides = document.querySelectorAll('.slide');

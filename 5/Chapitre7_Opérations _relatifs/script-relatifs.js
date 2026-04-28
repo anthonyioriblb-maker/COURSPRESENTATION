@@ -4,16 +4,15 @@ let currentStepIndex = 0;
 let slides = null;
 let totalSlides = 0;
 
-// Titres correspondant aux 8 slides du HTML
+// Titres correspondant aux 7 slides du HTML
 const slideTitles = [
-    "Chapitre 7 : Calculs avec les nombres relatifs",   // Slide 1
-    "I. Addition de nombres relatifs",                   // Slide 2
-    "I. Addition — 1) Même signe",                      // Slide 3
-    "I. Addition — 2) Signes contraires",               // Slide 4
-    "II. Opposé d'un nombre relatif",                   // Slide 5
-    "III. Soustraction de nombres relatifs",            // Slide 6
-    "IV. Enchaînement d'opérations — Méthode",         // Slide 7
-    "IV. Enchaînement d'opérations — Exemple"          // Slide 8
+    "Chapitre 7 : Opérations avec les relatifs",
+    "I. Addition de nombres relatifs",
+    "I. Addition de nombres relatifs — 1) Même signe",
+    "I. Addition de nombres relatifs — 2) Signes contraires",
+    "II. Opposé d'un nombre relatif",
+    "III. Soustraction de nombres relatifs",
+    "IV. Enchaînement d'opérations"
 ];
 
 // Construit la liste à plat de toutes les étapes d'une slide :

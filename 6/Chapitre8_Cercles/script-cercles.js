@@ -8,14 +8,14 @@ const slideTitles = [
     "Chapitre 8 : Cercles et disques",
     "I. Définitions - 1) Le cercle",
     "I. Définitions - 2) Le disque",
-    "II. Vocabulaire",
+    "II. Vocabulaire - Introduction",
     "II. Vocabulaire - 1) Le rayon",
     "II. Vocabulaire - 2) Le diamètre",
     "II. Vocabulaire - 3) La corde",
     "II. Vocabulaire - 4) L'arc de cercle",
-    "III. Construction d'un cercle",
-    "IV. Programme de construction",
-    "V. Appartenance à un cercle"
+    "III. Construction d'un cercle - 1) Utilisation du compas",
+    "III. Construction d'un cercle - 2) Programme de construction",
+    "IV. Appartenance à un cercle"
 ];
 
 document.getElementById('totalSlides').textContent = totalSlides;

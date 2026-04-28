@@ -6,13 +6,13 @@ let totalSlides = 0;
 
 // Titres correspondant aux 7 slides du HTML
 const slideTitles = [
-    "Chapitre 7 : Notion de fonction",                      // Slide 1
-    "Introduction",                                          // Slide 2
-    "I. Définitions-vocabulaire",                           // Slide 3
-    "II. Détermination - 1) Par une formule",              // Slide 4
-    "2) Calcul d'images et d'antécédents",                 // Slide 5
-    "3) Par un graphique",                                  // Slide 6
-    "4) Par un tableau de valeurs"                          // Slide 7
+    "Chapitre 7 : Notion de fonction",                              // Slide 1
+    "I. Définitions-vocabulaire",                                   // Slide 2
+    "I. Définitions-vocabulaire — Vocabulaire : image et antécédent",// Slide 3
+    "II. Détermination d'une fonction — 1) Par une formule",        // Slide 4
+    "II. Détermination d'une fonction — 1) Fin : Calcul d'images et antécédents",// Slide 5
+    "II. Détermination d'une fonction — 2) Par un graphique",       // Slide 6
+    "II. Détermination d'une fonction — 3) Par un tableau de valeur"// Slide 7
 ];
 
 // Initialisation - attendre que le DOM soit chargé

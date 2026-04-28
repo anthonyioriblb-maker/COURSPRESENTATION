@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Chapitre 2 - Symétrie centrale</title>
+    <link rel="stylesheet" href="../../styles.css">
+    <style>
+        .img-step { text-align: center; margin: 15px 0; }
+        img { max-width: 100%; height: auto; border-radius: 6px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="content">
+
+            <!-- Slide 1 : Titre -->
+            <div class="slide active">
+                <h1>Chapitre 2 : Symétrie centrale</h1>
+            </div>
+
+            <!-- Slide 2 : I. Symétrique d'un point -->
+            <div class="slide">
+                <h2>I. Symétrique d'un point</h2>
+                <div class="definition">
+                    <div class="step"><span style="color:red;">Définition :</span> Deux points A et A' sont <strong>symétriques par rapport à un point O</strong>, lorsque O est le <strong>milieu</strong> du segment [AA']. O est alors le <strong>centre de symétrie</strong> de A et A'.</div>
+                </div>
+            </div>
+
+            <!-- Slide 3 : 1) Sur feuille blanche -->
+            <div class="slide">
+                <h3>1) Sur feuille blanche</h3>
+                <div class="method">
+                    <div class="step"><strong>Pour construire le symétrique A' d'un point A par rapport à un point O :</strong></div>
+                    <div class="step">• À la règle, on trace la demi-droite [A0) (d'origine A et passant par O).</div>
+                    <div class="step">• Au compas, on prend pour écartement la distance AO.</div>
+                    <div class="step">• On reporte cet écartement sur la demi-droite de l'autre côté de O.</div>
+                    <div class="step">• On marque le point A' et on code l'égalité de longueur.</div>
+                </div>
+                <div class="step">
+                    <div class="img-step">
+                        <img src="images/5-21.png" alt="Construction du symétrique sur feuille blanche">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 4 : 2) Dans un quadrillage -->
+            <div class="slide">
+                <h3>2) Dans un quadrillage</h3>
+                <div class="method">
+                    <div class="step"><strong>Pour construire le symétrique A' d'un point A par rapport à un point O :</strong></div>
+                    <div class="step">• On regarde le déplacement pour aller de A vers O (ici 3 carreaux vers la droite et deux vers le bas).</div>
+                    <div class="step">• On reproduit ce déplacement à partir du point O.</div>
+                    <div class="step">• On marque le point A'.</div>
+                </div>
+                <div class="step">
+                    <div class="img-step">
+                        <img src="images/5-22.png" alt="Construction du symétrique dans un quadrillage">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 5 : II. Symétrique d'une figure -->
+            <div class="slide">
+                <h2>II. Symétrique d'une figure</h2>
+                <div class="method">
+                    <div class="step"><strong>Pour construire le symétrique d'une figure par rapport à un point :</strong></div>
+                    <div class="step">Il suffit de construire les symétriques des <strong>points clés</strong> puis de les relier correctement en suivant la figure de départ.</div>
+                </div>
+                <div class="step">
+                    <div class="img-step">
+                        <img src="images/5-23.png" alt="Symétrique d'une figure">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 6 : III. Propriétés de la symétrie centrale -->
+            <div class="slide">
+                <h2>III. Propriétés de la symétrie centrale</h2>
+                <div class="important">
+                    <div class="step"><strong>Par une symétrie centrale :</strong></div>
+                    <div class="step">• Le symétrique d'un <strong>segment</strong> est un segment de <strong>même longueur</strong>.</div>
+                    <div class="step">• Le symétrique d'un <strong>cercle</strong> est un cercle de <strong>même rayon</strong>. Les centres de ces 2 cercles sont symétriques l'un de l'autre.</div>
+                    <div class="step">• Le symétrique d'un <strong>angle</strong> est un angle de <strong>même mesure</strong>.</div>
+                    <div class="step">• Le symétrique d'une <strong>droite</strong> est une <strong>droite parallèle</strong>.</div>
+                    <div class="step">• Les <strong>périmètres et les aires</strong> sont conservés.</div>
+                </div>
+            </div>
+
+            <!-- Slide 7 : IV. Centre de symétrie et axes de symétrie de figures usuelles -->
+            <div class="slide">
+                <h2>IV. Centre de symétrie et axes de symétrie de figures usuelles</h2>
+                <div class="definition">
+                    <div class="step"><span style="color:red;">Définition :</span> Dire qu'un point est un <strong>centre de symétrie</strong> d'une figure signifie que la figure et son symétrique par rapport à ce point sont <strong>confondus</strong>.</div>
+                </div>
+                <div class="step">
+                    <div class="img-step">
+                        <img src="images/5-24.png" alt="Centre de symétrie et axes de symétrie de figures usuelles">
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Contrôles -->
+        <div class="controls">
+            <div class="controls-left">
+                <button class="btn-menu" onclick="openMenu()">☰ Menu</button>
+                <button onclick="openHelp()">❓ Aide</button>
+            </div>
+            <div class="progress">
+                <span id="stepIndicator" class="step-indicator hidden">Étape 0/0</span>
+                <span>Slide <span id="currentSlide">1</span> / <span id="totalSlides">0</span></span>
+            </div>
+            <div class="controls-right">
+                <button class="btn-reset" onclick="resetSlide()">↻ Réinitialiser</button>
+                <button id="prevBtn" onclick="changeSlide(-1)">◀ Précédent</button>
+                <button onclick="changeSlide(1)">Suivant ▶</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Menu des slides -->
+    <div id="slideMenu" class="slide-menu">
+        <div class="menu-content">
+            <h2>Navigation</h2>
+            <div id="slideList" class="slide-list"></div>
+            <button class="close-menu" onclick="closeMenu()">Fermer</button>
+        </div>
+    </div>
+
+    <!-- Overlay d'aide -->
+    <div id="helpOverlay" class="help-overlay">
+        <div class="help-content">
+            <h2>Raccourcis clavier</h2>
+            <ul>
+                <li><kbd>→</kbd> ou <kbd>Espace</kbd> : Suivant</li>
+                <li><kbd>←</kbd> : Précédent</li>
+                <li><kbd>M</kbd> : Ouvrir le menu</li>
+                <li><kbd>R</kbd> : Réinitialiser la slide</li>
+                <li><kbd>H</kbd> ou <kbd>?</kbd> : Ouvrir/fermer l'aide</li>
+                <li><kbd>Échap</kbd> : Fermer les overlays</li>
+            </ul>
+            <button class="close-menu" onclick="closeHelp()">Fermer</button>
+        </div>
+    </div>
+
+    <script src="script-symetrie.js"></script>
+</body>
+</html>

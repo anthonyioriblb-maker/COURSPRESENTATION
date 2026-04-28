@@ -17,9 +17,10 @@ const slides = document.querySelectorAll('.slide');
 const totalSlides = slides.length;
 
 const slideTitles = [
-    "Calcul littéral 1",
+    "Chapitre 6 : Calcul littéral",
     "I. Expression littérale",
     "II. Simplification d'écriture",
+    "II. Simplification d'écriture — 1) Puissances",
     "III. Substitution",
     "IV. Tester une égalité",
     "V. Distributivité simple",

@@ -1,537 +1,437 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Proportionnalité - Présentation Interactive</title>
+    <title>Chapitre 7 - Proportionnalité</title>
     <link rel="stylesheet" href="../../styles.css">
     <style>
-        table {
-            font-size: inherit;
+        /* Tableaux du cours */
+        table { border-collapse: collapse; margin: 12px auto; }
+        th, td { border: 2px solid #2980b9; padding: 8px 14px; text-align: center; }
+        th { background-color: #d4ebf7; color: #1a5276; font-weight: bold; }
+        td { background-color: #eaf6ff; color: #1a5276; }
+
+        .cell-q { color: #c0392b; font-weight: bold; font-size: 1.05em; }
+        .cell-a { display: none; font-weight: bold; color: #27ae60; }
+        .redac-step { opacity: 0; transition: opacity 0.5s; margin-top: 6px; }
+
+        .btn-etape {
+            display: inline-block;
+            background: #2980b9; color: white; border: none;
+            padding: 7px 15px; border-radius: 5px; cursor: pointer;
+            font-size: 14px; margin: 8px 4px 4px 0; font-weight: bold;
         }
-        table th, table td {
-            font-size: inherit;
+        .btn-etape:hover { background: #1a6fa8; }
+        .btn-etape:disabled { background: #95a5a6; cursor: default; }
+        .btn-reset-anim {
+            display: inline-block;
+            background: #7f8c8d; color: white; border: none;
+            padding: 7px 11px; border-radius: 5px; cursor: pointer;
+            font-size: 14px; margin: 8px 0 4px 0;
         }
+        .btn-reset-anim:hover { background: #636e72; }
+
+        .tableau-avec-fleche { display: flex; align-items: center; justify-content: center; gap: 10px; margin: 12px 0; }
+        .fleche-coefficient { display: flex; flex-direction: column; align-items: center; }
+        .fleche-anim-svg { width: 75px; overflow: visible; display: block; }
+        .coefficient { color: #e67e22; font-weight: bold; margin-top: 4px; }
+        .arc-horizontal-wrap { display: flex; justify-content: center; }
+
+        img { max-width: 60%; height: auto; display: block; margin: 12px auto; border-radius: 6px; }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="content">
+
+            <!-- Slide 1 : Titre -->
             <div class="slide active">
                 <h1>Chapitre 7 : Proportionnalité</h1>
             </div>
 
+            <!-- Slide 2 : I. Situation de proportionnalité — 1) Reconnaître une situation de proportionnalité -->
             <div class="slide">
-                <h2><u>I. Situation de proportionnalité</u></h2>
-                <h3><u>1) Reconnaitre une situation de proportionnalité</u></h3>
-                <div class="definition step">
-                    <strong>Définition :</strong> Deux grandeurs sont proportionnelles lorsque l'une s'obtient en <strong>multipliant</strong> (ou en <strong>divisant</strong>) l'autre par un <strong>même nombre non nul</strong>.
-                </div>
-                <div class="example">
-                    <strong>Exemple 1 :</strong>
-                    <div class="step">
-                        <table>
-                            <tr>
-                                <th>Nombre de croissants</th>
-                                <td>2</td>
-                                <td>5</td>
-                                <td>8</td>
-                            </tr>
-                            <tr>
-                                <th>Prix (en €)</th>
-                                <td>3</td>
-                                <td>7,5</td>
-                                <td>12</td>
-                            </tr>
-                        </table>
-                    </div>
-                    <div class="step">On a :</div>
-                    <div class="step"><span class="fraction"><span class="numerateur">3</span><span class="denominateur">2</span></span> = 1,5</div>
-                    <div class="step"><span class="fraction"><span class="numerateur">7,5</span><span class="denominateur">5</span></span> = 1,5</div>
-                    <div class="step"><span class="fraction"><span class="numerateur">12</span><span class="denominateur">8</span></span> = 1,5</div>
-                    <div class="step">Les quotients sont <strong>égaux</strong>.</div>
-                    <div class="step"><strong>Pour passer de la première ligne à la deuxième ligne</strong>, on multiplie toujours par le même nombre : <strong>1,5</strong>.</div>
-                    <div class="step">
-                        <table>
-                            <tr>
-                                <th>Nombre de croissants</th>
-                                <td>2</td>
-                                <td>5</td>
-                                <td>8</td>
-                            </tr>
-                            <tr>
-                                <th>Prix (en €)</th>
-                                <td>3</td>
-                                <td>7,5</td>
-                                <td>12</td>
-                            </tr>
-                        </table>
-                    </div>
-                    <div class="step">Dans ce cas les deux grandeurs sont <strong>proportionnelles</strong>.</div>
-                </div>
-                <div class="example">
-                    <strong>Exemple 2 (contre-exemple) :</strong>
-                    <div class="step">
-                        <table>
-                            <tr>
-                                <th>Âge de Léo (en années)</th>
-                                <td>5</td>
-                                <td>10</td>
-                                <td>15</td>
-                            </tr>
-                            <tr>
-                                <th>Taille de Léo (en cm)</th>
-                                <td>110</td>
-                                <td>140</td>
-                                <td>165</td>
-                            </tr>
-                        </table>
-                    </div>
-                    <div class="step">On a :</div>
-                    <div class="step"><span class="fraction"><span class="numerateur">110</span><span class="denominateur">5</span></span> = 22</div>
-                    <div class="step"><span class="fraction"><span class="numerateur">140</span><span class="denominateur">10</span></span> = 14</div>
-                    <div class="step">Les quotients <strong>ne sont pas égaux</strong>.</div>
-                    <div class="step">Dans ce cas les deux grandeurs <strong>ne sont pas proportionnelles</strong>.</div>
-                </div>
-            </div>
+                <h2>I. Situation de proportionnalité</h2>
+                <h3>1) Reconnaître une situation de proportionnalité</h3>
 
-            <div class="slide">
-                <h3><u>2) Compléter un tableau de proportionnalité</u></h3>
-                <div class="example">
-                    <strong>Exemple :</strong> Paul achète 3 kg de pommes pour 6,9 €. Compléter le tableau suivant :
-                    <div class="step">
-                        <table>
-                            <tr>
-                                <th>Quantité de pommes (Kg)</th>
-                                <td>3</td>
-                                <td>4</td>
-                                <td>7</td>
-                                <td>15</td>
-                            </tr>
-                            <tr>
-                                <th>Prix (en €)</th>
-                                <td>6,9</td>
-                                <td>?</td>
-                                <td>?</td>
-                                <td>?</td>
-                            </tr>
-                        </table>
+                <div class="step">
+                    <div class="definition">
+                        <span style="color:red;">Définition :</span> Deux grandeurs sont proportionnelles lorsque l'une s'obtient en multipliant (ou en divisant) l'autre par un <span style="color:red;">même nombre non nul</span>.
                     </div>
                 </div>
-                <h4 class="step">a) En trouvant le nombre pour passer de la première ligne à la deuxième ligne</h4>
-                <div class="method">
-                    <div class="step">
-                        <table>
-                            <tr>
-                                <th>Quantité de pommes (Kg)</th>
-                                <td>3</td>
-                                <td>4</td>
-                            </tr>
-                            <tr>
-                                <th>Prix (en €)</th>
-                                <td>6,9</td>
-                                <td>?</td>
-                            </tr>
-                        </table>
+
+                <div class="step">
+                    <div class="example">
+                        <strong>Exemple 1 :</strong>
+                        <div class="tableau-avec-fleche">
+                            <table>
+                                <tr><th>Nombre de croissants</th><td>2</td><td>5</td><td>8</td></tr>
+                                <tr><th>Prix (en €)</th><td>3</td><td>7,5</td><td>12</td></tr>
+                            </table>
+                            <div class="fleche-coefficient">
+                                <svg class="fleche-anim-svg" viewBox="0 0 120 100" xmlns="http://www.w3.org/2000/svg">
+                                    <path id="arc-ex1" d="M 10 20 C 80 20, 80 80, 10 80" stroke="#e67e22" stroke-width="3" fill="none"/>
+                                    <polygon id="ptr-ex1" points="13,75 13,85 5,80" fill="#e67e22" style="opacity:0"/>
+                                </svg>
+                                <div class="coefficient" id="lbl-ex1" style="opacity:0; transition:opacity 0.4s;">× 1,5</div>
+                            </div>
+                        </div>
+                        <div style="margin: 4px 0 8px;">
+                            <button class="btn-etape" id="btn-ex1" onclick="stepEx1()">▶ Voir le coefficient</button>
+                            <button class="btn-reset-anim" onclick="resetBlkEx1()" title="Réinitialiser">↻</button>
+                        </div>
+                        <p>On a : <span class="fraction"><span class="numerateur">3</span><span class="denominateur">2</span></span> = 1,5 ; <span class="fraction"><span class="numerateur">7,5</span><span class="denominateur">5</span></span> = 1,5 ; <span class="fraction"><span class="numerateur">12</span><span class="denominateur">8</span></span> = 1,5</p>
+                        <p>Les quotients sont égaux.</p>
+                        <p><strong>Pour passer de la première ligne à la deuxième ligne</strong>, on multiplie toujours par le même nombre : 1,5.</p>
+                        <p>Dans ce cas les deux grandeurs sont <strong>proportionnelles</strong>.</p>
                     </div>
-                    <div class="step"><span class="fraction"><span class="numerateur">6,9</span><span class="denominateur">3</span></span> = 2,3</div>
-                    <div class="step"><strong>Pour passer de la première ligne à la deuxième ligne</strong>, on multiplie par <strong>2,3</strong>.</div>
-                    <div class="step">
+                </div>
+
+                <div class="step">
+                    <div class="example">
+                        <strong>Exemple 2 (contre-exemple) :</strong>
                         <table>
-                            <tr>
-                                <th>Quantité de pommes (Kg)</th>
-                                <td>3</td>
-                                <td>4</td>
-                            </tr>
-                            <tr>
-                                <th>Prix (en €)</th>
-                                <td>6,9</td>
-                                <td>?</td>
-                            </tr>
+                            <tr><th>Âge de Léo (en années)</th><td>5</td><td>10</td><td>15</td></tr>
+                            <tr><th>Taille de Léo (en cm)</th><td>110</td><td>140</td><td>165</td></tr>
                         </table>
-                    </div>
-                    <div class="step">Donc : 4 × 2,3 = <strong>9,2</strong></div>
-                    <div class="step">
-                        <table>
-                            <tr>
-                                <th>Quantité de pommes (Kg)</th>
-                                <td>3</td>
-                                <td>4</td>
-                            </tr>
-                            <tr>
-                                <th>Prix (en €)</th>
-                                <td>6,9</td>
-                                <td><strong>9,2</strong></td>
-                            </tr>
-                        </table>
+                        <p>On a : <span class="fraction"><span class="numerateur">110</span><span class="denominateur">5</span></span> = 22 ; <span class="fraction"><span class="numerateur">140</span><span class="denominateur">10</span></span> = 14</p>
+                        <p>Les quotients ne sont pas égaux.</p>
+                        <p>Dans ce cas les deux grandeurs <strong>ne sont pas proportionnelles</strong>.</p>
                     </div>
                 </div>
             </div>
 
+            <!-- Slide 3 : I. Situation de proportionnalité — 2) Compléter un tableau de proportionnalité -->
             <div class="slide">
-                <h4 class="step">b) En additionnant ou en soustrayant deux colonnes du tableau</h4>
-                <div class="method">
-                    <div class="step">Dans un tableau de proportionnalité on peut <strong>additionner</strong> ou <strong>soustraire</strong> deux colonnes :</div>
-                    <div class="step">
+                <h2>I. Situation de proportionnalité</h2>
+                <h3>2) Compléter un tableau de proportionnalité</h3>
+
+                <div class="step">
+                    <div class="example">
+                        <strong>Exemple :</strong> Paul achète 3 kg de pommes pour 6,9 €. Compléter le tableau suivant :
                         <table>
-                            <tr>
-                                <th>Quantité de pommes (Kg)</th>
-                                <td>3</td>
-                                <td>4</td>
-                                <td>7</td>
-                            </tr>
-                            <tr>
-                                <th>Prix (en €)</th>
-                                <td>6,9</td>
-                                <td>9,2</td>
-                                <td>?</td>
-                            </tr>
-                        </table>
-                    </div>
-                    <div class="step">3 kg + 4 kg = <strong>7 kg</strong></div>
-                    <div class="step">et 6,9 € + 9,2 € = <strong>16,1 €</strong></div>
-                    <div class="step">
-                        <table>
-                            <tr>
-                                <th>Quantité de pommes (Kg)</th>
-                                <td>3</td>
-                                <td>4</td>
-                                <td>7</td>
-                            </tr>
-                            <tr>
-                                <th>Prix (en €)</th>
-                                <td>6,9</td>
-                                <td>9,2</td>
-                                <td><strong>16,1</strong></td>
-                            </tr>
+                            <tr><th>Quantité de pommes (Kg)</th><td>3</td><td>4</td><td>7</td><td>15</td></tr>
+                            <tr><th>Prix (en €)</th><td>6,9</td><td><span class="cell-q">?</span></td><td><span class="cell-q">?</span></td><td><span class="cell-q">?</span></td></tr>
                         </table>
                     </div>
                 </div>
-                <h4 class="step">c) En multipliant ou en divisant une colonne par un nombre non nul</h4>
-                <div class="method">
-                    <div class="step">
-                        <table>
-                            <tr>
-                                <th>Quantité de pommes (Kg)</th>
-                                <td>3</td>
-                                <td>15</td>
-                            </tr>
-                            <tr>
-                                <th>Prix (en €)</th>
-                                <td>6,9</td>
-                                <td>?</td>
-                            </tr>
-                        </table>
+
+                <div class="step">
+                    <h4 style="text-align:left;">a) En trouvant le nombre pour passer de la première ligne à la deuxième ligne</h4>
+                    <div class="method">
+                        <div class="tableau-avec-fleche">
+                            <table>
+                                <tr><th>Quantité de pommes (Kg)</th><td>3</td><td>4</td></tr>
+                                <tr><th>Prix (en €)</th><td>6,9</td><td id="rep-A"><span class="cell-q">?</span><span class="cell-a">9,2</span></td></tr>
+                            </table>
+                            <div class="fleche-coefficient">
+                                <svg class="fleche-anim-svg" viewBox="0 0 120 100" xmlns="http://www.w3.org/2000/svg">
+                                    <path id="arc-A" d="M 10 20 C 80 20, 80 80, 10 80" stroke="#e67e22" stroke-width="3" fill="none"/>
+                                    <polygon id="ptr-A" points="13,75 13,85 5,80" fill="#e67e22" style="opacity:0"/>
+                                </svg>
+                                <div class="coefficient" id="lbl-A" style="opacity:0; transition:opacity 0.4s;">× 2,3</div>
+                            </div>
+                        </div>
+                        <div id="redac-A" class="redac-step">
+                            <p><span class="fraction"><span class="numerateur">6,9</span><span class="denominateur">3</span></span> = 2,3</p>
+                            <p><strong>Pour passer de la première ligne à la deuxième ligne</strong>, on multiplie par 2,3.</p>
+                            <p>Donc : 4 × 2,3 = <strong>9,2</strong></p>
+                        </div>
+                        <div>
+                            <button class="btn-etape" id="btn-A" onclick="nextStep('A')">▶ Voir le calcul</button>
+                            <button class="btn-reset-anim" onclick="resetBlk('A')" title="Réinitialiser">↻</button>
+                        </div>
                     </div>
-                    <div class="step"><span class="fraction"><span class="numerateur">15</span><span class="denominateur">3</span></span> = 5</div>
-                    <div class="step">Ainsi on passe de la première colonne à la deuxième colonne en multipliant par <strong>5</strong>.</div>
-                    <div class="step">Donc : 6,9 × 5 = <strong>34,5</strong></div>
-                    <div class="step">
+                </div>
+
+                <div class="step">
+                    <h4 style="text-align:left;">b) En additionnant ou en soustrayant deux colonnes du tableau</h4>
+                    <div class="method">
+                        <p>Dans un tableau de proportionnalité on peut additionner ou soustraire deux colonnes :</p>
                         <table>
-                            <tr>
-                                <th>Quantité de pommes (Kg)</th>
-                                <td>3</td>
-                                <td>15</td>
-                            </tr>
-                            <tr>
-                                <th>Prix (en €)</th>
-                                <td>6,9</td>
-                                <td><strong>34,5</strong></td>
-                            </tr>
+                            <tr><th>Quantité de pommes (Kg)</th><td>3</td><td>4</td><td id="rep-B1"><span class="cell-q">?</span><span class="cell-a">7</span></td></tr>
+                            <tr><th>Prix (en €)</th><td>6,9</td><td>9,2</td><td id="rep-B2"><span class="cell-q">?</span><span class="cell-a">16,1</span></td></tr>
                         </table>
+                        <div id="redac-B" class="redac-step">
+                            <p>3 kg + 4 kg = 7 kg, et 6,9 € + 9,2 € = 16,1 €</p>
+                        </div>
+                        <div>
+                            <button class="btn-etape" id="btn-B" onclick="stepB()">▶ Voir le calcul</button>
+                            <button class="btn-reset-anim" onclick="resetBlkB()" title="Réinitialiser">↻</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <h4 style="text-align:left;">c) En multipliant ou en divisant une colonne par un nombre non nul</h4>
+                    <div class="method">
+                        <div class="arc-horizontal-wrap">
+                            <svg id="svg-arc-C" viewBox="0 0 280 65" style="width:100%; max-width:380px; overflow:visible;">
+                                <path id="arc-C" d="M 50 60 C 50 10 230 10 230 60" fill="none" stroke="#e67e22" stroke-width="2.8"/>
+                                <polygon id="ptr-C" points="224,50 232,50 230,62" fill="#e67e22" style="opacity:0"/>
+                                <text id="lbl-C" x="140" y="27" text-anchor="middle" fill="#e67e22" font-size="15" font-weight="bold" style="opacity:0">× 5</text>
+                            </svg>
+                        </div>
+                        <table>
+                            <tr><th>Quantité de pommes (Kg)</th><td>3</td><td>15</td></tr>
+                            <tr><th>Prix (en €)</th><td>6,9</td><td id="rep-C"><span class="cell-q">?</span><span class="cell-a">34,5</span></td></tr>
+                        </table>
+                        <div id="redac-C" class="redac-step">
+                            <p><span class="fraction"><span class="numerateur">15</span><span class="denominateur">3</span></span> = 5</p>
+                            <p>Ainsi on passe de la première colonne à la deuxième colonne en multipliant par 5.</p>
+                            <p>Donc : 6,9 × 5 = <strong>34,5</strong></p>
+                        </div>
+                        <div>
+                            <button class="btn-etape" id="btn-C" onclick="nextStep('C')">▶ Voir le calcul</button>
+                            <button class="btn-reset-anim" onclick="resetBlk('C')" title="Réinitialiser">↻</button>
+                        </div>
                     </div>
                 </div>
             </div>
 
+            <!-- Slide 4 : II. Exemples d'utilisations — 1) Les pourcentages -->
             <div class="slide">
-                <h2><u>II. Exemples d'utilisations de la proportionnalité</u></h2>
-                <h3><u>1) Les pourcentages</u></h3>
-                <div class="important step">
-                    <strong>Propriété :</strong> Appliquer <span class="math">x</span> % à un nombre, c'est <strong>multiplier</strong> ce nombre par <span class="fraction"><span class="numerateur">x</span><span class="denominateur">100</span></span>.
+                <h2>II. Exemples d'utilisations de la proportionnalité</h2>
+                <h3>1) Les pourcentages</h3>
+
+                <div class="step">
+                    <div class="important">
+                        <span style="color:red;">Propriété :</span> Appliquer <span class="math">x</span> % à un nombre, c'est multiplier ce nombre par <span class="fraction"><span class="numerateur">x</span><span class="denominateur">100</span></span>.
+                    </div>
                 </div>
-                <h4 class="step">a) Appliquer un pourcentage :</h4>
-                <div class="example">
-                    <div class="step"><strong>Exemple :</strong> Dans un collège de 400 élèves, 15% des élèves jouent au volley. Combien d'élèves jouent au volley ?</div>
-                    <div class="step">400 × <span class="fraction"><span class="numerateur">15</span><span class="denominateur">100</span></span> = 400 × 0,15 = <strong>60</strong></div>
-                    <div class="step">Il y a <strong>60 élèves</strong> qui jouent au volley dans ce collège.</div>
-                    <div class="step"><strong>Ou bien avec un tableau :</strong></div>
-                    <div class="step">
+
+                <div class="step">
+                    <h4 style="text-align:left;">a) Appliquer un pourcentage :</h4>
+                    <div class="example">
+                        <strong>Exemple :</strong> Dans un collège de 400 élèves, 15 % des élèves jouent au volley. Combien d'élèves jouent au volley ?
+                        <p>400 × <span class="fraction"><span class="numerateur">15</span><span class="denominateur">100</span></span> = 400 × 0,15 = 60</p>
+                        <p>Il y a <strong>60 élèves</strong> qui jouent au volley dans ce collège.</p>
+                        <p><strong>Ou bien :</strong></p>
                         <table>
-                            <tr>
-                                <th>Nombre d'élèves</th>
-                                <td>100</td>
-                                <td>400</td>
-                            </tr>
-                            <tr>
-                                <th>Nombre d'élèves qui jouent au volley</th>
-                                <td>15</td>
-                                <td>?</td>
-                            </tr>
+                            <tr><th>Nombre d'élèves</th><td>100</td><td>400</td></tr>
+                            <tr><th>Nombre d'élèves qui jouent au volley</th><td>15</td><td><strong>60</strong></td></tr>
                         </table>
                     </div>
-                    <div class="step"><span class="fraction"><span class="numerateur">400</span><span class="denominateur">100</span></span> = 4, donc on multiplie la colonne de gauche par <strong>4</strong></div>
-                    <div class="step">
+                </div>
+
+                <div class="step">
+                    <h4 style="text-align:left;">b) Calculer un pourcentage :</h4>
+                    <div class="example">
+                        <strong>Exemple :</strong> Dans une classe de 30 élèves il y a 9 filles. Quel est le pourcentage de filles dans cette classe ?
+                        <p>Cela revient à déterminer le nombre de filles qu'il y aurait si la classe était composée de 100 élèves.</p>
                         <table>
-                            <tr>
-                                <th>Nombre d'élèves</th>
-                                <td>100</td>
-                                <td>400</td>
-                            </tr>
-                            <tr>
-                                <th>Nombre d'élèves qui jouent au volley</th>
-                                <td>15</td>
-                                <td>?</td>
-                            </tr>
+                            <tr><th>Nombre d'élèves</th><td>30</td><td>100</td></tr>
+                            <tr><th>Nombre de filles</th><td>9</td><td><strong>30</strong></td></tr>
                         </table>
-                    </div>
-                    <div class="step">15 × 4 = <strong>60</strong></div>
-                    <div class="step">
-                        <table>
-                            <tr>
-                                <th>Nombre d'élèves</th>
-                                <td>100</td>
-                                <td>400</td>
-                            </tr>
-                            <tr>
-                                <th>Nombre d'élèves qui jouent au volley</th>
-                                <td>15</td>
-                                <td><strong>60</strong></td>
-                            </tr>
-                        </table>
+                        <p><span class="fraction"><span class="numerateur">9</span><span class="denominateur">30</span></span> = 0,3</p>
+                        <p><strong>Pour passer de la première ligne à la deuxième ligne</strong>, on multiplie par 0,3.</p>
+                        <p>Dans cette classe, il y a <strong>30 % de filles</strong>.</p>
                     </div>
                 </div>
             </div>
 
+            <!-- Slide 5 : II. Exemples d'utilisations — 2) Échelles -->
             <div class="slide">
-                <h4 class="step">b) Calculer un pourcentage :</h4>
-                <div class="example">
-                    <div class="step"><strong>Exemple :</strong> Dans une classe de 30 élèves il y a 9 filles. Quel est le pourcentage de filles dans cette classe ?</div>
-                    <div class="step">Cela revient à déterminer le nombre de filles qu'il y aurait si la classe était composée de <strong>100 élèves</strong>.</div>
-                    <div class="step">
-                        <table>
-                            <tr>
-                                <th>Nombre d'élèves</th>
-                                <td>30</td>
-                                <td>100</td>
-                            </tr>
-                            <tr>
-                                <th>Nombre de filles</th>
-                                <td>9</td>
-                                <td>?</td>
-                            </tr>
-                        </table>
+                <h2>II. Exemples d'utilisations de la proportionnalité</h2>
+                <h3>2) Échelles</h3>
+
+                <div class="step">
+                    <div class="definition">
+                        <span style="color:red;">Définition :</span> Sur une représentation à l'échelle, les mesures sur la représentation sont proportionnelles aux mesures réelles.
                     </div>
-                    <div class="step"><span class="fraction"><span class="numerateur">9</span><span class="denominateur">30</span></span> = 0,3</div>
-                    <div class="step"><strong>Pour passer de la première ligne à la deuxième ligne</strong>, on multiplie par <strong>0,3</strong>.</div>
-                    <div class="step">
-                        <table>
-                            <tr>
-                                <th>Nombre d'élèves</th>
-                                <td>30</td>
-                                <td>100</td>
-                            </tr>
-                            <tr>
-                                <th>Nombre de filles</th>
-                                <td>9</td>
-                                <td>?</td>
-                            </tr>
-                        </table>
+                </div>
+
+                <div class="step">
+                    <div class="remarque">
+                        <strong>Remarque importante :</strong> Les mesures sont exprimées dans la <strong>même unité</strong>.
                     </div>
-                    <div class="step">Donc : 100 × 0,3 = <strong>30</strong></div>
-                    <div class="step">
+                </div>
+
+                <div class="step">
+                    <h4 style="text-align:left;">a) Utilisation d'une échelle :</h4>
+                    <div class="example">
+                        <strong>Exemple :</strong> Sur une carte à l'échelle <span class="fraction"><span class="numerateur">1</span><span class="denominateur">50 000</span></span>, deux villes sont distantes de 12 cm. Quelle est la distance réelle entre ces deux villes ?
                         <table>
-                            <tr>
-                                <th>Nombre d'élèves</th>
-                                <td>30</td>
-                                <td>100</td>
-                            </tr>
-                            <tr>
-                                <th>Nombre de filles</th>
-                                <td>9</td>
-                                <td><strong>30</strong></td>
-                            </tr>
+                            <tr><th>Distance sur la carte en cm</th><td>1</td><td>12</td></tr>
+                            <tr><th>Distance réelle en cm</th><td>50 000</td><td><strong>600 000</strong></td></tr>
                         </table>
+                        <p><span class="fraction"><span class="numerateur">50 000</span><span class="denominateur">1</span></span> = 50 000</p>
+                        <p><strong>Pour passer de la première ligne à la deuxième ligne</strong>, on multiplie par 50 000.</p>
+                        <p>La distance réelle est de 600 000 cm soit <strong>6 km</strong>.</p>
                     </div>
-                    <div class="step">Dans cette classe, il y a <strong>30% de filles</strong>.</div>
+                </div>
+
+                <div class="step">
+                    <h4 style="text-align:left;">b) Calculer une échelle :</h4>
+                    <div class="example">
+                        <strong>Exemple :</strong> Calculer l'échelle de ce dessin :
+                        <img src="images/6-71.png" alt="Dessin d'un roller">
+                        Sur ce dessin, on mesure la longueur de la flèche, elle mesure 4 cm.
+                        On cherche combien 1 cm sur le dessin va représenter en réalité.
+                        <table>
+                            <tr><th>Distance sur le dessin en cm</th><td>4</td><td>1</td></tr>
+                            <tr><th>Distance réelle en cm</th><td>36</td><td><strong>9</strong></td></tr>
+                        </table>
+                        <p><span class="fraction"><span class="numerateur">36</span><span class="denominateur">4</span></span> = 9</p>
+                        <p><strong>Pour passer de la première ligne à la deuxième ligne</strong>, on multiplie par 9.</p>
+                        <p>L'échelle est <span class="fraction"><span class="numerateur">1</span><span class="denominateur">9</span></span>.</p>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <div class="remarque">
+                        <strong>Remarque :</strong> Calculer une échelle revient à calculer le nombre représenté par la fraction : <span class="fraction"><span class="numerateur">distance sur la carte</span><span class="denominateur">distance réelle</span></span>, <strong>ces distances étant dans la même unité</strong>.
+                    </div>
                 </div>
             </div>
 
-            <div class="slide">
-                <h3><u>2) Échelles</u></h3>
-                <div class="definition step">
-                    <strong>Définition :</strong> Sur une représentation à l'échelle, les mesures sur la représentation sont <strong>proportionnelles</strong> aux mesures réelles.
-                </div>
-                <div class="remarque step">
-                    <strong>Remarque importante :</strong> Les mesures sont exprimées dans la <strong>même unité</strong>.
-                </div>
-                <h4 class="step">a) Utilisation d'une échelle :</h4>
-                <div class="example">
-                    <div class="step"><strong>Exemple :</strong> Sur une carte à l'échelle <span class="fraction"><span class="numerateur">1</span><span class="denominateur">50 000</span></span>, deux villes sont distantes de 12 cm.<br>
-                    Quelle est la distance réelle entre ces deux villes ?</div>
-                    <div class="step">
-                        <table>
-                            <tr>
-                                <th>Distance sur la carte en cm</th>
-                                <td>1</td>
-                                <td>12</td>
-                            </tr>
-                            <tr>
-                                <th>Distance réelle en cm</th>
-                                <td>50 000</td>
-                                <td>?</td>
-                            </tr>
-                        </table>
-                    </div>
-                    <div class="step"><span class="fraction"><span class="numerateur">50 000</span><span class="denominateur">1</span></span> = 50 000</div>
-                    <div class="step"><strong>Pour passer de la première ligne à la deuxième ligne</strong>, on multiplie par <strong>50 000</strong>.</div>
-                    <div class="step">
-                        <table>
-                            <tr>
-                                <th>Distance sur la carte en cm</th>
-                                <td>1</td>
-                                <td>12</td>
-                            </tr>
-                            <tr>
-                                <th>Distance réelle en cm</th>
-                                <td>50 000</td>
-                                <td>?</td>
-                            </tr>
-                        </table>
-                    </div>
-                    <div class="step">Donc : 12 × 50 000 = <strong>600 000</strong></div>
-                    <div class="step">
-                        <table>
-                            <tr>
-                                <th>Distance sur la carte en cm</th>
-                                <td>1</td>
-                                <td>12</td>
-                            </tr>
-                            <tr>
-                                <th>Distance réelle en cm</th>
-                                <td>50 000</td>
-                                <td><strong>600 000</strong></td>
-                            </tr>
-                        </table>
-                    </div>
-                    <div class="step">La distance réelle est de 600 000 cm soit <strong>6 km</strong>.</div>
-                </div>
-            </div>
-
-            <div class="slide">
-                <h4 class="step">b) Calculer une échelle :</h4>
-                <div class="example">
-                    <div class="step"><strong>Exemple :</strong> Calculer l'échelle de ce dessin :</div>
-                    <div class="step">
-                        <img src="6-71.png" alt="Dessin d'un roller" style="max-width: 400px;">
-                    </div>
-                    <div class="step">Sur ce dessin, on mesure la longueur de la flèche, elle mesure 4 cm.</div>
-                    <div class="step">On cherche combien 1 cm sur le dessin va représenter en réalité.</div>
-                    <div class="step">
-                        <table>
-                            <tr>
-                                <th>Distance réelle en cm</th>
-                                <td>36</td>
-                                <td>?</td>
-                            </tr>
-                            <tr>
-                                <th>Distance sur le dessin en cm</th>
-                                <td>4</td>
-                                <td>1</td>
-                            </tr>
-                        </table>
-                    </div>
-                    <div class="step"><span class="fraction"><span class="numerateur">36</span><span class="denominateur">4</span></span> = 9</div>
-                    <div class="step"><strong>Pour passer de la deuxième ligne à la première ligne</strong>, on multiplie par <strong>9</strong>.</div>
-                    <div class="step">
-                        <table>
-                            <tr>
-                                <th>Distance réelle en cm</th>
-                                <td>36</td>
-                                <td>?</td>
-                            </tr>
-                            <tr>
-                                <th>Distance sur le dessin en cm</th>
-                                <td>4</td>
-                                <td>1</td>
-                            </tr>
-                        </table>
-                    </div>
-                    <div class="step">Donc : 1 × 9 = <strong>9</strong></div>
-                    <div class="step">
-                        <table>
-                            <tr>
-                                <th>Distance réelle en cm</th>
-                                <td>36</td>
-                                <td><strong>9</strong></td>
-                            </tr>
-                            <tr>
-                                <th>Distance sur le dessin en cm</th>
-                                <td>4</td>
-                                <td>1</td>
-                            </tr>
-                        </table>
-                    </div>
-                    <div class="step">L'échelle est <span class="fraction"><span class="numerateur">1</span><span class="denominateur">9</span></span>.</div>
-                </div>
-                <div class="remarque">
-                    <div class="step"><strong>Remarque :</strong> Calculer une échelle revient à calculer le rapport : <span class="fraction"><span class="numerateur">distance sur la carte</span><span class="denominateur">distance réelle</span></span>, <strong>ces distances étant dans la même unité</strong>.</div>
-                </div>
-            </div>
-
-            <div class="slide">
-                <h2><u>Exercices</u></h2>
-                <div class="exercice">
-                    <div class="step"><strong>Exercice 1 :</strong> Un élève achète 5 cahiers pour 8 €. Quel est le prix de 8 cahiers ? de 12 cahiers ?</div>
-                </div>
-                <div class="exercice">
-                    <div class="step"><strong>Exercice 2 :</strong> Dans un collège, 60 % des élèves sont demi-pensionnaires. Il y a 450 élèves dans le collège. Combien d'élèves sont demi-pensionnaires ?</div>
-                </div>
-                <div class="exercice">
-                    <div class="step"><strong>Exercice 3 :</strong> Sur une carte à l'échelle <span class="fraction"><span class="numerateur">1</span><span class="denominateur">25 000</span></span>, deux villes sont distantes de 8 cm. Quelle est la distance réelle en km ?</div>
-                </div>
-            </div>
         </div>
 
         <div class="controls">
             <div class="controls-left">
-                <button id="prevBtn" onclick="changeSlide(-1)">← Précédent</button>
-                <button class="btn-reset" onclick="resetSlide()">⟲</button>
+                <button class="btn-menu" onclick="openMenu()">☰ Menu</button>
+                <button onclick="openHelp()">❓ Aide</button>
             </div>
             <div class="progress">
-                <span><span id="currentSlide">1</span> / <span id="totalSlides">9</span></span>
-                <span class="step-indicator" id="stepIndicator"></span>
+                <span id="stepIndicator" class="step-indicator hidden">Étape 0/0</span>
+                <span>Slide <span id="currentSlide">1</span> / <span id="totalSlides">0</span></span>
             </div>
             <div class="controls-right">
-                <button class="btn-menu" onclick="openMenu()">📋 Menu</button>
-                <button class="btn-menu" onclick="openHelp()">❓ Aide</button>
-                <button id="nextBtn" onclick="changeSlide(1)">Suivant →</button>
+                <button class="btn-reset" onclick="resetSlide()">↻ Réinitialiser</button>
+                <button id="prevBtn" onclick="changeSlide(-1)">◀ Précédent</button>
+                <button onclick="changeSlide(1)">Suivant ▶</button>
             </div>
         </div>
     </div>
 
-    <div class="slide-menu" id="slideMenu">
+    <div id="slideMenu" class="slide-menu">
         <div class="menu-content">
-            <h2>Sélectionner une diapositive</h2>
-            <div class="slide-list" id="slideList"></div>
+            <h2>Navigation</h2>
+            <div id="slideList" class="slide-list"></div>
             <button class="close-menu" onclick="closeMenu()">Fermer</button>
         </div>
     </div>
 
-    <div class="help-overlay" id="helpOverlay">
+    <div id="helpOverlay" class="help-overlay">
         <div class="help-content">
             <h2>Raccourcis clavier</h2>
             <ul>
-                <li><kbd>↑</kbd> ou <kbd>Espace</kbd> : Étape/Slide suivante</li>
-                <li><kbd>↓</kbd> : Étape/Slide précédente</li>
-                <li><kbd>M</kbd> : Ouvrir le menu des slides</li>
-                <li><kbd>R</kbd> : Réinitialiser la slide actuelle</li>
-                <li><kbd>H</kbd> ou <kbd>?</kbd> : Afficher cette aide</li>
-                <li><kbd>Échap</kbd> : Fermer les menus</li>
+                <li><kbd>→</kbd> ou <kbd>Espace</kbd> : Suivant</li>
+                <li><kbd>←</kbd> : Précédent</li>
+                <li><kbd>M</kbd> : Ouvrir le menu</li>
+                <li><kbd>R</kbd> : Réinitialiser la slide</li>
+                <li><kbd>H</kbd> ou <kbd>?</kbd> : Ouvrir/fermer l'aide</li>
+                <li><kbd>Échap</kbd> : Fermer les overlays</li>
             </ul>
             <button class="close-menu" onclick="closeHelp()">Fermer</button>
         </div>
     </div>
 
+    <script>
+        const blkState = {};
+        document.addEventListener('DOMContentLoaded', function () {
+            ['ex1', 'A', 'C'].forEach(id => {
+                const arc = document.getElementById('arc-' + id);
+                if (!arc) return;
+                const len = Math.ceil(arc.getTotalLength()) + 5;
+                arc.style.strokeDasharray = len;
+                arc.style.strokeDashoffset = len;
+                blkState[id] = 0;
+            });
+        });
+
+        function stepEx1() {
+            if ((blkState['ex1'] || 0) >= 1) return;
+            blkState['ex1'] = 1;
+            const arc = document.getElementById('arc-ex1');
+            requestAnimationFrame(() => { arc.style.transition = 'stroke-dashoffset 0.8s ease-out'; arc.style.strokeDashoffset = '0'; });
+            setTimeout(() => { document.getElementById('ptr-ex1').style.transition = 'opacity 0.15s'; document.getElementById('ptr-ex1').style.opacity = '1'; }, 850);
+            setTimeout(() => { document.getElementById('lbl-ex1').style.opacity = '1'; }, 1050);
+            setTimeout(() => { document.getElementById('btn-ex1').disabled = true; }, 1100);
+        }
+        function resetBlkEx1() {
+            blkState['ex1'] = 0;
+            const arc = document.getElementById('arc-ex1');
+            const len = Math.ceil(arc.getTotalLength()) + 5;
+            arc.style.transition = 'none'; arc.style.strokeDasharray = len; arc.style.strokeDashoffset = len;
+            const ptr = document.getElementById('ptr-ex1'); ptr.style.transition = 'none'; ptr.style.opacity = '0';
+            const lbl = document.getElementById('lbl-ex1'); lbl.style.transition = 'none'; lbl.style.opacity = '0';
+            document.getElementById('btn-ex1').disabled = false;
+        }
+        function nextStep(id) {
+            blkState[id] = (blkState[id] || 0) + 1;
+            const state = blkState[id];
+            const btn = document.getElementById('btn-' + id);
+            if (state === 1) {
+                const redac = document.getElementById('redac-' + id);
+                if (redac) redac.style.opacity = '1';
+                if (btn) btn.textContent = '▶ Voir le coefficient';
+            } else if (state === 2) {
+                const arc = document.getElementById('arc-' + id);
+                requestAnimationFrame(() => { arc.style.transition = 'stroke-dashoffset 0.8s ease-out'; arc.style.strokeDashoffset = '0'; });
+                setTimeout(() => { document.getElementById('ptr-' + id).style.transition = 'opacity 0.15s'; document.getElementById('ptr-' + id).style.opacity = '1'; }, 850);
+                setTimeout(() => { document.getElementById('lbl-' + id).style.opacity = '1'; }, 1050);
+                if (btn) btn.textContent = '▶ Voir la réponse';
+            } else if (state === 3) {
+                const rep = document.getElementById('rep-' + id);
+                if (rep) {
+                    rep.querySelector('.cell-q').style.display = 'none';
+                    rep.querySelector('.cell-a').style.display = 'inline';
+                }
+                if (btn) btn.disabled = true;
+            }
+        }
+        function resetBlk(id) {
+            blkState[id] = 0;
+            const arc = document.getElementById('arc-' + id);
+            const len = Math.ceil(arc.getTotalLength()) + 5;
+            arc.style.transition = 'none'; arc.style.strokeDasharray = len; arc.style.strokeDashoffset = len;
+            const ptr = document.getElementById('ptr-' + id); ptr.style.transition = 'none'; ptr.style.opacity = '0';
+            const lbl = document.getElementById('lbl-' + id); lbl.style.transition = 'none'; lbl.style.opacity = '0';
+            const rep = document.getElementById('rep-' + id);
+            if (rep) {
+                rep.querySelector('.cell-q').style.display = 'inline';
+                rep.querySelector('.cell-a').style.display = 'none';
+            }
+            const redac = document.getElementById('redac-' + id);
+            if (redac) { redac.style.transition = 'none'; redac.style.opacity = '0'; }
+            const btn = document.getElementById('btn-' + id);
+            btn.disabled = false; btn.textContent = '▶ Voir le calcul';
+        }
+        function stepB() {
+            blkState['B'] = (blkState['B'] || 0) + 1;
+            const state = blkState['B'];
+            const btn = document.getElementById('btn-B');
+            if (state === 1) {
+                const redac = document.getElementById('redac-B');
+                if (redac) redac.style.opacity = '1';
+                if (btn) btn.textContent = '▶ Voir la réponse';
+            } else if (state === 2) {
+                ['rep-B1', 'rep-B2'].forEach(id => {
+                    const el = document.getElementById(id);
+                    if (!el) return;
+                    el.querySelector('.cell-q').style.display = 'none';
+                    el.querySelector('.cell-a').style.display = 'inline';
+                });
+                if (btn) btn.disabled = true;
+            }
+        }
+        function resetBlkB() {
+            blkState['B'] = 0;
+            ['rep-B1', 'rep-B2'].forEach(id => {
+                const el = document.getElementById(id);
+                if (!el) return;
+                el.querySelector('.cell-q').style.display = 'inline';
+                el.querySelector('.cell-a').style.display = 'none';
+            });
+            const redac = document.getElementById('redac-B');
+            if (redac) { redac.style.transition = 'none'; redac.style.opacity = '0'; }
+            const btn = document.getElementById('btn-B');
+            btn.disabled = false; btn.textContent = '▶ Voir le calcul';
+        }
+    </script>
     <script src="script-proportionnalite.js"></script>
 </body>
 </html>

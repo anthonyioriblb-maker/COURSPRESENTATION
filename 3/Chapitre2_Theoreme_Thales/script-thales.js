@@ -7,9 +7,8 @@ const slideTitles = [
     "Théorème de Thalès",
     "I. Produit en croix",
     "II. Théorème de Thalès",
-    "Exemples d'application",
-    "III. Réciproque",
-    "IV. Contraposée",
+    "III. Réciproque du théorème de Thalès",
+    "IV. Contraposée du théorème de Thalès",
     "V. Agrandissement et réduction"
 ];
 

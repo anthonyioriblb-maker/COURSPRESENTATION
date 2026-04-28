@@ -5,13 +5,14 @@ const totalSlides = slides.length;
 
 const slideTitles = [
     "Chapitre 9 : Les opérations",
-    "Calculs posés – Addition",
-    "Calculs posés – Soustraction",
-    "Calculs posés – Multiplication",
-    "Division euclidienne",
-    "Vocabulaire & Critères de divisibilité",
-    "Division décimale – Continuer",
-    "Division décimale – Diviser un nombre décimal"
+    "I. Calculs posés – 1) Poser une addition",
+    "I. Calculs posés – 2) Poser une soustraction",
+    "I. Calculs posés – 3) Poser une multiplication",
+    "II. Division euclidienne – 1) Poser une division euclidienne",
+    "III. Vocabulaire",
+    "IV. Critères de divisibilité",
+    "V. Division décimale – 1) Continuer une division euclidienne",
+    "V. Division décimale – 2) Diviser un nombre décimal"
 ];
 
 document.getElementById('totalSlides').textContent = totalSlides;

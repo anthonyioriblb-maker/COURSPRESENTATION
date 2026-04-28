@@ -10,7 +10,9 @@ const slideTitles = [
     "II. Fraction et nombres",
     "III. Quotients égaux",
     "IV. Fractions et demi-droite graduée",
-    "V. Comparaison de fractions"
+    "V. Comparaison de fractions",
+    "2) Comparer les fractions",
+    "3) Encadrer une fraction par deux entiers consécutifs"
 ];
 
 document.getElementById('totalSlides').textContent = totalSlides;

@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Chapitre 7 - Notion de fonction</title>
+    <link rel="stylesheet" href="../../styles.css">
+</head>
+<body>
+    <div class="container">
+        <div class="content">
+
+            <!-- Slide 1 : Titre -->
+            <div class="slide active">
+                <h1>Chapitre 7 : Notion de fonction</h1>
+            </div>
+
+            <!-- Slide 2 : I. Définitions-vocabulaire -->
+            <div class="slide">
+                <h2>I. Définitions-vocabulaire</h2>
+                <div class="definition">
+                    <div class="step"><span style="color:red;">Définition :</span> Une <span style="color:red;">fonction</span> est un processus qui à un nombre donné lui fait correspondre un et un seul autre nombre.</div>
+                </div>
+                <div class="example">
+                    <div class="step"><strong>Exemple introductif :</strong> Imaginons que nous décidions d'aller à la piscine et que l'on paie toujours à la fin de l'année.</div>
+                    <div class="step">Si nous allons 1 fois à la piscine et que le prix de l'entrée est de 5€, nous paierons une fois 5€.</div>
+                    <div class="step">Si nous allons 4 fois à la piscine, nous paierons 4 fois 5€ soit 20€.</div>
+                    <div class="step">Si nous allons 10 fois à la piscine, nous paierons 50€.</div>
+                    <div class="step">Disons que nous y allons <span class="math">x</span> fois. A la fin de l'année, nous paierons 5<span class="math">x</span> €.</div>
+                    <div class="step">Nous avons ici la <strong>fonction 5<span class="math">x</span></strong> qui nous donne le prix à payer en fonction du nombre de séances <span class="math">x</span>.</div>
+                </div>
+            </div>
+
+            <!-- Slide 3 : Vocabulaire : image et antécédent -->
+            <div class="slide">
+                <h3>Vocabulaire : image et antécédent</h3>
+                <div class="definition">
+                    <div class="step"><span style="color:red;">Définition :</span> On dit que</div>
+                    <div class="step">• 25 est <span style="color:red;">l'image</span> de 5 par la fonction.</div>
+                    <div class="step">• 14 est <span style="color:red;">un antécédent</span> de 70 par la fonction.</div>
+                </div>
+                <div class="remarque">
+                    <div class="step"><strong>Remarque :</strong> Tout nombre ne possède qu'<strong>une seule image</strong> par une fonction.</div>
+                    <div class="step">Ce n'est pas le cas d'un antécédent d'un nombre par une fonction (il peut en avoir aucun, un ou plusieurs).</div>
+                </div>
+            </div>
+
+            <!-- Slide 4 : II. Détermination d'une fonction — 1) Par une formule — a) Notation -->
+            <div class="slide">
+                <h2>II. Détermination d'une fonction</h2>
+                <h3>1) Par une formule</h3>
+                <div class="remarque">
+                    <div class="step">Une fonction peut être définie de plusieurs façons.</div>
+                    <div class="step">Lorsqu'une fonction est définie par une formule, on peut calculer précisément les valeurs à l'arrivée.</div>
+                    <div class="step">On note généralement la fonction par une lettre.</div>
+                </div>
+                <div class="example">
+                    <div class="step"><strong>Notation :</strong> Pour notre exemple on a :</div>
+                    <div class="step"><span class="math">f</span> : <span class="math">x</span> ⟼ 5<span class="math">x</span></div>
+                    <div class="step">Qui se lit « fonction <span class="math">f</span> qui à un nombre <span class="math">x</span> associe le nombre 5<span class="math">x</span> ».</div>
+                    <div class="step">Ou bien : <span class="math">f</span>(<span class="math">x</span>) = 5<span class="math">x</span></div>
+                </div>
+            </div>
+
+            <!-- Slide 5 : II. Détermination d'une fonction — 1) Par une formule — b) Calcul d'images et d'antécédents -->
+            <div class="slide">
+                <h3>Fin : 1) Par une formule</h3>
+                <div class="example">
+                    <div class="step"><strong>Calcul d'images :</strong> A partir de <span class="math">f</span>(<span class="math">x</span>) = 5<span class="math">x</span>, calculons les images de 2, 7 et 10 :</div>
+                    <div class="step">Image de 2 : <span class="math">f</span>(2) = 5 × 2 = 10</div>
+                    <div class="step">Image de 7 : <span class="math">f</span>(7) = 5 × 7 = 35</div>
+                    <div class="step">Image de 10 : <span class="math">f</span>(10) = 5 × 10 = 50</div>
+                </div>
+                <div class="example">
+                    <div class="step"><strong>Calcul d'antécédents :</strong> Calculons les éventuels antécédents de 75 :</div>
+                    <div class="step">Il faut trouver les nombres de départ qui donnent 75. On cherche <span class="math">x</span> tel que <span class="math">f</span>(<span class="math">x</span>) = 75.</div>
+                    <div class="step">5<span class="math">x</span> = 75, donc <span class="math">x</span> = <span class="frac"><span class="num">75</span><span class="den">5</span></span> = 15</div>
+                    <div class="step">La solution est 15 (on paie 75€ si on a été 15 fois à la piscine dans l'année).</div>
+                </div>
+            </div>
+
+            <!-- Slide 6 : II. Détermination d'une fonction — 2) Par un graphique -->
+            <div class="slide">
+                <h3>2) Par un graphique</h3>
+                <div class="definition">
+                    <div class="step"><span style="color:red;">Définition :</span> Un repère étant choisi, on appelle <span style="color:red;">représentation graphique</span> d'une fonction <span class="math">f</span>, l'ensemble des points M de coordonnées (<span class="math">x</span> ; <span class="math">f</span>(<span class="math">x</span>)).</div>
+                    <div class="step">On dit aussi que <span class="math">y</span> = <span class="math">f</span>(<span class="math">x</span>) est une <span style="color:red;">équation de la représentation graphique</span> de <span class="math">f</span> dans ce repère.</div>
+                </div>
+                <div class="remarque">
+                    <div class="step"><strong>Attention :</strong> cette méthode n'est pas très précise. La seule vérification est le calcul.</div>
+                    <div class="step">Par exemple, pour le point A(18 ; 26) sur la courbe de <span class="math">f</span>(<span class="math">x</span>) = 0,08<span class="math">x</span>² :</div>
+                    <div class="step"><span class="math">f</span>(18) = 0,08 × 18² = 0,08 × 324 = 25,92 ≠ 26, donc A n'est pas sur la courbe.</div>
+                </div>
+            </div>
+
+            <!-- Slide 7 : II. Détermination d'une fonction — 3) Par un tableau de valeur -->
+            <div class="slide">
+                <h3>3) Par un tableau de valeur</h3>
+                <div class="definition">
+                    <div class="step"><span style="color:red;">Définition :</span> Un tableau de valeur permet de connaître les valeurs prises par une fonction <span class="math">f</span> pour certaines valeurs de la variable.</div>
+                    <div class="step">Avec suffisamment de valeurs, on peut tracer la courbe représentative de façon approchée.</div>
+                </div>
+                <div class="example">
+                    <div class="step"><strong>Exemple :</strong> Remplissons le tableau de valeur pour la fonction <span class="math">f</span> telle que <span class="math">f</span>(<span class="math">x</span>) = 0,08<span class="math">x</span>².</div>
+                    <div class="step">Pour <span class="math">x</span> = 4 : <span class="math">f</span>(4) = 0,08 × 4² = 0,08 × 16 = 1,28</div>
+                    <div class="step">On calcule ainsi toutes les valeurs du tableau pour tracer l'allure générale de la courbe.</div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Contrôles -->
+        <div class="controls">
+            <div class="controls-left">
+                <button class="btn-menu" onclick="openMenu()">☰ Menu</button>
+                <button onclick="openHelp()">❓ Aide</button>
+            </div>
+            <div class="progress">
+                <span id="stepIndicator" class="step-indicator hidden">Étape 0/0</span>
+                <span>Slide <span id="currentSlide">1</span> / <span id="totalSlides">0</span></span>
+            </div>
+            <div class="controls-right">
+                <button class="btn-reset" onclick="resetSlide()">↻ Réinitialiser</button>
+                <button id="prevBtn" onclick="changeSlide(-1)">◀ Précédent</button>
+                <button onclick="changeSlide(1)">Suivant ▶</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Menu des slides -->
+    <div id="slideMenu" class="slide-menu">
+        <div class="menu-content">
+            <h2>Navigation</h2>
+            <div id="slideList" class="slide-list"></div>
+            <button class="close-menu" onclick="closeMenu()">Fermer</button>
+        </div>
+    </div>
+
+    <!-- Overlay d'aide -->
+    <div id="helpOverlay" class="help-overlay">
+        <div class="help-content">
+            <h2>Raccourcis clavier</h2>
+            <ul>
+                <li><kbd>→</kbd> ou <kbd>Espace</kbd> : Suivant</li>
+                <li><kbd>←</kbd> : Précédent</li>
+                <li><kbd>M</kbd> : Ouvrir le menu</li>
+                <li><kbd>R</kbd> : Réinitialiser la slide</li>
+                <li><kbd>H</kbd> ou <kbd>?</kbd> : Ouvrir/fermer l'aide</li>
+                <li><kbd>Échap</kbd> : Fermer les overlays</li>
+            </ul>
+            <button class="close-menu" onclick="closeHelp()">Fermer</button>
+        </div>
+    </div>
+
+    <script src="script-fonctions.js"></script>
+</body>
+</html>

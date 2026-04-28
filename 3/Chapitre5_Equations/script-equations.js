@@ -6,15 +6,15 @@ let totalSlides = 0;
 
 // Titres correspondant aux 9 slides du HTML
 const slideTitles = [
-    "Équations",                            // Slide 1
-    "I. Définitions",                       // Slide 2
-    "II. Équation du premier degré",        // Slide 3
-    "Règle 2",                              // Slide 4
-    "2) Vérification d'une solution",       // Slide 5
-    "3) Résolution d'une équation",         // Slide 6
-    "III. Équation produit nul",            // Slide 7
-    "IV. Équation x² = a",                  // Slide 8
-    "Exemples"                              // Slide 9
+    "Chapitre 5 : Équations",                              // Slide 1
+    "I. Définitions",                                      // Slide 2
+    "II. Équation du premier degré — 1) Conservation",     // Slide 3
+    "II. Équation du premier degré — Règle 2",             // Slide 4
+    "II. Équation du premier degré — 2) Vérification",     // Slide 5
+    "II. Équation du premier degré — 3) Résolution",       // Slide 6
+    "II. Équation du premier degré — Résolution détaillée",// Slide 7
+    "III. Équation produit nul",                           // Slide 8
+    "IV. Équation x² = a"                                  // Slide 9
 ];
 
 // Initialisation - attendre que le DOM soit chargé

@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Animation : Translation avec quadrillage</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #fafafa;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        .container {
+            max-width: 850px;
+            margin: 0 auto;
+            padding: 10px;
+        }
+        svg {
+            display: block;
+            margin: 0 auto;
+            background: white;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+        }
+        .controls {
+            text-align: center;
+            margin: 15px 0;
+        }
+        button {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            margin: 4px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 15px;
+            font-weight: bold;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            transition: all 0.3s;
+        }
+        button:hover {
+            background-color: #2980b9;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+        }
+        button.active {
+            background-color: #27ae60;
+        }
+        button.complete {
+            background-color: #27ae60;
+        }
+        button.complete.active {
+            background-color: #c0392b;
+        }
+        button.reset {
+            background-color: #e74c3c;
+        }
+        button.reset:hover {
+            background-color: #c0392b;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <svg id="translationSVG" width="800" height="550" viewBox="0 0 800 550">
+        <!-- Quadrillage -->
+        <g id="grid">
+            <!-- Lignes verticales -->
+            <line x1="50" y1="50" x2="50" y2="500" stroke="#ccc" stroke-width="1"/>
+            <line x1="100" y1="50" x2="100" y2="500" stroke="#ccc" stroke-width="1"/>
+            <line x1="150" y1="50" x2="150" y2="500" stroke="#ccc" stroke-width="1"/>
+            <line x1="200" y1="50" x2="200" y2="500" stroke="#ccc" stroke-width="1"/>
+            <line x1="250" y1="50" x2="250" y2="500" stroke="#ccc" stroke-width="1"/>
+            <line x1="300" y1="50" x2="300" y2="500" stroke="#ccc" stroke-width="1"/>
+            <line x1="350" y1="50" x2="350" y2="500" stroke="#ccc" stroke-width="1"/>
+            <line x1="400" y1="50" x2="400" y2="500" stroke="#ccc" stroke-width="1"/>
+            <line x1="450" y1="50" x2="450" y2="500" stroke="#ccc" stroke-width="1"/>
+            <line x1="500" y1="50" x2="500" y2="500" stroke="#ccc" stroke-width="1"/>
+            <line x1="550" y1="50" x2="550" y2="500" stroke="#ccc" stroke-width="1"/>
+            <line x1="600" y1="50" x2="600" y2="500" stroke="#ccc" stroke-width="1"/>
+            <line x1="650" y1="50" x2="650" y2="500" stroke="#ccc" stroke-width="1"/>
+            <line x1="700" y1="50" x2="700" y2="500" stroke="#ccc" stroke-width="1"/>
+            <line x1="750" y1="50" x2="750" y2="500" stroke="#ccc" stroke-width="1"/>
+            
+            <!-- Lignes horizontales -->
+            <line x1="50" y1="50" x2="750" y2="50" stroke="#ccc" stroke-width="1"/>
+            <line x1="50" y1="100" x2="750" y2="100" stroke="#ccc" stroke-width="1"/>
+            <line x1="50" y1="150" x2="750" y2="150" stroke="#ccc" stroke-width="1"/>
+            <line x1="50" y1="200" x2="750" y2="200" stroke="#ccc" stroke-width="1"/>
+            <line x1="50" y1="250" x2="750" y2="250" stroke="#ccc" stroke-width="1"/>
+            <line x1="50" y1="300" x2="750" y2="300" stroke="#ccc" stroke-width="1"/>
+            <line x1="50" y1="350" x2="750" y2="350" stroke="#ccc" stroke-width="1"/>
+            <line x1="50" y1="400" x2="750" y2="400" stroke="#ccc" stroke-width="1"/>
+            <line x1="50" y1="450" x2="750" y2="450" stroke="#ccc" stroke-width="1"/>
+            <line x1="50" y1="500" x2="750" y2="500" stroke="#ccc" stroke-width="1"/>
+        </g>
+        
+        <!-- Vecteur PP' -->
+        <g id="vector">
+            <defs>
+                <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+                    <polygon points="0 0, 10 3, 0 6" fill="red" />
+                </marker>
+            </defs>
+            <line x1="350" y1="200" x2="50" y2="350" stroke="red" stroke-width="3" marker-end="url(#arrowhead)"/>
+            <!-- Croix P -->
+            <line x1="345" y1="195" x2="355" y2="205" stroke="red" stroke-width="2"/>
+            <line x1="355" y1="195" x2="345" y2="205" stroke="red" stroke-width="2"/>
+            <text x="360" y="195" font-size="20" fill="red" font-weight="bold">P</text>
+            <!-- Croix P' -->
+            <line x1="45" y1="345" x2="55" y2="355" stroke="red" stroke-width="2"/>
+            <line x1="55" y1="345" x2="45" y2="355" stroke="red" stroke-width="2"/>
+            <text x="25" y="345" font-size="20" fill="red" font-weight="bold">P'</text>
+        </g>
+        
+        <!-- Figure ABCD -->
+        <g id="figure">
+            <polygon points="550,150 700,200 650,300 500,300" fill="none" stroke="black" stroke-width="3"/>
+            <!-- Croix A -->
+            <line x1="545" y1="145" x2="555" y2="155" stroke="black" stroke-width="2"/>
+            <line x1="555" y1="145" x2="545" y2="155" stroke="black" stroke-width="2"/>
+            <text x="530" y="140" font-size="20" fill="black" font-weight="bold">A</text>
+            <!-- Croix B -->
+            <line x1="695" y1="195" x2="705" y2="205" stroke="black" stroke-width="2"/>
+            <line x1="705" y1="195" x2="695" y2="205" stroke="black" stroke-width="2"/>
+            <text x="710" y="205" font-size="20" fill="black" font-weight="bold">B</text>
+            <!-- Croix C -->
+            <line x1="645" y1="295" x2="655" y2="305" stroke="black" stroke-width="2"/>
+            <line x1="655" y1="295" x2="645" y2="305" stroke="black" stroke-width="2"/>
+            <text x="660" y="315" font-size="20" fill="black" font-weight="bold">C</text>
+            <!-- Croix D -->
+            <line x1="495" y1="295" x2="505" y2="305" stroke="black" stroke-width="2"/>
+            <line x1="505" y1="295" x2="495" y2="305" stroke="black" stroke-width="2"/>
+            <text x="480" y="315" font-size="20" fill="black" font-weight="bold">D</text>
+        </g>
+        
+        <!-- Images des points avec flèches de translation -->
+        <!-- Point A' -->
+        <g id="pointA" style="opacity: 0; transition: opacity 0.5s;">
+            <line x1="550" y1="150" x2="250" y2="300" stroke="blue" stroke-width="1.5" stroke-dasharray="5,5" opacity="0.6"/>
+            <line x1="245" y1="295" x2="255" y2="305" stroke="blue" stroke-width="2"/>
+            <line x1="255" y1="295" x2="245" y2="305" stroke="blue" stroke-width="2"/>
+            <text x="230" y="290" font-size="20" fill="blue" font-weight="bold">A'</text>
+        </g>
+        
+        <!-- Point B' -->
+        <g id="pointB" style="opacity: 0; transition: opacity 0.5s;">
+            <line x1="700" y1="200" x2="400" y2="350" stroke="blue" stroke-width="1.5" stroke-dasharray="5,5" opacity="0.6"/>
+            <line x1="395" y1="345" x2="405" y2="355" stroke="blue" stroke-width="2"/>
+            <line x1="405" y1="345" x2="395" y2="355" stroke="blue" stroke-width="2"/>
+            <text x="410" y="355" font-size="20" fill="blue" font-weight="bold">B'</text>
+        </g>
+        
+        <!-- Point C' -->
+        <g id="pointC" style="opacity: 0; transition: opacity 0.5s;">
+            <line x1="650" y1="300" x2="350" y2="450" stroke="blue" stroke-width="1.5" stroke-dasharray="5,5" opacity="0.6"/>
+            <line x1="345" y1="445" x2="355" y2="455" stroke="blue" stroke-width="2"/>
+            <line x1="355" y1="445" x2="345" y2="455" stroke="blue" stroke-width="2"/>
+            <text x="360" y="465" font-size="20" fill="blue" font-weight="bold">C'</text>
+        </g>
+        
+        <!-- Point D' -->
+        <g id="pointD" style="opacity: 0; transition: opacity 0.5s;">
+            <line x1="500" y1="300" x2="200" y2="450" stroke="blue" stroke-width="1.5" stroke-dasharray="5,5" opacity="0.6"/>
+            <line x1="195" y1="445" x2="205" y2="455" stroke="blue" stroke-width="2"/>
+            <line x1="205" y1="445" x2="195" y2="455" stroke="blue" stroke-width="2"/>
+            <text x="180" y="465" font-size="20" fill="blue" font-weight="bold">D'</text>
+        </g>
+        
+        <!-- Figure complète A'B'C'D' -->
+        <g id="figureComplete" style="opacity: 0; transition: opacity 0.5s;">
+            <polygon points="250,300 400,350 350,450 200,450" fill="rgba(0,100,255,0.1)" stroke="blue" stroke-width="3"/>
+        </g>
+    </svg>
+    
+    <div class="controls">
+        <button id="btnA" onclick="toggleTranslationPoint('pointA', this)">A'</button>
+        <button id="btnB" onclick="toggleTranslationPoint('pointB', this)">B'</button>
+        <button id="btnC" onclick="toggleTranslationPoint('pointC', this)">C'</button>
+        <button id="btnD" onclick="toggleTranslationPoint('pointD', this)">D'</button>
+        <button id="btnComplete" class="complete" onclick="toggleTranslationComplete(this)">Figure complète</button>
+        <button class="reset" onclick="resetTranslation()">🔄 Effacer</button>
+    </div>
+</div>
+
+<script>
+    const translationPoints = {
+        pointA: false,
+        pointB: false,
+        pointC: false,
+        pointD: false,
+        figureComplete: false
+    };
+    
+    function toggleTranslationPoint(pointId, btn) {
+        const element = document.getElementById(pointId);
+        
+        if (translationPoints[pointId]) {
+            element.style.opacity = '0';
+            translationPoints[pointId] = false;
+            btn.classList.remove('active');
+        } else {
+            element.style.opacity = '1';
+            translationPoints[pointId] = true;
+            btn.classList.add('active');
+        }
+    }
+    
+    function toggleTranslationComplete(btn) {
+        const element = document.getElementById('figureComplete');
+        
+        if (translationPoints.figureComplete) {
+            element.style.opacity = '0';
+            translationPoints.figureComplete = false;
+            btn.classList.remove('active');
+        } else {
+            // Afficher tous les points d'abord
+            ['pointA', 'pointB', 'pointC', 'pointD'].forEach(id => {
+                const pointElement = document.getElementById(id);
+                pointElement.style.opacity = '1';
+                translationPoints[id] = true;
+            });
+            
+            // Mettre à jour les boutons des points
+            ['btnA', 'btnB', 'btnC', 'btnD'].forEach(id => {
+                document.getElementById(id).classList.add('active');
+            });
+            
+            // Afficher la figure complète
+            element.style.opacity = '1';
+            translationPoints.figureComplete = true;
+            btn.classList.add('active');
+        }
+    }
+    
+    function resetTranslation() {
+        ['pointA', 'pointB', 'pointC', 'pointD', 'figureComplete'].forEach(id => {
+            const element = document.getElementById(id);
+            element.style.opacity = '0';
+            translationPoints[id] = false;
+        });
+        
+        ['btnA', 'btnB', 'btnC', 'btnD', 'btnComplete'].forEach(id => {
+            document.getElementById(id).classList.remove('active');
+        });
+    }
+</script>
+</body>
+</html>

@@ -4,14 +4,13 @@ let currentStepIndex = 0;
 let slides = null;
 let totalSlides = 0;
 
-// Titres correspondant exactement aux 6 slides du HTML
+// Titres correspondant exactement aux 5 slides du HTML
 const slideTitles = [
-    "Calcul littéral",                      // Slide 1
-    "I. La distributivité",                 // Slide 2
-    "2) Suppression de parenthèses",        // Slide 3
-    "3) La double distributivité",          // Slide 4
-    "II. Identité remarquable",             // Slide 5
-    "III. Factorisation"                    // Slide 6
+    "Calcul littéral",                                              // Slide 1
+    "I. La distributivité — 1) La distributivité simple",          // Slide 2
+    "I. La distributivité — 2) La double distributivité",          // Slide 3
+    "II. Identité remarquable",                                     // Slide 4
+    "III. Factorisation"                                            // Slide 5
 ];
 
 // Initialisation - attendre que le DOM soit chargé

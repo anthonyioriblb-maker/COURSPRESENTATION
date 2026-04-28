@@ -8,17 +8,21 @@ const slides      = document.querySelectorAll('.slide');
 const totalSlides = slides.length;
 
 const slideTitles = [
-    "Les triangles",
+    "Chapitre 8 : Les triangles",
     "I. Somme des angles d'un triangle",
     "II. Inégalité triangulaire",
-    "III.1) Construction – 3 côtés",
-    "III.2) Construction – angle + 2 côtés",
-    "III.3) Construction – 2 angles + côté",
-    "IV. La médiatrice – Définition",
-    "IV. Médiatrice – Méthode équerre",
-    "IV. Médiatrice – Propriétés",
-    "IV. Médiatrice – Méthode compas",
-    "IV. Cercle circonscrit"
+    "III. Protocole de construction d'un triangle - 1) Construction d'un triangle connaissant ses trois côtés",
+    "2) Construction connaissant un angle et les deux côtés adjacents",
+    "3) Construction connaissant deux angles et le côté compris entre eux",
+    "IV. La médiatrice d'un segment",
+    "Méthode avec l'équerre et la règle",
+    "Propriétés",
+    "Méthode avec le compas",
+    "Cercle circonscrit",
+    "V. Les hauteurs d'un triangle",
+    "VI. Cas particuliers de triangles - Triangle isocèle",
+    "Triangle équilatéral",
+    "Triangle rectangle"
 ];
 
 document.getElementById('totalSlides').textContent = totalSlides;

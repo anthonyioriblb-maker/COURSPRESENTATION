@@ -3,6 +3,16 @@ let currentStepIndex = 0;
 let slides = null;
 let totalSlides = 0;
 
+const slideTitles = [
+    "Symétrie centrale",
+    "I. Symétrique d'un point",
+    "I. Symétrique d'un point — 1) Sur feuille blanche",
+    "I. Symétrique d'un point — 2) Dans un quadrillage",
+    "II. Symétrique d'une figure",
+    "III. Propriétés de la symétrie centrale",
+    "IV. Centre de symétrie et axes de symétrie de figures usuelles"
+];
+
 const slideTitles = ["Symétrie centrale","I. Symétrique d un point","Construction sur feuille blanche","Construction dans un quadrillage","II. Symétrique d une figure","III. Propriétés","IV. Centres de symétrie"];
 
 document.addEventListener('DOMContentLoaded', function() {

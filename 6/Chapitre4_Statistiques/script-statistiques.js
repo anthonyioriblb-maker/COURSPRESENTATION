@@ -5,11 +5,11 @@ const slides = document.querySelectorAll('.slide');
 const totalSlides = slides.length;
 
 const slideTitles = [
-    "Organisation et gestion de données",
-    "I. Statistiques",
-    "II. Utilisation de tableaux",
+    "Chapitre 4 : Statistiques et Organisation de données",
+    "I. Introduction aux statistiques",
+    "II. Utilisation de tableaux — 1) Tableau à simple entrée",
     "2) Tableau à double entrée",
-    "III. Représentations graphiques",
+    "III. Représentations graphiques — 1) Diagramme en bâtons",
     "2) Diagramme circulaire",
     "3) Courbes"
 ];
@@ -158,10 +158,10 @@ document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape' || e.key === 'h' || e.key === 'H' || e.key === '?') closeHelp();
         return;
     }
-    if (e.key === 'ArrowUp' || e.key === ' ') {
+    if (e.key === 'ArrowRight' || e.key === ' ') {
         e.preventDefault();
         changeSlide(1);
-    } else if (e.key === 'ArrowDown') {
+    } else if (e.key === 'ArrowLeft') {
         e.preventDefault();
         changeSlide(-1); 
     } else if (e.key === 'm' || e.key === 'M') {
