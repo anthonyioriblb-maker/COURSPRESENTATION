@@ -1,28 +1,26 @@
-// ============================================================
-//  NAVIGATION DES SLIDES — Chapitre 10 : Les angles
-// ============================================================
 let currentSlideIndex = 0;
-let currentStepIndex  = 0;
-const slides     = document.querySelectorAll('.slide');
+let currentStepIndex = 0;
+const slides = document.querySelectorAll('.slide');
 const totalSlides = slides.length;
 
 const slideTitles = [
     "Chapitre 10 : Les angles",
-    "I. Vocabulaire – Définition",
-    "I. Vocabulaire – Exemple triangle",
-    "II. Mesure d'un angle",
-    "II. Nature des angles",
-    "III. Tracer un angle de mesure donnée",
-    "IV. Angles supplémentaires & Adjacents",
-    "VI. Angles opposés & Bissectrice (définition)",
-    "VII. Tracer la bissectrice au rapporteur"
+    "I. Vocabulaire",
+    "II. Mesure d'un angle – 1) Mesure en degrés",
+    "II. Mesure d'un angle – 2) Nature des angles",
+    "II. Mesure d'un angle – 3) Tracer un angle de mesure donnée",
+    "III. Angles supplémentaires",
+    "IV. Angles adjacents",
+    "V. Angles opposés par le sommet",
+    "VI. La bissectrice – 1) Définition",
+    "VI. La bissectrice – 2) Tracer la bissectrice au rapporteur"
 ];
 
 document.getElementById('totalSlides').textContent = totalSlides;
 
 function getSteps(slide) {
     return Array.from(slide.querySelectorAll('.step')).filter(el =>
-        !el.closest('.anim-controls-row') && !el.closest('.anim-btn')
+        !el.closest('.animation-container')
     );
 }
 
@@ -39,14 +37,14 @@ function initSlideMenu() {
     });
 }
 
-function openMenu()  { initSlideMenu(); document.getElementById('slideMenu').classList.add('active'); }
+function openMenu() { initSlideMenu(); document.getElementById('slideMenu').classList.add('active'); }
 function closeMenu() { document.getElementById('slideMenu').classList.remove('active'); }
-function openHelp()  { document.getElementById('helpOverlay').classList.add('active'); }
+function openHelp() { document.getElementById('helpOverlay').classList.add('active'); }
 function closeHelp() { document.getElementById('helpOverlay').classList.remove('active'); }
 
 function goToSlide(index) {
     currentSlideIndex = index;
-    currentStepIndex  = 0;
+    currentStepIndex = 0;
     updateSlide();
     closeMenu();
 }
@@ -116,18 +114,17 @@ function changeSlide(direction) {
 }
 
 document.addEventListener('keydown', (e) => {
-    if (document.getElementById('slideMenu').classList.contains('active'))   { if (e.key === 'Escape') closeMenu(); return; }
+    if (document.getElementById('slideMenu').classList.contains('active')) { if (e.key === 'Escape') closeMenu(); return; }
     if (document.getElementById('helpOverlay').classList.contains('active')) { if (e.key === 'Escape') closeHelp(); return; }
-    if (e.key === 'ArrowUp' || e.key === ' ')  { e.preventDefault(); changeSlide(1); }
-    else if (e.key === 'ArrowDown')            { e.preventDefault(); changeSlide(-1); }
-    else if (e.key === 'm' || e.key === 'M')   openMenu();
-    else if (e.key === 'r' || e.key === 'R')   resetSlide();
+    if (e.key === 'ArrowUp' || e.key === ' ') { e.preventDefault(); changeSlide(1); }
+    else if (e.key === 'ArrowDown') { e.preventDefault(); changeSlide(-1); }
+    else if (e.key === 'm' || e.key === 'M') openMenu();
+    else if (e.key === 'r' || e.key === 'R') resetSlide();
     else if (e.key === 'h' || e.key === 'H' || e.key === '?') openHelp();
-    else if (e.key === 'Escape')               { closeMenu(); closeHelp(); }
+    else if (e.key === 'Escape') { closeMenu(); closeHelp(); }
 });
 
-document.getElementById('slideMenu').addEventListener('click',   e => { if (e.target.id === 'slideMenu')   closeMenu(); });
-document.getElementById('helpOverlay').addEventListener('click', e => { if (e.target.id === 'helpOverlay') closeHelp(); });
+document.getElementById('slideMenu').addEventListener('click', (e) => { if (e.target.id === 'slideMenu') closeMenu(); });
+document.getElementById('helpOverlay').addEventListener('click', (e) => { if (e.target.id === 'helpOverlay') closeHelp(); });
 
-// Initialisation au chargement
 updateSlide();
