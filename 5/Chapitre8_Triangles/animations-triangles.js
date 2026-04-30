@@ -872,3 +872,143 @@ async function animArc(pathId, cx, cy, r, a0, a1, dur) {
         if (btn) { btn.disabled = false; btn.textContent = 'Étape suivante ▶'; btn.style.backgroundColor = '#3498db'; }
     };
 })();
+
+/* ════════════════════════════════════════════════════════════
+   V. Hauteur d'un triangle — construction à l'équerre
+   ════════════════════════════════════════════════════════════ */
+(function () {
+    let step = 0, anim = false;
+    const texts = [
+        'Cliquez sur « Étape suivante » pour voir la construction.',
+        'Étape 1 – On place l\'équerre sur le côté [AB] : un côté de l\'angle droit longe [AB].',
+        'Étape 2 – On fait glisser l\'équerre le long de [AB] jusqu\'à ce que l\'autre côté de l\'angle droit passe par le sommet C.',
+        'Étape 3 – On trace le segment de C jusqu\'au pied H_C sur [AB]. C\'est la hauteur issue de C. On retire l\'équerre.'
+    ];
+
+    /* ── Équerre ── */
+    function buildEqH(gId) {
+        const g = document.getElementById(gId);
+        if (!g) return;
+        if (g.dataset.built === '1') return;
+        const NS = 'http://www.w3.org/2000/svg';
+        const poly = document.createElementNS(NS, 'polygon');
+        poly.setAttribute('points', '0,0 140,0 0,-240');
+        poly.setAttribute('fill', 'rgba(180,220,255,0.72)');
+        poly.setAttribute('stroke', '#2255aa'); poly.setAttribute('stroke-width', '2');
+        g.appendChild(poly);
+        const sq = document.createElementNS(NS, 'polyline');
+        sq.setAttribute('points', '14,0 14,-14 0,-14');
+        sq.setAttribute('stroke', '#1144aa'); sq.setAttribute('stroke-width', '1.8'); sq.setAttribute('fill', 'none');
+        g.appendChild(sq);
+        g.dataset.built = '1';
+    }
+
+    async function slideEqH(xFrom, xTo, dur) {
+        const g = document.getElementById('eqH'); if (!g) return;
+        g.style.opacity = '1';
+        const N = 40;
+        for (let i = 0; i <= N; i++) {
+            const x = xFrom + (xTo - xFrom) * i / N;
+            g.setAttribute('transform', `translate(${x.toFixed(1)},280)`);
+            await sleep(dur / N);
+        }
+    }
+
+    async function fadeEqH(dur) {
+        const g = document.getElementById('eqH'); if (!g) return;
+        const N = 18;
+        for (let i = N; i >= 0; i--) { g.style.opacity = (i / N).toFixed(2); await sleep(dur / N); }
+        g.style.opacity = '0';
+    }
+
+    async function drawHauteur(dur) {
+        const el = document.getElementById('hautH'); if (!el) return;
+        el.style.opacity = '1';
+        const len = 230;
+        el.style.strokeDasharray = len + ' ' + len;
+        el.style.strokeDashoffset = len;
+        const N = 40;
+        for (let i = 0; i <= N; i++) {
+            el.style.strokeDashoffset = String(len * (1 - i / N));
+            await sleep(dur / N);
+        }
+        el.style.strokeDasharray = '9,4';
+        el.style.strokeDashoffset = '0';
+    }
+
+    function ensureBuilt() { buildEqH('eqH'); }
+
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', ensureBuilt);
+    } else {
+        ensureBuilt();
+    }
+
+    window.nextH = async function () {
+        ensureBuilt();
+        if (anim || step >= 3) return;
+        const btn = document.getElementById('btnH');
+        if (btn) btn.disabled = true;
+        anim = true; step++;
+        const txt = document.getElementById('stH');
+        if (txt) txt.textContent = texts[step];
+
+        if (step === 1) {
+            await slideEqH(-60, 60, 600);
+        } else if (step === 2) {
+            await slideEqH(60, 200, 1000);
+        } else if (step === 3) {
+            await drawHauteur(800);
+            const pied = document.getElementById('piedH');
+            if (pied) pied.style.opacity = '1';
+            await sleep(300);
+            await fadeEqH(500);
+            if (btn) { btn.textContent = '— Fin —'; btn.style.backgroundColor = '#888'; }
+        }
+        anim = false;
+        if (step < 3 && btn) btn.disabled = false;
+    };
+
+    window.resetH = function () {
+        step = 0; anim = false;
+        const txt = document.getElementById('stH');
+        if (txt) txt.textContent = texts[0];
+        const eq = document.getElementById('eqH');
+        if (eq) { eq.style.opacity = '0'; eq.setAttribute('transform', 'translate(-60,280)'); }
+        const h = document.getElementById('hautH');
+        if (h) { h.style.opacity = '0'; h.style.strokeDasharray = '9,4'; h.style.strokeDashoffset = '0'; }
+        const pied = document.getElementById('piedH');
+        if (pied) pied.style.opacity = '0';
+        const btn = document.getElementById('btnH');
+        if (btn) { btn.disabled = false; btn.textContent = 'Étape suivante ▶'; btn.style.backgroundColor = '#3498db'; }
+    };
+})();
+
+/* ════════════════════════════════════════════════════════════
+   V. Trois hauteurs et orthocentre — boutons à bascule
+   ════════════════════════════════════════════════════════════ */
+(function () {
+    const hauteurState = { hc: false, ha: false, hb: false, ortho: false };
+    const colors = { btnHc: '#e74c3c', btnHa: '#3498db', btnHb: '#27ae60', btnOrtho: '#8e44ad' };
+
+    window.toggleHauteur = function (id, btnId, color) {
+        const el = document.getElementById(id);
+        const btn = document.getElementById(btnId);
+        if (!el || !btn) return;
+        hauteurState[id] = !hauteurState[id];
+        el.style.opacity = hauteurState[id] ? '1' : '0';
+        btn.style.backgroundColor = hauteurState[id] ? '#555' : color;
+    };
+
+    window.resetHauteurs = function () {
+        ['hc', 'ha', 'hb', 'ortho'].forEach(id => {
+            const el = document.getElementById(id);
+            if (el) el.style.opacity = '0';
+            hauteurState[id] = false;
+        });
+        Object.keys(colors).forEach(btnId => {
+            const btn = document.getElementById(btnId);
+            if (btn) btn.style.backgroundColor = colors[btnId];
+        });
+    };
+})();

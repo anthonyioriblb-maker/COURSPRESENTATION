@@ -11,18 +11,18 @@ const slideTitles = [
     "Chapitre 8 : Les triangles",
     "I. Somme des angles d'un triangle",
     "II. Inégalité triangulaire",
-    "III. Protocole de construction d'un triangle - 1) Construction d'un triangle connaissant ses trois côtés",
-    "2) Construction connaissant un angle et les deux côtés adjacents",
-    "3) Construction connaissant deux angles et le côté compris entre eux",
+    "III. Protocole de construction d'un triangle — 1) Construction d'un triangle connaissant ses trois côtés",
+    "III. Protocole de construction d'un triangle — 2) Construction connaissant un angle et les deux côtés adjacents",
+    "III. Protocole de construction d'un triangle — 3) Construction connaissant deux angles et le côté compris entre eux",
     "IV. La médiatrice d'un segment",
-    "Méthode avec l'équerre et la règle",
-    "Propriétés",
-    "Méthode avec le compas",
-    "Cercle circonscrit",
+    "IV. La médiatrice d'un segment — 1) Méthode avec l'équerre et la règle",
+    "IV. La médiatrice d'un segment — 2) Propriétés",
+    "IV. La médiatrice d'un segment — 3) Méthode avec le compas",
+    "IV. La médiatrice d'un segment — 4) Cercle circonscrit",
     "V. Les hauteurs d'un triangle",
-    "VI. Cas particuliers de triangles - Triangle isocèle",
-    "Triangle équilatéral",
-    "Triangle rectangle"
+    "VI. Cas particuliers de triangles — 1) Triangle isocèle",
+    "VI. Cas particuliers de triangles — 2) Triangle équilatéral",
+    "VI. Cas particuliers de triangles — 3) Triangle rectangle"
 ];
 
 document.getElementById('totalSlides').textContent = totalSlides;
