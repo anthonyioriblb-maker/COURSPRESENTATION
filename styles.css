@@ -99,7 +99,7 @@ h3 {
     transform: translateX(0);
 }
 
-.definition, .example, .important, .remarque, .method, .calcul-detail {
+.definition, .example, .important, .remarque, .method, .calcul-detail, .property {
     font-size: 2.5em;
     padding: 18px 30px;
     border-radius: 12px;
@@ -112,22 +112,30 @@ h3 {
     will-change: transform;
 }
 
-.definition:hover, .example:hover, .important:hover, .remarque:hover, .method:hover, .calcul-detail:hover {
+.definition:hover, .example:hover, .important:hover, .remarque:hover, .method:hover, .calcul-detail:hover, .property:hover {
     transform: scale(1.02);
     box-shadow: 0 5px 15px rgba(0,0,0,0.2);
 }
 
+.property {
+    background: #fff3b8;
+    border-left: 6px solid #e67e22;
+    color: black;
+}
+
 /* Empêche la multiplication de font-size quand une boîte est imbriquée dans une autre */
 .definition .definition, .definition .example, .definition .important,
-.definition .remarque,   .definition .method,   .definition .calcul-detail,
+.definition .remarque,   .definition .method,   .definition .calcul-detail, .definition .property,
 .example .definition,   .example .example,     .example .important,
-.example .remarque,     .example .method,       .example .calcul-detail,
+.example .remarque,     .example .method,       .example .calcul-detail, .example .property,
 .important .definition, .important .example,    .important .important,
-.important .remarque,   .important .method,     .important .calcul-detail,
+.important .remarque,   .important .method,     .important .calcul-detail, .important .property,
 .remarque .definition,  .remarque .example,     .remarque .important,
-.remarque .remarque,    .remarque .method,      .remarque .calcul-detail,
+.remarque .remarque,    .remarque .method,      .remarque .calcul-detail, .remarque .property,
 .method .definition,    .method .example,       .method .important,
-.method .remarque,      .method .method,        .method .calcul-detail {
+.method .remarque,      .method .method,        .method .calcul-detail, .method .property,
+.property .definition,  .property .example,     .property .important,
+.property .remarque,    .property .method,      .property .calcul-detail, .property .property {
     font-size: 1em;
 }
 
