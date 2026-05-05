@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Chapitre 10 - Les angles</title>
+    <link rel="stylesheet" href="../../styles.css">
+    <style>
+        .step-box {
+            background: #e3f2fd;
+            border-left: 5px solid #2196f3;
+            padding: 10px 16px;
+            margin-bottom: 8px;
+            color: #1565c0;
+            font-size: 0.95em;
+            font-weight: 500;
+            min-height: 40px;
+            display: flex;
+            align-items: center;
+            border-radius: 6px;
+            line-height: 1.6;
+        }
+        .svg-wrap {
+            text-align: center;
+            background: white;
+            padding: 6px;
+            border-radius: 5px;
+            border: 2px solid #ddd;
+            margin: 10px 0;
+        }
+        .anim-btn {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 8px 18px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.85em;
+            font-weight: normal;
+            margin: 4px;
+            transform: none !important;
+        }
+        .anim-btn:hover { background-color: #2980b9; }
+        .anim-btn.anim-reset { background-color: #e74c3c; }
+        .anim-btn.anim-reset:hover { background-color: #c0392b; }
+
+        .angle-cards-row {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        .angle-card {
+            display: inline-block;
+            text-align: center;
+            padding: 10px 14px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            background: white;
+            width: 200px;
+            vertical-align: top;
+            font-size: 0.85em;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="content">
+
+            <!-- Slide 1 : Titre -->
+            <div class="slide active">
+                <h1>Chapitre 10 : Les angles</h1>
+            </div>
+
+            <!-- Slide 2 : I. Vocabulaire -->
+            <div class="slide">
+                <h2>I. Vocabulaire</h2>
+                <div class="definition">
+                    <div class="step">Un <strong>angle</strong> est formé par deux demi-droites qui ont la même origine.</div>
+                </div>
+                <div class="example">
+                    <div class="step"><strong>Vocabulaire :</strong></div>
+                    <div class="step">• L'<strong>origine</strong> commune des deux demi-droites s'appelle le <strong>sommet</strong> de l'angle.</div>
+                    <div class="step">• Les deux demi-droites s'appellent les <strong>côtés</strong> de l'angle.</div>
+                    <div class="step">• Pour nommer un angle, on utilise trois lettres : celle du sommet est toujours au milieu.</div>
+                </div>
+            </div>
+
+            <!-- Slide 3 : II. Mesure d'un angle – 1) Mesure en degrés -->
+            <div class="slide">
+                <h2>II. Mesure d'un angle</h2>
+                <h3>1) Mesure en degrés</h3>
+                <div class="definition">
+                    <div class="step">La <strong>mesure</strong> d'un angle s'exprime en <strong>degrés</strong>, notée °.</div>
+                    <div class="step">Un angle qui fait un tour complet mesure <strong>360°</strong>.</div>
+                </div>
+                <div class="method">
+                    <div class="step"><strong>Méthode — Mesurer un angle avec un rapporteur :</strong></div>
+                    <div class="step">1. Placer le centre du rapporteur sur le sommet de l'angle.</div>
+                    <div class="step">2. Aligner le 0 du rapporteur avec l'un des côtés de l'angle.</div>
+                    <div class="step">3. Lire la mesure sur le rapporteur en suivant l'autre côté.</div>
+                </div>
+            </div>
+
+            <!-- Slide 4 : II. Mesure d'un angle – 2) Nature des angles -->
+            <div class="slide">
+                <h3>2) Nature des angles</h3>
+                <div class="important">
+                    <div class="step">Un angle <strong>aigu</strong> mesure entre 0° et 90°.</div>
+                    <div class="step">Un angle <strong>droit</strong> mesure exactement 90°.</div>
+                    <div class="step">Un angle <strong>obtus</strong> mesure entre 90° et 180°.</div>
+                    <div class="step">Un angle <strong>plat</strong> mesure exactement 180°.</div>
+                </div>
+            </div>
+
+            <!-- Slide 5 : II. Mesure d'un angle – 3) Tracer un angle de mesure donnée -->
+            <div class="slide">
+                <h3>3) Tracer un angle de mesure donnée</h3>
+                <div class="method">
+                    <div class="step"><strong>Méthode — Tracer un angle de 50° :</strong></div>
+                    <div class="step">1. Tracer une demi-droite [OA).</div>
+                    <div class="step">2. Placer le centre du rapporteur sur O et aligner le 0 avec [OA).</div>
+                    <div class="step">3. Marquer un point B à 50° sur le rapporteur.</div>
+                    <div class="step">4. Tracer la demi-droite [OB).</div>
+                    <div class="step">L'angle AOB mesure 50°.</div>
+                </div>
+            </div>
+
+            <!-- Slide 6 : III. Angles supplémentaires -->
+            <div class="slide">
+                <h2>III. Angles supplémentaires</h2>
+                <div class="definition">
+                    <div class="step">Deux angles sont <strong>supplémentaires</strong> si la somme de leurs mesures est égale à <strong>180°</strong>.</div>
+                </div>
+                <div class="example">
+                    <div class="step"><strong>Exemple :</strong> Un angle de 60° et un angle de 120° sont supplémentaires car 60° + 120° = 180°.</div>
+                </div>
+            </div>
+
+            <!-- Slide 7 : IV. Angles adjacents -->
+            <div class="slide">
+                <h2>IV. Angles adjacents</h2>
+                <div class="definition">
+                    <div class="step">Deux angles sont <strong>adjacents</strong> s'ils :</div>
+                    <div class="step">• ont le même sommet,</div>
+                    <div class="step">• ont un côté commun,</div>
+                    <div class="step">• sont situés de part et d'autre de ce côté commun.</div>
+                </div>
+                <div class="example">
+                    <div class="step"><strong>Propriété :</strong> Si deux angles sont adjacents et supplémentaires, alors ils forment un angle plat.</div>
+                </div>
+            </div>
+
+            <!-- Slide 8 : V. Angles opposés par le sommet -->
+            <div class="slide">
+                <h2>V. Angles opposés par le sommet</h2>
+                <div class="definition">
+                    <div class="step">Deux angles sont <strong>opposés par le sommet</strong> si :</div>
+                    <div class="step">• ils ont le même sommet,</div>
+                    <div class="step">• les côtés de l'un sont les prolongements des côtés de l'autre.</div>
+                </div>
+                <div class="important">
+                    <div class="step"><strong>Propriété :</strong> Deux angles opposés par le sommet ont la même mesure.</div>
+                </div>
+            </div>
+
+            <!-- Slide 9 : VI. La bissectrice – 1) Définition -->
+            <div class="slide">
+                <h2>VI. La bissectrice</h2>
+                <h3>1) Définition</h3>
+                <div class="definition">
+                    <div class="step">La <strong>bissectrice</strong> d'un angle est la demi-droite qui partage cet angle en deux angles de même mesure.</div>
+                </div>
+                <div class="example">
+                    <div class="step"><strong>Exemple :</strong> Si un angle mesure 80°, la bissectrice le partage en deux angles de 40° chacun.</div>
+                </div>
+            </div>
+
+            <!-- Slide 10 : VI. La bissectrice – 2) Tracer la bissectrice au rapporteur -->
+            <div class="slide">
+                <h3>2) Tracer la bissectrice au rapporteur</h3>
+                <div class="method">
+                    <div class="step"><strong>Méthode — Tracer la bissectrice d'un angle de 80° :</strong></div>
+                    <div class="step">1. Mesurer l'angle avec le rapporteur : 80°.</div>
+                    <div class="step">2. Calculer la moitié : 80° ÷ 2 = 40°.</div>
+                    <div class="step">3. Placer le rapporteur sur le sommet et marquer la demi-droite à 40°.</div>
+                    <div class="step">4. Tracer cette demi-droite : c'est la bissectrice.</div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Contrôles -->
+        <div class="controls">
+            <div class="controls-left">
+                <button class="btn-menu" onclick="openMenu()">☰ Menu</button>
+                <button onclick="openHelp()">❓ Aide</button>
+            </div>
+            <div class="progress">
+                <span id="stepIndicator" class="step-indicator hidden">Étape 0/0</span>
+                <span>Slide <span id="currentSlide">1</span> / <span id="totalSlides">0</span></span>
+            </div>
+            <div class="controls-right">
+                <button class="btn-reset" onclick="resetSlide()">↻ Réinitialiser</button>
+                <button id="prevBtn" onclick="changeSlide(-1)">◀ Précédent</button>
+                <button onclick="changeSlide(1)">Suivant ▶</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Menu des slides -->
+    <div id="slideMenu" class="slide-menu">
+        <div class="menu-content">
+            <h2>Navigation</h2>
+            <div id="slideList" class="slide-list"></div>
+            <button class="close-menu" onclick="closeMenu()">Fermer</button>
+        </div>
+    </div>
+
+    <!-- Overlay d'aide -->
+    <div id="helpOverlay" class="help-overlay">
+        <div class="help-content">
+            <h2>Raccourcis clavier</h2>
+            <ul>
+                <li><kbd>→</kbd> ou <kbd>Espace</kbd> : Suivant</li>
+                <li><kbd>←</kbd> : Précédent</li>
+                <li><kbd>M</kbd> : Ouvrir le menu</li>
+                <li><kbd>R</kbd> : Réinitialiser la slide</li>
+                <li><kbd>H</kbd> ou <kbd>?</kbd> : Ouvrir/fermer l'aide</li>
+                <li><kbd>Échap</kbd> : Fermer les overlays</li>
+            </ul>
+            <button class="close-menu" onclick="closeHelp()">Fermer</button>
+        </div>
+    </div>
+
+    <script src="script-angles.js"></script>
+</body>
+</html>

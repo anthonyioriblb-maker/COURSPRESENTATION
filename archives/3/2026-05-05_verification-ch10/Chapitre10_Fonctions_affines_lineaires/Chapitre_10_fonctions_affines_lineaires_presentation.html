@@ -6,11 +6,6 @@
     <title>Chapitre 10 - Fonctions affines et linéaires</title>
     <link rel="stylesheet" href="../../styles.css">
     <style>
-        .step-inline { opacity: 0; transition: opacity 0.5s; }
-        .step-inline.visible { opacity: 1; }
-        tr.step { display: table-row !important; opacity: 0; transition: opacity 0.5s; }
-        tr.step.visible { opacity: 1; }
-        .anim-fullbleed { display: block; width: 100%; }
         .graph-center { text-align: center; margin: 15px 0; }
         svg.repere { border: 1px solid #ccc; border-radius: 6px; background: #fff; }
         .tableau-valeurs th { background-color: #d4ebf7; color: #1a5276; border: 2px solid #2980b9; }
@@ -523,17 +518,17 @@
         <!-- Contrôles -->
         <div class="controls">
             <div class="controls-left">
-                <button id="prevBtn" onclick="changeSlide(-1)">← Précédent</button>
-                <button class="btn-reset" onclick="resetSlide()">⟲</button>
+                <button class="btn-menu" onclick="openMenu()">☰ Menu</button>
+                <button onclick="openHelp()">❓ Aide</button>
             </div>
             <div class="progress">
-                <span><span id="currentSlide">1</span> / <span id="totalSlides">6</span></span>
-                <span class="step-indicator" id="stepIndicator"></span>
+                <span id="stepIndicator" class="step-indicator hidden">Étape 0/0</span>
+                <span>Slide <span id="currentSlide">1</span> / <span id="totalSlides">0</span></span>
             </div>
             <div class="controls-right">
-                <button class="btn-menu" onclick="openMenu()">📋 Menu</button>
-                <button class="btn-menu" onclick="openHelp()">❓ Aide</button>
-                <button id="nextBtn" onclick="changeSlide(1)">Suivant →</button>
+                <button class="btn-reset" onclick="resetSlide()">↻ Réinitialiser</button>
+                <button id="prevBtn" onclick="changeSlide(-1)">◀ Précédent</button>
+                <button onclick="changeSlide(1)">Suivant ▶</button>
             </div>
         </div>
     </div>
@@ -552,12 +547,12 @@
         <div class="help-content">
             <h2>Raccourcis clavier</h2>
             <ul>
-                <li><kbd>→</kbd> ou <kbd>Espace</kbd> : Étape/Slide suivante</li>
-                <li><kbd>←</kbd> : Étape/Slide précédente</li>
-                <li><kbd>M</kbd> : Ouvrir le menu des slides</li>
-                <li><kbd>R</kbd> : Réinitialiser la slide actuelle</li>
-                <li><kbd>H</kbd> ou <kbd>?</kbd> : Afficher cette aide</li>
-                <li><kbd>Échap</kbd> : Fermer les menus</li>
+                <li><kbd>→</kbd> ou <kbd>Espace</kbd> : Suivant</li>
+                <li><kbd>←</kbd> : Précédent</li>
+                <li><kbd>M</kbd> : Ouvrir le menu</li>
+                <li><kbd>R</kbd> : Réinitialiser la slide</li>
+                <li><kbd>H</kbd> ou <kbd>?</kbd> : Ouvrir/fermer l'aide</li>
+                <li><kbd>Échap</kbd> : Fermer les overlays</li>
             </ul>
             <button class="close-menu" onclick="closeHelp()">Fermer</button>
         </div>

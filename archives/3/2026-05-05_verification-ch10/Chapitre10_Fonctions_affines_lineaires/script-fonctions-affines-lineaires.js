@@ -1,10 +1,10 @@
 let currentSlideIndex = 0;
-let currentStepIndex  = 0;
-const slides      = document.querySelectorAll('.slide');
-const totalSlides = slides.length;
+let currentStepIndex = 0;
+let slides = null;
+let totalSlides = 0;
 
 const slideTitles = [
-    "Chapitre 10 : Fonctions affines et linéaires",
+    "Fonctions affines et linéaires",
     "I. Fonction linéaire — 1) Proportionnalité et fonction linéaire",
     "I. Fonction linéaire — 2) Définition et représentation graphique",
     "II. Fonctions affines",
@@ -12,7 +12,13 @@ const slideTitles = [
     "III. Trouver l'expression algébrique — 2) Par lecture graphique"
 ];
 
-document.getElementById('totalSlides').textContent = totalSlides;
+document.addEventListener('DOMContentLoaded', function() {
+    slides = document.querySelectorAll('.slide');
+    totalSlides = slides.length;
+    const el = document.getElementById('totalSlides');
+    if (el) el.textContent = totalSlides;
+    updateSlide();
+});
 
 function initSlideMenu() {
     const slideList = document.getElementById('slideList');
@@ -36,6 +42,7 @@ function goToSlide(index) { currentSlideIndex = index; currentStepIndex = 0; upd
 function resetSlide() { currentStepIndex = 0; updateSlide(); }
 
 function updateSlide() {
+    if (!slides || slides.length === 0) return;
     const contentDiv = document.querySelector('.content');
     slides.forEach((slide, index) => {
         slide.classList.remove('active');
@@ -48,14 +55,16 @@ function updateSlide() {
         if (index < currentStepIndex) step.classList.add('visible');
         else step.classList.remove('visible');
     });
-    document.getElementById('currentSlide').textContent = currentSlideIndex + 1;
-    document.getElementById('prevBtn').disabled = (currentSlideIndex === 0 && currentStepIndex === 0);
-    document.getElementById('nextBtn').disabled  = (currentSlideIndex === totalSlides - 1 && currentStepIndex >= totalSteps);
+    const cse = document.getElementById('currentSlide');
+    if (cse) cse.textContent = currentSlideIndex + 1;
+    const prevBtn = document.getElementById('prevBtn');
+    if (prevBtn) prevBtn.disabled = currentSlideIndex === 0 && currentStepIndex === 0;
     const stepIndicator = document.getElementById('stepIndicator');
-    if (totalSteps > 0 && currentStepIndex < totalSteps) {
-        stepIndicator.textContent = `Étape ${currentStepIndex} / ${totalSteps}`;
-    } else {
-        stepIndicator.textContent = '';
+    if (stepIndicator) {
+        if (totalSteps > 0 && currentStepIndex < totalSteps) {
+            stepIndicator.textContent = 'Étape ' + currentStepIndex + '/' + totalSteps;
+            stepIndicator.classList.remove('hidden');
+        } else { stepIndicator.classList.add('hidden'); }
     }
     if (currentStepIndex === 0 && contentDiv) {
         setTimeout(() => { contentDiv.scrollTo({ top: 0, behavior: 'smooth' }); }, 50);
@@ -68,6 +77,7 @@ function updateSlide() {
 }
 
 function changeSlide(direction) {
+    if (!slides || slides.length === 0) return;
     const currentSlide = slides[currentSlideIndex];
     const steps = currentSlide.querySelectorAll('.step');
     const totalSteps = steps.length;
@@ -96,8 +106,9 @@ document.addEventListener('keydown', (e) => {
     else if (e.key === 'h' || e.key === 'H' || e.key === '?') openHelp();
 });
 
-document.getElementById('slideMenu').addEventListener('click',   (e) => { if (e.target.id === 'slideMenu')   closeMenu(); });
-document.getElementById('helpOverlay').addEventListener('click', (e) => { if (e.target.id === 'helpOverlay') closeHelp(); });
-
-/* ── Init ── */
-updateSlide();
+document.addEventListener('click', (e) => {
+    const sm = document.getElementById('slideMenu');
+    if (sm && e.target.id === 'slideMenu') closeMenu();
+    const ho = document.getElementById('helpOverlay');
+    if (ho && e.target.id === 'helpOverlay') closeHelp();
+});

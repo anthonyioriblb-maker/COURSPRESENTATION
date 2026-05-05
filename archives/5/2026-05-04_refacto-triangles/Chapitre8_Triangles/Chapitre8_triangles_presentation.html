@@ -5,13 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Chapitre 8 - Les triangles</title>
     <link rel="stylesheet" href="../../styles.css">
-    <style>
-        .step-inline { opacity: 0; transition: opacity 0.5s; }
-        .step-inline.visible { opacity: 1; }
-        tr.step { display: table-row !important; opacity: 0; transition: opacity 0.5s; }
-        tr.step.visible { opacity: 1; }
-        .anim-fullbleed { display: block; width: 100%; }
-    </style>
 </head>
 <body>
     <div class="container">
@@ -298,6 +291,21 @@
                     <div class="step" style="padding-left:30px;">• passant par le <span style="color: red;">milieu</span> du segment [AB].</div>
                 </div>
 
+                <div class="step" style="text-align:center; margin:12px 0;">
+                    <svg width="340" height="200" viewBox="0 0 340 200" style="max-width:100%; height:auto; background:#fafafa; border-radius:8px; border:2px solid #ddd;">
+                        <line x1="50" y1="130" x2="290" y2="130" stroke="black" stroke-width="2.5"/>
+                        <text x="30" y="135" font-size="18" font-weight="bold">A</text>
+                        <text x="296" y="135" font-size="18" font-weight="bold">B</text>
+                        <line x1="165" y1="125" x2="175" y2="135" stroke="black" stroke-width="2"/>
+                        <line x1="175" y1="125" x2="165" y2="135" stroke="black" stroke-width="2"/>
+                        <text x="177" y="150" font-size="14" fill="#555">I</text>
+                        <polyline points="170,130 170,118 182,118" stroke="black" stroke-width="1.8" fill="none"/>
+                        <line x1="170" y1="20" x2="170" y2="185" stroke="#e74c3c" stroke-width="2.5" stroke-dasharray="9,4"/>
+                        <line x1="108" y1="123" x2="108" y2="137" stroke="red" stroke-width="2.5" stroke-linecap="round"/>
+                        <line x1="232" y1="123" x2="232" y2="137" stroke="red" stroke-width="2.5" stroke-linecap="round"/>
+                        <text x="178" y="28" font-size="13" fill="#e74c3c" font-weight="bold">médiatrice</text>
+                    </svg>
+                </div>
             </div>
 
             <!-- ════════════ Slide 8 : IV. Médiatrice / 1) Méthode équerre et règle ════════════ -->
@@ -718,17 +726,17 @@
         <!-- Contrôles -->
         <div class="controls">
             <div class="controls-left">
-                <button id="prevBtn" onclick="changeSlide(-1)">← Précédent</button>
-                <button class="btn-reset" onclick="resetSlide()">⟲</button>
+                <button class="btn-menu" onclick="openMenu()">☰ Menu</button>
+                <button onclick="openHelp()">❓ Aide</button>
             </div>
             <div class="progress">
-                <span><span id="currentSlide">1</span> / <span id="totalSlides">0</span></span>
-                <span class="step-indicator" id="stepIndicator"></span>
+                <span id="stepIndicator" class="step-indicator hidden">Étape 0/0</span>
+                <span>Slide <span id="currentSlide">1</span> / <span id="totalSlides">0</span></span>
             </div>
             <div class="controls-right">
-                <button class="btn-menu" onclick="openMenu()">📋 Menu</button>
-                <button class="btn-menu" onclick="openHelp()">❓ Aide</button>
-                <button id="nextBtn" onclick="changeSlide(1)">Suivant →</button>
+                <button class="btn-reset" onclick="resetSlide()">↻ Réinitialiser</button>
+                <button id="prevBtn" onclick="changeSlide(-1)">◀ Précédent</button>
+                <button onclick="changeSlide(1)">Suivant ▶</button>
             </div>
         </div>
     </div>

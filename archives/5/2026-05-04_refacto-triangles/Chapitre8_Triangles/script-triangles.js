@@ -68,13 +68,13 @@ function updateSlide() {
 
     document.getElementById('currentSlide').textContent = currentSlideIndex + 1;
     document.getElementById('prevBtn').disabled = (currentSlideIndex === 0 && currentStepIndex === 0);
-    document.getElementById('nextBtn').disabled  = (currentSlideIndex === totalSlides - 1 && currentStepIndex >= totalSteps);
 
     const stepIndicator = document.getElementById('stepIndicator');
     if (totalSteps > 0 && currentStepIndex < totalSteps) {
-        stepIndicator.textContent = `Étape ${currentStepIndex} / ${totalSteps}`;
+        stepIndicator.textContent = `Étape ${currentStepIndex}/${totalSteps}`;
+        stepIndicator.classList.remove('hidden');
     } else {
-        stepIndicator.textContent = '';
+        stepIndicator.classList.add('hidden');
     }
 
     if (currentStepIndex === 0) {

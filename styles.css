@@ -117,6 +117,20 @@ h3 {
     box-shadow: 0 5px 15px rgba(0,0,0,0.2);
 }
 
+/* Empêche la multiplication de font-size quand une boîte est imbriquée dans une autre */
+.definition .definition, .definition .example, .definition .important,
+.definition .remarque,   .definition .method,   .definition .calcul-detail,
+.example .definition,   .example .example,     .example .important,
+.example .remarque,     .example .method,       .example .calcul-detail,
+.important .definition, .important .example,    .important .important,
+.important .remarque,   .important .method,     .important .calcul-detail,
+.remarque .definition,  .remarque .example,     .remarque .important,
+.remarque .remarque,    .remarque .method,      .remarque .calcul-detail,
+.method .definition,    .method .example,       .method .important,
+.method .remarque,      .method .method,        .method .calcul-detail {
+    font-size: 1em;
+}
+
 .definition {
     background: #d4ebf7;
     border-left: 6px solid #2980b9;
