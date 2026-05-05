@@ -51,8 +51,13 @@ Dans chaque slide, le contenu apparaît **phrase par phrase** ou **bloc par bloc
 
 Mécanique :
 - Chaque phrase / bloc logique distinct = `<div class="step">…</div>`
-  - Définition : chaque ligne logique = un `.step`
-  - Exemple : énoncé = un step, tableau = un step, calculs = un step, conclusion = un step
+  - **Définition** : chaque phrase = un step séparé. Ne jamais mettre deux phrases dans le même step, même si elles sont liées.
+  - **Exemple** : énoncé = un step, tableau = un step, calculs = un step, conclusion = un step
+  - **Méthode** : intro = un step, puis **chaque item de liste = un step séparé** (utiliser `<ol start="N">` pour conserver la numérotation)
+  - **Propriété** : intro = un step, puis chaque règle/puce = un step séparé
+  - **Remarque** : si deux phrases distinctes, les séparer en deux steps
+  - **Exercice** : énoncé = un step, puis chaque question/puce = un step séparé
+  - **Règle absolue** : un `<br><br>` ou un `<br>` entre deux phrases = signal qu'il faut deux steps distincts
 - Pour faire apparaître **un mot précis** dans une phrase déjà visible (typiquement un résultat numérique en vert), utiliser `<span class="step-inline" style="color:green;"><strong>X</strong></span>`.
 - Le JS construit la liste des `.step` puis ajoute `.step-inline` enfants à la suite via `buildStepsArray`.
 
