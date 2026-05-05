@@ -120,7 +120,7 @@ h3 {
 .property {
     background: #fff3b8;
     border-left: 6px solid #e67e22;
-    color: black;
+    color: blue;
 }
 
 /* Empêche la multiplication de font-size quand une boîte est imbriquée dans une autre */
@@ -370,13 +370,13 @@ img {
     margin: 15px auto;
 }
 
-ul { 
-    text-align: left; 
-    margin: 20px 0; 
-    padding-left: 60px; 
+ul, ol {
+    text-align: left;
+    margin: 20px 0;
+    padding-left: 80px;
 }
 
-ul li {
+ul li, ol li {
     margin: 15px 0;
     font-size: 1em;
 }

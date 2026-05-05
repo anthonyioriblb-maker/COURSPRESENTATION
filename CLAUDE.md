@@ -216,6 +216,46 @@ Exemple : `archives/4/2026-04-28_avant-refacto-fidelite/Chapitre11_Proportionnal
 
 ---
 
+## Règle n°10 — Classes CSS disponibles dans styles.css
+
+Les classes de boîtes suivantes sont définies dans `styles.css` avec `font-size: 2.5em`, fond coloré et bordure gauche. Utiliser **uniquement** ces classes — ne jamais en inventer une nouvelle sans l'ajouter en même temps dans `styles.css` :
+
+| Classe | Fond | Bordure | Texte | Usage |
+|---|---|---|---|---|
+| `.definition` | bleu clair `#d4ebf7` | bleu `#2980b9` | bleu | Définitions |
+| `.example` | vert clair `#e8f8f0` | vert `#27ae60` | noir | Exemples |
+| `.important` | jaune `#fff3b8` | orange `#f39c12` | bleu | Points importants |
+| `.remarque` | gris clair `#e8e8e8` | gris `#555` | noir | Remarques |
+| `.method` | gris `#c8c8c8` | noir `#000` | noir | Méthodes |
+| `.calcul-detail` | gris `#f0f0f0` | gris `#7f8c8d` | noir | Détails de calcul |
+| `.property` | jaune `#fff3b8` | orange `#e67e22` | bleu | Propriétés |
+| `.exercice` | rose `#fce4ec` | rose foncé `#c2185b` | noir | Exercices |
+
+> **Erreur courante (Chapitre 12, mai 2026)** : la classe `.property` avait été utilisée dans le HTML sans être définie dans le CSS → texte minuscule. Toujours vérifier que la classe HTML existe bien dans `styles.css`.
+
+---
+
+## Erreurs fréquentes à éviter (retours d'expérience)
+
+> Ces erreurs ont été rencontrées sur de vraies présentations — les corriger systématiquement à la création.
+
+**1. Classe CSS utilisée dans le HTML mais absente de `styles.css`**
+→ Le texte apparaît minuscule (taille navigateur par défaut au lieu de `2.5em`).
+→ **Vérifier toujours** que chaque classe de boîte utilisée (`property`, `exercice`, etc.) est bien définie dans `styles.css` avec `font-size: 2.5em` et ses couleurs.
+
+**2. `max-width` en pixels sur un conteneur de boîtes `calcul-detail`**
+→ Exemple : `<div style="max-width:580px;">` autour de boîtes `.calcul-detail` qui ont déjà `font-size: 2.5em` → le texte déborde et se coupe à la ligne.
+→ **Toujours utiliser `max-width:100%`** (jamais de valeur fixe en px) pour les conteneurs qui wrappent des boîtes CSS.
+
+**3. Couleur du texte dans `.property`**
+→ La boîte `.property` doit avoir `color: blue` (comme `.definition` et `.important`), pas `color: black`.
+
+**4. Numéros de liste `<ol>` coupés par la bordure gauche des boîtes**
+→ Les `<ol>` n'avaient pas de `padding-left` suffisant → les numéros (1. 2. 3.) disparaissaient derrière la bordure.
+→ Le CSS définit maintenant `padding-left: 80px` pour `ul` ET `ol`. Ne jamais réduire cette valeur.
+
+---
+
 ## Ce qu'il ne faut JAMAIS faire
 
 - Ajouter du contenu qui n'est pas dans le cours (exemples, définitions, transitions, slides de récap, "à retenir"…).
