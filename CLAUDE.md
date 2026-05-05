@@ -250,7 +250,15 @@ Les classes de boîtes suivantes sont définies dans `styles.css` avec `font-siz
 **3. Couleur du texte dans `.property`**
 → La boîte `.property` doit avoir `color: blue` (comme `.definition` et `.important`), pas `color: black`.
 
-**4. Numéros de liste `<ol>` coupés par la bordure gauche des boîtes**
+**4. Bouton "Étape suivante" dans les animations pas-à-pas**
+→ Quand une animation révèle plusieurs `calcul-detail` successifs (ex. résolution d'équation), le bouton doit se déplacer physiquement dans le DOM après chaque nouvelle étape, sinon il disparaît hors écran.
+→ Patron à suivre :
+  - Donner un `id` au conteneur du bouton (ex. `s3btnContainer`) et à chaque étape (ex. `s3step0`, `s3step1`…)
+  - Dans `nextStepX()` : après avoir affiché l'étape, appeler `el.after(btnContainer)` pour déplacer le bouton juste après
+  - Scroller vers la nouvelle étape avec `el.scrollIntoView({ behavior: 'smooth', block: 'center' })` (center = étape visible au milieu, bouton visible en dessous)
+  - Dans `resetSolveX()` : remettre le bouton avant la première étape avec `step0.before(btnContainer)`
+
+**5. Numéros de liste `<ol>` coupés par la bordure gauche des boîtes**
 → Les `<ol>` n'avaient pas de `padding-left` suffisant → les numéros (1. 2. 3.) disparaissaient derrière la bordure.
 → Le CSS définit maintenant `padding-left: 80px` pour `ul` ET `ol`. Ne jamais réduire cette valeur.
 

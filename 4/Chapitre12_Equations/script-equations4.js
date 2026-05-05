@@ -164,11 +164,17 @@ function nextStep3() {
     if (s3currentStep >= s3totalSteps) return;
     s3currentStep++;
     const el = document.getElementById('s3step' + s3currentStep);
+    const btnContainer = document.getElementById('s3btnContainer');
     if (el) {
         el.style.display = 'block';
         el.style.opacity = '0';
         el.style.transition = 'opacity 0.4s';
-        setTimeout(() => { el.style.opacity = '1'; }, 10);
+        // Déplacer le bouton juste après cette nouvelle étape
+        el.after(btnContainer);
+        setTimeout(() => {
+            el.style.opacity = '1';
+            el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }, 50);
     }
     document.getElementById('s3counter').textContent = 'Étape ' + s3currentStep + ' / ' + s3totalSteps;
     if (s3currentStep >= s3totalSteps) {
@@ -184,6 +190,10 @@ function resetSolve3() {
         const el = document.getElementById('s3step' + i);
         if (el) el.style.display = 'none';
     }
+    // Remettre le bouton au début (avant s3step0)
+    const s3step0 = document.getElementById('s3step0');
+    const btnContainer = document.getElementById('s3btnContainer');
+    s3step0.before(btnContainer);
     document.getElementById('s3counter').textContent = 'Étape 0 / ' + s3totalSteps;
     document.getElementById('btnNext3').disabled = false;
     document.getElementById('btnNext3').style.background = '#27ae60';
@@ -198,11 +208,17 @@ function nextStep4() {
     if (s4currentStep >= s4totalSteps) return;
     s4currentStep++;
     const el = document.getElementById('s4step' + s4currentStep);
+    const btnContainer = document.getElementById('s4btnContainer');
     if (el) {
         el.style.display = 'block';
         el.style.opacity = '0';
         el.style.transition = 'opacity 0.4s';
-        setTimeout(() => { el.style.opacity = '1'; }, 10);
+        // Déplacer le bouton juste après cette nouvelle étape
+        el.after(btnContainer);
+        setTimeout(() => {
+            el.style.opacity = '1';
+            el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }, 50);
     }
     document.getElementById('s4counter').textContent = 'Étape ' + s4currentStep + ' / ' + s4totalSteps;
     if (s4currentStep >= s4totalSteps) {
@@ -218,6 +234,10 @@ function resetSolve4() {
         const el = document.getElementById('s4step' + i);
         if (el) el.style.display = 'none';
     }
+    // Remettre le bouton au début (avant s4step0)
+    const s4step0 = document.getElementById('s4step0');
+    const btnContainer = document.getElementById('s4btnContainer');
+    s4step0.before(btnContainer);
     document.getElementById('s4counter').textContent = 'Étape 0 / ' + s4totalSteps;
     document.getElementById('btnNext4').disabled = false;
     document.getElementById('btnNext4').style.background = '#27ae60';
