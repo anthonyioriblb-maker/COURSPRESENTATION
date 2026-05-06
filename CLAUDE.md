@@ -49,6 +49,8 @@ Les titres reprennent le **même libellé** que dans le cours, avec une numérot
 
 Dans chaque slide, le contenu apparaît **phrase par phrase** ou **bloc par bloc** lorsque l'utilisateur appuie sur la flèche droite ou Espace.
 
+> ⚠️ **OBLIGATION ABSOLUE** : chaque phrase est dans son propre `<div class="step">`. Toujours. Sans exception. Ne jamais regrouper deux phrases dans un même step, même si elles semblent liées. C'est la règle la plus importante de toute la présentation.
+
 Mécanique :
 - Chaque phrase / bloc logique distinct = `<div class="step">…</div>`
   - **Définition** : chaque phrase = un step séparé. Ne jamais mettre deux phrases dans le même step, même si elles sont liées.
