@@ -15,8 +15,7 @@ const slideTitles = [
     "IV. Angles supplémentaires",                                 // Slide 7
     "V. Angles opposés par le sommet",                            // Slide 8
     "VI. La bissectrice — 1) Définition",                         // Slide 9
-    "VI. 2) Tracer la bissectrice au rapporteur",                 // Slide 10
-    "VII. La somme des angles d'un triangle"                      // Slide 11
+    "VI. 2) Tracer la bissectrice au rapporteur"                  // Slide 10
 ];
 
 // Construit la liste à plat des étapes
@@ -576,58 +575,4 @@ function resetBisRap() {
     d.style.opacity = '0';
     ['brOA','brOB','brO','brArcAOB','brOD','brArcsEqual'].forEach(id => setOpacity(id, 0));
     ['brLine40','brLabel40','brResult'].forEach(id => setOpacity(id, 0));
-}
-
-// ────────────────────────────────────────────────────
-// ANIMATION : Somme des angles d'un triangle
-// ────────────────────────────────────────────────────
-const triTexts = [
-    "Cliquez sur &#171;&#160;&#201;tape suivante&#160;&#187; pour voir la d&#233;monstration.",
-    "Un triangle ABC poss&#232;de trois angles&#160;: &#945; (bleu en A), &#946; (vert en B) et &#947; (rouge en C).",
-    "L&#39;angle &#945; glisse depuis le sommet A et vient se placer sur la droite.",
-    "L&#39;angle &#946; glisse depuis le sommet B et se colle contre &#945;.",
-    "L&#39;angle &#947; glisse depuis le sommet C et compl&#232;te l&#39;angle plat.",
-    "Conclusion&#160;: &#945;&#160;+&#160;&#946;&#160;+&#160;&#947;&#160;=&#160;180&#176;&#160;!"
-];
-let stepTri = 0;
-
-function slideToDemo(id, dx, dy, rot) {
-    const el = document.getElementById(id);
-    el.style.transformOrigin = '270px 332px';
-    setOpacity(id, 1);
-    el.style.transition = 'none';
-    el.style.transform = 'translate(' + dx + 'px,' + dy + 'px) rotate(' + rot + 'deg)';
-    void el.getBoundingClientRect();
-    setTimeout(function() {
-        el.style.transition = 'transform 2s cubic-bezier(0.4, 0, 0.2, 1)';
-        el.style.transform = 'translate(0,0) rotate(0deg)';
-    }, 30);
-}
-
-function nextStepTri() {
-    stepTri++;
-    if (stepTri > 5) stepTri = 5;
-    document.getElementById('stepTri').innerHTML = triTexts[stepTri];
-    if (stepTri >= 1) setOpacity('triGroup', 1);
-    if (stepTri === 2) {
-        setOpacity('demoStructure', 1);
-        slideToDemo('animAlpha', -150, -92, 135);
-    }
-    if (stepTri === 3) slideToDemo('animBeta',  150, -92,  -45);
-    if (stepTri === 4) slideToDemo('animGamma',  55, -297, 135);
-    if (stepTri >= 5) setOpacity('resultTri', 1);
-}
-
-function resetTri() {
-    stepTri = 0;
-    document.getElementById('stepTri').innerHTML = triTexts[0];
-    setOpacity('triGroup', 0);
-    setOpacity('demoStructure', 0);
-    setOpacity('resultTri', 0);
-    ['animAlpha', 'animBeta', 'animGamma'].forEach(function(id) {
-        const el = document.getElementById(id);
-        el.style.transition = 'none';
-        el.style.transform = 'translate(0,0) rotate(0deg)';
-        setOpacity(id, 0);
-    });
 }

@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Chapitre 9 - Fractions</title>
+    <link rel="stylesheet" href="../../styles.css">
+    <style>
+        .step-inline { opacity: 0; transition: opacity 0.5s; }
+        .step-inline.visible { opacity: 1; }
+        tr.step { display: table-row !important; opacity: 0; transition: opacity 0.5s; }
+        tr.step.visible { opacity: 1; }
+        .anim-fullbleed { display: block; width: 100%; }
+
+        /* Décomposition en facteurs premiers */
+        .decomp-wrap { display: inline-block; vertical-align: top; margin: 5px 20px 5px 0; }
+        .decomp { font-family: 'Courier New', monospace; font-size: 1em; line-height: 1; position: relative; display: inline-block; }
+        .decomp::before { content: ''; position: absolute; left: 2.8em; top: 0; bottom: 0; border-left: 2px solid #333; pointer-events: none; }
+        .decomp-row { display: flex; align-items: center; height: 1.55em; opacity: 0; transform: translateY(-3px); transition: opacity 0.2s ease, transform 0.2s ease; }
+        .decomp-row.visible { opacity: 1; transform: translateY(0); }
+        .decomp-n { min-width: 2.5em; text-align: right; padding-right: 0.3em; color: blue; font-weight: bold; }
+        .decomp-d { padding-left: 0.4em; min-width: 1.5em; color: red; font-weight: bold; opacity: 0; transition: opacity 0.2s ease; }
+        .decomp-d.visible { opacity: 1; }
+        .decomp-btn { margin-top: 5px; background: #3498db; color: white; border: none; border-radius: 3px; padding: 0.2em 0.6em; cursor: pointer; font-size: 0.55em; display: block; }
+        .decomp-btn:hover:not(:disabled) { background: #217dbb; }
+        .decomp-btn:disabled { background: #aaa; cursor: default; }
+        .decomp-result { margin-top: 0.3em; font-style: italic; color: #333; font-size: 0.85em; opacity: 0; transition: opacity 0.3s; }
+        .decomp-result.visible { opacity: 1; }
+
+        /* Facteurs communs */
+        .fc1 { background: #ffe0b2; font-weight: bold; padding: 1px 3px; border-radius: 3px; color: #e65100; }
+        .fc2 { background: #c8e6c9; font-weight: bold; padding: 1px 3px; border-radius: 3px; color: #1b5e20; }
+        .fc3 { background: #bbdefb; font-weight: bold; padding: 1px 3px; border-radius: 3px; color: #0d47a1; }
+
+        /* Colonnes d'exemples */
+        .exemples-colonnes { display: flex; flex-wrap: wrap; gap: 20px; margin: 10px 0; }
+        .exemple-item { flex: 1; min-width: 200px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="content">
+
+            <!-- ═══ Slide 1 : Titre ═══ -->
+            <div class="slide active">
+                <h1>Chapitre 9 : Addition et soustraction de nombres en écriture fractionnaire</h1>
+            </div>
+
+            <!-- ═══ Slide 2 : I. Rappels + 1) Observation ═══ -->
+            <div class="slide">
+                <h2>I. Rappels : Fractions égales</h2>
+                <h3>1) Observation</h3>
+                <div class="example">
+                    <div class="step"><strong>Observation :</strong></div>
+                    <div class="step" style="display: flex; gap: 0; align-items: flex-start; flex-wrap: wrap;">
+                        <div style="text-align: center; margin: 20px;">
+                            <div style="display: flex; flex-direction: column; gap: 2px; width: 160px; height: 80px; border: 2px solid #333;">
+                                <div style="flex: 1; background-color: #4a90e2; border: 1px solid #333;"></div>
+                                <div style="flex: 1; background-color: white; border: 1px solid #333;"></div>
+                            </div>
+                            <br>On a colorié <span class="fraction"><span class="numerateur">1</span><span class="denominateur">2</span></span> de la figure
+                        </div>
+                        <span class="step-inline" style="text-align: center; margin: 20px; display: inline-block;">
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr; gap: 2px; width: 160px; height: 80px; border: 2px solid #333;">
+                                <div style="background-color: #6fdc6f; border: 1px solid #333;"></div>
+                                <div style="background-color: #6fdc6f; border: 1px solid #333;"></div>
+                                <div style="background-color: white; border: 1px solid #333;"></div>
+                                <div style="background-color: white; border: 1px solid #333;"></div>
+                            </div>
+                            <br>On a colorié <span class="fraction"><span class="numerateur">2</span><span class="denominateur">4</span></span> de la figure
+                        </span>
+                        <span class="step-inline" style="text-align: center; margin: 20px; display: inline-block;">
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr 1fr 1fr; gap: 2px; width: 160px; height: 80px; border: 2px solid #333;">
+                                <div style="background-color: #e24a4a; border: 1px solid #333;"></div>
+                                <div style="background-color: #e24a4a; border: 1px solid #333;"></div>
+                                <div style="background-color: #e24a4a; border: 1px solid #333;"></div>
+                                <div style="background-color: #e24a4a; border: 1px solid #333;"></div>
+                                <div style="background-color: white; border: 1px solid #333;"></div>
+                                <div style="background-color: white; border: 1px solid #333;"></div>
+                                <div style="background-color: white; border: 1px solid #333;"></div>
+                                <div style="background-color: white; border: 1px solid #333;"></div>
+                            </div>
+                            <br>On a colorié <span class="fraction"><span class="numerateur">4</span><span class="denominateur">8</span></span> de la figure
+                        </span>
+                    </div>
+                    <div class="step">Or, les trois parties coloriées sur les trois figures sont identiques.<br>
+                    Cela veut dire que les fractions sont <strong>égales</strong> :</div>
+                    <div class="step" style="text-align: center; font-size: 1.3em; margin: 15px 0;">
+                        <span class="fraction"><span class="numerateur">1</span><span class="denominateur">2</span></span>
+                        &nbsp;=&nbsp;
+                        <span class="fraction"><span class="numerateur">2</span><span class="denominateur">4</span></span>
+                        &nbsp;=&nbsp;
+                        <span class="fraction"><span class="numerateur">4</span><span class="denominateur">8</span></span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ═══ Slide 3 : 2) Propriété fondamentale ═══ -->
+            <div class="slide">
+                <h3>2) Propriété fondamentale</h3>
+                <div class="important">
+                    <div class="step"><span style="color: red;">Propriété fondamentale :</span> On ne change pas la valeur d'une fraction si on <strong>multiplie</strong> (ou si on <strong>divise</strong>) le numérateur et le dénominateur par un <strong>même nombre non nul</strong>.</div>
+                </div>
+                <div class="example">
+                    <div class="step"><strong>Exemples :</strong></div>
+                    <div class="step">
+                        <span class="fraction"><span class="numerateur">2</span><span class="denominateur">7</span></span>
+                        <span class="step-inline"> =
+                        <span class="fraction"><span class="numerateur">2×5</span><span class="denominateur">7×5</span></span></span>
+                        <span class="step-inline"> =
+                        <span class="fraction"><span class="numerateur">10</span><span class="denominateur">35</span></span></span>
+                    </div>
+                    <div class="step">
+                        <span class="fraction"><span class="numerateur">18</span><span class="denominateur">28</span></span>
+                        <span class="step-inline"> =
+                        <span class="fraction"><span class="numerateur">18÷2</span><span class="denominateur">28÷2</span></span></span>
+                        <span class="step-inline"> =
+                        <span class="fraction"><span class="numerateur">9</span><span class="denominateur">14</span></span></span>
+                    </div>
+                </div>
+                <div class="remarque">
+                    <div class="step"><strong>⚠ Attention :</strong> Cette règle ne s'applique <strong>pas</strong> à l'addition et à la soustraction.</div>
+                    <div class="step">
+                        <span class="fraction"><span class="numerateur">3</span><span class="denominateur">4</span></span>
+                        ≠
+                        <span class="fraction"><span class="numerateur">3+5</span><span class="denominateur">4+5</span></span>
+                    </div>
+                    <div class="step">
+                        En effet :
+                        <span class="fraction"><span class="numerateur">3</span><span class="denominateur">4</span></span>
+                        = 0,75 &nbsp; et &nbsp;
+                        <span class="fraction"><span class="numerateur">3+5</span><span class="denominateur">4+5</span></span>
+                        =
+                        <span class="fraction"><span class="numerateur">8</span><span class="denominateur">9</span></span>
+                        ≈ 0,9
+                    </div>
+                </div>
+            </div>
+
+            <!-- ═══ Slide 4 : II. Nombres premiers + 1) Nombres premiers ═══ -->
+            <div class="slide">
+                <h2>II. Nombres premiers et décomposition en facteurs premiers</h2>
+                <h3>1) Nombres premiers</h3>
+                <div class="definition">
+                    <div class="step"><span style="color: red;">Définition :</span> Un entier naturel est <strong>premier</strong> s'il possède exactement <strong>deux diviseurs distincts positifs : 1 et lui-même</strong>.</div>
+                </div>
+                <div class="example">
+                    <div class="step"><strong>Exemples :</strong></div>
+                    <div class="step">2 est premier : ses seuls diviseurs sont 1 et 2.</div>
+                    <div class="step">13 est premier : ses seuls diviseurs sont 1 et 13.</div>
+                    <div class="step">15 n'est <strong>pas</strong> premier : 15 = 3 × 5, il a 4 diviseurs (1, 3, 5, 15).</div>
+                    <div class="step">La liste des nombres premiers à connaître (inférieurs ou égaux à 30) :</div>
+                    <div class="step">
+                        <div style="text-align: center; font-size: 1.15em; margin: 10px 0; font-weight: bold; color: red;">
+                            2 &nbsp;–&nbsp; 3 &nbsp;–&nbsp; 5 &nbsp;–&nbsp; 7 &nbsp;–&nbsp; 11 &nbsp;–&nbsp; 13 &nbsp;–&nbsp; 17 &nbsp;–&nbsp; 19 &nbsp;–&nbsp; 23 &nbsp;–&nbsp; 29
+                        </div>
+                    </div>
+                </div>
+                <div class="remarque">
+                    <div class="step"><strong>⚠ Attention :</strong> 1 n'est <strong>pas</strong> un nombre premier car il ne possède qu'un seul diviseur positif : lui-même.</div>
+                </div>
+            </div>
+
+            <!-- ═══ Slide 5 : 2) Décomposition en produit de facteurs premiers ═══ -->
+            <div class="slide">
+                <h3>2) Décomposition en produit de facteurs premiers</h3>
+                <div class="property">
+                    <div class="step"><span style="color: red;">Propriété :</span> Tout entier naturel supérieur à 1 peut s'écrire comme un <strong>produit de facteurs premiers</strong>. Cette décomposition est <strong>unique</strong> (à l'ordre des facteurs près).</div>
+                </div>
+                <div class="method">
+                    <div class="step"><strong>Méthode :</strong> On divise successivement par les nombres premiers dans l'ordre croissant (2, 3, 5, 7, 11 …) jusqu'à obtenir 1.</div>
+                    <div class="step"><strong>Exemple : décomposer 60 en facteurs premiers.</strong></div>
+                    <div class="step">
+                        <div class="decomp-wrap">
+                            <div class="decomp" id="d-60">
+                                <div class="decomp-row"><span class="decomp-n">60</span><span class="decomp-d">2</span></div>
+                                <div class="decomp-row"><span class="decomp-n">30</span><span class="decomp-d">2</span></div>
+                                <div class="decomp-row"><span class="decomp-n">15</span><span class="decomp-d">3</span></div>
+                                <div class="decomp-row"><span class="decomp-n">5</span><span class="decomp-d">5</span></div>
+                                <div class="decomp-row"><span class="decomp-n">1</span><span class="decomp-d"></span></div>
+                            </div>
+                            <button class="decomp-btn" data-target="d-60">▶ Suivant</button>
+                            <div class="decomp-result" id="r-60">60 = 2 × 2 × 3 × 5 = 2<sup>2</sup> × 3 × 5</div>
+                        </div>
+                    </div>
+                    <div class="step">On lit le résultat en lisant les diviseurs (colonne de droite, en rouge) de haut en bas :</div>
+                    <div class="step"><strong>60 = 2 × 2 × 3 × 5</strong></div>
+                </div>
+                <div class="example">
+                    <div class="step"><strong>Autres exemples :</strong></div>
+                    <div class="step">
+                        <div class="decomp-wrap">
+                            <div class="decomp" id="d-12">
+                                <div class="decomp-row"><span class="decomp-n">12</span><span class="decomp-d">2</span></div>
+                                <div class="decomp-row"><span class="decomp-n">6</span><span class="decomp-d">2</span></div>
+                                <div class="decomp-row"><span class="decomp-n">3</span><span class="decomp-d">3</span></div>
+                                <div class="decomp-row"><span class="decomp-n">1</span><span class="decomp-d"></span></div>
+                            </div>
+                            <button class="decomp-btn" data-target="d-12">▶ Suivant</button>
+                            <div class="decomp-result" id="r-12">12 = 2 × 2 × 3 = 2<sup>2</sup> × 3</div>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <div class="decomp-wrap">
+                            <div class="decomp" id="d-18">
+                                <div class="decomp-row"><span class="decomp-n">18</span><span class="decomp-d">2</span></div>
+                                <div class="decomp-row"><span class="decomp-n">9</span><span class="decomp-d">3</span></div>
+                                <div class="decomp-row"><span class="decomp-n">3</span><span class="decomp-d">3</span></div>
+                                <div class="decomp-row"><span class="decomp-n">1</span><span class="decomp-d"></span></div>
+                            </div>
+                            <button class="decomp-btn" data-target="d-18">▶ Suivant</button>
+                            <div class="decomp-result" id="r-18">18 = 2 × 3 × 3 = 2 × 3<sup>2</sup></div>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <div class="decomp-wrap">
+                            <div class="decomp" id="d-42">
+                                <div class="decomp-row"><span class="decomp-n">42</span><span class="decomp-d">2</span></div>
+                                <div class="decomp-row"><span class="decomp-n">21</span><span class="decomp-d">3</span></div>
+                                <div class="decomp-row"><span class="decomp-n">7</span><span class="decomp-d">7</span></div>
+                                <div class="decomp-row"><span class="decomp-n">1</span><span class="decomp-d"></span></div>
+                            </div>
+                            <button class="decomp-btn" data-target="d-42">▶ Suivant</button>
+                            <div class="decomp-result" id="r-42">42 = 2 × 3 × 7</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ═══ Slide 6 : III. Simplifier + 1) Définition ═══ -->
+            <div class="slide">
+                <h2>III. Simplifier une fraction</h2>
+                <h3>1) Définition</h3>
+                <div class="definition">
+                    <div class="step"><span style="color: red;">Définition :</span> <strong>Simplifier une fraction</strong>, c'est trouver une fraction égale dont le numérateur et le dénominateur sont plus petits.</div>
+                    <div class="step">Une fraction est dite <span style="color: red;"><strong>irréductible</strong></span> lorsqu'on ne peut plus la simplifier, c'est-à-dire lorsque le numérateur et le dénominateur n'ont <strong>aucun diviseur commun autre que 1</strong>.</div>
+                </div>
+            </div>
+
+            <!-- ═══ Slide 7 : 2) Méthode ═══ -->
+            <div class="slide">
+                <h3>2) Méthode : utiliser la décomposition en facteurs premiers</h3>
+                <div class="method">
+                    <div class="step"><strong>Méthode :</strong> Pour simplifier une fraction complètement :</div>
+                    <div class="step"><ol start="1"><li>Décomposer le numérateur et le dénominateur en <strong>produit de facteurs premiers</strong> ;</li></ol></div>
+                    <div class="step"><ol start="2"><li>Repérer les facteurs communs (identiques au numérateur et au dénominateur) ;</li></ol></div>
+                    <div class="step"><ol start="3"><li>Les <strong>simplifier</strong> (les barrer en haut et en bas) ;</li></ol></div>
+                    <div class="step"><ol start="4"><li>La fraction obtenue est <strong>irréductible</strong>.</li></ol></div>
+                </div>
+                <div class="example">
+                    <div class="step"><strong>Exemple 1 :</strong> Simplifier
+                    <span class="fraction"><span class="numerateur">12</span><span class="denominateur">18</span></span></div>
+                    <div class="step">On décompose : &nbsp;&nbsp; 12 = 2 × 2 × 3 &nbsp;&nbsp; et &nbsp;&nbsp; 18 = 2 × 3 × 3</div>
+                    <div class="step">
+                        <span class="fraction">
+                            <span class="numerateur">12</span>
+                            <span class="denominateur">18</span>
+                        </span>
+                        <span class="step-inline"> =
+                        <span class="fraction">
+                            <span class="numerateur"><span class="strikethrough-red">2</span> × 2 × <span class="strikethrough-blue">3</span></span>
+                            <span class="denominateur"><span class="strikethrough-red">2</span> × <span class="strikethrough-blue">3</span> × 3</span>
+                        </span></span>
+                        <span class="step-inline"> =
+                        <span class="fraction">
+                            <span class="numerateur">2</span>
+                            <span class="denominateur">3</span>
+                        </span></span>
+                    </div>
+                    <div class="step">
+                        <strong>La fraction
+                        <span class="fraction"><span class="numerateur">2</span><span class="denominateur">3</span></span>
+                        est irréductible.</strong>
+                    </div>
+                </div>
+                <div class="example">
+                    <div class="step"><strong>Exemple 2 :</strong> Simplifier
+                    <span class="fraction"><span class="numerateur">30</span><span class="denominateur">42</span></span></div>
+                    <div class="step">On décompose : &nbsp;&nbsp; 30 = 2 × 3 × 5 &nbsp;&nbsp; et &nbsp;&nbsp; 42 = 2 × 3 × 7</div>
+                    <div class="step">
+                        <span class="fraction">
+                            <span class="numerateur">30</span>
+                            <span class="denominateur">42</span>
+                        </span>
+                        <span class="step-inline"> =
+                        <span class="fraction">
+                            <span class="numerateur"><span class="strikethrough-red">2</span> × <span class="strikethrough-blue">3</span> × 5</span>
+                            <span class="denominateur"><span class="strikethrough-red">2</span> × <span class="strikethrough-blue">3</span> × 7</span>
+                        </span></span>
+                        <span class="step-inline"> =
+                        <span class="fraction">
+                            <span class="numerateur">5</span>
+                            <span class="denominateur">7</span>
+                        </span></span>
+                    </div>
+                </div>
+                <div class="remarque">
+                    <div class="step"><strong>💡 Remarque :</strong> On peut aussi simplifier progressivement, en divisant plusieurs fois par un même facteur, jusqu'à obtenir une fraction irréductible.</div>
+                    <div class="step">Exemple :
+                        <span class="fraction"><span class="numerateur">24</span><span class="denominateur">36</span></span>
+                        <span class="step-inline"> =
+                        <span class="fraction"><span class="numerateur">24÷2</span><span class="denominateur">36÷2</span></span></span>
+                        <span class="step-inline"> =
+                        <span class="fraction"><span class="numerateur">12</span><span class="denominateur">18</span></span></span>
+                        <span class="step-inline"> =
+                        <span class="fraction"><span class="numerateur">12÷2</span><span class="denominateur">18÷2</span></span></span>
+                        <span class="step-inline"> =
+                        <span class="fraction"><span class="numerateur">6</span><span class="denominateur">9</span></span></span>
+                        <span class="step-inline"> =
+                        <span class="fraction"><span class="numerateur">6÷3</span><span class="denominateur">9÷3</span></span></span>
+                        <span class="step-inline"> =
+                        <span class="fraction"><span class="numerateur">2</span><span class="denominateur">3</span></span></span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ═══ Slide 8 : IV. Même dénominateur ═══ -->
+            <div class="slide">
+                <h2>IV. Additionner ou soustraire deux nombres en écriture fractionnaire de même dénominateur</h2>
+                <div class="important">
+                    <div class="step"><span style="color: red;">Règle 1 :</span> Pour additionner (ou soustraire) deux nombres en écriture fractionnaire de <strong>même dénominateur</strong>, on additionne (ou on soustrait) les numérateurs et on <strong>garde</strong> le dénominateur commun.</div>
+                </div>
+                <div class="example">
+                    <div class="step"><strong>Exemples :</strong></div>
+                    <div class="step">
+                        <div class="calcul-detail">
+                            <div><em>D</em> =
+                                <span class="fraction"><span class="numerateur">4</span><span class="denominateur">3</span></span>
+                                +
+                                <span class="fraction"><span class="numerateur">7</span><span class="denominateur">3</span></span>
+                            </div>
+                            <div class="step">&nbsp;&nbsp; =
+                                <span class="fraction"><span class="numerateur">4 + 7</span><span class="denominateur">3</span></span>
+                            </div>
+                            <div class="step"><em>D</em> =
+                                <span class="fraction"><span class="numerateur">11</span><span class="denominateur">3</span></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <div class="calcul-detail">
+                            <div><em>E</em> =
+                                <span class="fraction"><span class="numerateur">7</span><span class="denominateur">6</span></span>
+                                +
+                                <span class="fraction"><span class="numerateur">19</span><span class="denominateur">6</span></span>
+                            </div>
+                            <div class="step">&nbsp;&nbsp; =
+                                <span class="fraction"><span class="numerateur">7 + 19</span><span class="denominateur">6</span></span>
+                            </div>
+                            <div class="step">&nbsp;&nbsp; =
+                                <span class="fraction"><span class="numerateur">26</span><span class="denominateur">6</span></span>
+                            </div>
+                            <div class="step">&nbsp;&nbsp; =
+                                <span class="fraction"><span class="numerateur"><span class="strikethrough-red">2</span> × 13</span><span class="denominateur"><span class="strikethrough-red">2</span> × 3</span></span>
+                            </div>
+                            <div class="step"><em>E</em> =
+                                <span class="fraction"><span class="numerateur">13</span><span class="denominateur">3</span></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <div class="calcul-detail">
+                            <div><em>F</em> =
+                                <span class="fraction"><span class="numerateur">25</span><span class="denominateur">16</span></span>
+                                −
+                                <span class="fraction"><span class="numerateur">1</span><span class="denominateur">16</span></span>
+                            </div>
+                            <div class="step">&nbsp;&nbsp; =
+                                <span class="fraction"><span class="numerateur">25 − 1</span><span class="denominateur">16</span></span>
+                            </div>
+                            <div class="step">&nbsp;&nbsp; =
+                                <span class="fraction"><span class="numerateur">24</span><span class="denominateur">16</span></span>
+                            </div>
+                            <div class="step">&nbsp;&nbsp; =
+                                <span class="fraction"><span class="numerateur"><span class="strikethrough-red">2</span> × <span class="strikethrough-blue">2</span> × <span class="strikethrough-green">2</span> × 3</span><span class="denominateur"><span class="strikethrough-red">2</span> × <span class="strikethrough-blue">2</span> × <span class="strikethrough-green">2</span> × 2</span></span>
+                            </div>
+                            <div class="step"><em>F</em> =
+                                <span class="fraction"><span class="numerateur">3</span><span class="denominateur">2</span></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="remarque">
+                    <div class="step"><strong>💡 Remarque :</strong> Lorsque le résultat n'est pas irréductible, on le simplifie (voir la partie III).</div>
+                </div>
+            </div>
+
+            <!-- ═══ Slide 9 : V. Dénominateurs différents ═══ -->
+            <div class="slide">
+                <h2>V. Additionner ou soustraire deux fractions de dénominateurs différents</h2>
+                <div class="remarque">
+                    <div class="step"><strong>💡 Méthode :</strong> On traite ici <strong>uniquement</strong> le cas où le dénominateur de l'une est un multiple de l'autre.</div>
+                </div>
+                <div class="important">
+                    <div class="step"><span style="color: red;">Règle 2 :</span> Pour additionner (ou soustraire) deux nombres en écriture fractionnaire de <strong>dénominateurs différents</strong>, on les « réduit » (met) au <strong>même dénominateur</strong> à l'aide de la propriété fondamentale, puis on additionne (ou on soustrait) les numérateurs et on garde le dénominateur commun.</div>
+                </div>
+                <div class="method">
+                    <div class="step"><strong>Méthode :</strong></div>
+                    <div class="step"><ol start="1"><li>Repérer quel est le <strong>dénominateur commun</strong> (le plus grand des deux dénominateurs, s'il est multiple de l'autre) ;</li></ol></div>
+                    <div class="step"><ol start="2"><li>Transformer la fraction dont le dénominateur est plus petit pour obtenir le dénominateur commun ;</li></ol></div>
+                    <div class="step"><ol start="3"><li>Additionner (ou soustraire) les numérateurs et garder le dénominateur commun ;</li></ol></div>
+                    <div class="step"><ol start="4"><li>Simplifier le résultat si nécessaire.</li></ol></div>
+                </div>
+                <div class="example">
+                    <div class="step"><strong>Exemples :</strong></div>
+                    <div class="step">
+                        <div class="calcul-detail">
+                            <div><em>G</em> =
+                                <span class="fraction"><span class="numerateur">5</span><span class="denominateur">3</span></span>
+                                +
+                                <span class="fraction"><span class="numerateur">2</span><span class="denominateur">9</span></span>
+                            </div>
+                            <div class="step">&nbsp;&nbsp; =
+                                <span class="fraction"><span class="numerateur">5 × 3</span><span class="denominateur">3 × 3</span></span>
+                                +
+                                <span class="fraction"><span class="numerateur">2</span><span class="denominateur">9</span></span>
+                            </div>
+                            <div class="step">&nbsp;&nbsp; =
+                                <span class="fraction"><span class="numerateur">15</span><span class="denominateur">9</span></span>
+                                +
+                                <span class="fraction"><span class="numerateur">2</span><span class="denominateur">9</span></span>
+                            </div>
+                            <div class="step">&nbsp;&nbsp; =
+                                <span class="fraction"><span class="numerateur">15 + 2</span><span class="denominateur">9</span></span>
+                            </div>
+                            <div class="step"><em>G</em> =
+                                <span class="fraction"><span class="numerateur">17</span><span class="denominateur">9</span></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <div class="calcul-detail">
+                            <div><em>H</em> =
+                                <span class="fraction"><span class="numerateur">29</span><span class="denominateur">48</span></span>
+                                −
+                                <span class="fraction"><span class="numerateur">5</span><span class="denominateur">12</span></span>
+                            </div>
+                            <div class="step">&nbsp;&nbsp; =
+                                <span class="fraction"><span class="numerateur">29</span><span class="denominateur">48</span></span>
+                                −
+                                <span class="fraction"><span class="numerateur">5 × 4</span><span class="denominateur">12 × 4</span></span>
+                            </div>
+                            <div class="step">&nbsp;&nbsp; =
+                                <span class="fraction"><span class="numerateur">29</span><span class="denominateur">48</span></span>
+                                −
+                                <span class="fraction"><span class="numerateur">20</span><span class="denominateur">48</span></span>
+                            </div>
+                            <div class="step">&nbsp;&nbsp; =
+                                <span class="fraction"><span class="numerateur">29 − 20</span><span class="denominateur">48</span></span>
+                            </div>
+                            <div class="step">&nbsp;&nbsp; =
+                                <span class="fraction"><span class="numerateur">9</span><span class="denominateur">48</span></span>
+                            </div>
+                            <div class="step">&nbsp;&nbsp; =
+                                <span class="fraction"><span class="numerateur"><span class="strikethrough-red">3</span> × 3</span><span class="denominateur"><span class="strikethrough-red">3</span> × 2 × 2 × 2 × 2</span></span>
+                            </div>
+                            <div class="step"><em>H</em> =
+                                <span class="fraction"><span class="numerateur">3</span><span class="denominateur">16</span></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <div class="calcul-detail">
+                            <div><em>I</em> =
+                                <span class="fraction"><span class="numerateur">1</span><span class="denominateur">4</span></span>
+                                + 2
+                            </div>
+                            <div class="step">&nbsp;&nbsp; =
+                                <span class="fraction"><span class="numerateur">1</span><span class="denominateur">4</span></span>
+                                +
+                                <span class="fraction"><span class="numerateur">2</span><span class="denominateur">1</span></span>
+                            </div>
+                            <div class="step">&nbsp;&nbsp; =
+                                <span class="fraction"><span class="numerateur">1</span><span class="denominateur">4</span></span>
+                                +
+                                <span class="fraction"><span class="numerateur">2 × 4</span><span class="denominateur">1 × 4</span></span>
+                            </div>
+                            <div class="step">&nbsp;&nbsp; =
+                                <span class="fraction"><span class="numerateur">1</span><span class="denominateur">4</span></span>
+                                +
+                                <span class="fraction"><span class="numerateur">8</span><span class="denominateur">4</span></span>
+                            </div>
+                            <div class="step">&nbsp;&nbsp; =
+                                <span class="fraction"><span class="numerateur">1 + 8</span><span class="denominateur">4</span></span>
+                            </div>
+                            <div class="step"><em>I</em> =
+                                <span class="fraction"><span class="numerateur">9</span><span class="denominateur">4</span></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="remarque">
+                    <div class="step"><strong>⚠ Attention :</strong> Si le dénominateur de l'une n'est <strong>pas</strong> un multiple de l'autre, il faut utiliser une autre méthode pour trouver un dénominateur commun (par exemple le produit des deux dénominateurs). Ce cas sera étudié en <strong>4ème</strong>.</div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Contrôles -->
+        <div class="controls">
+            <div class="controls-left">
+                <button id="prevBtn" onclick="changeSlide(-1)">← Précédent</button>
+                <button class="btn-reset" onclick="resetSlide()">⟲</button>
+            </div>
+            <div class="progress">
+                <span><span id="currentSlide">1</span> / <span id="totalSlides">9</span></span>
+                <span class="step-indicator" id="stepIndicator"></span>
+            </div>
+            <div class="controls-right">
+                <button class="btn-menu" onclick="openMenu()">📋 Menu</button>
+                <button class="btn-menu" onclick="openHelp()">❓ Aide</button>
+                <button id="nextBtn" onclick="changeSlide(1)">Suivant →</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Menu des slides -->
+    <div class="slide-menu" id="slideMenu">
+        <div class="menu-content">
+            <h2>Sélectionner une diapositive</h2>
+            <div class="slide-list" id="slideList"></div>
+            <button class="close-menu" onclick="closeMenu()">Fermer</button>
+        </div>
+    </div>
+
+    <!-- Aide -->
+    <div class="help-overlay" id="helpOverlay">
+        <div class="help-content">
+            <h2>Raccourcis clavier</h2>
+            <ul>
+                <li><kbd>→</kbd> ou <kbd>Espace</kbd> : Étape/Slide suivante</li>
+                <li><kbd>←</kbd> : Étape/Slide précédente</li>
+                <li><kbd>M</kbd> : Ouvrir le menu des slides</li>
+                <li><kbd>R</kbd> : Réinitialiser la slide actuelle</li>
+                <li><kbd>H</kbd> ou <kbd>?</kbd> : Afficher cette aide</li>
+                <li><kbd>Échap</kbd> : Fermer les menus</li>
+            </ul>
+            <button class="close-menu" onclick="closeHelp()">Fermer</button>
+        </div>
+    </div>
+
+    <script src="script-fractions.js"></script>
+</body>
+</html>

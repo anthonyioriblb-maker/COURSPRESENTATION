@@ -55,6 +55,8 @@ Mécanique :
 - Chaque phrase / bloc logique distinct = `<div class="step">…</div>`
   - **Définition** : chaque phrase = un step séparé. Ne jamais mettre deux phrases dans le même step, même si elles sont liées.
   - **Exemple** : énoncé = un step, tableau = un step, calculs = un step, conclusion = un step
+  - **Calcul (calcul-detail)** : chaque ligne d'égalité = un step séparé. La première ligne déclenche l'apparition de la boîte (step externe), les lignes suivantes sont des `<div class="step">` imbriqués à l'intérieur du `calcul-detail`. Ne jamais mettre plusieurs lignes de calcul dans le même step.
+  - **Chaîne d'égalités inline** (ex. `a/b = a×k/b×k = c/d`) : la première fraction est dans le step parent, puis **chaque terme après `=`** est un `<span class="step-inline">`. Exemple : `<span class="fraction">…</span><span class="step-inline"> = <span class="fraction">…</span></span><span class="step-inline"> = <span class="fraction">…</span></span>`
   - **Méthode** : intro = un step, puis **chaque item de liste = un step séparé** (utiliser `<ol start="N">` pour conserver la numérotation)
   - **Propriété** : intro = un step, puis chaque règle/puce = un step séparé
   - **Remarque** : si deux phrases distinctes, les séparer en deux steps
@@ -202,11 +204,26 @@ Toujours présent, structure identique d'un chapitre à l'autre. À copier depui
 
 ## Règle n°8 — Avant toute modification : archiver
 
-Avant de modifier un dossier de chapitre existant, le copier dans :
+**S'applique aux DEUX fichiers : présentation ET cours source.**
+
+### Structure d'archive — COURSPRESENTATION
+Dossier fixe par niveau + chapitre, **date dans le nom de fichier** :
 ```
-archives/<niveau>/<YYYY-MM-DD>_<motif-court>/<dossier-chapitre>/
+COURSPRESENTATION/archives/<niveau>/Chapitre<N>_<Nom>/
+    Chapitre_<N>_<nom>_presentation_<YYYY-MM-DD>.html
+    script-<nom>_<YYYY-MM-DD>.js
 ```
-Exemple : `archives/4/2026-04-28_avant-refacto-fidelite/Chapitre11_Proportionnalite/`.
+Exemple : `archives/6/Chapitre10_Angles/Chapitre_10_angles_presentation_2026-05-06.html`
+
+### Structure d'archive — MathsIORI
+Dossier fixe par niveau + chapitre, **date dans le nom de fichier** :
+```
+MathsIORI/archives/<niveau>°/chapitre<N> - <Nom>/
+    cours_<YYYY-MM-DD>.html
+```
+Exemple : `MathsIORI/archives/6°/chapitre10 - Les angles/cours_2026-05-06.html`
+
+> **Erreur commise (mai 2026)** : cours.html modifié sans archive → impossible de revenir à l'état précédent sans reconstruire manuellement. Archiver TOUJOURS les deux fichiers avant toute modification.
 
 ---
 
