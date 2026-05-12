@@ -288,13 +288,10 @@ function nextStepP1() {
     if (p1currentStep >= p1totalSteps) return;
     p1currentStep++;
     const el = document.getElementById('p1step' + p1currentStep);
-    const btnContainer = document.getElementById('p1btnContainer');
     if (el) {
         el.style.display = 'block';
         el.style.opacity = '0';
         el.style.transition = 'opacity 0.4s';
-        // Déplacer le bouton juste après cette nouvelle étape
-        el.after(btnContainer);
         setTimeout(() => {
             el.style.opacity = '1';
             el.scrollIntoView({ behavior: 'smooth', block: 'center' });
@@ -314,10 +311,6 @@ function resetProb1() {
         const el = document.getElementById('p1step' + i);
         if (el) el.style.display = 'none';
     }
-    // Remettre le bouton au début du container
-    const p1container = document.getElementById('p1container');
-    const btnContainer = document.getElementById('p1btnContainer');
-    p1container.insertBefore(btnContainer, p1container.firstChild);
     document.getElementById('p1counter').textContent = 'Étape 0 / ' + p1totalSteps;
     document.getElementById('btnNextP1').disabled = false;
     document.getElementById('btnNextP1').style.background = '#8e44ad';
