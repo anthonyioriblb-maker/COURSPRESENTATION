@@ -280,48 +280,16 @@ function verifSolution() {
     }
 }
 
-/* ——— Exemple P1 (triangle isocèle) : pas à pas contrôlé par l'utilisateur ——— */
-let p1currentStep = 0;
-const p1totalSteps = 4;
-
-function nextStepP1() {
-    if (p1currentStep >= p1totalSteps) return;
-    p1currentStep++;
-    const el = document.getElementById('p1step' + p1currentStep);
-    const btnContainer = document.getElementById('p1btnContainer');
-    if (el) {
-        el.style.display = 'block';
-        el.style.opacity = '0';
-        el.style.transition = 'opacity 0.4s';
-        // Déplacer le bouton juste après cette nouvelle étape
-        el.after(btnContainer);
-        setTimeout(() => {
-            el.style.opacity = '1';
-            el.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        }, 50);
-    }
-    document.getElementById('p1counter').textContent = 'Étape ' + p1currentStep + ' / ' + p1totalSteps;
-    if (p1currentStep >= p1totalSteps) {
-        document.getElementById('btnNextP1').disabled = true;
-        document.getElementById('btnNextP1').style.background = '#95a5a6';
-        document.getElementById('btnNextP1').style.cursor = 'default';
-    }
+/* ——— Problème 1 ——— */
+function showProb1() {
+    document.getElementById('probSteps1').style.opacity = '1';
+    document.getElementById('btnP1').disabled = true;
+    document.getElementById('btnP1').style.background = '#95a5a6';
 }
-
 function resetProb1() {
-    p1currentStep = 0;
-    for (let i = 1; i <= p1totalSteps; i++) {
-        const el = document.getElementById('p1step' + i);
-        if (el) el.style.display = 'none';
-    }
-    // Remettre le bouton au début du container
-    const p1container = document.getElementById('p1container');
-    const btnContainer = document.getElementById('p1btnContainer');
-    p1container.insertBefore(btnContainer, p1container.firstChild);
-    document.getElementById('p1counter').textContent = 'Étape 0 / ' + p1totalSteps;
-    document.getElementById('btnNextP1').disabled = false;
-    document.getElementById('btnNextP1').style.background = '#8e44ad';
-    document.getElementById('btnNextP1').style.cursor = 'pointer';
+    document.getElementById('probSteps1').style.opacity = '0';
+    document.getElementById('btnP1').disabled = false;
+    document.getElementById('btnP1').style.background = '#8e44ad';
 }
 
 /* ——— Cartes (cas 1/2/3) ——— */

@@ -343,37 +343,38 @@
                     Les deux côtés égaux d'un triangle isocèle mesurent 2,8 cm. Son périmètre est 10,1 cm. Calculer la longueur de sa base.</div>
 
                     <div class="step">
-                        <div id="p1container">
-                            <div id="p1btnContainer" style="display:flex;align-items:center;gap:12px;margin:14px 0;">
-                                <button onclick="nextStepP1()" id="btnNextP1"
-                                    style="padding:9px 20px;font-size:14px;background:#8e44ad;color:white;border:none;border-radius:5px;cursor:pointer;font-weight:bold;">
-                                    ▶ Étape suivante
-                                </button>
-                                <button onclick="resetProb1()"
-                                    style="padding:9px 18px;font-size:14px;background:#7f8c8d;color:white;border:none;border-radius:5px;cursor:pointer;font-weight:bold;">
-                                    ↻ Recommencer
-                                </button>
-                                <span id="p1counter" style="color:#555;font-size:0.95em;">Étape 0 / 4</span>
-                            </div>
-                            <div style="display:none;margin:6px 0;padding:8px 14px;background:#f4eafc;border-left:3px solid #8e44ad;font-size:1.05em;" id="p1step1">
-                                <strong style="color:#8e44ad;">Étape 1 – Inconnue :</strong><br>
-                                Soit <span class="math">x</span> la longueur de la base (en cm).
-                            </div>
-                            <div style="display:none;margin:6px 0;padding:8px 14px;background:#f4eafc;border-left:3px solid #8e44ad;font-size:1.05em;" id="p1step2">
-                                <strong style="color:#8e44ad;">Étape 2 – Équation :</strong><br>
-                                Périmètre = côté + côté + base<br>
-                                <span class="math">2,8 + 2,8 + x = 10,1</span><br>
-                                soit&nbsp;&nbsp;<span class="math">5,6 + x = 10,1</span>
-                            </div>
-                            <div style="display:none;margin:6px 0;padding:8px 14px;background:#f4eafc;border-left:3px solid #8e44ad;font-size:1.05em;" id="p1step3">
-                                <strong style="color:#8e44ad;">Étape 3 – Résolution :</strong><br>
-                                <span class="math">5,6 + x − 5,6 = 10,1 − 5,6</span><br>
-                                <span class="math" style="color:#c0392b;font-weight:bold;">x = 4,5</span>
-                            </div>
-                            <div style="display:none;margin:6px 0;padding:8px 14px;background:#fff3cd;border-left:3px solid #e67e22;font-size:1.05em;" id="p1step4">
-                                <strong style="color:#e67e22;">Étape 4 – Vérification et conclusion :</strong><br>
-                                <span class="math">2,8 + 2,8 + 4,5 = 10,1</span> ✔<br>
-                                La base du triangle mesure <span style="color:#1a7a3c;font-weight:bold;">4,5 cm</span>.
+                        <div style="text-align:center;margin:10px 0;">
+                            <button onclick="showProb1()" id="btnP1"
+                                style="padding:9px 18px;font-size:14px;background:#8e44ad;color:white;border:none;border-radius:5px;cursor:pointer;font-weight:bold;">
+                                ▶ Voir la mise en équation
+                            </button>
+                            <button onclick="resetProb1()"
+                                style="padding:9px 18px;font-size:14px;background:#7f8c8d;color:white;border:none;border-radius:5px;cursor:pointer;font-weight:bold;margin-left:8px;">
+                                ↻ Réinitialiser
+                            </button>
+                        </div>
+                        <div id="probSteps1" style="opacity:0;transition:opacity 0.6s;">
+                            <div style="max-width:520px;margin:0 auto;">
+                                <div style="margin:6px 0;padding:8px 14px;background:#f4eafc;border-left:3px solid #8e44ad;font-size:1.05em;">
+                                    <strong style="color:#8e44ad;">Étape 1 – Inconnue :</strong><br>
+                                    Soit <span class="math">x</span> la longueur de la base (en cm).
+                                </div>
+                                <div style="margin:6px 0;padding:8px 14px;background:#f4eafc;border-left:3px solid #8e44ad;font-size:1.05em;">
+                                    <strong style="color:#8e44ad;">Étape 2 – Équation :</strong><br>
+                                    Périmètre = côté + côté + base<br>
+                                    <span class="math">2,8 + 2,8 + x = 10,1</span><br>
+                                    soit&nbsp;&nbsp;<span class="math">5,6 + x = 10,1</span>
+                                </div>
+                                <div style="margin:6px 0;padding:8px 14px;background:#f4eafc;border-left:3px solid #8e44ad;font-size:1.05em;">
+                                    <strong style="color:#8e44ad;">Étape 3 – Résolution :</strong><br>
+                                    <span class="math">5,6 + x − 5,6 = 10,1 − 5,6</span><br>
+                                    <span class="math" style="color:#c0392b;font-weight:bold;">x = 4,5</span>
+                                </div>
+                                <div style="margin:6px 0;padding:8px 14px;background:#fff3cd;border-left:3px solid #e67e22;font-size:1.05em;">
+                                    <strong style="color:#e67e22;">Étape 4 – Vérification et conclusion :</strong><br>
+                                    <span class="math">2,8 + 2,8 + 4,5 = 10,1</span> ✔<br>
+                                    La base du triangle mesure <span style="color:#1a7a3c;font-weight:bold;">4,5 cm</span>.
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -531,11 +532,13 @@
                 </div>
 
                 <div class="exercice">
-                    <div class="step"><strong>Exercices de mise en équation :</strong></div>
-                    <div class="step"><ol start="1"><li>J'ai choisi un nombre entier <span class="math">x</span>. Je l'ai multiplié par 3,5 et j'ai ajouté 2. J'ai trouvé 30. Que vaut <span class="math">x</span> ?</li></ol></div>
-                    <div class="step"><ol start="2"><li>Le quart d'un gâteau pèse 75 g. Quel est le poids de ce gâteau ?</li></ol></div>
-                    <div class="step"><ol start="3"><li>Tom a 3 fois l'âge d'Axel plus 4 ans et il a 4 fois l'âge de Lisa plus 2 ans. Axel et Lisa ont le même âge. Quel est cet âge ?</li></ol></div>
-                    <div class="step"><ol start="4"><li>Trouver un nombre sachant que son triple augmenté de 2 est égal à son double diminué de 3.</li></ol></div>
+                    <div class="step"><strong>Exercices de mise en équation :</strong><br>
+                    <ol>
+                        <li>J'ai choisi un nombre entier <span class="math">x</span>. Je l'ai multiplié par 3,5 et j'ai ajouté 2. J'ai trouvé 30. Que vaut <span class="math">x</span> ?</li>
+                        <li>Le quart d'un gâteau pèse 75 g. Quel est le poids de ce gâteau ?</li>
+                        <li>Tom a 3 fois l'âge d'Axel plus 4 ans et il a 4 fois l'âge de Lisa plus 2 ans. Axel et Lisa ont le même âge. Quel est cet âge ?</li>
+                        <li>Trouver un nombre sachant que son triple augmenté de 2 est égal à son double diminué de 3.</li>
+                    </ol></div>
                 </div>
             </div>
 
