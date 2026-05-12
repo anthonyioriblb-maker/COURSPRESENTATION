@@ -280,43 +280,6 @@ function verifSolution() {
     }
 }
 
-/* ——— Exemple P1 (triangle isocèle) : pas à pas contrôlé par l'utilisateur ——— */
-let p1currentStep = 0;
-const p1totalSteps = 4;
-
-function nextStepP1() {
-    if (p1currentStep >= p1totalSteps) return;
-    p1currentStep++;
-    const el = document.getElementById('p1step' + p1currentStep);
-    if (el) {
-        el.style.display = 'block';
-        el.style.opacity = '0';
-        el.style.transition = 'opacity 0.4s';
-        setTimeout(() => {
-            el.style.opacity = '1';
-            el.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        }, 50);
-    }
-    document.getElementById('p1counter').textContent = 'Étape ' + p1currentStep + ' / ' + p1totalSteps;
-    if (p1currentStep >= p1totalSteps) {
-        document.getElementById('btnNextP1').disabled = true;
-        document.getElementById('btnNextP1').style.background = '#95a5a6';
-        document.getElementById('btnNextP1').style.cursor = 'default';
-    }
-}
-
-function resetProb1() {
-    p1currentStep = 0;
-    for (let i = 1; i <= p1totalSteps; i++) {
-        const el = document.getElementById('p1step' + i);
-        if (el) el.style.display = 'none';
-    }
-    document.getElementById('p1counter').textContent = 'Étape 0 / ' + p1totalSteps;
-    document.getElementById('btnNextP1').disabled = false;
-    document.getElementById('btnNextP1').style.background = '#8e44ad';
-    document.getElementById('btnNextP1').style.cursor = 'pointer';
-}
-
 /* ——— Cartes (cas 1/2/3) ——— */
 function showCas(n) {
     ['cas1', 'cas2', 'cas3'].forEach(id => document.getElementById(id).style.display = 'none');
