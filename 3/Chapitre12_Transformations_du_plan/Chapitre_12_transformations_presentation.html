@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Chapitre 12 - Transformations du plan</title>
+    <link rel="stylesheet" href="../../styles.css">
+    <style>
+        .step-inline { opacity: 0; transition: opacity 0.5s; }
+        .step-inline.visible { opacity: 1; }
+        tr.step { display: table-row !important; opacity: 0; transition: opacity 0.5s; }
+        tr.step.visible { opacity: 1; }
+        .anim-fullbleed { display: block; width: 100%; }
+        /* Vecteur avec trait et flèche au-dessus */
+        .vecteur {
+            position: relative;
+            display: inline-block;
+            font-weight: bold;
+            padding: 0 4px;
+        }
+        .vecteur::before {
+            content: '';
+            position: absolute;
+            top: -0.15em;
+            left: 0;
+            right: 0;
+            height: 0;
+            border-top: 2.5px solid currentColor;
+        }
+        .vecteur::after {
+            content: '';
+            position: absolute;
+            top: -0.25em;
+            right: -2px;
+            width: 0;
+            height: 0;
+            border-left: 10px solid currentColor;
+            border-top: 5px solid transparent;
+            border-bottom: 5px solid transparent;
+        }
+        .img-cours {
+            display: block;
+            margin: 16px auto;
+            max-width: 380px;
+            width: 100%;
+            border-radius: 6px;
+        }
+        .img-cours.large { max-width: 560px; }
+        .img-cours.medium { max-width: 300px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="content">
+
+            <!-- ═══ Slide 1 : Titre ═══ -->
+            <div class="slide active">
+                <h1>Chapitre 12 : Transformations du plan</h1>
+            </div>
+
+            <!-- ═══ Slide 2 : I. Rappels + 1) Symétrie axiale ═══ -->
+            <div class="slide">
+                <h2>I. Rappels</h2>
+                <h3>1) Sym&eacute;trie axiale</h3>
+                <div class="definition">
+                    <div class="step">M et M&prime; sont <strong>sym&eacute;triques par rapport &agrave; la droite (d)</strong> signifie que :</div>
+                    <div class="step">&nbsp;&mdash; [MM&prime;] est <strong>perpendiculaire</strong> &agrave; (d),</div>
+                    <div class="step">&nbsp;&mdash; M et M&prime; sont &agrave; <strong>&eacute;gale distance</strong> de (d).</div>
+                </div>
+                <div class="step">
+                    <img class="img-cours medium" src="images/rappel_sym_axiale.png" alt="Sym&eacute;trie axiale">
+                </div>
+                <div class="important">
+                    <div class="step">Deux figures sym&eacute;triques par sym&eacute;trie axiale se superposent par un <strong>pliage</strong> le long de l&rsquo;axe de sym&eacute;trie&nbsp;(d).</div>
+                </div>
+            </div>
+
+            <!-- ═══ Slide 3 : 2) Symétrie centrale ═══ -->
+            <div class="slide">
+                <h3>2) Sym&eacute;trie centrale</h3>
+                <div class="definition">
+                    <div class="step">M et M&prime; sont <strong>sym&eacute;triques par rapport au point O</strong> signifie que :</div>
+                    <div class="step">&nbsp;&mdash; M, O et M&prime; sont <strong>align&eacute;s</strong>,</div>
+                    <div class="step">&nbsp;&mdash; M&prime;O = MO</div>
+                </div>
+                <div class="step">
+                    <img class="img-cours medium" src="images/rappel_sym_centrale.png" alt="Sym&eacute;trie centrale">
+                </div>
+                <div class="important">
+                    <div class="step">Deux figures sym&eacute;triques par sym&eacute;trie centrale se superposent par un <strong>demi-tour</strong> autour du centre de sym&eacute;trie O.</div>
+                </div>
+            </div>
+
+            <!-- ═══ Slide 4 : 3) Translation ═══ -->
+            <div class="slide">
+                <h3>3) Translation</h3>
+                <div class="definition">
+                    <div class="step">M&prime; est l&rsquo;image de M par la <strong>translation de vecteur <span class="vecteur">AB</span></strong> signifie que :</div>
+                    <div class="step">&nbsp;&mdash; ABM&prime;M est un <strong>parall&eacute;logramme</strong>.</div>
+                </div>
+                <div class="step">
+                    <img class="img-cours" src="images/rappel_translation.png" alt="Translation">
+                </div>
+                <div class="important">
+                    <div class="step">Une translation fait <strong>glisser</strong> une figure dans une direction, un sens et une longueur donn&eacute;e.</div>
+                </div>
+            </div>
+
+            <!-- ═══ Slide 5 : 4) Rotation ═══ -->
+            <div class="slide">
+                <h3>4) Rotation</h3>
+                <div class="definition">
+                    <div class="step">M&prime; est l&rsquo;image de M par la <strong>rotation de centre O et d&rsquo;angle &alpha;</strong> dans le sens indiqu&eacute; signifie que :</div>
+                    <div class="step">&nbsp;&mdash; <span class="angle">MOM&prime;</span> = &alpha; de M vers M&prime; dans le sens de la fl&egrave;che,</div>
+                    <div class="step">&nbsp;&mdash; MO = M&prime;O</div>
+                </div>
+                <div class="step">
+                    <img class="img-cours" src="images/rappel_rotation.png" alt="Rotation">
+                </div>
+                <div class="important">
+                    <div class="step">Une rotation fait <strong>tourner</strong> une figure autour d&rsquo;un point selon un angle.</div>
+                </div>
+            </div>
+
+            <!-- ═══ Slide 6 : II. Homothétie ═══ -->
+            <div class="slide">
+                <h2>II. Hom&eacute;th&eacute;tie</h2>
+                <div class="definition">
+                    <div class="step">M&prime; est l&rsquo;image de M par <strong>l&rsquo;hom&eacute;th&eacute;tie de centre O et de rapport k</strong> signifie que :</div>
+                    <div class="step">&nbsp;&mdash; O, M et M&prime; sont <strong>align&eacute;s</strong>,</div>
+                    <div class="step">&nbsp;&mdash; M et M&prime; sont du <strong>m&ecirc;me c&ocirc;t&eacute;</strong> par rapport &agrave; O si <strong style="color:#27ae60;">k &gt; 0</strong>,</div>
+                    <div class="step">&nbsp;&mdash; M et M&prime; <strong>ne sont pas du m&ecirc;me c&ocirc;t&eacute;</strong> par rapport &agrave; O si <strong style="color:#e74c3c;">k &lt; 0</strong>,</div>
+                    <div class="step">&nbsp;&mdash; <span class="math">OM&prime; = k &times; OM</span></div>
+                </div>
+                <div class="example">
+                    <div class="step"><strong>Exemple :</strong> Les figures F2, F3, F4 et F5 sont les images de la figure F1 par les hom&eacute;th&eacute;ties de centre O et de rapports respectifs
+                    k<sub>1</sub>&nbsp;=&nbsp;2,2 &nbsp;;&nbsp; k<sub>2</sub>&nbsp;=&nbsp;0,5 &nbsp;;&nbsp; k<sub>3</sub>&nbsp;=&nbsp;&#8722;0,5 &nbsp;<em>et</em>&nbsp; k<sub>4</sub>&nbsp;=&nbsp;&#8722;1,3.</div>
+                    <div class="step">
+                        <img class="img-cours large" src="images/homothetie_exemple.png" alt="Exemple hom&oacute;th&eacute;tie avec F1 &agrave; F5">
+                    </div>
+                </div>
+                <div class="important">
+                    <div class="step">Deux figures hom&eacute;th&eacute;tiques sont une <strong>r&eacute;duction</strong> ou un <strong>agrandissement</strong> l&rsquo;une de l&rsquo;autre.</div>
+                </div>
+                <div class="remarque">
+                    <div class="step"><span style="color:red;">Remarques :</span></div>
+                    <div class="step">&nbsp;&mdash; Une hom&eacute;th&eacute;tie de rapport <strong>1</strong> n&rsquo;effectue aucune transformation.</div>
+                    <div class="step">&nbsp;&mdash; Une hom&eacute;th&eacute;tie de rapport <strong>&#8722;1</strong> est une <strong>sym&eacute;trie centrale</strong>.</div>
+                    <div class="step">&nbsp;&mdash; Dans une hom&eacute;th&eacute;tie de rapport diff&eacute;rent de 1, <strong>seule le centre ne &laquo;&nbsp;bouge&nbsp;&raquo; pas</strong>.</div>
+                </div>
+                <div class="property">
+                    <div class="step"><span style="color:red;">Propri&eacute;t&eacute;s :</span></div>
+                    <div class="step">&nbsp;&mdash; Une hom&eacute;th&eacute;tie <strong>conserve les alignements et les mesures d&rsquo;angles</strong>.</div>
+                    <div class="step">&nbsp;&mdash; Une figure et son image par une hom&eacute;th&eacute;tie ont donc la <strong>m&ecirc;me forme</strong> (figures semblables).</div>
+                </div>
+            </div>
+
+            <!-- ═══ Slide 7 : Constructions ═══ -->
+            <div class="slide">
+                <h3>Constructions</h3>
+                <div class="method">
+                    <div class="step"><strong style="color:#e74c3c;">Construction 1)</strong> Construire A&prime;, l&rsquo;image du point A par l&rsquo;hom&eacute;th&eacute;tie de centre O et de rapport&nbsp;<strong>3</strong>.</div>
+                    <div class="step"><strong style="color:#e74c3c;">Construction 2)</strong> Construire B&prime;, l&rsquo;image du point B par l&rsquo;hom&eacute;th&eacute;tie de centre O et de rapport&nbsp;<strong>&#8722;0,5</strong>.</div>
+                </div>
+                <div class="step">
+                    <img class="img-cours" src="images/construction_12.png" alt="Constructions 1 et 2">
+                </div>
+                <div class="method" style="margin-top:18px;">
+                    <div class="step"><strong style="color:#e74c3c;">Construction 3)</strong> Construire A&prime;B&prime;C&prime;, l&rsquo;image du triangle ABC par l&rsquo;hom&eacute;th&eacute;tie de centre O et de rapport&nbsp;<strong>&#8722;2</strong>.</div>
+                </div>
+                <div class="step">
+                    <img class="img-cours" src="images/construction_3.png" alt="Construction 3 - triangle ABC">
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Contrôles -->
+        <div class="controls">
+            <div class="controls-left">
+                <button id="prevBtn" onclick="changeSlide(-1)">← Précédent</button>
+                <button class="btn-reset" onclick="resetSlide()">⟲</button>
+            </div>
+            <div class="progress">
+                <span><span id="currentSlide">1</span> / <span id="totalSlides">7</span></span>
+                <span class="step-indicator" id="stepIndicator"></span>
+            </div>
+            <div class="controls-right">
+                <button class="btn-menu" onclick="openMenu()">📋 Menu</button>
+                <button class="btn-menu" onclick="openHelp()">❓ Aide</button>
+                <button id="nextBtn" onclick="changeSlide(1)">Suivant →</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Menu des slides -->
+    <div class="slide-menu" id="slideMenu">
+        <div class="menu-content">
+            <h2>Sélectionner une diapositive</h2>
+            <div class="slide-list" id="slideList"></div>
+            <button class="close-menu" onclick="closeMenu()">Fermer</button>
+        </div>
+    </div>
+
+    <!-- Aide -->
+    <div class="help-overlay" id="helpOverlay">
+        <div class="help-content">
+            <h2>Raccourcis clavier</h2>
+            <ul>
+                <li><kbd>→</kbd> ou <kbd>Espace</kbd> : Étape/Slide suivante</li>
+                <li><kbd>←</kbd> : Étape/Slide précédente</li>
+                <li><kbd>M</kbd> : Ouvrir le menu des slides</li>
+                <li><kbd>R</kbd> : Réinitialiser la slide actuelle</li>
+                <li><kbd>H</kbd> ou <kbd>?</kbd> : Afficher cette aide</li>
+                <li><kbd>Échap</kbd> : Fermer les menus</li>
+            </ul>
+            <button class="close-menu" onclick="closeHelp()">Fermer</button>
+        </div>
+    </div>
+
+    <script src="script-transformations.js"></script>
+</body>
+</html>
