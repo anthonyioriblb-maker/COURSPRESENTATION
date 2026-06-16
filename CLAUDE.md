@@ -286,6 +286,63 @@ Les classes de boîtes suivantes sont définies dans `styles.css` avec `font-siz
 → Les `<ol>` n'avaient pas de `padding-left` suffisant → les numéros (1. 2. 3.) disparaissaient derrière la bordure.
 → Le CSS définit maintenant `padding-left: 80px` pour `ul` ET `ol`. Ne jamais réduire cette valeur.
 
+**6. Animations compas — règles absolues (juin 2026, long à corriger)**
+
+> Un point en mathématiques est toujours une **croix ×**, jamais un cercle. Remplacer tous les `<circle r="4/5">` marqueurs de points par deux `<line>` en × (±5px en diagonale).
+
+> Le compas ne se referme **jamais** pendant une animation. L'écartement, une fois pris, reste constant jusqu'au prochain "prise d'écartement" explicite.
+
+Séquence correcte pour le symétrique avec compas seul (arcs en A puis en B) :
+1. Pointe en A, **ouvrir** jusqu'à M (`compassOpen`) — montre la prise d'écartement AM
+2. **Pivoter** autour de A à écartement constant (`compassPivot`) — jamais `compassMove` pour un pivot
+3. Tracer l'arc en A (`compassSweep`)
+4. **Transporter** de A→B en gardant la même direction (dxA, dyA = direction fin d'arc A) — écartement R_A constant
+5. En B, **ajuster** la mine de sa direction vers M (`compassMove(B, penAtB, B, M)`) — montre la prise d'écartement BM
+6. **Pivoter** autour de B à écartement constant R_B (`compassPivot`)
+7. Tracer l'arc en B (`compassSweep`)
+
+Pourquoi `compassMove` est interdit pour les pivots : interpole la position en ligne droite (corde < arc) → écartement diminue → compas semble se refermer. `compassPivot` interpole l'angle → écartement exactement constant.
+
+```javascript
+async function compassPivot(tip, radius, a1, a2, duration) {
+    const N = 50;
+    for (let i = 0; i <= N; i++) {
+        const angle = a1 + (a2 - a1) * (i / N);
+        setCompass(tip, { x: tip.x + radius * Math.cos(angle),
+                          y: tip.y + radius * Math.sin(angle) });
+        await sleep(duration / N);
+    }
+}
+```
+(Dupliquer avec le préfixe adapté : `eqCompassPivot`, `csCompassPivot`, etc.)
+
+Séquence correcte équerre + compas :
+1. Équerre le long de (d), glisse jusqu'à aligner avec M
+2. Tracer la perpendiculaire (droite rouge pointillés **prolongée** au-delà de M et M')
+3. **Ranger l'équerre EN PREMIER**, puis faire apparaître le codage de l'angle droit — jamais l'inverse
+4. Compas : `compassOpen` de I vers M, `compassPivot`, `compassSweep`
+
+---
+
+## Règle n°11 — Numérotation des titres h2/h3 : deux CSS différents
+
+Les deux projets utilisent des feuilles CSS **distinctes** avec des comportements opposés sur la numérotation :
+
+### MathsIORI (`MathsIORI/styles.css`)
+- `h2::before` ajoute **automatiquement** le chiffre romain via un CSS counter (`I.`, `II.`, `III.`…)
+- `h3::before` ajoute **automatiquement** la numérotation arabe (`1)`, `2)`, `3)`…)
+- **Conséquence** : les balises `<h2>` et `<h3>` dans `cours.html` ne doivent **jamais** contenir le préfixe en dur.
+  - ✅ `<h2>Construction du symétrique d'un point</h2>`
+  - ❌ `<h2>II. Construction du symétrique d'un point</h2>` → affichera "II. II. Construction…"
+
+### COURSPRESENTATION (`COURSPRESENTATION/styles.css`)
+- Aucun CSS counter — les h2/h3 n'ont **pas** de `::before`
+- **Conséquence** : les balises `<h2>` et `<h3>` dans la présentation **doivent** contenir le préfixe en dur.
+  - ✅ `<h2>II. Construction du symétrique d'un point</h2>`
+  - ❌ `<h2>Construction du symétrique d'un point</h2>` → titre sans numéro
+
+> **Erreur commise (juin 2026)** : lors de la création du chapitre 12, les h2/h3 de `cours.html` ont été écrits avec les préfixes ("I. …", "1) …") → doublon visible à l'écran ("III. III. Construction…").
+
 ---
 
 ## Ce qu'il ne faut JAMAIS faire

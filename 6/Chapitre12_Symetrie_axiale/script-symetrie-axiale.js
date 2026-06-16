@@ -297,6 +297,19 @@ function eqSetCompass(tip, pen) {
     eqEl('compassPencilPoint').setAttribute('cy', pen.y);
 }
 
+async function eqCompassPivot(tip, radius, a1, a2, duration) {
+    const N = 50;
+    for (let i = 0; i <= N; i++) {
+        const t = i / N;
+        const angle = a1 + (a2 - a1) * t;
+        eqSetCompass(tip, {
+            x: tip.x + radius * Math.cos(angle),
+            y: tip.y + radius * Math.sin(angle)
+        });
+        await sleep(duration / N);
+    }
+}
+
 async function eqCompassOpen(tip, target, duration) {
     const N = 30;
     for (let i = 0; i <= N; i++) {
@@ -364,18 +377,18 @@ async function eqNextStep() {
     }
     else if (eqCurrentStep === 2) {
         txt.innerHTML = eqStepTexts[3];
+        eqEl('setSquare').style.opacity = '0';
+        await sleep(700);
         eqEl('squareO').style.opacity = '1';
         eqEl('labelO').style.opacity  = '1';
-        await sleep(700);
-        eqEl('setSquare').style.opacity = '0';
         await sleep(600);
         eqCurrentStep = 3;
     }
     else if (eqCurrentStep === 3) {
         txt.innerHTML = eqStepTexts[4];
-        eqEl('compass').style.opacity = '1';
         eqSetCompass(EQ_I, EQ_I);
-        await sleep(500);
+        eqEl('compass').style.opacity = '1';
+        await sleep(400);
         await eqCompassOpen(EQ_I, EQ_M, 1400);
         await sleep(800);
         eqCurrentStep = 4;
@@ -385,11 +398,7 @@ async function eqNextStep() {
         const half  = 0.28;
         const aStart = EQ_angMp - half;
         const aEnd   = EQ_angMp + half;
-        const arcStart = {
-            x: EQ_I.x + EQ_RADIUS * Math.cos(aStart),
-            y: EQ_I.y + EQ_RADIUS * Math.sin(aStart)
-        };
-        await eqCompassMove(EQ_I, EQ_M, EQ_I, arcStart, 1200);
+        await eqCompassPivot(EQ_I, EQ_RADIUS, EQ_angM, aStart, 1200);
         await sleep(300);
         await eqCompassSweep(EQ_I, EQ_RADIUS, aStart, aEnd, 1400);
         await sleep(800);
@@ -492,6 +501,19 @@ function csSetCompass(tip, pen) {
     csEl('compassPencilPoint').setAttribute('cy', pen.y);
 }
 
+async function csCompassPivot(tip, radius, a1, a2, duration) {
+    const N = 50;
+    for (let i = 0; i <= N; i++) {
+        const t = i / N;
+        const angle = a1 + (a2 - a1) * t;
+        csSetCompass(tip, {
+            x: tip.x + radius * Math.cos(angle),
+            y: tip.y + radius * Math.sin(angle)
+        });
+        await sleep(duration / N);
+    }
+}
+
 async function csCompassOpen(tip, target, duration) {
     const N = 30;
     for (let i = 0; i <= N; i++) {
@@ -550,19 +572,15 @@ async function csNextStep() {
     }
     else if (csCurrentStep === 1) {
         txt.innerHTML = csStepTexts[2];
-        csEl('compass').style.opacity = '1';
         csSetCompass(CS_A, CS_A);
+        csEl('compass').style.opacity = '1';
         await sleep(400);
-        await csCompassOpen(CS_A, CS_M, 1200);
+        await csCompassOpen(CS_A, CS_M, 1200);   // prise de l'écartement AM
         await sleep(700);
         const half_A  = 0.30;
         const aA_start = CS_angA_Mp - half_A;
         const aA_end   = CS_angA_Mp + half_A;
-        const arcA_start = {
-            x: CS_A.x + CS_R_A * Math.cos(aA_start),
-            y: CS_A.y + CS_R_A * Math.sin(aA_start)
-        };
-        await csCompassMove(CS_A, CS_M, CS_A, arcA_start, 1000);
+        await csCompassPivot(CS_A, CS_R_A, CS_angA_M, aA_start, 1000);
         await sleep(300);
         await csCompassSweep('arc1', CS_A, CS_R_A, aA_start, aA_end, 1400);
         await sleep(800);
@@ -570,20 +588,28 @@ async function csNextStep() {
     }
     else if (csCurrentStep === 2) {
         txt.innerHTML = csStepTexts[3];
-        const penAfterArcA = {
-            x: CS_A.x + CS_R_A * Math.cos(CS_angA_Mp + 0.30),
-            y: CS_A.y + CS_R_A * Math.sin(CS_angA_Mp + 0.30)
-        };
-        await csCompassMove(CS_A, penAfterArcA, CS_B, CS_M, 1400);
+
+        // 1. Déplacer le compas de A vers B, écartement CS_R_A constant
+        //    (même direction que la fin de l'arc A — compas jamais refermé)
+        const csAngEndA = CS_angA_Mp + 0.30;
+        const csDxA = Math.cos(csAngEndA), csDyA = Math.sin(csAngEndA);
+        const csN_t = 40;
+        for (let i = 0; i <= csN_t; i++) {
+            const t = i / csN_t;
+            const tip = { x: CS_A.x + (CS_B.x - CS_A.x) * t, y: CS_A.y + (CS_B.y - CS_A.y) * t };
+            csSetCompass(tip, { x: tip.x + CS_R_A * csDxA, y: tip.y + CS_R_A * csDyA });
+            await sleep(1000 / csN_t);
+        }
+        await sleep(300);
+
+        // 2. En B, prendre l'écartement BM : mine glisse de sa direction courante vers M
+        const csPenAtB = { x: CS_B.x + CS_R_A * csDxA, y: CS_B.y + CS_R_A * csDyA };
+        await csCompassMove(CS_B, csPenAtB, CS_B, CS_M, 800);
         await sleep(500);
         const half_B  = 0.30;
         const aB_start = CS_angB_Mp - half_B;
         const aB_end   = CS_angB_Mp + half_B;
-        const arcB_start = {
-            x: CS_B.x + CS_R_B * Math.cos(aB_start),
-            y: CS_B.y + CS_R_B * Math.sin(aB_start)
-        };
-        await csCompassMove(CS_B, CS_M, CS_B, arcB_start, 1000);
+        await csCompassPivot(CS_B, CS_R_B, CS_angB_M, aB_start, 1000);
         await sleep(300);
         await csCompassSweep('arc2', CS_B, CS_R_B, aB_start, aB_end, 1400);
         await sleep(800);
