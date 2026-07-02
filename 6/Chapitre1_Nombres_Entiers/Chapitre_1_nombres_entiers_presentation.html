@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Chapitre 1 - Les nombres entiers</title>
+    <link rel="stylesheet" href="../../styles.css">
+    <style>
+        .step-inline { opacity: 0; transition: opacity 0.5s; }
+        .step-inline.visible { opacity: 1; }
+        tr.step { display: table-row !important; opacity: 0; transition: opacity 0.5s; }
+        tr.step.visible { opacity: 1; }
+        .anim-fullbleed { display: block; width: 100%; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="content">
+
+            <!-- ═══ Slide 1 : Titre ═══ -->
+            <div class="slide active">
+                <h1>Chapitre 1 : Les nombres entiers</h1>
+            </div>
+
+            <!-- ═══ Slide 2 : I. Numération décimale ═══ -->
+            <div class="slide">
+                <h2>I. Numération décimale</h2>
+
+                <div class="definition">
+                    <div class="step"><span style="color: red;">Définition :</span> Pour écrire tous les nombres, on utilise seulement 10 symboles que nous appelons <span style="color: red;">chiffres</span> :</div>
+                    <div class="step">1 ; 2 ; 3 ; 4 ; 5 ; 6 ; 7 ; 8 ; 9 ; 0.</div>
+                    <div class="step">C'est le <span style="color: red;">système décimal</span>.</div>
+                </div>
+
+                <div class="important">
+                    <div class="step"><span style="color: red;">Propriété :</span> La position des chiffres dans un nombre détermine sa signification.</div>
+                    <div class="step">Chaque chiffre, à l'exception de celui des unités, représente un « paquet de 10 » :</div>
+                    <div class="step">
+                        <ul><li>dix unités représentent une dizaine</li></ul>
+                        <img src="images/6-11.png" alt="Schéma représentant la numération décimale" style="display: block; margin: 0 auto; max-width: 300px;">
+                    </div>
+                    <div class="step">
+                        <ul><li>dix dizaines représentent une centaine</li></ul>
+                        <img src="images/6-12.png" alt="Schéma représentant la numération décimale" style="display: block; margin: 0 auto; max-width: 300px;">
+                    </div>
+                    <div class="step">
+                        <ul>
+                            <li>dix centaines représentent une unité de mille</li>
+                            <li>etc.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="example">
+                    <div class="step"><strong>Exemple :</strong></div>
+                    <div class="step">
+                        <img src="images/6-13.png" alt="Tableau de la numération décimale" style="display: block; margin: 0 auto; width: 100%">
+                    </div>
+                    <div class="step">Dans 4 705 <span style="color: green;">2</span>3<span style="color: red;">2</span>, le chiffre <span style="color: red;">2</span> des unités représente <span style="color: red;">2 × 1</span> alors que le chiffre <span style="color: green;">2</span> des centaines représente <span style="color: green;">2 × 100</span>.</div>
+                    <div class="step">Ce nombre se lit « quatre-millions-sept-cent-cinq-mille-deux-cent-trente-deux ».</div>
+                    <div class="step">Il peut se décomposer de la façon suivante :</div>
+                    <div class="step">
+                        <iframe src="animations/animation-decomposition.html?v=4" width="100%" height="580"
+                                style="border:none; border-radius:8px; box-shadow:0 2px 10px rgba(0,0,0,0.1); display:block; margin-top:16px;"></iframe>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ═══ Slide 3 : II. Comparer des nombres entiers ═══ -->
+            <div class="slide">
+                <h2>II. Comparer des nombres entiers</h2>
+
+                <div class="definition">
+                    <div class="step"><span style="color: red;">Définition :</span> Un nombre entier est souvent composé de plusieurs chiffres, par exemple le nombre 421 est composé des chiffres 4, 2 et 1.</div>
+                </div>
+
+                <div class="important">
+                    <div class="step"><span style="color: red;">Règle 1 :</span> Le nombre entier qui possède le <span style="color: red;">plus de chiffres</span> est le <span style="color: red;">plus grand</span>.</div>
+                </div>
+
+                <div class="example">
+                    <div class="step"><strong>Exemple :</strong> Comparer 537 et 89.</div>
+                    <div class="step">
+                        <iframe src="animations/animation-comparaison-r1.html" width="100%" height="480"
+                                style="border:none; border-radius:8px; box-shadow:0 2px 10px rgba(0,0,0,0.1); display:block; margin-bottom:12px;"></iframe>
+                    </div>
+                    <div class="step">537 est composé de 3 chiffres et 89 est composé de 2 chiffres.</div>
+                    <div class="step"><strong>Donc 537 > 89</strong></div>
+                </div>
+
+                <div class="important">
+                    <div class="step"><span style="color: red;">Règle 2 :</span> Si les nombres entiers possèdent la même quantité de chiffres, on compare chaque chiffre 1 à 1 en commençant par la gauche. Dès qu'un chiffre est plus petit qu'un autre, on peut conclure que le nombre auquel il appartient est strictement inférieur.</div>
+                </div>
+
+                <div class="example">
+                    <div class="step"><strong>Exemple :</strong> Comparer 3 546 et 3 527.</div>
+                    <div class="step">
+                        <iframe src="animations/animation-comparaison-r2.html" width="100%" height="480"
+                                style="border:none; border-radius:8px; box-shadow:0 2px 10px rgba(0,0,0,0.1); display:block; margin-bottom:12px;"></iframe>
+                    </div>
+                    <div class="step">Ces deux nombres comportent 4 chiffres.</div>
+                    <div class="step">3 = 3 ; 5 = 5 et 4 > 2</div>
+                    <div class="step"><strong>Donc 3 546 > 3 527</strong></div>
+                </div>
+
+                <div class="important">
+                    <div class="step"><span style="color: red;">Règle 3 :</span> Si tous les chiffres sont identiques, alors les nombres sont égaux.</div>
+                </div>
+
+                <div class="example">
+                    <div class="step"><strong>Exemple :</strong> Comparer 234 et 234.</div>
+                    <div class="step">
+                        <iframe src="animations/animation-comparaison-r3.html" width="100%" height="480"
+                                style="border:none; border-radius:8px; box-shadow:0 2px 10px rgba(0,0,0,0.1); display:block; margin-bottom:12px;"></iframe>
+                    </div>
+                    <div class="step">2 = 2 ; 3 = 3 et 4 = 4</div>
+                    <div class="step"><strong>Donc 234 = 234</strong></div>
+                </div>
+            </div>
+
+            <!-- ═══ Slide 4 : III. Repérage sur une demi-droite graduée ═══ -->
+            <div class="slide">
+                <h2>III. Repérage sur une demi-droite graduée</h2>
+
+                <div class="definition">
+                    <div class="step"><span style="color: red;">Définition :</span> Une <span style="color: red;">demi-droite graduée</span> est une demi-droite sur laquelle on a choisi une unité de longueur reportée régulièrement depuis l'origine:</div>
+                    <div class="step">
+                        <img src="images/6-14.png" alt="Schéma d'une demi-droite graduée" style="display: block; margin: 0 auto; max-width: 800px;">
+                    </div>
+                </div>
+
+                <div class="example">
+                    <div class="step"><strong>Exemple :</strong></div>
+                    <div class="step">Je choisis comme unité de longueur 2 carreaux (2 carreaux représentent donc un écart de 1)</div>
+                    <div class="step">
+                        <img src="images/6-15.png" alt="Schéma d'une demi-droite graduée" style="display: block; margin: 0 auto; max-width: 800px;">
+                    </div>
+                </div>
+
+                <div class="important">
+                    <div class="step"><span style="color: red;">Propriété :</span> Sur une demi-droite graduée, chaque point est repéré par un unique nombre appelé <span style="color: red;">abscisse</span> de ce point.</div>
+                </div>
+
+                <div class="example">
+                    <div class="step"><strong>Exemple :</strong></div>
+                    <div class="step">
+                        <img src="images/6-16.png" alt="Schéma d'une demi-droite graduée" style="display: block; margin: 0 auto; max-width: 800px;">
+                    </div>
+                    <div class="step">Ici, nous avons une demi-droite graduée d'origine O et d'unité 4 carreaux.</div>
+                    <div class="step">L'abscisse du point A est 3, on note <strong>A(3)</strong>.</div>
+                </div>
+
+                <div class="exercice">
+                    <div class="step"><strong>Exercice :</strong></div>
+                    <div class="step"><ol start="1"><li>Tracer une demi-droite graduée d'origine O et d'unité 3 cm.</li></ol></div>
+                    <div class="step"><ol start="2"><li>Placer A(1), B(2) et C(5).</li></ol></div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="controls">
+            <div class="controls-left">
+                <button id="prevBtn" onclick="changeSlide(-1)">← Précédent</button>
+                <button class="btn-reset" onclick="resetSlide()">⟲</button>
+            </div>
+            <div class="progress">
+                <span><span id="currentSlide">1</span> / <span id="totalSlides">4</span></span>
+                <span class="step-indicator" id="stepIndicator"></span>
+            </div>
+            <div class="controls-right">
+                <button class="btn-menu" onclick="openMenu()">📋 Menu</button>
+                <button class="btn-menu" onclick="openHelp()">❓ Aide</button>
+                <button id="nextBtn" onclick="changeSlide(1)">Suivant →</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="slide-menu" id="slideMenu">
+        <div class="menu-content">
+            <h2>Sélectionner une diapositive</h2>
+            <div class="slide-list" id="slideList"></div>
+            <button class="close-menu" onclick="closeMenu()">Fermer</button>
+        </div>
+    </div>
+
+    <div class="help-overlay" id="helpOverlay">
+        <div class="help-content">
+            <h2>Raccourcis clavier</h2>
+            <ul>
+                <li><kbd>→</kbd> ou <kbd>Espace</kbd> : Étape/Slide suivante</li>
+                <li><kbd>←</kbd> : Étape/Slide précédente</li>
+                <li><kbd>M</kbd> : Ouvrir le menu des slides</li>
+                <li><kbd>R</kbd> : Réinitialiser la slide actuelle</li>
+                <li><kbd>H</kbd> ou <kbd>?</kbd> : Afficher cette aide</li>
+                <li><kbd>Échap</kbd> : Fermer les menus</li>
+            </ul>
+            <button class="close-menu" onclick="closeHelp()">Fermer</button>
+        </div>
+    </div>
+
+    <script src="script-nombres-entiers.js"></script>
+</body>
+</htm
