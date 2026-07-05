@@ -5,7 +5,7 @@ const slides = document.querySelectorAll('.slide');
 const totalSlides = slides.length;
 
 const slideTitles = [
-    "Chapitre 4 : Statistiques et Organisation de données",
+    "Chapitre 2 : Gestion de données",
     "I. Introduction aux statistiques",
     "II. Utilisation de tableaux — 1) Tableau à simple entrée",
     "II. Utilisation de tableaux — 2) Tableau à double entrée",
@@ -47,33 +47,33 @@ function initSlideMenu() {
     });
 }
 
-function openMenu() { 
-    initSlideMenu(); 
-    document.getElementById('slideMenu').classList.add('active'); 
+function openMenu() {
+    initSlideMenu();
+    document.getElementById('slideMenu').classList.add('active');
 }
 
-function closeMenu() { 
-    document.getElementById('slideMenu').classList.remove('active'); 
+function closeMenu() {
+    document.getElementById('slideMenu').classList.remove('active');
 }
 
-function openHelp() { 
-    document.getElementById('helpOverlay').classList.add('active'); 
+function openHelp() {
+    document.getElementById('helpOverlay').classList.add('active');
 }
 
-function closeHelp() { 
-    document.getElementById('helpOverlay').classList.remove('active'); 
+function closeHelp() {
+    document.getElementById('helpOverlay').classList.remove('active');
 }
 
-function goToSlide(index) { 
-    currentSlideIndex = index; 
-    currentStepIndex = 0; 
-    updateSlide(); 
-    closeMenu(); 
+function goToSlide(index) {
+    currentSlideIndex = index;
+    currentStepIndex = 0;
+    updateSlide();
+    closeMenu();
 }
 
-function resetSlide() { 
-    currentStepIndex = 0; 
-    updateSlide(); 
+function resetSlide() {
+    currentStepIndex = 0;
+    updateSlide();
 }
 
 function updateSlide() {
@@ -107,8 +107,8 @@ function updateSlide() {
     }
 
     if (currentStepIndex === 0) {
-        setTimeout(() => { 
-            contentDiv.scrollTo({ top: 0, behavior: 'smooth' }); 
+        setTimeout(() => {
+            contentDiv.scrollTo({ top: 0, behavior: 'smooth' });
         }, 50);
     } else if (currentStepIndex > 0) {
         setTimeout(() => {
@@ -163,7 +163,7 @@ document.addEventListener('keydown', (e) => {
         changeSlide(1);
     } else if (e.key === 'ArrowLeft') {
         e.preventDefault();
-        changeSlide(-1); 
+        changeSlide(-1);
     } else if (e.key === 'm' || e.key === 'M') {
         openMenu();
     } else if (e.key === 'r' || e.key === 'R') {
@@ -173,12 +173,12 @@ document.addEventListener('keydown', (e) => {
     }
 });
 
-document.getElementById('slideMenu').addEventListener('click', (e) => { 
-    if (e.target.id === 'slideMenu') closeMenu(); 
+document.getElementById('slideMenu').addEventListener('click', (e) => {
+    if (e.target.id === 'slideMenu') closeMenu();
 });
 
-document.getElementById('helpOverlay').addEventListener('click', (e) => { 
-    if (e.target.id === 'helpOverlay') closeHelp(); 
+document.getElementById('helpOverlay').addEventListener('click', (e) => {
+    if (e.target.id === 'helpOverlay') closeHelp();
 });
 
 // Initialisation au chargement

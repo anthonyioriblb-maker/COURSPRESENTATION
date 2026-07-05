@@ -115,6 +115,7 @@ Pour les listes `<ol>` réparties en plusieurs steps : utiliser `<ol start="N">`
 | Niveau | Chapitre | Dossier présentation | Slides | Particularités |
 |---|---|---|---|---|
 | 6e | 1 — Les nombres entiers | `6/Chapitre1_Nombres_Entiers/` | 4 | Images + 4 iframes animation |
+| 6e | 2 — Gestion de données | `6/Chapitre2_Gestion_De_Donnees/` | 7 | 5 iframes animation (tableaux, bâtons, circulaire, courbe) — recréé 2026-07-02 (l'ancien dossier `Chapitre4_Statistiques` avait un numéro obsolète, ne correspondant plus à `chapitre02` dans MathsIORI) |
 | 6e | 10 — Les angles | `6/Chapitre10_Angles/` | ? | — |
 | 6e | 11 — Fractions partie 2 | `6/Chapitre11_Fractions_partie2/` | ? | — |
 | 6e | 12 — Symétrie axiale | `6/Chapitre12_Symetrie_axiale/` | ? | — |

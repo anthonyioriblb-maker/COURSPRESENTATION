@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Chapitre 4 - Statistiques et Organisation de données</title>
+    <title>Chapitre 2 - Gestion de données</title>
     <link rel="stylesheet" href="../../styles.css">
     <style>
         .tableau-avec-fleche {
@@ -49,7 +49,7 @@
 
             <!-- Slide 1 : Titre -->
             <div class="slide active">
-                <h1>Chapitre 4 : Statistiques et Organisation de données</h1>
+                <h1>Chapitre 2 : Gestion de données</h1>
             </div>
 
             <!-- Slide 2 : I. Introduction aux statistiques -->
@@ -58,7 +58,7 @@
                 <div class="example">
                     <div class="step"><strong>Exemple :</strong> Fred veut connaître les loisirs préférés de ses camarades de classe. Il fait une petite enquête auprès de ses 24 camarades et demande à chacun de noter sur un bout de papier son activité préférée.</div>
                     <div class="step">Voici les résultats :</div>
-                    <div class="step"><p align="center"><img src="6-41.png" width="70%"></p></div>
+                    <div class="step"><p align="center"><img src="images/6-41.png" width="70%"></p></div>
                 </div>
                 <div class="definition">
                     <div class="step"><span style="color: red;">Définition :</span> Sans le savoir, Fred va réaliser une <span style="color: red;">étude statistique</span> :</div>
@@ -75,28 +75,9 @@
                 <div class="example">
                     <div class="step"><strong>Exemple :</strong> À partir de l'exemple précédent on peut réaliser le tableau suivant :</div>
                     <div class="step">
-                        <table>
-                            <tr>
-                                <th>Loisir préféré</th>
-                                <th>Sport</th>
-                                <th>Cinéma</th>
-                                <th>Lecture</th>
-                                <th>Télévision</th>
-                                <th>Jeu vidéo</th>
-                                <th>Total</th>
-                            </tr>
-                            <tr>
-                                <td>Effectif</td>
-                                <td>8</td>
-                                <td>5</td>
-                                <td><span class="mark">6</span></td>
-                                <td>2</td>
-                                <td>3</td>
-                                <td><strong>24</strong></td>
-                            </tr>
-                        </table>
+                        <iframe src="animations/animation-tableau-effectif.html" width="100%" height="480"
+                                style="border:none; border-radius:8px; box-shadow:0 2px 10px rgba(0,0,0,0.1); display:block;"></iframe>
                     </div>
-                    <div class="step">L'<span style="color: red;">effectif</span> est ici le nombre d'élèves ayant la lecture comme loisir préféré, ils sont <span class="mark">6</span> dans cette classe.</div>
                 </div>
             </div>
 
@@ -110,53 +91,8 @@
                     <div class="step"><strong>Exemple :</strong> Fred a décidé de séparer les réponses des filles et des garçons, il réalise donc une étude statistique avec deux phénomènes : le loisir préféré et le sexe de la personne qui répond.</div>
                     <div class="step">Il obtient le tableau suivant :</div>
                     <div class="step">
-                        <table>
-                            <tr>
-                                <th></th>
-                                <th colspan="5">Loisir préféré</th>
-                            </tr>
-                            <tr>
-                                <th>Sexe</th>
-                                <th>Sport</th>
-                                <th>Cinéma</th>
-                                <th>Lecture</th>
-                                <th>Télévision</th>
-                                <th>Jeu vidéo</th>
-                            </tr>
-                            <tr>
-                                <td><strong>Fille</strong></td>
-                                <td><span class="mark-blue">4</span></td>
-                                <td><span class="mark-pink">2</span></td>
-                                <td>4</td>
-                                <td>0</td>
-                                <td>1</td>
-                            </tr>
-                            <tr>
-                                <td><strong>Garçon</strong></td>
-                                <td><span class="mark-blue">4</span></td>
-                                <td>3</td>
-                                <td>2</td>
-                                <td>2</td>
-                                <td><span class="mark-orange">2</span></td>
-                            </tr>
-                            <tr>
-                                <td><strong>Total</strong></td>
-                                <td><span class="mark-green">8</span></td>
-                                <td>5</td>
-                                <td>6</td>
-                                <td>2</td>
-                                <td>3</td>
-                            </tr>
-                        </table>
-                    </div>
-                    <div class="step">Grâce à ce tableau à double entrée on peut dire que :</div>
-                    <div class="step">
-                        <ul>
-                            <li><span class="mark-green">8</span> élèves de la classe préfèrent le sport.</li>
-                            <li><span class="mark-blue">Il y a autant de filles que de garçons qui préfèrent le sport.</span></li>
-                            <li><span class="mark-orange">2</span> garçons de la classe préfèrent le jeu vidéo.</li>
-                            <li><span class="mark-pink">2</span> filles de la classe préfèrent le cinéma.</li>
-                        </ul>
+                        <iframe src="animations/animation-tableau-double-entree.html" width="100%" height="620"
+                                style="border:none; border-radius:8px; box-shadow:0 2px 10px rgba(0,0,0,0.1); display:block;"></iframe>
                     </div>
                 </div>
             </div>
@@ -169,7 +105,10 @@
                 </div>
                 <div class="example">
                     <div class="step"><strong>Exemple :</strong> À partir de l'exemple du début, on peut réaliser le diagramme en bâtons suivant :</div>
-                    <div class="step"><p align="center"><img src="6-42.png" width="80%"></p></div>
+                    <div class="step">
+                        <iframe src="animations/animation-diagramme-batons.html" width="100%" height="640"
+                                style="border:none; border-radius:8px; box-shadow:0 2px 10px rgba(0,0,0,0.1); display:block;"></iframe>
+                    </div>
                 </div>
             </div>
 
@@ -234,7 +173,10 @@
                     </div>
                     <div class="step"><p align="center"><strong>L'angle complet d'un cercle est de 360°</strong></p></div>
                     <div class="step">360 ÷ 24 = 15 donc on multiplie la deuxième ligne par 15 pour obtenir la troisième.</div>
-                    <div class="step"><p align="center"><img src="6-43.png" width="60%"></p></div>
+                    <div class="step">
+                        <iframe src="animations/animation-diagramme-circulaire.html" width="100%" height="750"
+                                style="border:none; border-radius:8px; box-shadow:0 2px 10px rgba(0,0,0,0.1); display:block;"></iframe>
+                    </div>
                 </div>
             </div>
 
@@ -265,7 +207,10 @@
                         </table>
                     </div>
                     <div class="step">Réalisons la courbe correspondante à ce tableau.</div>
-                    <div class="step"><p align="center"><img src="6-44.png" width="90%"></p></div>
+                    <div class="step">
+                        <iframe src="animations/animation-courbe-temperature.html" width="100%" height="820"
+                                style="border:none; border-radius:8px; box-shadow:0 2px 10px rgba(0,0,0,0.1); display:block;"></iframe>
+                    </div>
                     <div class="step"><p align="center"><em>Évolution de la température en fonction du temps à Bourbonne.</em></p></div>
                 </div>
             </div>
@@ -315,6 +260,19 @@
         </div>
     </div>
 
-    <script src="script-statistiques.js"></script>
+    <script src="script-gestion-donnees.js"></script>
+    <script>
+        // Redimensionne automatiquement chaque iframe d'animation à la hauteur exacte de son contenu
+        // (identique au script de cours.html — évite toute barre de défilement dans les iframes).
+        window.addEventListener('message', function (e) {
+            if (e.data && e.data.type === 'iframe-resize') {
+                document.querySelectorAll('iframe').forEach(function (frame) {
+                    if (frame.contentWindow === e.source) {
+                        frame.style.height = e.data.height + 'px';
+                    }
+                });
+            }
+        });
+    </script>
 </body>
 </html>
