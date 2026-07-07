@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Angles formés par deux droites sécantes</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: #f0f4f8;
+  display: flex; flex-direction: column; align-items: center;
+  padding: 20px 30px;
+}
+
+.wrap {
+  background: white; border-radius: 12px;
+  box-shadow: 0 3px 12px rgba(0,0,0,0.1);
+  padding: 24px; width: 100%; max-width: 480px;
+  display: flex; flex-direction: column; align-items: center; gap: 10px;
+  margin-bottom: 14px;
+}
+
+svg { max-width: 100%; height: auto; }
+
+.step-box {
+  background: #e3f2fd; border-left: 5px solid #2196f3;
+  padding: 14px 20px; border-radius: 0 8px 8px 0;
+  font-size: 1rem; color: #1565c0; width: 100%; max-width: 480px;
+  min-height: 52px; display: flex; align-items: center; line-height: 1.6;
+  font-weight: 500; margin-bottom: 14px;
+}
+
+.progress-bar-wrap { width: 100%; max-width: 480px; background: #e0e0e0; border-radius: 8px; height: 8px; margin-bottom: 14px; overflow: hidden; }
+.progress-bar { height: 8px; background: linear-gradient(90deg, #2196f3, #4caf50); border-radius: 8px; width: 0%; transition: width 0.4s; }
+
+.controls { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; }
+button {
+  padding: 11px 22px; border: none; border-radius: 8px;
+  font-size: 0.95rem; font-weight: bold; cursor: pointer;
+  transition: all 0.25s; box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+}
+button:hover { transform: translateY(-2px); }
+button:disabled { background: #bdbdbd !important; color: #fff; cursor: not-allowed; transform: none; }
+#btnReset { background: #f44336; color: white; }
+#btnPrev  { background: #ff9800; color: white; }
+#btnNext  { background: #2196f3; color: white; }
+#btnAuto  { background: #4caf50; color: white; }
+
+.arc-path { fill: none; stroke-width: 3.5; opacity: 0; transition: opacity 0.4s; }
+.arc-path.visible { opacity: 1; }
+.arc-label { font-size: 15px; font-weight: bold; opacity: 0; transition: opacity 0.4s; text-anchor: middle; dominant-baseline: middle; }
+.arc-label.visible { opacity: 1; }
+</style>
+</head>
+<body>
+
+<div class="progress-bar-wrap"><div class="progress-bar" id="progressBar"></div></div>
+
+<div class="wrap">
+  <svg viewBox="0 0 420 420" xmlns="http://www.w3.org/2000/svg">
+    <!-- Lignes construites dynamiquement en JS -->
+    <g id="linesGroup"></g>
+    <g id="arcsGroup"></g>
+    <g id="labelsGroup"></g>
+    <g id="pointsGroup"></g>
+  </svg>
+</div>
+
+<div class="step-box" id="stepBox"></div>
+
+<div class="controls">
+  <button id="btnReset" onclick="reset()">↺ Recommencer</button>
+  <button id="btnPrev"  onclick="prev()" disabled>◀ Précédente</button>
+  <button id="btnNext"  onclick="next()">Suivante ▶</button>
+  <button id="btnAuto"  onclick="toggleAuto()">⏵ Automatique</button>
+</div>
+
+<script>
+const NS = 'http://www.w3.org/2000/svg';
+const E = { x: 210, y: 210 };
+const R_RAY = 150;
+const R_EXT = 175;
+const R_LABEL_PT = 168;
+const R_ARC = 40;
+const R_LABEL_ANGLE = 60;
+
+// Directions (degrés, convention écran : x=cos, y=sin, y positif vers le bas)
+const dirDeg = { B: -70, C: -140, A: 110, D: 40 };
+
+function toRad(d) { return d * Math.PI / 180; }
+function pt(angleDeg, r) {
+  const rad = toRad(angleDeg);
+  return { x: E.x + r * Math.cos(rad), y: E.y + r * Math.sin(rad) };
+}
+
+function mkEl(tag, attrs) {
+  const el = document.createElementNS(NS, tag);
+  for (const k in attrs) el.setAttribute(k, attrs[k]);
+  return el;
+}
+
+// --- Construction des deux droites (AB) et (CD) ---
+const linesGroup = document.getElementById('linesGroup');
+function drawLine(p1key, p2key) {
+  const p1 = pt(dirDeg[p1key], R_EXT);
+  const p2 = pt(dirDeg[p2key], R_EXT);
+  linesGroup.appendChild(mkEl('line', { x1: p1.x, y1: p1.y, x2: p2.x, y2: p2.y, stroke: '#555', 'stroke-width': 2 }));
+}
+drawLine('A', 'B');
+drawLine('C', 'D');
+
+// --- Points E, A, B, C, D ---
+const pointsGroup = document.getElementById('pointsGroup');
+pointsGroup.appendChild(mkEl('circle', { cx: E.x, cy: E.y, r: 3.5, fill: '#333' }));
+pointsGroup.appendChild(mkEl('text', { x: E.x - 16, y: E.y + 4, 'font-size': 16, 'font-weight': 'bold', fill: '#333' })).textContent = 'E';
+
+['A', 'B', 'C', 'D'].forEach(key => {
+  const p = pt(dirDeg[key], R_LABEL_PT);
+  const t = mkEl('text', { x: p.x, y: p.y, 'font-size': 17, 'font-weight': 'bold', fill: '#333', 'text-anchor': 'middle', 'dominant-baseline': 'middle' });
+  t.textContent = key;
+  pointsGroup.appendChild(t);
+});
+
+// --- Secteurs angulaires (angles adjacents formés par les deux droites) ---
+// Angles normalisés : D=40, A=110, C=220, B=290 (puis D+360=400)
+const sectors = [
+  { id: 'bec', names: ['B', 'E', 'C'], start: 220, end: 290, color: '#e53935' },
+  { id: 'bed', names: ['B', 'E', 'D'], start: 290, end: 400, color: '#1e88e5' },
+  { id: 'dea', names: ['D', 'E', 'A'], start: 40,  end: 110, color: '#212121' },
+  { id: 'cea', names: ['C', 'E', 'A'], start: 110, end: 220, color: '#43a047' }
+];
+
+const arcsGroup = document.getElementById('arcsGroup');
+const labelsGroup = document.getElementById('labelsGroup');
+
+sectors.forEach(s => {
+  const p1 = pt(s.start, R_ARC);
+  const p2 = pt(s.end, R_ARC);
+  const largeArc = (s.end - s.start) > 180 ? 1 : 0;
+  const path = mkEl('path', {
+    d: `M ${p1.x},${p1.y} A ${R_ARC},${R_ARC} 0 ${largeArc} 1 ${p2.x},${p2.y}`,
+    class: 'arc-path',
+    id: 'arc-' + s.id,
+    stroke: s.color
+  });
+  arcsGroup.appendChild(path);
+
+  const mid = (s.start + s.end) / 2;
+  const lp = pt(mid, R_LABEL_ANGLE);
+  const label = mkEl('text', { x: lp.x, y: lp.y, class: 'arc-label', id: 'label-' + s.id, fill: s.color });
+  label.textContent = s.names.join('');
+  labelsGroup.appendChild(label);
+});
+
+// --- Séquence pédagogique ---
+const steps = [
+  {
+    msg: 'Les droites <strong>(AB)</strong> et <strong>(CD)</strong> sont sécantes en <strong>E</strong>. Elles forment quatre angles autour de ce point.',
+    reveal: []
+  },
+  {
+    msg: 'Le premier angle se nomme <strong style="color:#e53935">BEC</strong> (ou <strong style="color:#e53935">CEB</strong>).',
+    reveal: ['bec']
+  },
+  {
+    msg: 'Le deuxième angle se nomme <strong style="color:#1e88e5">BED</strong> (ou <strong style="color:#1e88e5">DEB</strong>).',
+    reveal: ['bec', 'bed']
+  },
+  {
+    msg: 'Le troisième angle se nomme <strong style="color:#212121">DEA</strong> (ou <strong style="color:#212121">AED</strong>).',
+    reveal: ['bec', 'bed', 'dea']
+  },
+  {
+    msg: 'Le quatrième angle se nomme <strong style="color:#43a047">CEA</strong> (ou <strong style="color:#43a047">AEC</strong>).',
+    reveal: ['bec', 'bed', 'dea', 'cea']
+  },
+  {
+    msg: '✅ Dans le nom de chaque angle, la lettre du <strong>sommet</strong> (ici <strong>E</strong>) est toujours <strong>au milieu</strong>.',
+    reveal: ['bec', 'bed', 'dea', 'cea']
+  }
+];
+
+let etape = -1, autoMode = false, autoTimer = null;
+const allIds = sectors.map(s => s.id);
+
+function applyStep(i) {
+  const s = steps[i];
+  document.getElementById('stepBox').innerHTML = s.msg;
+  document.getElementById('progressBar').style.width = ((i + 1) / steps.length * 100) + '%';
+  document.getElementById('btnPrev').disabled = (i <= 0);
+  document.getElementById('btnNext').disabled = (i >= steps.length - 1);
+
+  allIds.forEach(id => {
+    const shown = s.reveal.includes(id);
+    document.getElementById('arc-' + id).classList.toggle('visible', shown);
+    document.getElementById('label-' + id).classList.toggle('visible', shown);
+  });
+}
+
+function reset() {
+  stopAuto(); etape = -1;
+  document.getElementById('stepBox').innerHTML = '';
+  document.getElementById('progressBar').style.width = '0%';
+  document.getElementById('btnPrev').disabled = true;
+  document.getElementById('btnNext').disabled = false;
+  allIds.forEach(id => {
+    document.getElementById('arc-' + id).classList.remove('visible');
+    document.getElementById('label-' + id).classList.remove('visible');
+  });
+}
+
+function next() {
+  if (etape < steps.length - 1) { etape++; applyStep(etape); }
+  if (etape >= steps.length - 1) stopAuto();
+}
+function prev() {
+  if (etape > 0) { etape--; applyStep(etape); }
+}
+
+function toggleAuto() {
+  if (autoMode) { stopAuto(); return; }
+  autoMode = true;
+  document.getElementById('btnAuto').textContent = '⏸ Pause';
+  document.getElementById('btnAuto').style.background = '#ff9800';
+  autoTimer = setInterval(() => { if (etape >= steps.length - 1) { stopAuto(); } else { next(); } }, 2200);
+}
+function stopAuto() {
+  autoMode = false; clearInterval(autoTimer); autoTimer = null;
+  document.getElementById('btnAuto').textContent = '⏵ Automatique';
+  document.getElementById('btnAuto').style.background = '#4caf50';
+}
+</script>
+</body>
+</html>

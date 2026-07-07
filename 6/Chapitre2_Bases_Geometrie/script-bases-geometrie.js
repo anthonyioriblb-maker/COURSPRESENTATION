@@ -1,6 +1,6 @@
 // Tableau des titres des slides
 const slideTitles = [
-    "Chapitre 2 : Les bases de géométrie",
+    "Chapitre 3 : Les bases de géométrie",
     "I. Rappels",
     "II. Points alignés et droites",
     "III. Position relative de deux droites — 1) Définitions",
