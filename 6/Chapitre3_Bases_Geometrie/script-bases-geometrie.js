@@ -21,6 +21,7 @@ function updateSlideDisplay() {
     });
     updateSteps();
     updateIndicators();
+    scrollToCurrentStep();
 }
 
 function updateSteps() {
@@ -31,10 +32,32 @@ function updateSteps() {
     });
 }
 
+function scrollToCurrentStep() {
+    const contentDiv = document.querySelector('.content');
+    if (!contentDiv) return;
+    if (currentStepIndex === 0) {
+        setTimeout(() => {
+            contentDiv.scrollTo({ top: 0, behavior: 'smooth' });
+        }, 50);
+    } else {
+        setTimeout(() => {
+            const currentSlide = getSlides()[currentSlideIndex];
+            const visibleSteps = currentSlide.querySelectorAll('.step.visible');
+            if (visibleSteps.length > 0) {
+                visibleSteps[visibleSteps.length - 1].scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'center',
+                    inline: 'nearest'
+                });
+            }
+        }, 350);
+    }
+}
+
 function updateIndicators() {
     document.getElementById('currentSlide').textContent = currentSlideIndex + 1;
     document.getElementById('totalSlides').textContent = getSlides().length;
-    document.getElementById('prevBtn').disabled = currentSlideIndex === 0;
+    document.getElementById('prevBtn').disabled = (currentSlideIndex === 0 && currentStepIndex === 0);
     updateStepIndicator();
 }
 
@@ -42,7 +65,7 @@ function updateStepIndicator() {
     const currentSlide = getSlides()[currentSlideIndex];
     const steps = currentSlide.querySelectorAll('.step');
     const indicator = document.getElementById('stepIndicator');
-    if (steps.length > 1) {
+    if (steps.length > 1 && currentStepIndex < steps.length) {
         indicator.textContent = `Étape ${currentStepIndex}/${steps.length}`;
         indicator.classList.remove('hidden');
     } else {
@@ -50,37 +73,33 @@ function updateStepIndicator() {
     }
 }
 
+// Navigation unique : gère à la fois l'avancée étape par étape à l'intérieur
+// d'une slide et le passage à la slide suivante/précédente une fois toutes
+// les étapes affichées (même logique pour les boutons et le clavier).
 function changeSlide(direction) {
     const slides = getSlides();
-    const newIndex = currentSlideIndex + direction;
-    if (newIndex >= 0 && newIndex < slides.length) {
-        currentSlideIndex = newIndex;
-        currentStepIndex = 0;
-        updateSlideDisplay();
-    }
-}
+    const currentSlide = slides[currentSlideIndex];
+    const totalSteps = currentSlide.querySelectorAll('.step').length;
 
-function nextStep() {
-    const currentSlide = getSlides()[currentSlideIndex];
-    const steps = currentSlide.querySelectorAll('.step');
-    if (currentStepIndex < steps.length) {
-        currentStepIndex++;
-        updateSteps();
-        updateStepIndicator();
+    if (direction === 1) {
+        if (currentStepIndex < totalSteps) {
+            currentStepIndex++;
+            updateSlideDisplay();
+        } else if (currentSlideIndex < slides.length - 1) {
+            currentSlideIndex++;
+            currentStepIndex = 0;
+            updateSlideDisplay();
+        }
     } else {
-        changeSlide(1);
+        if (currentStepIndex > 0) {
+            currentStepIndex--;
+            updateSlideDisplay();
+        } else if (currentSlideIndex > 0) {
+            currentSlideIndex--;
+            currentStepIndex = slides[currentSlideIndex].querySelectorAll('.step').length;
+            updateSlideDisplay();
+        }
     }
-}
-
-function prevStep() {
-    if (currentStepIndex > 0) {
-        currentStepIndex--;
-    } else {
-        changeSlide(-1);
-        const currentSlide = getSlides()[currentSlideIndex];
-        currentStepIndex = currentSlide.querySelectorAll('.step').length;
-    }
-    updateSlideDisplay();
 }
 
 function resetSlide() {
@@ -121,8 +140,8 @@ function closeHelp() {
 }
 
 document.addEventListener('keydown', (e) => {
-    if (e.key === 'ArrowRight' || e.key === ' ') nextStep();
-    else if (e.key === 'ArrowLeft') prevStep();
+    if (e.key === 'ArrowRight' || e.key === ' ') changeSlide(1);
+    else if (e.key === 'ArrowLeft') changeSlide(-1);
     else if (e.key === 'm' || e.key === 'M') openMenu();
     else if (e.key === 'r' || e.key === 'R') resetSlide();
     else if (e.key === 'h' || e.key === 'H' || e.key === '?') openHelp();

@@ -5,7 +5,7 @@ const slides = document.querySelectorAll('.slide');
 const totalSlides = slides.length;
 
 const slideTitles = [
-    "Chapitre 3 : Les nombres décimaux",
+    "Chapitre 4 : Les nombres décimaux",
     "I. Les fractions décimales",
     "II. Les nombres décimaux — 1) Définitions",
     "II. Les nombres décimaux — 2) Rang des chiffres",

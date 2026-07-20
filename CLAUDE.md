@@ -8,6 +8,12 @@
 
 ---
 
+## Règle n°0 — Déclencheur : un chapitre terminé = une présentation à jour
+
+Dès qu'un chapitre `cours.html` dans MathsIORI est **terminé ou modifié** (contenu, image remplacée par une animation, correction quelconque), la présentation `COURSPRESENTATION` correspondante doit être créée ou mise à jour pour refléter exactement ce changement (règle n°1). Ne pas attendre qu'on le demande explicitement à chaque fois — le réflexe est : cours modifié → présentation à reproduire/mettre à jour.
+
+---
+
 ## Règle n°1 — Aucune initiative
 
 La présentation contient **exactement** le même contenu que le cours : mêmes phrases, mêmes définitions, mêmes valeurs, mêmes exemples, mêmes SVG, mêmes animations interactives, mêmes couleurs.
@@ -321,6 +327,15 @@ Séquence correcte équerre + compas :
 2. Tracer la perpendiculaire (droite rouge pointillés **prolongée** au-delà de M et M')
 3. **Ranger l'équerre EN PREMIER**, puis faire apparaître le codage de l'angle droit — jamais l'inverse
 4. Compas : `compassOpen` de I vers M, `compassPivot`, `compassSweep`
+
+**7. Iframe d'animation collée à gauche avec espace vide à droite (juillet 2026)**
+→ Un `<iframe>` inséré sans `display:block; margin:auto` reste aligné à gauche dans son conteneur (comportement par défaut d'un élément remplacé), même si le conteneur est large → grand espace vide à droite, animation qui semble minuscule et mal centrée.
+→ Toujours centrer comme les images (`display:block; margin:0 auto` ou `margin:16px auto 0`) et choisir une `width` qui remplit réellement l'espace disponible (pas une valeur arbitrairement petite comme 480px si le conteneur fait plus de 1000px) : adapter en conséquence le `max-width` du `.wrap` interne de l'animation pour qu'il remplisse cette largeur.
+→ Toujours ajouter `scrolling="no"` sur l'iframe et calculer une `height` généreuse (somme : padding du wrap + hauteur du SVG mis à l'échelle + boîte de nom + boutons + texte + padding du body) pour éviter tout ascenseur. Mieux vaut prévoir large que trop juste.
+
+**8. Titre `h2` combiné (`— N) Mot`) qui se coupe mal à la ligne (juillet 2026)**
+→ Quand le libellé du `h3` après le tiret est court (un seul mot, ex. "Définitions"), le navigateur peut couper la ligne entre le numéro `N)` et son mot, laissant `N)` tout seul en bout de ligne 1 et le mot isolé en ligne 2.
+→ Remplacer l'espace entre `N)` et le mot par une espace insécable (`&nbsp;`) : `— 1)&nbsp;Définitions`. Le retour à la ligne se fait alors avant le tiret ou le numéro, jamais entre les deux.
 
 ---
 
