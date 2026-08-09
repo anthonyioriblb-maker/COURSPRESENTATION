@@ -1,80 +1,166 @@
-# Règles pour les cours en mode présentation
+# Instructions consolidées — MathsIORI & COURSPRESENTATION
 
-**Références absolues** :
-- Chapitre 11 Proportionnalité 4ᵉ (`4/Chapitre11_Proportionnalite/`)
-  - Source du contenu : `C:\Users\antho\Documents\GitHub\MathsIORI\4°\chapitre11 - Proportionnalite\cours.html`
-  - Présentation cible : `C:\Users\antho\Documents\GitHub\COURSPRESENTATION\4\Chapitre11_Proportionnalite\Chapitre_11_proportionnalite_presentation.html` + `script-proportionnalite.js`
-- Chapitres 1, 2, 3 et 4 — 6ᵉ (`6/Chapitre1_Nombres_Entiers/`, `6/Chapitre2_Gestion_De_Donnees/`, `6/Chapitre3_Bases_Geometrie/`, `6/Chapitre4_Nombres_Decimaux/`)
-  - Vérifiés et corrigés le 2026-07-21 (titres h2/h3, squelette des contrôles, raccourcis clavier) — servent aussi de modèle.
-
-> Lire **toujours** ces fichiers avant de produire ou corriger une présentation, ils sont le modèle exact à reproduire.
+> **Fichier maître.** Ce fichier existe à l'identique à trois endroits pour être sûr d'être lu quel que soit le dossier de travail :
+> - `C:\Users\antho\Documents\GitHub\CLAUDE.md` (racine)
+> - `C:\Users\antho\Documents\GitHub\MathsIORI\CLAUDE.md`
+> - `C:\Users\antho\Documents\GitHub\COURSPRESENTATION\CLAUDE.md`
+>
+> **En cas de modification** (nouvelle règle, erreur corrigée) : mettre à jour les **trois copies**, pas une seule.
 
 ---
 
-## Règle n°0 — Déclencheur : un chapitre terminé = une présentation à jour
+## Vue d'ensemble des deux projets
 
-Dès qu'un chapitre `cours.html` dans MathsIORI est **terminé ou modifié** (contenu, image remplacée par une animation, correction quelconque), la présentation `COURSPRESENTATION` correspondante doit être créée ou mise à jour pour refléter exactement ce changement (règle n°1). Ne pas attendre qu'on le demande explicitement à chaque fois — le réflexe est : cours modifié → présentation à reproduire/mettre à jour.
+- **MathsIORI** = les cours (`cours.html` par chapitre, par niveau `3°/4°/5°/6°`). C'est la **source**.
+- **COURSPRESENTATION** = les mêmes cours reproduits en diaporama interactif (slides, étapes au clic). C'est une **copie fidèle**, jamais une réécriture.
 
----
-
-## Règle n°1 — Aucune initiative
-
-La présentation contient **exactement** le même contenu que le cours : mêmes phrases, mêmes définitions, mêmes valeurs, mêmes exemples, mêmes SVG, mêmes animations interactives, mêmes couleurs.
-- Pas de reformulation, pas de simplification, pas d'ajout d'explications, pas de remplacement de valeurs, pas de modification d'images ou de SVG.
-- Si doute sur quelque chose → poser une question, ne **jamais** improviser.
+### Règle n°0 — Déclencheur automatique
+Dès qu'un `cours.html` dans MathsIORI est **terminé ou modifié** (contenu, image remplacée par une animation, correction quelconque), la présentation `COURSPRESENTATION` correspondante doit être créée ou mise à jour pour refléter exactement ce changement. **Ne pas attendre qu'on le demande.**
 
 ---
 
-## Règle n°2 — Découpage en slides
+## Règles communes aux deux projets (animations, notation)
 
-**Une slide par titre.** Chaque nouveau titre (`h2`, `h3`, `h4`) démarre une nouvelle slide, **sauf le premier sous-titre qui suit immédiatement son parent (sans contenu intercalaire)** : dans ce cas seulement il partage la slide de son parent.
+**1. Point en mathématiques**
+→ Toujours une croix `×` (deux `<line>` en diagonale), jamais un cercle.
+→ Référence : `MathsIORI/6°/chapitre03 - Bases de geometrie/animations/animation-angles-droites-secantes.html`
 
-> Si du contenu (intro, exemple, définition…) se glisse entre le `h2` et son premier `h3`, alors le `h2` reste seul sur sa slide avec ce contenu intercalaire, et le `h3` démarre une nouvelle slide. Idem entre `h3` et premier `h4`.
+**2. Notation d'un angle**
+→ Utiliser la classe `.angle` déjà définie dans `styles.css` (chapeau `^` étiré via `::before`), jamais le symbole `∠` ni un dessin fait main.
+→ Couleurs reprises à l'identique du cours (`red`, `blue`, `black`, `green`...), jamais de teinte inventée.
+
+**3. Iframe d'animation collée à gauche avec espace vide à droite** (bug rencontré juillet 2026)
+→ Un `<iframe>` sans `display:block; margin:auto` reste aligné à gauche même dans un conteneur large → grand espace vide à droite, animation qui semble minuscule.
+→ Toujours centrer comme les images (`display:block; margin:0 auto` ou `margin:16px auto 0`) et choisir une `width` qui remplit réellement l'espace disponible (pas une valeur arbitrairement petite comme 480px si le conteneur fait plus de 1000px). Adapter en conséquence le `max-width` du `.wrap` interne.
+→ Toujours ajouter `scrolling="no"` et calculer une `height` généreuse (padding du wrap + hauteur SVG + boîte de nom + boutons + texte + padding body) pour éviter tout ascenseur. Mieux vaut prévoir large que trop juste.
+
+**4. `.step-box` avec `display: flex` → espaces avalés autour des `<strong>`**
+→ Toujours garder `display: block` sur `.step-box` (centrage vertical via `min-height` + `line-height`, jamais `flex`). Avec `flex`, les nœuds de texte ne contenant qu'un espace deviennent des items flex vides et disparaissent dans certains navigateurs.
+→ Audit complet effectué le 19/07/2026 sur les 24 fichiers `.step-box` du projet (MathsIORI + COURSPRESENTATION) : tous conformes.
+
+**5. Boutons obligatoires des animations pas-à-pas** (juillet 2026)
+→ Toute animation `animation-*.html` doit avoir **4 boutons**, dans cet ordre, avec ces couleurs exactes :
+```html
+<button class="btn-anim" id="btnPrec" onclick="prevStep()" disabled>◀ Étape précédente</button>
+<button class="btn-anim" onclick="nextStep()">Étape suivante ▶</button>
+<button class="btn-auto" id="btnAuto" onclick="toggleAuto()">⏵ Automatique</button>
+<button class="btn-reset" onclick="resetAnimation()">Recommencer ↺</button>
+```
+```css
+.btn-reset { background: #e74c3c; color: white; }
+.btn-reset:hover { background: #c0392b; }
+.btn-auto  { background: #4caf50; color: white; }
+.btn-auto:hover { background: #388e3c; }
+```
+→ **Recommencer = rouge** (`#e74c3c`), **Automatique = vert** (`#4caf50`), qui passe en orange (`#ff9800`) + texte `⏸ Pause` pendant la lecture automatique (`toggleAuto()`/`stopAuto()`).
+→ `nextStep()` garde le comportement animé d'origine (CSS keyframes, `setTimeout` en cascade) — ne jamais le modifier pour l'avance normale.
+→ `prevStep()` ne peut pas "rejouer à l'envers" une animation faite de classes CSS/`setTimeout` chaînés (ordre non déterministe). Utiliser une fonction `renderStep(n)` qui recalcule **instantanément** (sans classes d'animation ni délais) l'état visuel final de l'étape `n`, en repartant de zéro (tout cacher, puis ne montrer que ce qui doit l'être à `n`). `toggleAuto()` relance simplement `nextStep()`/`advanceStep()` à intervalle régulier.
+→ Piège : un élément dont la visibilité ne dépend **que** d'une classe d'animation CSS (ex. `#sweepLine72.sweep-active { animation: ... forwards; }`, sans règle `#sweepLine72 { opacity: 0; }` par défaut) réapparaît à son état de repos si on retire juste la classe dans `renderStep()` — il faut le masquer explicitement (`el.style.opacity = '0'`).
+→ Exemples de référence complets : `MathsIORI/6°/chapitre07 - Les angles/animations/` (6 fichiers) et `MathsIORI/6°/chapitre08 - Fractions partie 1/animations/animation-placer-fraction-demi-droite.html`.
+
+**6. Animations compas — règles absolues** (juin 2026, long à corriger)
+→ Le compas ne se referme **jamais** pendant une animation. L'écartement, une fois pris, reste constant jusqu'au prochain "prise d'écartement" explicite.
+→ Séquence correcte pour le symétrique avec compas seul (arcs en A puis en B) :
+1. Pointe en A, **ouvrir** jusqu'à M (`compassOpen`) — montre la prise d'écartement AM
+2. **Pivoter** autour de A à écartement constant (`compassPivot`) — jamais `compassMove` pour un pivot
+3. Tracer l'arc en A (`compassSweep`)
+4. **Transporter** de A→B en gardant la même direction (dxA, dyA = direction fin d'arc A) — écartement R_A constant
+5. En B, **ajuster** la mine de sa direction vers M (`compassMove(B, penAtB, B, M)`) — montre la prise d'écartement BM
+6. **Pivoter** autour de B à écartement constant R_B (`compassPivot`)
+7. Tracer l'arc en B (`compassSweep`)
+
+→ Pourquoi `compassMove` est interdit pour les pivots : interpole la position en ligne droite (corde < arc) → écartement diminue → compas semble se refermer. `compassPivot` interpole l'angle → écartement exactement constant.
+```javascript
+async function compassPivot(tip, radius, a1, a2, duration) {
+    const N = 50;
+    for (let i = 0; i <= N; i++) {
+        const angle = a1 + (a2 - a1) * (i / N);
+        setCompass(tip, { x: tip.x + radius * Math.cos(angle),
+                          y: tip.y + radius * Math.sin(angle) });
+        await sleep(duration / N);
+    }
+}
+```
+(Dupliquer avec le préfixe adapté : `eqCompassPivot`, `csCompassPivot`, etc.)
+
+→ Séquence correcte équerre + compas :
+1. Équerre le long de (d), glisse jusqu'à aligner avec M
+2. Tracer la perpendiculaire (droite rouge pointillés **prolongée** au-delà de M et M')
+3. **Ranger l'équerre EN PREMIER**, puis faire apparaître le codage de l'angle droit — jamais l'inverse
+4. Compas : `compassOpen` de I vers M, `compassPivot`, `compassSweep`
+
+---
+
+## MathsIORI — spécifique aux cours
+
+**Avant toute modification d'un `cours.html`**
+→ Archiver d'abord :
+```
+MathsIORI/Archives/MathsIORI/<niveau>°/chapitre<N> - <Nom>/cours_<YYYY-MM-DD>.html
+```
+Exemple : `MathsIORI/Archives/MathsIORI/6°/chapitre10 - Les angles/cours_2026-05-06.html`
+
+**Numérotation des titres h2/h3**
+→ `MathsIORI/styles.css` ajoute **automatiquement** le préfixe via CSS counter : `h2::before` → `I.`, `II.`... et `h3::before` → `1)`, `2)`...
+→ Conséquence : les `<h2>` et `<h3>` dans `cours.html` ne doivent **jamais** contenir le préfixe en dur.
+  - ✅ `<h2>Construction du symétrique d'un point</h2>`
+  - ❌ `<h2>II. Construction du symétrique d'un point</h2>` → affiche "II. II. Construction…"
+
+---
+
+## COURSPRESENTATION — spécifique aux présentations
+
+**Références absolues (modèles à toujours relire avant de produire/corriger une présentation)** :
+- Chapitre 11 Proportionnalité 4ᵉ (`COURSPRESENTATION/4/Chapitre11_Proportionnalite/`)
+  - Source : `MathsIORI/4°/chapitre11 - Proportionnalite/cours.html`
+  - Cible : `Chapitre_11_proportionnalite_presentation.html` + `script-proportionnalite.js`
+- Chapitres 1 à 4 — 6ᵉ (`COURSPRESENTATION/6/Chapitre1_Nombres_Entiers/`, `Chapitre2_Gestion_De_Donnees/`, `Chapitre3_Bases_Geometrie/`, `Chapitre4_Nombres_Decimaux/`) — vérifiés et corrigés le 2026-07-21, servent aussi de modèle.
+
+### Règle n°1 — Aucune initiative
+La présentation contient **exactement** le même contenu que le cours : mêmes phrases, définitions, valeurs, exemples, SVG, animations, couleurs.
+- Pas de reformulation, simplification, ajout d'explications, remplacement de valeurs, modification d'images/SVG.
+- Si doute → poser une question, ne **jamais** improviser.
+
+### Règle n°2 — Découpage en slides
+**Une slide par titre.** Chaque nouveau titre (`h2`, `h3`, `h4`) démarre une nouvelle slide, **sauf le premier sous-titre qui suit immédiatement son parent sans contenu intercalaire** (dans ce cas il partage la slide du parent).
+> Si du contenu (intro, exemple, définition…) se glisse entre le `h2` et son premier `h3`, le `h2` reste seul sur sa slide avec ce contenu, et le `h3` démarre une nouvelle slide. Idem entre `h3` et premier `h4`.
 
 Exemple concret (Chapitre 11) :
-| Slide | Titres présents | Source dans le cours |
-|---|---|---|
-| 1 | `h1` Titre du chapitre | h1 |
-| 2 | `h2` I. + `h3` 1) | h2 + son premier h3 |
-| 3 | `h3` 2) | h3 suivant seul |
-| 4 | `h3` 3) | h3 suivant seul |
-| 5 | `h2` II. + intro | h2 (sans son h3, car l'intro est entre les deux) |
-| 6 | `h3` 1) | h3 seul |
-| 7 | `h3` 2) | h3 seul |
-| 8 | `h2` III. + `h3` 1) | h2 + premier h3 |
-| 9-10 | `h3` 2), 3) | h3 seuls |
-| 11 | `h3` 4) + `h4` a) | h3 + premier h4 |
-| 12 | `h4` b) | h4 seul |
-| 13 | `h3` 5) | h3 seul |
+| Slide | Titres présents |
+|---|---|
+| 1 | `h1` Titre du chapitre |
+| 2 | `h2` I. + `h3` 1) |
+| 3 | `h3` 2) |
+| 4 | `h3` 3) |
+| 5 | `h2` II. + intro (sans son h3, intro entre les deux) |
+| 6 | `h3` 1) |
+| 7 | `h3` 2) |
+| 8 | `h2` III. + `h3` 1) |
+| 9-10 | `h3` 2), 3) |
+| 11 | `h3` 4) + `h4` a) |
+| 12 | `h4` b) |
+| 13 | `h3` 5) |
 
-Les titres reprennent le **même libellé** que dans le cours, avec une numérotation préfixée :
+Numérotation en dur dans le HTML de la présentation (contrairement à MathsIORI) :
 - `h2` → `I.`, `II.`, `III.` (chiffres romains)
-- `h3` → `1)`, `2)`, `3)` (réinitialisé à chaque nouveau `h2`)
-- `h4` → `a)`, `b)`, ... (numérotation conservée du cours)
+- `h3` → `1)`, `2)`, `3)` (réinitialisé à chaque `h2`)
+- `h4` → `a)`, `b)`... (numérotation conservée du cours)
 
----
+### Règle n°3 — Apparition étape par étape
+Le contenu apparaît **phrase par phrase / bloc par bloc** à la flèche droite ou Espace.
+> ⚠️ **OBLIGATION ABSOLUE** : chaque phrase dans son propre `<div class="step">`. Toujours. Sans exception. Ne jamais regrouper deux phrases dans un même step. C'est la règle la plus importante de toute la présentation.
 
-## Règle n°3 — Apparition étape par étape
-
-Dans chaque slide, le contenu apparaît **phrase par phrase** ou **bloc par bloc** lorsque l'utilisateur appuie sur la flèche droite ou Espace.
-
-> ⚠️ **OBLIGATION ABSOLUE** : chaque phrase est dans son propre `<div class="step">`. Toujours. Sans exception. Ne jamais regrouper deux phrases dans un même step, même si elles semblent liées. C'est la règle la plus importante de toute la présentation.
-
-Mécanique :
 - Chaque phrase / bloc logique distinct = `<div class="step">…</div>`
-  - **Définition** : chaque phrase = un step séparé. Ne jamais mettre deux phrases dans le même step, même si elles sont liées.
-  - **Exemple** : énoncé = un step, tableau = un step, calculs = un step, conclusion = un step
-  - **Calcul (calcul-detail)** : chaque ligne d'égalité = un step séparé. La première ligne déclenche l'apparition de la boîte (step externe), les lignes suivantes sont des `<div class="step">` imbriqués à l'intérieur du `calcul-detail`. Ne jamais mettre plusieurs lignes de calcul dans le même step.
-  - **Chaîne d'égalités inline** (ex. `a/b = a×k/b×k = c/d`) : la première fraction est dans le step parent, puis **chaque terme après `=`** est un `<span class="step-inline">`. Exemple : `<span class="fraction">…</span><span class="step-inline"> = <span class="fraction">…</span></span><span class="step-inline"> = <span class="fraction">…</span></span>`
-  - **Méthode** : intro = un step, puis **chaque item de liste = un step séparé** (utiliser `<ol start="N">` pour conserver la numérotation)
-  - **Propriété** : intro = un step, puis chaque règle/puce = un step séparé
-  - **Remarque** : si deux phrases distinctes, les séparer en deux steps
-  - **Exercice** : énoncé = un step, puis chaque question/puce = un step séparé
-  - **Règle absolue** : un `<br><br>` ou un `<br>` entre deux phrases = signal qu'il faut deux steps distincts
-- Pour faire apparaître **un mot précis** dans une phrase déjà visible (typiquement un résultat numérique en vert), utiliser `<span class="step-inline" style="color:green;"><strong>X</strong></span>`.
-- Le JS construit la liste des `.step` puis ajoute `.step-inline` enfants à la suite via `buildStepsArray`.
+- **Calcul (calcul-detail)** : chaque ligne d'égalité = un step séparé (la première ligne = step externe qui déclenche la boîte, les suivantes = steps imbriqués).
+- **Chaîne d'égalités inline** (ex. `a/b = a×k/b×k = c/d`) : première fraction dans le step parent, puis chaque terme après `=` dans un `<span class="step-inline">`.
+- **Méthode** : intro = un step, puis chaque item de liste = un step séparé (`<ol start="N">` pour la numérotation).
+- **Propriété** : intro = un step, chaque règle/puce = un step séparé.
+- **Remarque** : deux phrases distinctes = deux steps.
+- **Exercice** : énoncé = un step, chaque question/puce = un step séparé.
+- **Règle absolue** : un `<br><br>` ou `<br>` entre deux phrases = signal de deux steps distincts.
+- Pour faire apparaître un mot précis dans une phrase déjà visible (résultat numérique en vert) : `<span class="step-inline" style="color:green;"><strong>X</strong></span>`.
 
-CSS minimal à mettre en `<style>` du HTML (en complément de `../../styles.css`) :
+CSS minimal (en complément de `../../styles.css`) :
 ```css
 .step-inline { opacity: 0; transition: opacity 0.5s; }
 .step-inline.visible { opacity: 1; }
@@ -83,26 +169,13 @@ tr.step.visible { opacity: 1; }
 .anim-fullbleed { display: block; width: 100%; }
 ```
 
----
+### Règle n°4 — Animations interactives identiques
+Tous les SVG, boutons, fonctions d'animation du cours sont **recopiés à l'identique** : mêmes IDs, coordonnées, couleurs, JS. Aucune simplification.
+- Animations synchronisées aux steps (ex. pilules de coefficient) : steps invisibles déclencheurs `<div class="step pilule-trigger" data-pid="1" style="height:0;overflow:hidden;margin:0;padding:0;"></div>`, puis dans `updateSlide` compter les `.pilule-trigger.visible` et appeler `syncPiluleAnim(n)`.
+- Animations indépendantes (graphique, produit en croix) gardent leurs boutons interactifs, fonctionnent comme dans le cours.
+- Squelette de boutons obligatoire : voir section « Règles communes » n°5 ci-dessus — toute animation MathsIORI qui suit ce patron doit être copiée telle quelle ici.
 
-## Règle n°4 — Animations interactives identiques
-
-Tous les SVG, boutons, fonctions d'animation présents dans le cours sont **recopiés à l'identique** dans la présentation : mêmes IDs, mêmes coordonnées, mêmes couleurs, même JS. Aucune simplification.
-
-Les animations qui doivent se synchroniser avec l'avancement des steps (ex. les pilules de coefficient slide 6) utilisent des **steps invisibles déclencheurs** :
-```html
-<div class="step pilule-trigger" data-pid="1" style="height:0;overflow:hidden;margin:0;padding:0;"></div>
-```
-… puis dans `updateSlide`, on compte le nombre de `.pilule-trigger.visible` et on appelle `syncPiluleAnim(n)`.
-
-Les animations indépendantes (graphique, produit en croix) gardent leurs boutons interactifs et fonctionnent pareil que dans le cours.
-
-> **Squelette de boutons obligatoire (juillet 2026)** : voir `MathsIORI/CLAUDE.md`, section « Erreurs fréquentes à éviter » n°6, pour le patron exact des 4 boutons (Précédent/Suivant/Automatique/Recommencer, couleurs, `renderStep(n)`). Comme ces fichiers sont recopiés à l'identique (règle n°1), toute animation dans MathsIORI qui suit ce patron doit être copiée telle quelle ici, sans l'omettre.
-
----
-
-## Règle n°5 — Architecture des fichiers
-
+### Règle n°5 — Architecture des fichiers
 ```
 COURSPRESENTATION/
 ├── styles.css                          ← feuille commune
@@ -115,13 +188,9 @@ COURSPRESENTATION/
         └── <date>_<motif>/
             └── Chapitre<N>_<Nom>/
 ```
+Chemin CSS dans le HTML : `<link rel="stylesheet" href="../../styles.css">` (deux niveaux à remonter).
 
-Chemin du CSS dans le HTML : `<link rel="stylesheet" href="../../styles.css">` (deux niveaux à remonter depuis `<niveau>/Chapitre…/`).
-
----
-
-## Règle n°6 — Squelette HTML obligatoire
-
+### Règle n°6 — Squelette HTML obligatoire
 ```html
 <!DOCTYPE html>
 <html lang="fr">
@@ -202,23 +271,16 @@ Chemin du CSS dans le HTML : `<link rel="stylesheet" href="../../styles.css">` (
 </html>
 ```
 
----
-
-## Règle n°7 — Squelette du script JS
-
-Toujours présent, structure identique d'un chapitre à l'autre. À copier depuis `4/Chapitre11_Proportionnalite/script-proportionnalite.js` puis adapter :
+### Règle n°7 — Squelette du script JS
+Toujours présent, structure identique d'un chapitre à l'autre. Copier depuis `COURSPRESENTATION/4/Chapitre11_Proportionnalite/script-proportionnalite.js` puis adapter :
 - `slideTitles` (un titre par slide, dans l'ordre)
 - Les fonctions d'animations spécifiques (`init...`, `show...`, `reset...`, `sync...`)
 - Tout le reste (navigation, raccourcis clavier, menu, aide) reste **identique mot pour mot**.
 
----
-
-## Règle n°8 — Avant toute modification : archiver
-
+### Règle n°8 — Avant toute modification : archiver (les deux fichiers)
 **S'applique aux DEUX fichiers : présentation ET cours source.**
 
-### Structure d'archive — COURSPRESENTATION
-Dossier fixe par niveau + chapitre, **date dans le nom de fichier** :
+Structure archive COURSPRESENTATION (date dans le nom de fichier) :
 ```
 COURSPRESENTATION/archives/<niveau>/Chapitre<N>_<Nom>/
     Chapitre_<N>_<nom>_presentation_<YYYY-MM-DD>.html
@@ -226,34 +288,22 @@ COURSPRESENTATION/archives/<niveau>/Chapitre<N>_<Nom>/
 ```
 Exemple : `archives/6/Chapitre10_Angles/Chapitre_10_angles_presentation_2026-05-06.html`
 
-### Structure d'archive — MathsIORI
-Dossier fixe par niveau + chapitre, **date dans le nom de fichier** :
-```
-MathsIORI/archives/<niveau>°/chapitre<N> - <Nom>/
-    cours_<YYYY-MM-DD>.html
-```
-Exemple : `MathsIORI/archives/6°/chapitre10 - Les angles/cours_2026-05-06.html`
+Structure archive MathsIORI : voir section « MathsIORI » ci-dessus.
 
-> **Erreur commise (mai 2026)** : cours.html modifié sans archive → impossible de revenir à l'état précédent sans reconstruire manuellement. Archiver TOUJOURS les deux fichiers avant toute modification.
+> **Erreur commise (mai 2026)** : cours.html modifié sans archive → impossible de revenir à l'état précédent sans reconstruire manuellement. Archiver TOUJOURS les deux fichiers avant modification.
 
----
-
-## Règle n°9 — Workflow type pour produire une nouvelle présentation
-
+### Règle n°9 — Workflow type pour produire une nouvelle présentation
 1. Lire le fichier source `MathsIORI/<niveau>°/chapitre<N> - <Nom>/cours.html`.
 2. Si une présentation existe déjà → l'archiver d'abord.
 3. Créer le dossier `COURSPRESENTATION/<niveau>/Chapitre<N>_<Nom>/`.
-4. Découper le contenu en slides selon la **règle n°2**.
-5. Copier-coller le contenu de chaque section, en encapsulant chaque phrase/bloc dans un `<div class="step">` (règle n°3).
-6. Recopier à l'identique les SVG / animations / boutons / fonctions JS (règle n°4).
-7. Créer le `script-<nom>.js` à partir du modèle, mettre à jour `slideTitles` et porter les animations spécifiques.
+4. Découper le contenu en slides selon la règle n°2.
+5. Copier-coller chaque section, en encapsulant chaque phrase/bloc dans un `<div class="step">` (règle n°3).
+6. Recopier à l'identique SVG / animations / boutons / fonctions JS (règle n°4).
+7. Créer `script-<nom>.js` à partir du modèle, mettre à jour `slideTitles`, porter les animations spécifiques.
 8. Vérifier visuellement que rien n'a été ajouté/retiré par rapport au cours.
 
----
-
-## Règle n°10 — Classes CSS disponibles dans styles.css
-
-Les classes de boîtes suivantes sont définies dans `styles.css` avec `font-size: 2.5em`, fond coloré et bordure gauche. Utiliser **uniquement** ces classes — ne jamais en inventer une nouvelle sans l'ajouter en même temps dans `styles.css` :
+### Règle n°10 — Classes CSS disponibles dans styles.css
+Classes de boîtes définies dans `COURSPRESENTATION/styles.css` (`font-size: 2.5em`, fond coloré, bordure gauche). Utiliser **uniquement** ces classes — jamais en inventer une nouvelle sans l'ajouter en même temps dans `styles.css` :
 
 | Classe | Fond | Bordure | Texte | Usage |
 |---|---|---|---|---|
@@ -266,111 +316,38 @@ Les classes de boîtes suivantes sont définies dans `styles.css` avec `font-siz
 | `.property` | jaune `#fff3b8` | orange `#e67e22` | bleu | Propriétés |
 | `.exercice` | rose `#fce4ec` | rose foncé `#c2185b` | noir | Exercices |
 
-> **Erreur courante (Chapitre 12, mai 2026)** : la classe `.property` avait été utilisée dans le HTML sans être définie dans le CSS → texte minuscule. Toujours vérifier que la classe HTML existe bien dans `styles.css`.
+> **Erreur courante (Chapitre 12, mai 2026)** : `.property` utilisée dans le HTML sans être définie dans le CSS → texte minuscule. Toujours vérifier que la classe HTML existe dans `styles.css`.
 
----
-
-## Erreurs fréquentes à éviter (retours d'expérience)
-
-> Ces erreurs ont été rencontrées sur de vraies présentations — les corriger systématiquement à la création.
-
-**1. Classe CSS utilisée dans le HTML mais absente de `styles.css`**
-→ Le texte apparaît minuscule (taille navigateur par défaut au lieu de `2.5em`).
-→ **Vérifier toujours** que chaque classe de boîte utilisée (`property`, `exercice`, etc.) est bien définie dans `styles.css` avec `font-size: 2.5em` et ses couleurs.
-
-**2. `max-width` en pixels sur un conteneur de boîtes `calcul-detail`**
-→ Exemple : `<div style="max-width:580px;">` autour de boîtes `.calcul-detail` qui ont déjà `font-size: 2.5em` → le texte déborde et se coupe à la ligne.
-→ **Toujours utiliser `max-width:100%`** (jamais de valeur fixe en px) pour les conteneurs qui wrappent des boîtes CSS.
-
-**3. Couleur du texte dans `.property`**
-→ La boîte `.property` doit avoir `color: blue` (comme `.definition` et `.important`), pas `color: black`.
-
-**4. Bouton "Étape suivante" dans les animations pas-à-pas**
-→ Quand une animation révèle plusieurs `calcul-detail` successifs (ex. résolution d'équation), le bouton doit se déplacer physiquement dans le DOM après chaque nouvelle étape, sinon il disparaît hors écran.
-→ Patron à suivre :
-  - Donner un `id` au conteneur du bouton (ex. `s3btnContainer`) et à chaque étape (ex. `s3step0`, `s3step1`…)
-  - Dans `nextStepX()` : après avoir affiché l'étape, appeler `el.after(btnContainer)` pour déplacer le bouton juste après
-  - Scroller vers la nouvelle étape avec `el.scrollIntoView({ behavior: 'smooth', block: 'center' })` (center = étape visible au milieu, bouton visible en dessous)
-  - Dans `resetSolveX()` : remettre le bouton avant la première étape avec `step0.before(btnContainer)`
-
-**5. Numéros de liste `<ol>` coupés par la bordure gauche des boîtes**
-→ Les `<ol>` n'avaient pas de `padding-left` suffisant → les numéros (1. 2. 3.) disparaissaient derrière la bordure.
-→ Le CSS définit maintenant `padding-left: 80px` pour `ul` ET `ol`. Ne jamais réduire cette valeur.
-
-**6. Animations compas — règles absolues (juin 2026, long à corriger)**
-
-> Un point en mathématiques est toujours une **croix ×**, jamais un cercle. Remplacer tous les `<circle r="4/5">` marqueurs de points par deux `<line>` en × (±5px en diagonale).
-
-> Le compas ne se referme **jamais** pendant une animation. L'écartement, une fois pris, reste constant jusqu'au prochain "prise d'écartement" explicite.
-
-Séquence correcte pour le symétrique avec compas seul (arcs en A puis en B) :
-1. Pointe en A, **ouvrir** jusqu'à M (`compassOpen`) — montre la prise d'écartement AM
-2. **Pivoter** autour de A à écartement constant (`compassPivot`) — jamais `compassMove` pour un pivot
-3. Tracer l'arc en A (`compassSweep`)
-4. **Transporter** de A→B en gardant la même direction (dxA, dyA = direction fin d'arc A) — écartement R_A constant
-5. En B, **ajuster** la mine de sa direction vers M (`compassMove(B, penAtB, B, M)`) — montre la prise d'écartement BM
-6. **Pivoter** autour de B à écartement constant R_B (`compassPivot`)
-7. Tracer l'arc en B (`compassSweep`)
-
-Pourquoi `compassMove` est interdit pour les pivots : interpole la position en ligne droite (corde < arc) → écartement diminue → compas semble se refermer. `compassPivot` interpole l'angle → écartement exactement constant.
-
-```javascript
-async function compassPivot(tip, radius, a1, a2, duration) {
-    const N = 50;
-    for (let i = 0; i <= N; i++) {
-        const angle = a1 + (a2 - a1) * (i / N);
-        setCompass(tip, { x: tip.x + radius * Math.cos(angle),
-                          y: tip.y + radius * Math.sin(angle) });
-        await sleep(duration / N);
-    }
-}
-```
-(Dupliquer avec le préfixe adapté : `eqCompassPivot`, `csCompassPivot`, etc.)
-
-Séquence correcte équerre + compas :
-1. Équerre le long de (d), glisse jusqu'à aligner avec M
-2. Tracer la perpendiculaire (droite rouge pointillés **prolongée** au-delà de M et M')
-3. **Ranger l'équerre EN PREMIER**, puis faire apparaître le codage de l'angle droit — jamais l'inverse
-4. Compas : `compassOpen` de I vers M, `compassPivot`, `compassSweep`
-
-**7. Iframe d'animation collée à gauche avec espace vide à droite (juillet 2026)**
-→ Un `<iframe>` inséré sans `display:block; margin:auto` reste aligné à gauche dans son conteneur (comportement par défaut d'un élément remplacé), même si le conteneur est large → grand espace vide à droite, animation qui semble minuscule et mal centrée.
-→ Toujours centrer comme les images (`display:block; margin:0 auto` ou `margin:16px auto 0`) et choisir une `width` qui remplit réellement l'espace disponible (pas une valeur arbitrairement petite comme 480px si le conteneur fait plus de 1000px) : adapter en conséquence le `max-width` du `.wrap` interne de l'animation pour qu'il remplisse cette largeur.
-→ Toujours ajouter `scrolling="no"` sur l'iframe et calculer une `height` généreuse (somme : padding du wrap + hauteur du SVG mis à l'échelle + boîte de nom + boutons + texte + padding du body) pour éviter tout ascenseur. Mieux vaut prévoir large que trop juste.
-
-**8. Titre `h2` combiné (`— N) Mot`) qui se coupe mal à la ligne (juillet 2026)**
-→ Quand le libellé du `h3` après le tiret est court (un seul mot, ex. "Définitions"), le navigateur peut couper la ligne entre le numéro `N)` et son mot, laissant `N)` tout seul en bout de ligne 1 et le mot isolé en ligne 2.
-→ Remplacer l'espace entre `N)` et le mot par une espace insécable (`&nbsp;`) : `— 1)&nbsp;Définitions`. Le retour à la ligne se fait alors avant le tiret ou le numéro, jamais entre les deux.
-
----
-
-## Règle n°11 — Numérotation des titres h2/h3 : deux CSS différents
-
-Les deux projets utilisent des feuilles CSS **distinctes** avec des comportements opposés sur la numérotation :
-
-### MathsIORI (`MathsIORI/styles.css`)
-- `h2::before` ajoute **automatiquement** le chiffre romain via un CSS counter (`I.`, `II.`, `III.`…)
-- `h3::before` ajoute **automatiquement** la numérotation arabe (`1)`, `2)`, `3)`…)
-- **Conséquence** : les balises `<h2>` et `<h3>` dans `cours.html` ne doivent **jamais** contenir le préfixe en dur.
-  - ✅ `<h2>Construction du symétrique d'un point</h2>`
-  - ❌ `<h2>II. Construction du symétrique d'un point</h2>` → affichera "II. II. Construction…"
-
-### COURSPRESENTATION (`COURSPRESENTATION/styles.css`)
-- Aucun CSS counter — les h2/h3 n'ont **pas** de `::before`
-- **Conséquence** : les balises `<h2>` et `<h3>` dans la présentation **doivent** contenir le préfixe en dur.
+### Règle n°11 — Numérotation des titres h2/h3 : deux CSS différents
+- **MathsIORI** : préfixe ajouté automatiquement par CSS counter → jamais de préfixe en dur dans `cours.html` (voir section « MathsIORI » ci-dessus).
+- **COURSPRESENTATION** : aucun CSS counter → le préfixe **doit** être écrit en dur dans le HTML de la présentation.
   - ✅ `<h2>II. Construction du symétrique d'un point</h2>`
   - ❌ `<h2>Construction du symétrique d'un point</h2>` → titre sans numéro
 
-> **Erreur commise (juin 2026)** : lors de la création du chapitre 12, les h2/h3 de `cours.html` ont été écrits avec les préfixes ("I. …", "1) …") → doublon visible à l'écran ("III. III. Construction…").
+> **Erreur commise (juin 2026)** : chapitre 12, les h2/h3 de `cours.html` écrits avec préfixes en dur → doublon visible ("III. III. Construction…").
 
 ---
 
-## Ce qu'il ne faut JAMAIS faire
+## Erreurs fréquentes supplémentaires (COURSPRESENTATION uniquement)
 
-- Ajouter du contenu qui n'est pas dans le cours (exemples, définitions, transitions, slides de récap, "à retenir"…).
+**1. Bouton "Étape suivante" qui disparaît hors écran**
+→ Quand une animation révèle plusieurs `calcul-detail` successifs (ex. résolution d'équation), le bouton doit se déplacer physiquement dans le DOM après chaque nouvelle étape.
+→ Patron : `id` sur le conteneur du bouton (ex. `s3btnContainer`) et sur chaque étape (`s3step0`, `s3step1`…). Dans `nextStepX()`, après affichage de l'étape, `el.after(btnContainer)`. Scroller avec `el.scrollIntoView({ behavior: 'smooth', block: 'center' })`. Dans `resetSolveX()`, remettre le bouton avant la première étape (`step0.before(btnContainer)`).
+
+**2. Numéros de liste `<ol>` coupés par la bordure gauche des boîtes**
+→ `padding-left: 80px` sur `ul` ET `ol` dans `styles.css`. Ne jamais réduire cette valeur.
+
+**3. Titre `h2` combiné (`— N) Mot`) qui se coupe mal à la ligne**
+→ Quand le libellé après le tiret est court (un mot), le navigateur peut couper entre le numéro `N)` et son mot.
+→ Remplacer l'espace par une espace insécable : `— 1)&nbsp;Définitions`.
+
+---
+
+## Ce qu'il ne faut JAMAIS faire (COURSPRESENTATION)
+- Ajouter du contenu absent du cours (exemples, définitions, transitions, slides de récap, "à retenir"…).
 - Reformuler ou raccourcir des phrases.
 - Remplacer un SVG par une version simplifiée.
 - Changer les couleurs ou la typographie.
-- Ajouter des slides de plan / sommaire / conclusion qui ne sont pas dans le cours.
+- Ajouter des slides de plan / sommaire / conclusion absentes du cours.
 - Modifier la numérotation des sections par rapport au cours.
 - Oublier d'archiver avant modification.
