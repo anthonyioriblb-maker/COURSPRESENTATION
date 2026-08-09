@@ -291,17 +291,17 @@
 
         <div class="controls">
             <div class="controls-left">
-                <button class="btn-menu" onclick="openMenu()">☰ Menu</button>
-                <button onclick="openHelp()">❓ Aide</button>
+                <button id="prevBtn" onclick="changeSlide(-1)">← Précédent</button>
+                <button class="btn-reset" onclick="resetSlide()">⟲</button>
             </div>
             <div class="progress">
-                <span id="stepIndicator" class="step-indicator hidden">Étape 0/0</span>
-                <span>Slide <span id="currentSlide">1</span> / <span id="totalSlides">0</span></span>
+                <span><span id="currentSlide">1</span> / <span id="totalSlides">0</span></span>
+                <span class="step-indicator hidden" id="stepIndicator">Étape 0/0</span>
             </div>
             <div class="controls-right">
-                <button class="btn-reset" onclick="resetSlide()">↻ Réinitialiser</button>
-                <button id="prevBtn" onclick="changeSlide(-1)">◀ Précédent</button>
-                <button onclick="changeSlide(1)">Suivant ▶</button>
+                <button class="btn-menu" onclick="openMenu()">📋 Menu</button>
+                <button class="btn-menu" onclick="openHelp()">❓ Aide</button>
+                <button onclick="changeSlide(1)">Suivant →</button>
             </div>
         </div>
     </div>

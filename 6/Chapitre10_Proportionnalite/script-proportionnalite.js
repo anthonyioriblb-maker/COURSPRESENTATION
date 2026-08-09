@@ -4,7 +4,7 @@ let slides = null;
 let totalSlides = 0;
 
 const slideTitles = [
-    "Chapitre 7 : Proportionnalité",
+    "Chapitre 10 : Proportionnalité",
     "I. Situation de proportionnalité — 1) Reconnaître une situation de proportionnalité",
     "I. Situation de proportionnalité — 2) Compléter un tableau de proportionnalité",
     "II. Exemples d'utilisations de la proportionnalité — 1) Les pourcentages",

@@ -8,10 +8,10 @@ const slideTitles = [
     "Chapitre 2 : Gestion de données",
     "I. Introduction aux statistiques",
     "II. Utilisation de tableaux — 1) Tableau à simple entrée",
-    "II. Utilisation de tableaux — 2) Tableau à double entrée",
+    "II. 2) Tableau à double entrée",
     "III. Représentations graphiques — 1) Diagramme en bâtons",
-    "III. Représentations graphiques — 2) Diagramme circulaire",
-    "III. Représentations graphiques — 3) Courbes"
+    "III. 2) Diagramme circulaire",
+    "III. 3) Courbes"
 ];
 
 document.getElementById('totalSlides').textContent = totalSlides;
@@ -158,10 +158,10 @@ document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape' || e.key === 'h' || e.key === 'H' || e.key === '?') closeHelp();
         return;
     }
-    if (e.key === 'ArrowRight' || e.key === ' ') {
+    if (e.key === 'ArrowRight' || e.key === 'ArrowUp' || e.key === ' ') {
         e.preventDefault();
         changeSlide(1);
-    } else if (e.key === 'ArrowLeft') {
+    } else if (e.key === 'ArrowLeft' || e.key === 'ArrowDown') {
         e.preventDefault();
         changeSlide(-1);
     } else if (e.key === 'm' || e.key === 'M') {

@@ -6,7 +6,7 @@ let totalSlides = 0;
 
 // Titres des slides du Chapitre 12
 const slideTitles = [
-    "Chapitre 12 : La symétrie axiale",                               // Slide 1
+    "Chapitre 13 : La symétrie axiale",                               // Slide 1
     "I. Figures symétriques — 1) Figures symétriques",                // Slide 2
     "I. 2) Axe de symétrie d'une figure",                             // Slide 3
     "II. Construction du symétrique d'un point",                      // Slide 4

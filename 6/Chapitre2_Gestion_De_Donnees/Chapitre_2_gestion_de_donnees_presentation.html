@@ -68,7 +68,8 @@
 
             <!-- Slide 3 : II. Utilisation de tableaux — 1) Tableau à simple entrée -->
             <div class="slide">
-                <h2>II. Utilisation de tableaux — 1) Tableau à simple entrée</h2>
+                <h2>II. Utilisation de tableaux</h2>
+                <h3>1) Tableau à simple entrée</h3>
                 <div class="definition">
                     <div class="step"><span style="color: red;">Définition :</span> Un <span style="color: red;">tableau à simple entrée</span> est un tableau qui comporte deux lignes, on l'utilise lorsque l'on étudie un seul phénomène.</div>
                 </div>
@@ -83,7 +84,7 @@
 
             <!-- Slide 4 : 2) Tableau à double entrée -->
             <div class="slide">
-                <h2>II. Utilisation de tableaux — 2) Tableau à double entrée</h2>
+                <h3>2) Tableau à double entrée</h3>
                 <div class="definition">
                     <div class="step"><span style="color: red;">Définition :</span> On utilise un <span style="color: red;">tableau à double entrée</span> lorsque l'on étudie deux phénomènes en même temps.</div>
                 </div>
@@ -99,7 +100,8 @@
 
             <!-- Slide 5 : III. Représentations graphiques — 1) Diagramme en bâtons -->
             <div class="slide">
-                <h2>III. Représentations graphiques — 1) Diagramme en bâtons</h2>
+                <h2>III. Représentations graphiques</h2>
+                <h3>1) Diagramme en bâtons</h3>
                 <div class="definition">
                     <div class="step"><span style="color: red;">Définition :</span> Dans un <span style="color: red;">diagramme en bâtons</span>, les hauteurs sont proportionnelles aux quantités qu'elles représentent.</div>
                 </div>
@@ -114,7 +116,7 @@
 
             <!-- Slide 6 : 2) Diagramme circulaire -->
             <div class="slide">
-                <h2>III. Représentations graphiques — 2) Diagramme circulaire</h2>
+                <h3>2) Diagramme circulaire</h3>
                 <div class="definition">
                     <div class="step"><span style="color: red;">Définition :</span> Dans un <span style="color: red;">diagramme circulaire</span>, les angles des secteurs sont proportionnels aux quantités qu'ils représentent.</div>
                 </div>
@@ -182,7 +184,7 @@
 
             <!-- Slide 7 : 3) Courbes -->
             <div class="slide">
-                <h2>III. Représentations graphiques — 3) Courbes</h2>
+                <h3>3) Courbes</h3>
                 <div class="definition">
                     <div class="step"><span style="color: red;">Définition :</span> Ces représentations sont utiles pour observer l'<span style="color: red;">évolution d'une grandeur par rapport à une autre</span>.</div>
                 </div>
@@ -220,17 +222,17 @@
         <!-- Contrôles -->
         <div class="controls">
             <div class="controls-left">
-                <button class="btn-menu" onclick="openMenu()">☰ Menu</button>
-                <button class="btn-menu" onclick="openHelp()">❓ Aide</button>
+                <button id="prevBtn" onclick="changeSlide(-1)">← Précédent</button>
+                <button class="btn-reset" onclick="resetSlide()">⟲</button>
             </div>
             <div class="progress">
-                <span id="stepIndicator" class="step-indicator hidden">Étape 0/0</span>
-                <span>Slide <span id="currentSlide">1</span> / <span id="totalSlides">0</span></span>
+                <span><span id="currentSlide">1</span> / <span id="totalSlides">0</span></span>
+                <span class="step-indicator hidden" id="stepIndicator">Étape 0/0</span>
             </div>
             <div class="controls-right">
-                <button class="btn-reset" onclick="resetSlide()">↻ Réinitialiser</button>
-                <button id="prevBtn" onclick="changeSlide(-1)">◀ Précédent</button>
-                <button onclick="changeSlide(1)">Suivant ▶</button>
+                <button class="btn-menu" onclick="openMenu()">📋 Menu</button>
+                <button class="btn-menu" onclick="openHelp()">❓ Aide</button>
+                <button onclick="changeSlide(1)">Suivant →</button>
             </div>
         </div>
     </div>

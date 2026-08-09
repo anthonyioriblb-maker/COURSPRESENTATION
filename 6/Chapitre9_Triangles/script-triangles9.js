@@ -4,19 +4,15 @@ let currentStepIndex = 0;
 let slides = null;
 let totalSlides = 0;
 
-// Titres des slides du Chapitre 7 — 6e
+// Titres des slides du Chapitre 9 — 6e
 const slideTitles = [
-    "Chapitre 7 : Les angles",                                   // Slide 1
-    "I. Vocabulaire",                                             // Slide 2
-    "II. Mesure d'un angle — 1) Mesure en degrés",                // Slide 3
-    "II. 2) Nature des angles",                                   // Slide 4
-    "II. 3) Tracer un angle de mesure donnée",                    // Slide 5
-    "III. Angles adjacents",                                      // Slide 6
-    "IV. Angles supplémentaires",                                 // Slide 7
-    "V. Angles opposés par le sommet",                            // Slide 8
-    "VI. La bissectrice — 1) Définition",                         // Slide 9
-    "VI. 2) Tracer la bissectrice au rapporteur",                 // Slide 10
-    "VII. La somme des angles d'un triangle"                      // Slide 11
+    "Chapitre 9 : Triangles, médiatrice et cercle circonscrit",           // Slide 1
+    "I. Les types de triangles — 1) Classification selon les côtés",     // Slide 2
+    "I. 2) Classification selon les angles",                             // Slide 3
+    "II. Construire un triangle — 1) Connaissant ses trois côtés",       // Slide 4
+    "III. Somme des angles d'un triangle — 1) La propriété fondamentale",// Slide 5
+    "IV. La médiatrice d'un segment — 1) Définition et construction",    // Slide 6
+    "V. Le cercle circonscrit à un triangle — 1) Définition"             // Slide 7
 ];
 
 // Construit la liste à plat des étapes

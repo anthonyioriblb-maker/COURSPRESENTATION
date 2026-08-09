@@ -20,7 +20,7 @@ const slideTitles = [
     "Chapitre 6 : Calcul littéral",
     "I. Expression littérale",
     "II. Simplification d'écriture",
-    "II. Simplification d'écriture — 1) Puissances",
+    "II. Simplification d'écriture",
     "III. Substitution",
     "IV. Tester une égalité",
     "V. Distributivité simple",

@@ -5,16 +5,16 @@ const slides = document.querySelectorAll('.slide');
 const totalSlides = slides.length;
 
 const slideTitles = [
-    "Chapitre 8 : Cercles et disques",
+    "Chapitre 11 : Cercles et disques",
     "I. Définitions — 1) Le cercle",
-    "I. Définitions — 2) Le disque",
+    "I. 2) Le disque",
     "II. Vocabulaire",
-    "II. Vocabulaire — 1) Le rayon",
-    "II. Vocabulaire — 2) Le diamètre",
-    "II. Vocabulaire — 3) La corde",
-    "II. Vocabulaire — 4) L'arc de cercle",
+    "II. 1) Le rayon",
+    "II. 2) Le diamètre",
+    "II. 3) La corde",
+    "II. 4) L'arc de cercle",
     "III. Construction d'un cercle — 1) Utilisation du compas",
-    "III. Construction d'un cercle — 2) Programme de construction",
+    "III. 2) Programme de construction",
     "IV. Appartenance à un cercle"
 ];
 
@@ -147,10 +147,10 @@ document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape' || e.key === 'h' || e.key === 'H' || e.key === '?') closeHelp();
         return;
     }
-    if (e.key === 'ArrowUp' || e.key === ' ') {
+    if (e.key === 'ArrowRight' || e.key === 'ArrowUp' || e.key === ' ') {
         e.preventDefault();
         changeSlide(1);
-    } else if (e.key === 'ArrowDown') {
+    } else if (e.key === 'ArrowLeft' || e.key === 'ArrowDown') {
         e.preventDefault();
         changeSlide(-1);
     } else if (e.key === 'm' || e.key === 'M') {

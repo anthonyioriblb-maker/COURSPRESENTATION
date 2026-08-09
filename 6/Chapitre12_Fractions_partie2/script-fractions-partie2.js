@@ -6,7 +6,7 @@ let totalSlides = 0;
 
 // Titres des slides du Chapitre 11 - Fractions partie 2
 const slideTitles = [
-    "Chapitre 11 : Les fractions - Partie 2",                                   // Slide 1
+    "Chapitre 12 : Les fractions - Partie 2",                                   // Slide 1
     "I. Fraction d'une quantité",                                                // Slide 2
     "II. Additionner et soustraire — 1) Règle 1 — Même dénominateur",           // Slide 3
     "2) Règle 2 — Dénominateurs différents"                                      // Slide 4

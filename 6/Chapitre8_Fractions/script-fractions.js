@@ -5,15 +5,15 @@ const slides = document.querySelectorAll('.slide');
 const totalSlides = slides.length;
 
 const slideTitles = [
-    "Chapitre 6 : Les fractions - Partie 1",
+    "Chapitre 8 : Les fractions - Partie 1",
     "I. Écriture fractionnaire — 1) Partage",
-    "I. Écriture fractionnaire — 2) Vocabulaire",
+    "I. 2) Vocabulaire",
     "II. Fraction et nombres",
     "III. Quotients égaux",
     "IV. Fractions et demi-droite graduée",
     "V. Comparaison de fractions — 1) Mettre des fractions au même dénominateur",
-    "V. Comparaison de fractions — 2) Comparer les fractions",
-    "V. Comparaison de fractions — 3) Encadrer une fraction par deux entiers consécutifs"
+    "V. 2) Comparer les fractions",
+    "V. 3) Encadrer une fraction par deux entiers consécutifs"
 ];
 
 document.getElementById('totalSlides').textContent = totalSlides;
@@ -145,10 +145,10 @@ document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape' || e.key === 'h' || e.key === 'H' || e.key === '?') closeHelp();
         return;
     }
-    if (e.key === 'ArrowUp' || e.key === ' ') {
+    if (e.key === 'ArrowRight' || e.key === 'ArrowUp' || e.key === ' ') {
         e.preventDefault();
         changeSlide(1);
-    } else if (e.key === 'ArrowDown') {
+    } else if (e.key === 'ArrowLeft' || e.key === 'ArrowDown') {
         e.preventDefault();
         changeSlide(-1);
     } else if (e.key === 'm' || e.key === 'M') {

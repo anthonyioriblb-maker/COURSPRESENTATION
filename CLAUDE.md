@@ -1,10 +1,13 @@
 # Règles pour les cours en mode présentation
 
-**Référence absolue** : Chapitre 11 Proportionnalité 4ᵉ (`4/Chapitre11_Proportionnalite/`)
-- Source du contenu : `C:\Users\antho\Documents\GitHub\MathsIORI\4°\chapitre11 - Proportionnalite\cours.html`
-- Présentation cible : `C:\Users\antho\Documents\GitHub\COURSPRESENTATION\4\Chapitre11_Proportionnalite\Chapitre_11_proportionnalite_presentation.html` + `script-proportionnalite.js`
+**Références absolues** :
+- Chapitre 11 Proportionnalité 4ᵉ (`4/Chapitre11_Proportionnalite/`)
+  - Source du contenu : `C:\Users\antho\Documents\GitHub\MathsIORI\4°\chapitre11 - Proportionnalite\cours.html`
+  - Présentation cible : `C:\Users\antho\Documents\GitHub\COURSPRESENTATION\4\Chapitre11_Proportionnalite\Chapitre_11_proportionnalite_presentation.html` + `script-proportionnalite.js`
+- Chapitres 1, 2, 3 et 4 — 6ᵉ (`6/Chapitre1_Nombres_Entiers/`, `6/Chapitre2_Gestion_De_Donnees/`, `6/Chapitre3_Bases_Geometrie/`, `6/Chapitre4_Nombres_Decimaux/`)
+  - Vérifiés et corrigés le 2026-07-21 (titres h2/h3, squelette des contrôles, raccourcis clavier) — servent aussi de modèle.
 
-> Lire **toujours** ces deux fichiers avant de produire une nouvelle présentation, ils sont le modèle exact à reproduire.
+> Lire **toujours** ces fichiers avant de produire ou corriger une présentation, ils sont le modèle exact à reproduire.
 
 ---
 
@@ -93,6 +96,8 @@ Les animations qui doivent se synchroniser avec l'avancement des steps (ex. les 
 … puis dans `updateSlide`, on compte le nombre de `.pilule-trigger.visible` et on appelle `syncPiluleAnim(n)`.
 
 Les animations indépendantes (graphique, produit en croix) gardent leurs boutons interactifs et fonctionnent pareil que dans le cours.
+
+> **Squelette de boutons obligatoire (juillet 2026)** : voir `MathsIORI/CLAUDE.md`, section « Erreurs fréquentes à éviter » n°6, pour le patron exact des 4 boutons (Précédent/Suivant/Automatique/Recommencer, couleurs, `renderStep(n)`). Comme ces fichiers sont recopiés à l'identique (règle n°1), toute animation dans MathsIORI qui suit ce patron doit être copiée telle quelle ici, sans l'omettre.
 
 ---
 

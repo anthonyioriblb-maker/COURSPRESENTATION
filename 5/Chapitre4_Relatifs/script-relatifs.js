@@ -9,7 +9,7 @@ const slideTitles = [
     "I. Qu'est-ce qu'un nombre relatif ? — 1) Les nombres relatifs",
     "I. Qu'est-ce qu'un nombre relatif ? — 2) Distance à zéro",
     "I. Qu'est-ce qu'un nombre relatif ? — 3) Nombres opposés",
-    "II. Repérage sur une droite graduée — 1) Droite graduée",
+    "II. Repérage sur une droite graduée",
     "III. Comparaison de nombres relatifs — 1) Règle générale",
     "III. Comparaison de nombres relatifs — 2) Comparaison de nombres de signes différents",
     "III. Comparaison de nombres relatifs — 3) Comparaison de nombres positifs",

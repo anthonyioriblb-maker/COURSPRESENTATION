@@ -140,12 +140,27 @@ function closeHelp() {
 }
 
 document.addEventListener('keydown', (e) => {
-    if (e.key === 'ArrowRight' || e.key === ' ') changeSlide(1);
-    else if (e.key === 'ArrowLeft') changeSlide(-1);
-    else if (e.key === 'm' || e.key === 'M') openMenu();
-    else if (e.key === 'r' || e.key === 'R') resetSlide();
-    else if (e.key === 'h' || e.key === 'H' || e.key === '?') openHelp();
-    else if (e.key === 'Escape') {
+    if (document.getElementById('slideMenu').classList.contains('active')) {
+        if (e.key === 'Escape') closeMenu();
+        return;
+    }
+    if (document.getElementById('helpOverlay').classList.contains('active')) {
+        if (e.key === 'Escape' || e.key === 'h' || e.key === 'H' || e.key === '?') closeHelp();
+        return;
+    }
+    if (e.key === 'ArrowRight' || e.key === 'ArrowUp' || e.key === ' ') {
+        e.preventDefault();
+        changeSlide(1);
+    } else if (e.key === 'ArrowLeft' || e.key === 'ArrowDown') {
+        e.preventDefault();
+        changeSlide(-1);
+    } else if (e.key === 'm' || e.key === 'M') {
+        openMenu();
+    } else if (e.key === 'r' || e.key === 'R') {
+        resetSlide();
+    } else if (e.key === 'h' || e.key === 'H' || e.key === '?') {
+        openHelp();
+    } else if (e.key === 'Escape') {
         closeMenu();
         closeHelp();
     }
