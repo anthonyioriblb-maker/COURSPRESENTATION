@@ -10,8 +10,9 @@ const slideTitles = [
     "I. Les types de triangles — 1) Définitions",                        // Slide 2
     "I. 2) Propriétés",                                                  // Slide 3
     "II. Construire un triangle — 1) Connaissant ses trois côtés",       // Slide 4
-    "III. La médiatrice d'un segment — 1) Définition et construction",   // Slide 5
-    "IV. Le cercle circonscrit à un triangle — 1) Définition"            // Slide 6
+    "III. Somme des angles d'un triangle — 1) La propriété fondamentale",// Slide 5
+    "IV. La médiatrice d'un segment — 1) Définition et construction",    // Slide 6
+    "V. Le cercle circonscrit à un triangle — 1) Définition"             // Slide 7
 ];
 
 // Construit la liste à plat des étapes
