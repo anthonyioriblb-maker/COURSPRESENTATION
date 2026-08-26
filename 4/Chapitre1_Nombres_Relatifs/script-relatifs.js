@@ -5,12 +5,13 @@ let totalSlides = 0;
 
 const slideTitles = [
     "Les nombres relatifs",
-    "I. Additions",
-    "II. Soustractions",
-    "III. Multiplications",
-    "IV. Divisions",
-    "V. Priorités opératoires",
-    "VI. Coordonnées d'un point"
+    "I. Comparer, ranger et encadrer",
+    "II. Additions",
+    "III. Soustractions",
+    "IV. Multiplications",
+    "V. Divisions",
+    "VI. Priorités opératoires",
+    "VII. Coordonnées d'un point"
 ];
 
 document.addEventListener('DOMContentLoaded', function() {
