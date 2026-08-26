@@ -1,5 +1,5 @@
 // ============================================================
-//  Chapitre 8 – Les triangles  |  Contrôleur de présentation
+//  Chapitre 6 – Les triangles  |  Contrôleur de présentation
 // ============================================================
 
 let currentSlideIndex = 0;
@@ -8,7 +8,7 @@ const slides      = document.querySelectorAll('.slide');
 const totalSlides = slides.length;
 
 const slideTitles = [
-    "Chapitre 8 : Les triangles",
+    "Les triangles",
     "I. Somme des angles d'un triangle",
     "II. Inégalité triangulaire",
     "III. Protocole de construction d'un triangle — 1) Construction d'un triangle connaissant ses trois côtés",

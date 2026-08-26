@@ -1,5 +1,5 @@
 // ============================================================
-//  Animations SVG interactives – Chapitre 8 Les triangles
+//  Animations SVG interactives – Chapitre 6 Les triangles
 //  Extraites fidèlement du cours pour préserver la cohérence
 //  des coordonnées avec les SVG de la présentation.
 // ============================================================

@@ -300,6 +300,51 @@ h3 {
     color: black;
 }
 
+/* Étapes de calcul simples (sans boîte grisée), issues de MathsIORI .calcul-etapes */
+.calcul-etape, .calcul-etapes {
+    margin: 8px 0;
+    padding-left: 20px;
+}
+
+.calcul-etapes div {
+    margin: 10px 0;
+    font-family: 'Courier New', monospace;
+}
+
+/* Schéma programme de calcul (chaîne étape → flèche → étape), issu de MathsIORI */
+.programme-calcul-groupe {
+    display: flex;
+    gap: 80px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin: 25px 0;
+}
+
+.programme-calcul {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+}
+
+.etape-calcul {
+    background-color: #e3f2fd;
+    border: 3px solid #1976d2;
+    padding: 14px 28px;
+    border-radius: 10px;
+    min-width: 120px;
+    text-align: center;
+    font-size: 1.1em;
+}
+
+.fleche-calcul {
+    color: #2ecc71;
+    font-weight: bold;
+    font-size: 0.7em;
+    padding: 5px 0;
+    text-align: center;
+}
+
 .slide > div:not([class]), .slide > p:not([class]) {
     background: #f0f0f0;
     border-left: 6px solid #999;

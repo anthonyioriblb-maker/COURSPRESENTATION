@@ -6,8 +6,14 @@
     <title>Chapitre 2 - Symétrie centrale</title>
     <link rel="stylesheet" href="../../styles.css">
     <style>
-        .img-step { text-align: center; margin: 15px 0; }
-        img { max-width: 100%; height: auto; border-radius: 6px; }
+        iframe {
+            border: none;
+            border-radius: 5px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin: 10px auto;
+            display: block;
+            max-width: 100%;
+        }
     </style>
 </head>
 <body>
@@ -25,6 +31,10 @@
                 <div class="definition">
                     <div class="step"><span style="color: red;">Définition :</span> Deux points A et A' sont <strong>symétriques par rapport à un point O</strong>, lorsque O est le <strong>milieu</strong> du segment [AA']. O est alors le <strong>centre de symétrie</strong> de A et A'.</div>
                 </div>
+                <div class="remarque">
+                    <div class="step"><strong>Vocabulaire :</strong> Appliquer la symétrie centrale de centre O à une figure revient à lui faire faire un <strong>demi-tour</strong> (une rotation de 180°) autour du point O.</div>
+                    <div class="step">C'est pour cela qu'on dit souvent qu'une symétrie centrale est un « demi-tour ».</div>
+                </div>
             </div>
 
             <!-- Slide 3 : I. Symétrique d'un point — 1) Sur feuille blanche -->
@@ -32,15 +42,13 @@
                 <h2>I. Symétrique d'un point — 1) Sur feuille blanche</h2>
                 <div class="method">
                     <div class="step"><strong>Pour construire le symétrique A' d'un point A par rapport à un point O, il faut :</strong></div>
+                    <div class="step">
+                        <iframe class="sym-anim-frame" src="animations/animation-regle-compas.html" width="1160" height="872" scrolling="no" style="overflow:hidden;"></iframe>
+                    </div>
                     <div class="step">• À la règle, on trace la demi-droite [A0) (d'origine A et passant par O).</div>
                     <div class="step">• Au compas, on prend pour écartement la distance AO.</div>
                     <div class="step">• On reporte cet écartement sur la demi-droite de l'autre côté de O.</div>
                     <div class="step">• On marque le point A' et on code l'égalité de longueur.</div>
-                </div>
-                <div class="step">
-                    <div class="img-step">
-                        <img src="5-21.png" alt="Construction du symétrique sur feuille blanche">
-                    </div>
                 </div>
             </div>
 
@@ -49,14 +57,12 @@
                 <h2>I. Symétrique d'un point — 2) Dans un quadrillage</h2>
                 <div class="method">
                     <div class="step"><strong>Pour construire le symétrique A' d'un point A par rapport à un point O, il faut :</strong></div>
-                    <div class="step">• On regarde le déplacement pour aller de A vers O (ici 3 carreaux vers la droite et deux vers le bas).</div>
+                    <div class="step">
+                        <iframe class="sym-anim-frame" src="animations/animation-quadrillage-symetrie.html" width="884" height="836" scrolling="no" style="overflow:hidden;"></iframe>
+                    </div>
+                    <div class="step">• On regarde le déplacement pour aller de A vers O (ici 3 carreaux vers la droite et 2 vers le bas).</div>
                     <div class="step">• On reproduit ce déplacement à partir du point O.</div>
                     <div class="step">• On marque le point A'.</div>
-                </div>
-                <div class="step">
-                    <div class="img-step">
-                        <img src="5-22.png" alt="Construction du symétrique dans un quadrillage">
-                    </div>
                 </div>
             </div>
 
@@ -65,10 +71,8 @@
                 <h2>II. Symétrique d'une figure</h2>
                 <div class="method">
                     <div class="step"><strong>Pour construire le symétrique d'une figure par rapport à un point, il suffit de construire les symétriques des points clés puis de les relier correctement en suivant la figure de départ.</strong></div>
-                </div>
-                <div class="step">
-                    <div class="img-step">
-                        <img src="5-23.png" alt="Symétrique d'une figure">
+                    <div class="step">
+                        <iframe class="sym-anim-frame" src="animations/animation-figure-symetrique.html" width="1122" height="1035" scrolling="no" style="overflow:hidden;"></iframe>
                     </div>
                 </div>
             </div>
@@ -93,9 +97,7 @@
                     <div class="step"><span style="color: red;">Définition :</span> Dire qu'un point est un <strong>centre de symétrie</strong> d'une figure signifie que la figure et son symétrique par rapport à ce point sont <strong>confondus</strong>.</div>
                 </div>
                 <div class="step">
-                    <div class="img-step">
-                        <img src="5-24.png" alt="Centre de symétrie et axes de symétrie de figures usuelles">
-                    </div>
+                    <iframe class="sym-anim-frame" src="animations/animation-axes-centres-symetrie.html" width="920" height="776" scrolling="no" style="overflow:hidden;"></iframe>
                 </div>
             </div>
 
@@ -144,6 +146,94 @@
         </div>
     </div>
 
+    <!-- ══ Bouton volant pour piloter l'animation de la slide active ══ -->
+    <style>
+        #symFloatingCtrl {
+            position: fixed; right: 16px; top: 50%; transform: translateY(-50%);
+            display: none; flex-direction: column; gap: 6px; z-index: 9999;
+            background: rgba(255,255,255,0.97); padding: 8px; border-radius: 10px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.25);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        #symFloatingCtrl button {
+            color: white; border: none; padding: 8px 10px; border-radius: 6px;
+            cursor: pointer; font-size: 12px; font-weight: bold; white-space: nowrap;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2); min-width: 76px;
+        }
+        #symFloatingCtrl button:disabled { background:#bdc3c7 !important; cursor:not-allowed; }
+        #symFPrev  { background:#7f8c8d; }
+        #symFNext  { background:#3498db; }
+        #symFReset { background:#e74c3c; }
+        @media (max-width: 700px) {
+            #symFloatingCtrl { right: 4px; padding: 6px; }
+            #symFloatingCtrl button { min-width: 0; padding: 8px 6px; font-size: 11px; }
+        }
+    </style>
+    <div id="symFloatingCtrl">
+        <button id="symFPrev" disabled title="Étape précédente">◀ Préc.</button>
+        <button id="symFNext" title="Étape suivante">Suiv. ▶</button>
+        <button id="symFReset" title="Recommencer">🔄 Reprendre</button>
+    </div>
+
     <script src="script-symetrie.js"></script>
+    <script>
+    // Ce script est autonome, ne touche pas à script-symetrie.js : il pilote
+    // uniquement l'animation de la slide actuellement affichée, via le pont
+    // postMessage déjà présent dans les fichiers animation-*.html.
+    (function() {
+        const allFrames = Array.from(document.querySelectorAll('iframe.sym-anim-frame'));
+        if (!allFrames.length) return;
+        const bar   = document.getElementById('symFloatingCtrl');
+        const fPrev = document.getElementById('symFPrev');
+        const fNext = document.getElementById('symFNext');
+        const fReset = document.getElementById('symFReset');
+        let activeFrame = null;
+
+        function findVisibleFrame() {
+            const activeSlide = document.querySelector('.slide.active');
+            if (!activeSlide) return null;
+            const frame = activeSlide.querySelector('iframe.sym-anim-frame');
+            if (!frame) return null;
+            // n'afficher le bouton volant que si l'étape contenant l'iframe
+            // a bien été révélée (sinon on piloterait une animation invisible)
+            const stepEl = frame.closest('.step');
+            if (stepEl && !stepEl.classList.contains('visible')) return null;
+            return frame;
+        }
+
+        function refresh() {
+            const f = findVisibleFrame();
+            if (f !== activeFrame) {
+                activeFrame = f;
+                if (activeFrame) activeFrame.contentWindow.postMessage({type:'symAnimCmd', cmd:'sync'}, '*');
+            }
+            bar.style.display = activeFrame ? 'flex' : 'none';
+        }
+
+        window.addEventListener('message', function(e) {
+            if (!e.data || e.data.type !== 'symAnimState') return;
+            if (!activeFrame || e.source !== activeFrame.contentWindow) return;
+            const finished = /Termin/i.test(e.data.nextText || '');
+            fNext.textContent = finished ? '✓ Fini' : 'Suiv. ▶';
+            fNext.disabled    = e.data.nextDisabled;
+            fPrev.disabled    = e.data.prevDisabled;
+        });
+
+        fNext.addEventListener('click', function() {
+            if (activeFrame) activeFrame.contentWindow.postMessage({type:'symAnimCmd', cmd:'next'}, '*');
+        });
+        fPrev.addEventListener('click', function() {
+            if (activeFrame) activeFrame.contentWindow.postMessage({type:'symAnimCmd', cmd:'prev'}, '*');
+        });
+        fReset.addEventListener('click', function() {
+            if (activeFrame) activeFrame.contentWindow.postMessage({type:'symAnimCmd', cmd:'reset'}, '*');
+        });
+
+        // La navigation de script-symetrie.js (slides + steps) ne déclenche
+        // pas d'évènement : on vérifie l'état régulièrement (léger, local).
+        setInterval(refresh, 300);
+        refresh();
+    })();
+    </script>
 </body>
 </html>
