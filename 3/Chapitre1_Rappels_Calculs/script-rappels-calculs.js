@@ -6,10 +6,11 @@ let totalSlides = 0;
 const slideTitles = [
     "Calculs numériques",
     "I. Priorités de calculs et fractions",
-    "II. Puissances — 1) Puissances positives",
-    "II. Puissances — 2) Puissances d'exposant négatif",
-    "II. Puissances — 3) Règles de calcul sur les puissances",
-    "III. Notation scientifique"
+    "II. Racines carrées",
+    "III. Puissances — 1) Puissances positives",
+    "III. Puissances — 2) Puissances d'exposant négatif",
+    "III. Puissances — 3) Règles de calcul sur les puissances",
+    "IV. Notation scientifique"
 ];
 
 document.addEventListener('DOMContentLoaded', function() {
