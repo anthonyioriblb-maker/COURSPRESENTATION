@@ -392,13 +392,13 @@ th {
     padding: 2px 5px; 
 }
 
-.mark-orange { 
-    background: orange; 
-    font-weight: bold; 
-    padding: 2px 5px; 
+.mark-orange {
+    background: orange;
+    font-weight: bold;
+    padding: 2px 5px;
 }
 
-.red-text { 
+.red-text {
     color: red; 
     font-weight: bold; 
 }

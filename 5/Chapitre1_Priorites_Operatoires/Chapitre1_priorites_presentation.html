@@ -5,6 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Chapitre 1 - Priorités opératoires</title>
     <link rel="stylesheet" href="../../styles.css">
+    <style>
+        .ul-reveal {
+            text-decoration: underline;
+            text-decoration-color: transparent;
+            text-decoration-thickness: 2px;
+            text-underline-offset: 3px;
+            transition: text-decoration-color 0.4s;
+        }
+    </style>
 </head>
 <body>
     <div class="container">
@@ -47,9 +56,12 @@
                 <div class="example">
                     <div class="step"><strong>Exemple :</strong></div>
                     <div class="calcul-etapes">
-                        <div class="step"><span class="math">D</span> = <span style="background-color: yellow;">4 × 7</span> − 8 : 2</div>
-                        <div class="step"><span class="math">D</span> = 28 − <span style="background-color: yellow;">8 : 2</span></div>
-                        <div class="step"><span class="math">D</span> = <span style="background-color: yellow;">28 − 4</span></div>
+                        <div class="step"><span class="math">D</span> = <span class="ul-reveal ulgD1">4 × 7</span> − 8 : 2</div>
+                        <div class="step ul-trigger" data-target="ulgD1" style="height:0;overflow:hidden;margin:0;padding:0;"></div>
+                        <div class="step"><span class="math">D</span> = 28 − <span class="ul-reveal ulgD2">8 : 2</span></div>
+                        <div class="step ul-trigger" data-target="ulgD2" style="height:0;overflow:hidden;margin:0;padding:0;"></div>
+                        <div class="step"><span class="math">D</span> = <span class="ul-reveal ulgD3">28 − 4</span></div>
+                        <div class="step ul-trigger" data-target="ulgD3" style="height:0;overflow:hidden;margin:0;padding:0;"></div>
                         <div class="step"><span class="math">D</span> = 24</div>
                     </div>
                 </div>
@@ -71,10 +83,14 @@
                 <div class="example">
                     <div class="step"><strong>Exemple :</strong></div>
                     <div class="calcul-etapes">
-                        <div class="step"><span class="math">E</span> = 3 × (10 − (<span style="background-color: yellow;">4 + 2</span> − 3))</div>
-                        <div class="step"><span class="math">E</span> = 3 × (10 − (<span style="background-color: yellow;">6 − 3</span>))</div>
-                        <div class="step"><span class="math">E</span> = 3 × <span style="background-color: yellow;">(10 − 3)</span></div>
-                        <div class="step"><span class="math">E</span> = <span style="background-color: yellow;">3 × 7</span></div>
+                        <div class="step"><span class="math">E</span> = 3 × (10 − (<span class="ul-reveal ulgE1">4 + 2</span> − 3))</div>
+                        <div class="step ul-trigger" data-target="ulgE1" style="height:0;overflow:hidden;margin:0;padding:0;"></div>
+                        <div class="step"><span class="math">E</span> = 3 × (10 − (<span class="ul-reveal ulgE2">6 − 3</span>))</div>
+                        <div class="step ul-trigger" data-target="ulgE2" style="height:0;overflow:hidden;margin:0;padding:0;"></div>
+                        <div class="step"><span class="math">E</span> = 3 × <span class="ul-reveal ulgE3">(10 − 3)</span></div>
+                        <div class="step ul-trigger" data-target="ulgE3" style="height:0;overflow:hidden;margin:0;padding:0;"></div>
+                        <div class="step"><span class="math">E</span> = <span class="ul-reveal ulgE4">3 × 7</span></div>
+                        <div class="step ul-trigger" data-target="ulgE4" style="height:0;overflow:hidden;margin:0;padding:0;"></div>
                         <div class="step"><span class="math">E</span> = 21</div>
                     </div>
                 </div>
@@ -91,7 +107,8 @@
                     <div class="step"><strong>Exemple :</strong></div>
                     <div class="calcul-etapes">
                         <div class="step">25,6 : 0,8</div>
-                        <div class="step">= <span style="background-color: yellow;">256 : 8</span> (on multiplie les deux nombres par 10)</div>
+                        <div class="step">= <span class="ul-reveal ulgDiv1">256 : 8</span> (on multiplie les deux nombres par 10)</div>
+                        <div class="step ul-trigger" data-target="ulgDiv1" style="height:0;overflow:hidden;margin:0;padding:0;"></div>
                         <div class="step">= 32</div>
                     </div>
                 </div>
@@ -100,7 +117,8 @@
                     <div class="step"><strong>Exemple (avec un diviseur à deux chiffres après la virgule) :</strong></div>
                     <div class="calcul-etapes">
                         <div class="step">99,875 : 4,25</div>
-                        <div class="step">= <span style="background-color: yellow;">9987,5 : 425</span> (on multiplie les deux nombres par 100, car le diviseur a deux chiffres après la virgule)</div>
+                        <div class="step">= <span class="ul-reveal ulgDiv2">9987,5 : 425</span> (on multiplie les deux nombres par 100, car le diviseur a deux chiffres après la virgule)</div>
+                        <div class="step ul-trigger" data-target="ulgDiv2" style="height:0;overflow:hidden;margin:0;padding:0;"></div>
                         <div class="step">= 23,5</div>
                     </div>
                 </div>
@@ -118,7 +136,8 @@
                     <div class="calcul-etapes">
                         <div class="step"><span class="math">F</span> = 4 × 27</div>
                         <div class="step"><span class="math">F</span> = 4 × (30 − 3)</div>
-                        <div class="step"><span class="math">F</span> = <span style="background-color: yellow;">4 × 30</span> − <span style="background-color: yellow;">4 × 3</span></div>
+                        <div class="step"><span class="math">F</span> = <span class="ul-reveal ulgF">4 × 30</span> − <span class="ul-reveal ulgF">4 × 3</span></div>
+                        <div class="step ul-trigger" data-target="ulgF" style="height:0;overflow:hidden;margin:0;padding:0;"></div>
                         <div class="step"><span class="math">F</span> = 120 − 12 = 108</div>
                     </div>
                 </div>
@@ -128,7 +147,8 @@
                     <div class="calcul-etapes">
                         <div class="step"><span class="math">G</span> = 6 × 53</div>
                         <div class="step"><span class="math">G</span> = 6 × (50 + 3)</div>
-                        <div class="step"><span class="math">G</span> = <span style="background-color: yellow;">6 × 50</span> + <span style="background-color: yellow;">6 × 3</span></div>
+                        <div class="step"><span class="math">G</span> = <span class="ul-reveal ulgG">6 × 50</span> + <span class="ul-reveal ulgG">6 × 3</span></div>
+                        <div class="step ul-trigger" data-target="ulgG" style="height:0;overflow:hidden;margin:0;padding:0;"></div>
                         <div class="step"><span class="math">G</span> = 300 + 18 = 318</div>
                     </div>
                 </div>

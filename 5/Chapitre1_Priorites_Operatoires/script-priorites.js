@@ -120,6 +120,15 @@ function updateSlide() {
         }
     });
 
+    // Synchronise les traits de soulignement révélés une étape après le texte
+    currentSlide.querySelectorAll('.ul-trigger').forEach(t => {
+        const active = t.classList.contains('visible');
+        const grp = t.dataset.target;
+        currentSlide.querySelectorAll('.' + grp).forEach(el => {
+            el.style.textDecorationColor = active ? 'red' : 'transparent';
+        });
+    });
+
     const currentSlideElement = document.getElementById('currentSlide');
     if (currentSlideElement) {
         currentSlideElement.textContent = currentSlideIndex + 1;

@@ -14,6 +14,13 @@
             display: block;
             max-width: 100%;
         }
+        .ul-reveal {
+            text-decoration: underline;
+            text-decoration-color: transparent;
+            text-decoration-thickness: 2px;
+            text-underline-offset: 3px;
+            transition: text-decoration-color 0.4s;
+        }
     </style>
 </head>
 <body>
@@ -145,10 +152,19 @@
                 </div>
                 <div class="example">
                     <div class="step"><strong>Exemple :</strong></div>
-                    <div class="step"><em>A</em> = (−2 + 5 × (−7)) + [(2 + 4 × (−3)) − (−10 − (−7) × (−2))]</div>
-                    <div class="step"><em>A</em> = (−2 − 35) + [(2 − 12) − (−10 − 14)]</div>
-                    <div class="step"><em>A</em> = −37 + [−10 − (−24)]</div>
-                    <div class="step"><em>A</em> = −37 + 14 = <strong style="color:red;">−23</strong></div>
+                    <div class="step calcul-detail"><em>A</em> = (−2 <span class="ul-reveal ulg1">+ 5 × (−7)</span>) + [(2 <span class="ul-reveal ulg1">+ 4 × (−3)</span>) − (−10 <span class="ul-reveal ulg1">− (−7) × (−2)</span>)]</div>
+                    <div class="step ul-trigger" data-target="ulg1" style="height:0;overflow:hidden;margin:0;padding:0;"></div>
+
+                    <div class="step calcul-detail"><em>A</em> = <span class="ul-reveal ulg2">(−2 − 35)</span> + [<span class="ul-reveal ulg2">(2 − 12)</span> − <span class="ul-reveal ulg2">(−10 − 14)</span>]</div>
+                    <div class="step ul-trigger" data-target="ulg2" style="height:0;overflow:hidden;margin:0;padding:0;"></div>
+
+                    <div class="step calcul-detail"><em>A</em> = −37 + <span class="ul-reveal ulg3">[(−10) − (−24)]</span></div>
+                    <div class="step ul-trigger" data-target="ulg3" style="height:0;overflow:hidden;margin:0;padding:0;"></div>
+
+                    <div class="step calcul-detail"><em>A</em> = <span class="ul-reveal ulg5">−37 + 14</span></div>
+                    <div class="step ul-trigger" data-target="ulg5" style="height:0;overflow:hidden;margin:0;padding:0;"></div>
+
+                    <div class="step calcul-detail"><strong><em>A</em> = −23</strong></div>
                 </div>
             </div>
 

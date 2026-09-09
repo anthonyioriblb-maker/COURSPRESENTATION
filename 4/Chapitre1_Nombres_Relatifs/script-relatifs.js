@@ -57,6 +57,15 @@ function updateSlide() {
         if (index < currentStepIndex) step.classList.add('visible');
         else step.classList.remove('visible');
     });
+    // Synchronise les traits de soulignement révélés une étape après le texte (VI. Priorités opératoires)
+    currentSlide.querySelectorAll('.ul-trigger').forEach(t => {
+        const active = t.classList.contains('visible');
+        const grp = t.dataset.target;
+        currentSlide.querySelectorAll('.' + grp).forEach(el => {
+            el.style.textDecorationColor = active ? 'red' : 'transparent';
+        });
+    });
+
     const cse = document.getElementById('currentSlide');
     if (cse) cse.textContent = currentSlideIndex + 1;
     const prevBtn = document.getElementById('prevBtn');
