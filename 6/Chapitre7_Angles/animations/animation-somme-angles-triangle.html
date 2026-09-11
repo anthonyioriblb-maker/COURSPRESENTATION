@@ -242,5 +242,76 @@ function stopAuto() {
     if (btn) { btn.textContent = '⏵ Automatique'; btn.style.background = ''; }
 }
 </script>
+    <script>
+    /* === Pont bouton volant (COURSPRESENTATION) ===
+       Générique, ne pas adapter au cas par cas : voir CLAUDE.md, règle
+       "Bouton volant". Détecte les boutons précédent/suivant/reset de
+       CETTE animation (quels que soient leurs id/onclick) et répond
+       aux commandes envoyées par floating-anim-controls.js. */
+    (function () {
+        if (window.parent === window) return;
+
+        function findBtn(ids, onclickRe, textRe) {
+            for (var i = 0; i < ids.length; i++) {
+                var el = document.getElementById(ids[i]);
+                if (el) return el;
+            }
+            var all = document.querySelectorAll('button');
+            for (var j = 0; j < all.length; j++) {
+                var oc = all[j].getAttribute('onclick') || '';
+                if (onclickRe.test(oc)) return all[j];
+            }
+            for (var k = 0; k < all.length; k++) {
+                if (textRe.test(all[k].textContent)) return all[k];
+            }
+            return null;
+        }
+
+        var btnPrev = findBtn(
+            ['btnPrec', 'btnPrecedent', 'prevBtn', 'btnPrev', 'btnRetour'],
+            /prev|pr[ée]c[ée]dent/i,
+            /pr[ée]c[ée]dent/i
+        );
+        var btnNext = findBtn(
+            ['btnNext', 'btnSuivant', 'nextBtn', 'btnSuiv'],
+            /next|suivant/i,
+            /suivant/i
+        );
+        var btnReset = findBtn(
+            ['btnReset'],
+            /reset/i,
+            /recommencer|r[ée]initialiser|effacer/i
+        );
+
+        function postState() {
+            window.parent.postMessage({
+                type: 'symAnimState',
+                nextText: btnNext ? btnNext.textContent.trim() : '',
+                nextDisabled: btnNext ? !!btnNext.disabled : true,
+                prevDisabled: btnPrev ? !!btnPrev.disabled : true
+            }, '*');
+        }
+
+        [btnPrev, btnNext, btnReset].forEach(function (b) {
+            if (!b) return;
+            new MutationObserver(postState).observe(b, { attributes: true, attributeFilter: ['disabled'] });
+            new MutationObserver(postState).observe(b, { childList: true, characterData: true, subtree: true });
+        });
+
+        window.addEventListener('message', function (e) {
+            if (!e.data || e.data.type !== 'symAnimCmd') return;
+            if (e.data.cmd === 'next' && btnNext && !btnNext.disabled) btnNext.click();
+            else if (e.data.cmd === 'prev' && btnPrev && !btnPrev.disabled) btnPrev.click();
+            else if (e.data.cmd === 'reset' && btnReset) btnReset.click();
+            else if (e.data.cmd === 'sync') postState();
+        });
+
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', postState);
+        } else {
+            postState();
+        }
+    })();
+    </script>
 </body>
 </html>
