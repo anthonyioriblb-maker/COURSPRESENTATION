@@ -105,3 +105,30 @@
         init();
     }
 })();
+
+/* ===================================================================
+   REDIMENSIONNEMENT AUTOMATIQUE DES IFRAMES D'ANIMATION
+   -------------------------------------------------------------------
+   Indépendant du bouton volant ci-dessus (fonctionne même sans lui).
+   Chaque fichier animations/*.html mesure sa propre hauteur de
+   contenu et la transmet ici via postMessage. On ajuste alors la
+   hauteur de l'iframe correspondante pile à la bonne valeur — plus
+   besoin de deviner une hauteur à l'avance dans le HTML de la
+   présentation.
+
+   Protocole postMessage (contrat avec animations/*.html) :
+     Animation → présentation : { type: 'iframe-resize', height: <px> }
+   =================================================================== */
+window.addEventListener('message', function (e) {
+    if (!e.data || e.data.type !== 'iframe-resize') return;
+    var frames = document.querySelectorAll('iframe');
+    for (var i = 0; i < frames.length; i++) {
+        if (frames[i].contentWindow === e.source) {
+            var h = parseInt(e.data.height, 10);
+            if (h && h > 0) {
+                frames[i].style.height = (h + 4) + 'px';
+            }
+            break;
+        }
+    }
+});
