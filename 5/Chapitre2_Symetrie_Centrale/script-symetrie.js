@@ -6,8 +6,8 @@ let totalSlides = 0;
 const slideTitles = [
     "Symétrie centrale",
     "I. Symétrique d'un point",
-    "I. Symétrique d'un point — 1) Sur feuille blanche",
-    "I. Symétrique d'un point — 2) Dans un quadrillage",
+    "1) Sur feuille blanche",
+    "2) Dans un quadrillage",
     "II. Symétrique d'une figure",
     "III. Propriétés de la symétrie centrale",
     "IV. Centre de symétrie et axes de symétrie de figures usuelles"

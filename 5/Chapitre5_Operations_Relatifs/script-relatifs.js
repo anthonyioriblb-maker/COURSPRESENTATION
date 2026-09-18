@@ -8,8 +8,8 @@ let totalSlides = 0;
 const slideTitles = [
     "Chapitre 9 : Calculs avec les nombres relatifs",
     "I. Addition de nombres relatifs",
-    "I. Addition de nombres relatifs — 1) Même signe",
-    "I. Addition de nombres relatifs — 2) Signes contraires",
+    "1) Même signe",
+    "2) Signes contraires",
     "II. Opposé d'un nombre relatif",
     "III. Soustraction de nombres relatifs",
     "IV. Enchaînement d'opérations"
