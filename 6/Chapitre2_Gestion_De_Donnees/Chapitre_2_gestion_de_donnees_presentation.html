@@ -8,30 +8,48 @@
     <style>
         .tableau-avec-fleche {
             position: relative;
-            margin: 20px 0;
+            display: inline-block;
+            margin: 20px auto;
+            max-width: 100%;
+        }
+        .tableau-avec-fleche table {
+            margin: 0 auto;
         }
         .fleche-coefficient {
             position: absolute;
-            right: 20px;
-            top: 50%;
-            transform: translateY(-50%);
+            right: -72px;
+            top: 0;
+            height: 0;
+            transform: none;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
             text-align: center;
         }
         .fleche-coefficient svg {
-            width: 80px;
-            height: 80px;
+            width: 62px;
+            height: 56px;
+            display: block;
+            flex-shrink: 0;
         }
         .coefficient {
-            font-size: 1.2em;
+            font-size: 23px;
             font-weight: bold;
             color: #2ecc71;
-            margin-top: 5px;
+            margin-top: 2px;
+            white-space: nowrap;
         }
-        table {
-            font-size: inherit;
+        #diagramme-circulaire-table {
+            font-size: 0.95em;
+            width: auto;
+            max-width: 100%;
         }
-        table th, table td {
+        #diagramme-circulaire-table th,
+        #diagramme-circulaire-table td {
             font-size: inherit;
+            padding: 6px 8px;
+            white-space: normal;
         }
         .green-text {
             color: #2ecc71;
@@ -40,6 +58,13 @@
         .red-text {
             color: red;
             font-weight: bold;
+        }
+        .reveal-target {
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+        .reveal-target.visible {
+            opacity: 1;
         }
     </style>
 </head>
@@ -127,7 +152,7 @@
                     <div class="step"><strong>Exemple :</strong></div>
                     <div class="step">
                         <div class="tableau-avec-fleche">
-                            <table>
+                            <table id="diagramme-circulaire-table">
                                 <tr>
                                     <th>Loisir préféré</th>
                                     <th>Sport</th>
@@ -144,22 +169,22 @@
                                     <td>6</td>
                                     <td>2</td>
                                     <td>3</td>
-                                    <td><strong>24</strong></td>
+                                    <td id="total-effectif-cell"><strong>24</strong></td>
                                 </tr>
                                 <tr>
                                     <td>Angle en degrés</td>
-                                    <td><span class="green-text">120</span></td>
-                                    <td><span class="green-text">75</span></td>
-                                    <td><span class="green-text">90</span></td>
-                                    <td><span class="green-text">30</span></td>
-                                    <td><span class="green-text">45</span></td>
-                                    <td><strong><span class="red-text">360</span></strong></td>
+                                    <td><span class="green-text reveal-target" id="angle-sport">120</span></td>
+                                    <td><span class="green-text reveal-target" id="angle-cinema">75</span></td>
+                                    <td><span class="green-text reveal-target" id="angle-lecture">90</span></td>
+                                    <td><span class="green-text reveal-target" id="angle-tv">30</span></td>
+                                    <td><span class="green-text reveal-target" id="angle-jeu">45</span></td>
+                                    <td id="total-angle-cell"><strong><span class="red-text reveal-target" id="angle-total">360</span></strong></td>
                                 </tr>
                             </table>
-                            <div class="fleche-coefficient">
+                            <div class="fleche-coefficient reveal-target" id="fleche-diag">
                                 <svg viewBox="0 0 120 100" xmlns="http://www.w3.org/2000/svg">
                                     <defs>
-                                        <marker id="arrowhead" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto">
+                                        <marker id="arrowhead-diag" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto">
                                             <polygon points="0 0, 6 3, 0 6" fill="#2ecc71"/>
                                         </marker>
                                     </defs>
@@ -167,14 +192,20 @@
                                           stroke="#2ecc71"
                                           stroke-width="3"
                                           fill="none"
-                                          marker-end="url(#arrowhead)"/>
+                                          marker-end="url(#arrowhead-diag)"/>
                                 </svg>
                                 <div class="coefficient">× 15</div>
                             </div>
                         </div>
                     </div>
-                    <div class="step"><p align="center"><strong>L'angle complet d'un cercle est de 360°</strong></p></div>
+                    <div class="step" data-reveal-target="angle-total"><p align="center"><strong>L'angle complet d'un cercle est de 360°</strong></p></div>
                     <div class="step">360 ÷ 24 = 15 donc on multiplie la deuxième ligne par 15 pour obtenir la troisième.</div>
+                    <div class="step" data-reveal-target="fleche-diag">On obtient ainsi le coefficient multiplicateur :</div>
+                    <div class="step" data-reveal-target="angle-sport">Sport&nbsp;: 8 × 15 = <strong>120°</strong></div>
+                    <div class="step" data-reveal-target="angle-cinema">Cinéma&nbsp;: 5 × 15 = <strong>75°</strong></div>
+                    <div class="step" data-reveal-target="angle-lecture">Lecture&nbsp;: 6 × 15 = <strong>90°</strong></div>
+                    <div class="step" data-reveal-target="angle-tv">Télévision&nbsp;: 2 × 15 = <strong>30°</strong></div>
+                    <div class="step" data-reveal-target="angle-jeu">Jeu vidéo&nbsp;: 3 × 15 = <strong>45°</strong></div>
                     <div class="step">
                         <iframe src="animations/animation-diagramme-circulaire.html" width="100%" height="750"
                                 style="border:none; border-radius:8px; box-shadow:0 2px 10px rgba(0,0,0,0.1); display:block;"></iframe>

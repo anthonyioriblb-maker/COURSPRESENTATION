@@ -76,6 +76,41 @@ function resetSlide() {
     updateSlide();
 }
 
+// Synchronise les éléments marqués "reveal-target" (valeurs de tableau, flèches, etc.)
+// avec la visibilité des .step qui déclarent data-reveal-target="id1,id2,...".
+// Permet à un simple clic "Suivant" de faire apparaître un élément situé dans un
+// bloc déjà affiché plus haut (ex : une valeur dans un tableau), sans script dédié.
+function syncRevealTargets() {
+    document.querySelectorAll('.step[data-reveal-target]').forEach(step => {
+        const visible = step.classList.contains('visible');
+        step.dataset.revealTarget.split(',').forEach(id => {
+            const el = document.getElementById(id.trim());
+            if (el) el.classList.toggle('visible', visible);
+        });
+    });
+}
+
+// Aligne précisément la flèche du coefficient ("fleche-diag") sur la hauteur
+// exacte comprise entre les deux cellules "Total" du tableau (celle du haut
+// et celle du bas), pour qu'elle pointe bien de l'une vers l'autre, quelle
+// que soit la taille de l'écran (les hauteurs de lignes peuvent varier).
+function positionFlecheDiag() {
+    const arrow = document.getElementById('fleche-diag');
+    const topCell = document.getElementById('total-effectif-cell');
+    const botCell = document.getElementById('total-angle-cell');
+    if (!arrow || !topCell || !botCell) return;
+    const wrap = arrow.closest('.tableau-avec-fleche');
+    if (!wrap) return;
+    const wrapRect = wrap.getBoundingClientRect();
+    const topRect = topCell.getBoundingClientRect();
+    const botRect = botCell.getBoundingClientRect();
+    const top = topRect.top - wrapRect.top;
+    const height = botRect.bottom - topRect.top;
+    arrow.style.top = top + 'px';
+    arrow.style.height = height + 'px';
+}
+window.addEventListener('resize', () => positionFlecheDiag());
+
 function updateSlide() {
     const contentDiv = document.querySelector('.content');
 
@@ -94,6 +129,9 @@ function updateSlide() {
             step.classList.remove('visible');
         }
     });
+
+    syncRevealTargets();
+    positionFlecheDiag();
 
     document.getElementById('currentSlide').textContent = currentSlideIndex + 1;
     document.getElementById('prevBtn').disabled = currentSlideIndex === 0 && currentStepIndex === 0;
@@ -115,7 +153,17 @@ function updateSlide() {
             const visibleSteps = slides[currentSlideIndex].querySelectorAll('.step.visible');
             if (visibleSteps.length > 0) {
                 const lastVisibleStep = visibleSteps[visibleSteps.length - 1];
-                lastVisibleStep.scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'nearest' });
+                // Si ce step ne fait qu'annoncer l'apparition d'un élément ailleurs
+                // (ex : une valeur dans un tableau plus haut via data-reveal-target),
+                // on centre la vue sur cet élément plutôt que sur le texte du step,
+                // pour que l'élève voie bien la valeur apparaître.
+                let scrollTarget = lastVisibleStep;
+                if (lastVisibleStep.dataset.revealTarget) {
+                    const firstId = lastVisibleStep.dataset.revealTarget.split(',')[0].trim();
+                    const revealEl = document.getElementById(firstId);
+                    if (revealEl) scrollTarget = revealEl;
+                }
+                scrollTarget.scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'nearest' });
             }
         }, 650);
     }
