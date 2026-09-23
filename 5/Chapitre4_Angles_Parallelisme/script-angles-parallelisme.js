@@ -6,11 +6,12 @@ const totalSlides = slides.length;
 
 const slideTitles = [
     "Chapitre 5 : Angles et parallélisme",
-    "I. Angles alternes-internes et angles correspondants — 1) Angles alternes-internes",
+    "I. Angles opposés par le sommet",
+    "II. Angles alternes-internes et angles correspondants — 1) Angles alternes-internes",
     "2) Angles correspondants",
-    "II. Propriétés de parallélisme — 1) Avec les angles alternes-internes",
+    "III. Propriétés de parallélisme — 1) Avec les angles alternes-internes",
     "2) Avec les angles correspondants",
-    "III. Exemples d'utilisation — 1) Exemple 1",
+    "IV. Exemples d'utilisation — 1) Exemple 1",
     "2) Exemple 2"
 ];
 
