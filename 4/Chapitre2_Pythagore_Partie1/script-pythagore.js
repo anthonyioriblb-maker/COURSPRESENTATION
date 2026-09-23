@@ -3,6 +3,32 @@ let currentStepIndex = 0;
 let slides = null;
 let totalSlides = 0;
 
+// Retourne les .step d'une slide, en respectant un ordre custom via
+// data-order pour les groupes contigus de steps qui en portent un
+// (ex: tableau carre/racine carree revele colonne par colonne).
+function getOrderedSteps(slideEl) {
+    const raw = Array.from(slideEl.querySelectorAll('.step'));
+    const result = [];
+    let i = 0;
+    while (i < raw.length) {
+        if (raw[i].dataset.order !== undefined) {
+            const run = [];
+            let j = i;
+            while (j < raw.length && raw[j].dataset.order !== undefined) {
+                run.push(raw[j]);
+                j++;
+            }
+            run.sort((a, b) => parseFloat(a.dataset.order) - parseFloat(b.dataset.order));
+            result.push(...run);
+            i = j;
+        } else {
+            result.push(raw[i]);
+            i++;
+        }
+    }
+    return result;
+}
+
 const slideTitles = [
     "Chapitre 2 : Théorème de Pythagore (1)",
     "I. Théorème de Pythagore",
@@ -47,7 +73,7 @@ function updateSlide() {
         if (index === currentSlideIndex) slide.classList.add('active');
     });
     const currentSlide = slides[currentSlideIndex];
-    const steps = currentSlide.querySelectorAll('.step');
+    const steps = getOrderedSteps(currentSlide);
     const totalSteps = steps.length;
     steps.forEach((step, index) => {
         if (index < currentStepIndex) step.classList.add('visible');
@@ -77,7 +103,7 @@ function updateSlide() {
 function changeSlide(direction) {
     if (!slides || slides.length === 0) return;
     const currentSlide = slides[currentSlideIndex];
-    const steps = currentSlide.querySelectorAll('.step');
+    const steps = getOrderedSteps(currentSlide);
     const totalSteps = steps.length;
     if (direction === 1) {
         if (currentStepIndex < totalSteps) { currentStepIndex++; updateSlide(); }
@@ -86,7 +112,7 @@ function changeSlide(direction) {
         if (currentStepIndex > 0) { currentStepIndex--; updateSlide(); }
         else if (currentSlideIndex > 0) {
             currentSlideIndex--;
-            currentStepIndex = slides[currentSlideIndex].querySelectorAll('.step').length;
+            currentStepIndex = getOrderedSteps(slides[currentSlideIndex]).length;
             updateSlide();
         }
     }
