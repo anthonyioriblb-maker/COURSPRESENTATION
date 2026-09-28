@@ -14,6 +14,14 @@ function getSlides() {
     return document.querySelectorAll('.slide');
 }
 
+// Étapes d'une slide, triées par data-order quand il est présent (sinon ordre du document)
+function stepsOf(slide) {
+    return Array.from(slide.querySelectorAll('.step'))
+        .map((el, i) => ({ el, i, o: el.dataset.order !== undefined ? +el.dataset.order : i }))
+        .sort((a, b) => a.o - b.o || a.i - b.i)
+        .map(x => x.el);
+}
+
 function updateSlideDisplay() {
     const slides = getSlides();
     slides.forEach((slide, index) => {
@@ -26,7 +34,7 @@ function updateSlideDisplay() {
 
 function updateSteps() {
     const currentSlide = getSlides()[currentSlideIndex];
-    const steps = currentSlide.querySelectorAll('.step');
+    const steps = stepsOf(currentSlide);
     steps.forEach((step, index) => {
         step.classList.toggle('visible', index < currentStepIndex);
     });
@@ -42,7 +50,7 @@ function scrollToCurrentStep() {
     } else {
         setTimeout(() => {
             const currentSlide = getSlides()[currentSlideIndex];
-            const visibleSteps = currentSlide.querySelectorAll('.step.visible');
+            const visibleSteps = stepsOf(currentSlide).filter(s => s.classList.contains('visible'));
             if (visibleSteps.length > 0) {
                 visibleSteps[visibleSteps.length - 1].scrollIntoView({
                     behavior: 'smooth',
@@ -63,7 +71,7 @@ function updateIndicators() {
 
 function updateStepIndicator() {
     const currentSlide = getSlides()[currentSlideIndex];
-    const steps = currentSlide.querySelectorAll('.step');
+    const steps = stepsOf(currentSlide);
     const indicator = document.getElementById('stepIndicator');
     if (steps.length > 1 && currentStepIndex < steps.length) {
         indicator.textContent = `Étape ${currentStepIndex}/${steps.length}`;
@@ -79,7 +87,7 @@ function updateStepIndicator() {
 function changeSlide(direction) {
     const slides = getSlides();
     const currentSlide = slides[currentSlideIndex];
-    const totalSteps = currentSlide.querySelectorAll('.step').length;
+    const totalSteps = stepsOf(currentSlide).length;
 
     if (direction === 1) {
         if (currentStepIndex < totalSteps) {
@@ -96,7 +104,7 @@ function changeSlide(direction) {
             updateSlideDisplay();
         } else if (currentSlideIndex > 0) {
             currentSlideIndex--;
-            currentStepIndex = slides[currentSlideIndex].querySelectorAll('.step').length;
+            currentStepIndex = stepsOf(slides[currentSlideIndex]).length;
             updateSlideDisplay();
         }
     }

@@ -5,6 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Chapitre 3 - Écriture fractionnaire</title>
     <link rel="stylesheet" href="../../styles.css">
+    <style>
+        /* Simplification barrée (au clic) */
+        .calc-filles .barre { color: red; text-decoration: line-through transparent; text-decoration-thickness: 2px; transition: text-decoration-color 0.4s; }
+        .calc-filles:has(.barre-trigger.visible) .barre { text-decoration-color: red; }
+    </style>
 </head>
 <body>
     <div class="container">
@@ -94,7 +99,14 @@
                 </div>
                 <div class="example">
                     <div class="step"><strong>Exemple 2 :</strong> Dans une classe de 24 élèves, il y a <span class="fraction"><span class="numerateur">3</span><span class="denominateur">8</span></span> de filles.</div>
-                    <div class="step">Nombre de filles = 24 × <span class="fraction"><span class="numerateur">3</span><span class="denominateur">8</span></span> = <span class="fraction"><span class="numerateur">72</span><span class="denominateur">8</span></span> = <strong style="color:red;">9 filles</strong></div>
+                    <div class="calc-filles">
+                        <div class="step">24 × <span class="fraction"><span class="numerateur">3</span><span class="denominateur">8</span></span></div>
+                        <div class="step">= <span class="fraction"><span class="numerateur">24 × 3</span><span class="denominateur">8</span></span></div>
+                        <div class="step">= <span class="fraction"><span class="numerateur"><span class="barre">2 × 2 × 2</span> × 3 × 3</span><span class="denominateur"><span class="barre">2 × 2 × 2</span></span></span></div>
+                        <div class="step barre-trigger" style="height:0;overflow:hidden;margin:0;padding:0;"></div>
+                        <div class="step">= 9</div>
+                    </div>
+                    <div class="step">Il y a donc 9 filles dans cette classe.</div>
                 </div>
             </div>
 

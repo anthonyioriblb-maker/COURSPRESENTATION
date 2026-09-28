@@ -5,6 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chapitre 3 - Calcul littéral</title>
     <link rel="stylesheet" href="../../styles.css">
+    <style>
+        .exemples-cote { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 10px 30px; align-items: start; }
+        .exemples-cote-large { grid-template-columns: repeat(auto-fit, minmax(780px, 1fr)); }
+        .exemples-cote-2 { grid-template-columns: repeat(auto-fit, minmax(560px, 1fr)); }
+        .exemples-cote .step { white-space: nowrap; }
+        .demo-barre .barre { color: red; text-decoration: line-through transparent; text-decoration-thickness: 2px; transition: text-decoration-color 0.4s; }
+        .demo-barre:has(.barre-trigger.visible) .barre { text-decoration-color: red; }
+    </style>
 </head>
 <body>
     <div class="container">
@@ -25,23 +33,35 @@
                 </div>
                 <div class="example">
                     <div class="step"><strong>Exemples :</strong></div>
-                    <div class="step">5(<span class="math">x</span> + 1)</div>
-                    <div class="step">= 5 × <span class="math">x</span> + 5 × 1</div>
-                    <div class="step">= 5<span class="math">x</span> + 5</div>
-                    <div class="step">4(<span class="math">y</span> − 7)</div>
-                    <div class="step">= 4 × <span class="math">y</span> − 4 × 7</div>
-                    <div class="step">= 4<span class="math">y</span> − 28</div>
-                    <div class="step">3(2<span class="math">x</span> − <span class="math">t</span>)</div>
-                    <div class="step">= 3 × 2<span class="math">x</span> − 3 × <span class="math">t</span></div>
-                    <div class="step">= 6<span class="math">x</span> − 3<span class="math">t</span></div>
+                    <div class="exemples-cote">
+                        <div>
+                            <div class="step"><span class="math">A</span> = 5(<span class="math">x</span> + 1)</div>
+                            <div class="step"><span class="math">A</span> = 5 × <span class="math">x</span> + 5 × 1</div>
+                            <div class="step"><span class="math">A</span> = 5<span class="math">x</span> + 5</div>
+                        </div>
+                        <div>
+                            <div class="step"><span class="math">B</span> = 4(<span class="math">y</span> − 7)</div>
+                            <div class="step"><span class="math">B</span> = 4 × <span class="math">y</span> − 4 × 7</div>
+                            <div class="step"><span class="math">B</span> = 4<span class="math">y</span> − 28</div>
+                        </div>
+                        <div>
+                            <div class="step"><span class="math">C</span> = 3(2<span class="math">x</span> − <span class="math">t</span>)</div>
+                            <div class="step"><span class="math">C</span> = 3 × 2<span class="math">x</span> − 3 × <span class="math">t</span></div>
+                            <div class="step"><span class="math">C</span> = 6<span class="math">x</span> − 3<span class="math">t</span></div>
+                        </div>
+                    </div>
                 </div>
                 <div class="important">
                     <div class="step"><span style="color: red;">Propriété :</span> On peut supprimer des parenthèses précédées d'un signe + sans rien changer.</div>
-                    <div class="step"><strong>Exemple :</strong> 4 + (<span class="math">y</span> + 5<span class="math">x</span>) = 4 + <span class="math">y</span> + 5<span class="math">x</span></div>
+                    <div class="step"><strong>Exemple :</strong></div>
+                    <div class="step"><span class="math">D</span> = 4 + (<span class="math">y</span> + 5<span class="math">x</span>)</div>
+                    <div class="step"><span class="math">D</span> = 4 + <span class="math">y</span> + 5<span class="math">x</span></div>
                 </div>
                 <div class="important">
                     <div class="step"><span style="color: red;">Propriété :</span> On peut supprimer des parenthèses précédées d'un signe − en changeant tous les signes des termes à l'intérieur.</div>
-                    <div class="step"><strong>Exemple :</strong> 4 − (<span class="math">x</span> − 5<span class="math">a</span>) = 4 − <span class="math">x</span> + 5<span class="math">a</span></div>
+                    <div class="step"><strong>Exemple :</strong></div>
+                    <div class="step"><span class="math">E</span> = 4 − (<span class="math">x</span> − 5<span class="math">a</span>)</div>
+                    <div class="step"><span class="math">E</span> = 4 − <span class="math">x</span> + 5<span class="math">a</span></div>
                 </div>
             </div>
 
@@ -54,17 +74,22 @@
                     <div class="step">(<span style="color: red;"><span class="math">a</span></span> + <span style="color: blue;"><span class="math">b</span></span>)(<span style="color: green;"><span class="math">c</span></span> + <span style="color: purple;"><span class="math">d</span></span>) = <span style="color: red;"><span class="math">a</span></span><span style="color: green;"><span class="math">c</span></span> + <span style="color: red;"><span class="math">a</span></span><span style="color: purple;"><span class="math">d</span></span> + <span style="color: blue;"><span class="math">b</span></span><span style="color: green;"><span class="math">c</span></span> + <span style="color: blue;"><span class="math">b</span></span><span style="color: purple;"><span class="math">d</span></span></div>
                 </div>
                 <div class="example">
-                    <div class="step"><strong>Exemple 1 :</strong> Développer et réduire (2<span class="math">x</span> + 3)(<span class="math">y</span> + 7)</div>
-                    <div class="step">(2<span class="math">x</span> + 3)(<span class="math">y</span> + 7)</div>
-                    <div class="step">= 2<span class="math">x</span> × <span class="math">y</span> + 2<span class="math">x</span> × 7 + 3 × <span class="math">y</span> + 3 × 7</div>
-                    <div class="step">= 2<span class="math">xy</span> + 14<span class="math">x</span> + 3<span class="math">y</span> + 21</div>
-                </div>
-                <div class="example">
-                    <div class="step"><strong>Exemple 2 :</strong> Développer et réduire (2<span class="math">x</span> − 3)(5<span class="math">x</span> + 7)</div>
-                    <div class="step">(2<span class="math">x</span> − 3)(5<span class="math">x</span> + 7)</div>
-                    <div class="step">= 2<span class="math">x</span> × 5<span class="math">x</span> + 2<span class="math">x</span> × 7 − 3 × 5<span class="math">x</span> − 3 × 7</div>
-                    <div class="step">= 10<span class="math">x</span>² + 14<span class="math">x</span> − 15<span class="math">x</span> − 21</div>
-                    <div class="step">= 10<span class="math">x</span>² − <span class="math">x</span> − 21</div>
+                    <div class="step"><strong>Exemples :</strong></div>
+                    <div class="exemples-cote exemples-cote-large">
+                        <div>
+                            <div class="step">Développer et réduire <span class="math">F</span>.</div>
+                            <div class="step"><span class="math">F</span> = (2<span class="math">x</span> + 3)(<span class="math">y</span> + 7)</div>
+                            <div class="step"><span class="math">F</span> = 2<span class="math">x</span> × <span class="math">y</span> + 2<span class="math">x</span> × 7 + 3 × <span class="math">y</span> + 3 × 7</div>
+                            <div class="step"><span class="math">F</span> = 2<span class="math">xy</span> + 14<span class="math">x</span> + 3<span class="math">y</span> + 21</div>
+                        </div>
+                        <div>
+                            <div class="step">Développer et réduire <span class="math">G</span>.</div>
+                            <div class="step"><span class="math">G</span> = (2<span class="math">x</span> − 3)(5<span class="math">x</span> + 7)</div>
+                            <div class="step"><span class="math">G</span> = 2<span class="math">x</span> × 5<span class="math">x</span> + 2<span class="math">x</span> × 7 − 3 × 5<span class="math">x</span> − 3 × 7</div>
+                            <div class="step"><span class="math">G</span> = 10<span class="math">x</span>² + 14<span class="math">x</span> − 15<span class="math">x</span> − 21</div>
+                            <div class="step"><span class="math">G</span> = 10<span class="math">x</span>² − <span class="math">x</span> − 21</div>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -75,18 +100,41 @@
                     <div class="step"><span style="color: red;">Propriété :</span> Quels que soient les nombres <span class="math">a</span> et <span class="math">b</span> :</div>
                     <div class="step">(<span class="math">a</span> + <span class="math">b</span>)(<span class="math">a</span> − <span class="math">b</span>) = <span class="math">a</span>² − <span class="math">b</span>²</div>
                 </div>
-                <div class="method">
+                <div class="method demo-barre">
                     <div class="step"><strong>Démonstration :</strong></div>
                     <div class="step">(<span class="math">a</span> + <span class="math">b</span>)(<span class="math">a</span> − <span class="math">b</span>)</div>
                     <div class="step">= <span class="math">a</span> × <span class="math">a</span> − <span class="math">a</span> × <span class="math">b</span> + <span class="math">b</span> × <span class="math">a</span> − <span class="math">b</span> × <span class="math">b</span></div>
-                    <div class="step">= <span class="math">a</span>² − <span class="math">ab</span> + <span class="math">ab</span> − <span class="math">b</span>²</div>
+                    <div class="step">= <span class="math">a</span>² <span class="barre">− <span class="math">ab</span></span> <span class="barre">+ <span class="math">ab</span></span> − <span class="math">b</span>²</div>
+                    <div class="step barre-trigger" style="height:0;overflow:hidden;margin:0;padding:0;"></div>
                     <div class="step">= <span class="math">a</span>² − <span class="math">b</span>²</div>
                 </div>
                 <div class="example">
-                    <div class="step"><strong>Exemple :</strong></div>
-                    <div class="step">(<span class="math">x</span> − 5)(<span class="math">x</span> + 5)</div>
-                    <div class="step">= <span class="math">x</span>² − 5²</div>
-                    <div class="step">= <span class="math">x</span>² − 25</div>
+                    <div class="step"><strong>Exemples :</strong></div>
+                    <div class="exemples-cote exemples-cote-2">
+                        <div>
+                            <div class="step"><span class="math">A</span> = (<span class="math">x</span> − 5)(<span class="math">x</span> + 5)</div>
+                            <div class="step"><span class="math">A</span> = <span class="math">x</span>² − 5²</div>
+                            <div class="step"><span class="math">A</span> = <span class="math">x</span>² − 25</div>
+                        </div>
+                        <div>
+                            <div class="step"><span class="math">B</span> = (7<span class="math">x</span> − 3)(7<span class="math">x</span> + 3)</div>
+                            <div class="step"><span class="math">B</span> = (7<span class="math">x</span>)² − 3²</div>
+                            <div class="step"><span class="math">B</span> = 49<span class="math">x</span>² − 9</div>
+                        </div>
+                        <div>
+                            <div class="step"><span class="math">C</span> = (7<span class="math">y</span> + <span class="math">x</span>)(−<span class="math">x</span> + 7<span class="math">y</span>)</div>
+                            <div class="step"><span class="math">C</span> = (7<span class="math">y</span> + <span class="math">x</span>)(7<span class="math">y</span> − <span class="math">x</span>)</div>
+                            <div class="step"><span class="math">C</span> = (7<span class="math">y</span>)² − <span class="math">x</span>²</div>
+                            <div class="step"><span class="math">C</span> = 49<span class="math">y</span>² − <span class="math">x</span>²</div>
+                        </div>
+                        <div>
+                            <div class="step"><span class="math">D</span> = (5 + 2<span class="sqrt">3</span>)(5 − 2<span class="sqrt">3</span>)</div>
+                            <div class="step"><span class="math">D</span> = 5² − (2<span class="sqrt">3</span>)²</div>
+                            <div class="step"><span class="math">D</span> = 25 − 4 × 3</div>
+                            <div class="step"><span class="math">D</span> = 25 − 12</div>
+                            <div class="step"><span class="math">D</span> = 13</div>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -100,23 +148,30 @@
                     <div class="step">• <span class="math">a</span>² − <span class="math">b</span>² = (<span class="math">a</span> + <span class="math">b</span>)(<span class="math">a</span> − <span class="math">b</span>)</div>
                 </div>
                 <div class="example">
-                    <div class="step"><strong>Exemple 1 :</strong></div>
-                    <div class="step"><span class="math">A</span> = 5<span class="math">x</span> + 15</div>
-                    <div class="step"><span class="math">A</span> = 5<span class="math">x</span> + 5 × 3</div>
-                    <div class="step"><span class="math">A</span> = 5(<span class="math">x</span> + 3)</div>
-                </div>
-                <div class="example">
-                    <div class="step"><strong>Exemple 2 :</strong></div>
-                    <div class="step"><span class="math">B</span> = (<span class="math">x</span> + 4)(2<span class="math">x</span> − 1) − (<span class="math">x</span> + 4)<span class="math">x</span></div>
-                    <div class="step"><span class="math">B</span> = (<span class="math">x</span> + 4)[(2<span class="math">x</span> − 1) − <span class="math">x</span>]</div>
-                    <div class="step"><span class="math">B</span> = (<span class="math">x</span> + 4)[2<span class="math">x</span> − 1 − <span class="math">x</span>]</div>
-                    <div class="step"><span class="math">B</span> = (<span class="math">x</span> + 4)(<span class="math">x</span> − 1)</div>
-                </div>
-                <div class="example">
-                    <div class="step"><strong>Exemple 3 :</strong></div>
-                    <div class="step"><span class="math">C</span> = <span class="math">x</span>² − 9</div>
-                    <div class="step"><span class="math">C</span> = <span class="math">x</span>² − 3²</div>
-                    <div class="step"><span class="math">C</span> = (<span class="math">x</span> + 3)(<span class="math">x</span> − 3)</div>
+                    <div class="step"><strong>Exemples :</strong></div>
+                    <div class="exemples-cote exemples-cote-2">
+                        <div>
+                            <div class="step"><span class="math">A</span> = 5<span class="math">x</span> + 15</div>
+                            <div class="step"><span class="math">A</span> = 5<span class="math">x</span> + 5 × 3</div>
+                            <div class="step"><span class="math">A</span> = 5(<span class="math">x</span> + 3)</div>
+                        </div>
+                        <div>
+                            <div class="step"><span class="math">B</span> = (<span class="math">x</span> + 4)(2<span class="math">x</span> − 1) − (<span class="math">x</span> + 4)<span class="math">x</span></div>
+                            <div class="step"><span class="math">B</span> = (<span class="math">x</span> + 4)[(2<span class="math">x</span> − 1) − <span class="math">x</span>]</div>
+                            <div class="step"><span class="math">B</span> = (<span class="math">x</span> + 4)[2<span class="math">x</span> − 1 − <span class="math">x</span>]</div>
+                            <div class="step"><span class="math">B</span> = (<span class="math">x</span> + 4)(<span class="math">x</span> − 1)</div>
+                        </div>
+                        <div>
+                            <div class="step"><span class="math">C</span> = <span class="math">x</span>² − 9</div>
+                            <div class="step"><span class="math">C</span> = <span class="math">x</span>² − 3²</div>
+                            <div class="step"><span class="math">C</span> = (<span class="math">x</span> + 3)(<span class="math">x</span> − 3)</div>
+                        </div>
+                        <div>
+                            <div class="step"><span class="math">D</span> = 9<span class="math">x</span>² − 25</div>
+                            <div class="step"><span class="math">D</span> = (3<span class="math">x</span>)² − 5²</div>
+                            <div class="step"><span class="math">D</span> = (3<span class="math">x</span> + 5)(3<span class="math">x</span> − 5)</div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
