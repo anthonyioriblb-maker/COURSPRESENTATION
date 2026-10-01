@@ -894,3 +894,61 @@ h4.step {
     #floatAnimCtrl { right: 6px; padding: 6px; gap: 4px; }
     #floatAnimCtrl button { font-size: 0.75em; padding: 6px 10px; }
 }
+
+/* --- IMPRESSION --- */
+@media print {
+    body {
+        background: white;
+        display: block;
+        min-height: 0;
+        overflow: visible;
+    }
+
+    .container {
+        width: 100%;
+        height: auto;
+        border-radius: 0;
+        box-shadow: none;
+        overflow: visible;
+    }
+
+    .content {
+        overflow: visible;
+        padding: 10px 20px;
+    }
+
+    /* Forcer l'impression des arrière-plans et couleurs */
+    * {
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+        color-adjust: exact !important;
+    }
+
+    /* Les encadrés peuvent être coupés entre deux pages (évite les grands blancs) */
+    .definition, .property, .important, .example, .remarque, .method, .exercice, .calcul-detail {
+        page-break-inside: auto;
+        break-inside: auto;
+    }
+
+    /* Jamais coupées : images, figures, animations, lignes de tableau, fractions, phrases (steps) */
+    img, svg, figure, iframe, canvas, tr, li, .step, .frac, .fraction {
+        page-break-inside: avoid;
+        break-inside: avoid;
+    }
+
+    /* Un titre ne reste jamais seul en bas de page */
+    h1, h2, h3, h4 {
+        page-break-after: avoid;
+        break-after: avoid;
+    }
+
+    p, div {
+        orphans: 2;
+        widows: 2;
+    }
+
+    /* Ne jamais imprimer les contrôles de navigation, menus, aide et bouton volant des animations */
+    .controls, .slide-menu, .help-overlay, #floatAnimCtrl {
+        display: none !important;
+    }
+}
