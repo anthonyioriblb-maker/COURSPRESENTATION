@@ -6,9 +6,12 @@
     <title>Chapitre 3 - Écriture fractionnaire</title>
     <link rel="stylesheet" href="../../styles.css">
     <style>
-        /* Simplification barrée (au clic) */
-        .calc-filles .barre { color: red; text-decoration: line-through transparent; text-decoration-thickness: 2px; transition: text-decoration-color 0.4s; }
-        .calc-filles:has(.barre-trigger.visible) .barre { text-decoration-color: red; }
+        .step-inline { opacity: 0; transition: opacity 0.5s; }
+        .step-inline.visible { opacity: 1; }
+        .mf { color: red; }
+        /* Simplification : facteurs communs en rouge, barrés au clic suivant */
+        .barre-zone .barre { color: red; display: inline-block; text-decoration: line-through transparent; text-decoration-thickness: 2px; transition: text-decoration-color 0.4s; }
+        .barre-zone:has(.barre-trigger.visible) .barre { text-decoration-color: red; }
     </style>
 </head>
 <body>
@@ -20,33 +23,42 @@
                 <h1>Chapitre 3 : Écriture fractionnaire</h1>
             </div>
 
-            <!-- Slide 2 : Définitions -->
+            <!-- Slide 2 : I. Rappels — 1) Définitions -->
             <div class="slide">
-                <h2>I. Rappels – Définitions</h2>
+                <h2>I. Rappels</h2>
+                <h3>1) Définitions</h3>
                 <div class="definition">
-                    <div class="step"><span style="color:red;">Définition :</span> Soient <em>a</em> et <em>b</em> deux nombres relatifs avec <em>b</em> ≠ 0.</div>
-                    <div class="step">Le nombre <span class="fraction"><span class="numerateur"><em>a</em></span><span class="denominateur"><em>b</em></span></span> est une <span style="color:red;">fraction</span> et <span class="fraction"><span class="numerateur"><em>a</em></span><span class="denominateur"><em>b</em></span></span> = <em>a</em> ÷ <em>b</em></div>
-                    <div class="step">• <em>a</em> est le <span style="color:red;">numérateur</span></div>
-                    <div class="step">• <em>b</em> est le <span style="color:red;">dénominateur</span></div>
+                    <div class="step">Soient <span class="math">a</span> et <span class="math">b</span> deux nombres relatifs avec <span class="math">b ≠ 0</span>.</div>
+                    <div class="step">Le nombre <span class="fraction"><span class="numerateur"><span class="math">a</span></span><span class="denominateur"><span class="math">b</span></span></span> est une <span style="color: red;">fraction</span> et <span class="fraction"><span class="numerateur"><span class="math">a</span></span><span class="denominateur"><span class="math">b</span></span></span>=<span class="math">a</span>&divide;<span class="math">b</span></div>
+                    <ul>
+                        <li class="step"><span class="math">a</span> est le <span style="color: red;">numérateur</span>.</li>
+                        <li class="step"><span class="math">b</span> est le <span style="color: red;">dénominateur</span>.</li>
+                    </ul>
+                </div>
+                <div class="definition">
+                    <div class="step">Soient <span class="math">a</span> et <span class="math">b</span> deux nombres relatifs avec <span class="math">b ≠ 0</span>.</div>
+                    <div class="step"><span class="fraction"><span class="numerateur"><span class="math">a</span></span><span class="denominateur"><span class="math">b</span></span></span> = <span class="math">a</span> &times; <span class="fraction"><span class="numerateur">1</span><span class="denominateur"><span class="math">b</span></span></span></div>
                 </div>
             </div>
 
-            <!-- Slide 3 : Signe d'une fraction -->
+            <!-- Slide 3 : 2) Signe d'une fraction -->
             <div class="slide">
-                <h2>II. Signe d'une fraction</h2>
+                <h3>2) Signe d’une fraction</h3>
                 <div class="important">
-                    <div class="step">Le signe de <span class="fraction"><span class="numerateur"><em>a</em></span><span class="denominateur"><em>b</em></span></span> dépend des signes de <em>a</em> et <em>b</em> :</div>
-                    <div class="step">• Si <em>a</em> et <em>b</em> sont de <strong>même signe</strong> → <span class="fraction"><span class="numerateur"><em>a</em></span><span class="denominateur"><em>b</em></span></span> est <span style="color:red;">positif</span></div>
-                    <div class="step">• Si <em>a</em> et <em>b</em> sont de <strong>signes contraires</strong> → <span class="fraction"><span class="numerateur"><em>a</em></span><span class="denominateur"><em>b</em></span></span> est <span style="color:red;">négatif</span></div>
+                    <div class="step">Le signe de la fraction <span class="fraction"><span class="numerateur"><span class="math">a</span></span><span class="denominateur"><span class="math">b</span></span></span> dépend du signe de <span class="math">a</span> et de <span class="math">b</span> :</div>
+                    <ul>
+                        <li class="step">Si <span class="math">a</span> et <span class="math">b</span> sont de même signe, alors <span class="fraction"><span class="numerateur"><span class="math">a</span></span><span class="denominateur"><span class="math">b</span></span></span> est positif.</li>
+                        <li class="step">Si <span class="math">a</span> et <span class="math">b</span> sont de signes contraires, alors <span class="fraction"><span class="numerateur"><span class="math">a</span></span><span class="denominateur"><span class="math">b</span></span></span> est négatif.</li>
+                    </ul>
                 </div>
             </div>
 
-            <!-- Slide 4 : Simplifier une fraction -->
+            <!-- Slide 4 : 3) Simplifier une fraction -->
             <div class="slide">
-                <h2>III. Simplifier une fraction</h2>
+                <h3>3) Simplifier une fraction</h3>
                 <div class="definition">
-                    <div class="step"><span style="color:red;">Définition :</span> Un nombre entier est <span style="color:red;">premier</span> s'il possède exactement deux diviseurs positifs : 1 et lui-même.</div>
-                    <div class="step">Premiers à connaître : <strong>2, 3, 5, 7, 11, 13, 17, 19, 23, 29 ...</strong></div>
+                    <div class="step"><span style="color: red;">Définition :</span> Un nombre entier est <span style="color: red;">premier</span> s'il possède exactement deux diviseurs positifs : 1 et lui-même.</div>
+                    <div class="step">La liste des nombres premiers à connaitre est : 2, 3, 5, 7, 11, 13, 17, 19, 23, 29, ...</div>
                 </div>
                 <div class="method">
                     <div class="step"><strong>Méthode: Décomposition en facteurs premiers de 300</strong></div>
@@ -58,54 +70,62 @@
                     </div>
                 </div>
                 <div class="important">
-                    <div class="step"><span style="color:red;">Règle fondamentale :</span> On ne change pas la valeur d'une fraction en multipliant ou divisant le numérateur <strong>et</strong> le dénominateur par un même nombre non nul.</div>
+                    <div class="step"><span style="color: red;">Règle fondamentale :</span> On ne change pas la valeur d'une fraction si l'on multiplie ou divise le numérateur <span style="color: red;">et</span> le dénominateur par un même nombre non nul.</div>
                 </div>
-                <div class="example">
-                    <div class="step"><strong>Exemple :</strong> <span class="fraction"><span class="numerateur">12</span><span class="denominateur">18</span></span> = <span class="fraction"><span class="numerateur"><span class="strikethrough-red">2×3</span>×2</span><span class="denominateur"><span class="strikethrough-red">2×3</span>×3</span></span> = <span class="fraction"><span class="numerateur">2</span><span class="denominateur">3</span></span></div>
-                    <div class="step">Une fraction est <span style="color:red;">irréductible</span> lorsqu'elle est simplifiée au maximum.</div>
+                <div class="definition">
+                    <div class="step"><span style="color: red;">Simplifier une fraction</span>, c'est trouver une fraction égale avec un numérateur et un dénominateur entiers les plus petits possibles.</div>
+                </div>
+                <div class="example barre-zone">
+                    <div class="step">Exemple : <span class="fraction"><span class="numerateur">12</span><span class="denominateur">18</span></span><span class="step-inline">= <span class="fraction"><span class="numerateur"><span class="barre">2&times;3</span>&times;2</span><span class="denominateur"><span class="barre">2&times;3</span>&times;3</span></span></span><span class="step-inline barre-trigger"></span><span class="step-inline"> = <span class="fraction"><span class="numerateur">2</span><span class="denominateur">3</span></span> (on a simplifié par 6).</span></div>
+                </div>
+                <div class="definition">
+                    <div class="step">Une fraction est <span style="color: red;">irréductible</span> lorsqu'elle est simplifiée au maximum.</div>
                 </div>
             </div>
 
-            <!-- Slide 5 : Addition et soustraction -->
+            <!-- Slide 5 : II. Addition et soustraction -->
             <div class="slide">
-                <h2>IV. Addition et soustraction</h2>
+                <h2>II. Addition et soustraction</h2>
                 <div class="important">
                     <div class="step">Pour additionner ou soustraire deux fractions :</div>
-                    <div class="step">1. Réduire les fractions au <strong>même dénominateur</strong></div>
-                    <div class="step">2. Additionner ou soustraire les <strong>numérateurs</strong></div>
-                    <div class="step">3. Garder le <strong>même dénominateur</strong></div>
-                    <div class="step">4. <strong>Simplifier</strong> si possible</div>
+                    <ol>
+                        <li class="step">Réduire les fractions au même dénominateur.</li>
+                        <li class="step">Additionner ou soustraire les numérateurs.</li>
+                        <li class="step">Gardez le même dénominateur.</li>
+                        <li class="step">Simplifier si possible.</li>
+                    </ol>
                 </div>
                 <div class="example">
                     <div class="step"><strong>Exemple :</strong></div>
-                    <div class="step"><span class="fraction"><span class="numerateur">3</span><span class="denominateur">4</span></span> + <span class="fraction"><span class="numerateur">1</span><span class="denominateur">6</span></span> = <span class="fraction"><span class="numerateur">3 <span class="mark-blue">×3</span></span><span class="denominateur">4 <span class="mark-blue">×3</span></span></span> + <span class="fraction"><span class="numerateur">1 <span class="mark-green">×2</span></span><span class="denominateur">6 <span class="mark-green">×2</span></span></span> = <span class="fraction"><span class="numerateur">9</span><span class="denominateur">12</span></span> + <span class="fraction"><span class="numerateur">2</span><span class="denominateur">12</span></span> = <span class="fraction"><span class="numerateur">11</span><span class="denominateur">12</span></span></div>
+                    <div class="step"><span class="fraction"><span class="numerateur">3</span><span class="denominateur">4</span></span> + <span class="fraction"><span class="numerateur">1</span><span class="denominateur">6</span></span><span class="step-inline">= <span class="fraction"><span class="numerateur">3<span class="mf">&times;3</span></span><span class="denominateur">4<span class="mf">&times;3</span></span></span> + <span class="fraction"><span class="numerateur">1<span class="mf">&times;2</span></span><span class="denominateur">6<span class="mf">&times;2</span></span></span></span><span class="step-inline"> = <span class="fraction"><span class="numerateur">9</span><span class="denominateur">12</span></span> + <span class="fraction"><span class="numerateur">2</span><span class="denominateur">12</span></span></span><span class="step-inline"> = <span class="fraction"><span class="numerateur">11</span><span class="denominateur">12</span></span></span></div>
                 </div>
             </div>
 
-            <!-- Slide 6 : Multiplication -->
+            <!-- Slide 6 : III. Multiplication -->
             <div class="slide">
-                <h2>V. Multiplication</h2>
+                <h2>III. Multiplication</h2>
                 <div class="important">
                     <div class="step">Pour multiplier deux fractions :</div>
-                    <div class="step">1. Multiplier les <strong>numérateurs</strong> ensemble (attention à la règle des signes)</div>
-                    <div class="step">2. Multiplier les <strong>dénominateurs</strong> ensemble</div>
-                    <div class="step">3. Simplifier si possible</div>
+                    <ol>
+                        <li class="step">Multiplier les numérateurs ensemble (attention à la règle des signes).</li>
+                        <li class="step">Multiplier les dénominateurs ensemble (attention à la règle des signes).</li>
+                        <li class="step">Simplifier si possible.</li>
+                    </ol>
                 </div>
                 <div class="example">
-                    <div class="step"><strong>Exemple 1 :</strong> <span class="fraction"><span class="numerateur">2</span><span class="denominateur">3</span></span> × <span class="fraction"><span class="numerateur">5</span><span class="denominateur">7</span></span> = <span class="fraction"><span class="numerateur">10</span><span class="denominateur">21</span></span></div>
+                    <div class="step"><strong>Exemple :</strong></div>
+                    <div class="step"><span class="fraction"><span class="numerateur">2</span><span class="denominateur">3</span></span> × <span class="fraction"><span class="numerateur">5</span><span class="denominateur">7</span></span><span class="step-inline"> = <span class="fraction"><span class="numerateur">10</span><span class="denominateur">21</span></span></span></div>
                 </div>
                 <div class="important">
-                    <div class="step"><span style="color:red;">Propriété :</span> Prendre une fraction d'une quantité, c'est <strong>multiplier</strong> la quantité par la fraction.</div>
+                    <div class="step"><span style="color: red;">Propriété :</span> Prendre une fraction d'une quantité, c'est multiplier la quantité par la fraction.</div>
                 </div>
-                <div class="example">
-                    <div class="step"><strong>Exemple 2 :</strong> Dans une classe de 24 élèves, il y a <span class="fraction"><span class="numerateur">3</span><span class="denominateur">8</span></span> de filles.</div>
-                    <div class="calc-filles">
-                        <div class="step">24 × <span class="fraction"><span class="numerateur">3</span><span class="denominateur">8</span></span></div>
-                        <div class="step">= <span class="fraction"><span class="numerateur">24 × 3</span><span class="denominateur">8</span></span></div>
-                        <div class="step">= <span class="fraction"><span class="numerateur"><span class="barre">2 × 2 × 2</span> × 3 × 3</span><span class="denominateur"><span class="barre">2 × 2 × 2</span></span></span></div>
-                        <div class="step barre-trigger" style="height:0;overflow:hidden;margin:0;padding:0;"></div>
-                        <div class="step">= 9</div>
-                    </div>
+                <div class="example barre-zone">
+                    <div class="step"><strong>Exemple :</strong> Dans une classe de 24 élèves, il y a <span class="fraction"><span class="numerateur">3</span><span class="denominateur">8</span></span> de filles.</div>
+                    <div class="step">24&times;<span class="fraction"><span class="numerateur">3</span><span class="denominateur">8</span></span></div>
+                    <div class="step">= <span class="fraction"><span class="numerateur">24&times;3</span><span class="denominateur">8</span></span></div>
+                    <div class="step">= <span class="fraction"><span class="numerateur"><span class="barre">2&times;2&times;2</span>&times;3&times;3</span><span class="denominateur"><span class="barre">2&times;2&times;2</span></span></span></div>
+                    <div class="step barre-trigger" style="height:0;overflow:hidden;margin:0;padding:0;"></div>
+                    <div class="step">= 9</div>
                     <div class="step">Il y a donc 9 filles dans cette classe.</div>
                 </div>
             </div>

@@ -3,7 +3,7 @@ let currentStepIndex = 0;
 let slides = null;
 let totalSlides = 0;
 
-const slideTitles = ["Écriture fractionnaire","I. Rappels – Définitions","II. Signe d une fraction","III. Simplifier une fraction","IV. Addition et soustraction","V. Multiplication"];
+const slideTitles = ["Écriture fractionnaire","I. Rappels — 1) Définitions","2) Signe d’une fraction","3) Simplifier une fraction","II. Addition et soustraction","III. Multiplication"];
 
 document.addEventListener('DOMContentLoaded', function() {
     slides = document.querySelectorAll('.slide');
@@ -42,7 +42,7 @@ function updateSlide() {
         if (index === currentSlideIndex) slide.classList.add('active');
     });
     const currentSlide = slides[currentSlideIndex];
-    const steps = currentSlide.querySelectorAll('.step');
+    const steps = currentSlide.querySelectorAll('.step, .step-inline');
     const totalSteps = steps.length;
     steps.forEach((step, index) => {
         if (index < currentStepIndex) step.classList.add('visible');
@@ -72,7 +72,7 @@ function updateSlide() {
 function changeSlide(direction) {
     if (!slides || slides.length === 0) return;
     const currentSlide = slides[currentSlideIndex];
-    const steps = currentSlide.querySelectorAll('.step');
+    const steps = currentSlide.querySelectorAll('.step, .step-inline');
     const totalSteps = steps.length;
     if (direction === 1) {
         if (currentStepIndex < totalSteps) { currentStepIndex++; updateSlide(); }
@@ -81,7 +81,7 @@ function changeSlide(direction) {
         if (currentStepIndex > 0) { currentStepIndex--; updateSlide(); }
         else if (currentSlideIndex > 0) {
             currentSlideIndex--;
-            currentStepIndex = slides[currentSlideIndex].querySelectorAll('.step').length;
+            currentStepIndex = slides[currentSlideIndex].querySelectorAll('.step, .step-inline').length;
             updateSlide();
         }
     }
