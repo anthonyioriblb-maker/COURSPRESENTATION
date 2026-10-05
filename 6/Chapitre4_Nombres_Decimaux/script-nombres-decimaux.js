@@ -11,7 +11,8 @@ const slideTitles = [
     "II. Les nombres décimaux — 2) Rang des chiffres",
     "II. Les nombres décimaux — 3) Les différentes décompositions",
     "III. Comparaison des nombres décimaux — 1) Méthodologie",
-    "III. Comparaison des nombres décimaux — 2) Encadrer et intercaler"
+    "III. Comparaison des nombres décimaux — 2) Encadrer et intercaler",
+    "IV. Nombres décimaux et demi-droite graduée"
 ];
 
 document.getElementById('totalSlides').textContent = totalSlides;
