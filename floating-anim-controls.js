@@ -53,19 +53,29 @@
         }
     }
 
-    // Une iframe d'animation est "visible" si elle est dans la slide
+    // Une iframe d'animation est "candidate" si elle est dans la slide
     // active ET (elle n'est dans aucun .step, ou son .step ancêtre le
     // plus proche a déjà été révélé avec la classe "visible").
+    // S'il y a plusieurs candidates dans la même slide (ex. plusieurs
+    // exemples animés), on pilote celle qui occupe le plus de place à
+    // l'écran ; à égalité (ou si aucune n'est à l'écran), la dernière
+    // révélée.
     function findVisibleFrame() {
         var frames = document.querySelectorAll('.slide.active iframe[src*="animations/"]');
+        var best = null, bestArea = -1;
+        var vh = window.innerHeight || document.documentElement.clientHeight;
+        var vw = window.innerWidth || document.documentElement.clientWidth;
         for (var i = 0; i < frames.length; i++) {
             var f = frames[i];
             var stepAncestor = f.closest ? f.closest('.step') : null;
-            if (!stepAncestor || stepAncestor.classList.contains('visible')) {
-                return f;
-            }
+            if (stepAncestor && !stepAncestor.classList.contains('visible')) continue;
+            var r = f.getBoundingClientRect();
+            var w = Math.max(0, Math.min(r.right, vw) - Math.max(r.left, 0));
+            var h = Math.max(0, Math.min(r.bottom, vh) - Math.max(r.top, 0));
+            var area = w * h;
+            if (area >= bestArea) { best = f; bestArea = area; }
         }
-        return null;
+        return best;
     }
 
     function refresh() {
