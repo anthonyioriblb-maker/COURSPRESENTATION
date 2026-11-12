@@ -30,6 +30,10 @@
         .frac .frac {
             font-size: 0.8em;
         }
+        .exemples-cote { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px 40px; align-items: start; text-align: left; }
+        .exemples-cote .step { white-space: nowrap; }
+        .demo-barre .barre { color: red; text-decoration: line-through transparent; text-decoration-thickness: 2px; transition: text-decoration-color 0.4s; }
+        .demo-barre:has(.barre-trigger.visible) .barre { text-decoration-color: red; }
     </style>
 </head>
 <body>
@@ -45,84 +49,180 @@
             <div class="slide">
                 <h2>I. Notion d'inverse</h2>
                 <div class="definition">
-                    <div class="step"><span style="color:red;">Définition :</span> Deux nombres sont <strong>inverses</strong> si leur produit est égal à 1.</div>
+                    <div class="step"><span style="color:red;">Définition :</span> Deux nombres sont <span style="color:red;">inverses</span> si leur produit est égal à 1.</div>
                 </div>
                 <div class="example">
-                    <div class="step"><strong>Exemple :</strong> L'inverse de 3 est <span class="frac"><span class="num">1</span><span class="den">3</span></span> car <span class="frac"><span class="num">1</span><span class="den">3</span></span> × 3 = <span class="frac"><span class="num">3</span><span class="den">3</span></span> = 1.</div>
+                    <div class="step"><strong>Exemples :</strong></div>
+                    <div class="exemples-cote">
+                        <div class="demo-barre">
+                            <div class="step">L'inverse de 3 est <span class="frac"><span class="num">1</span><span class="den">3</span></span> car :</div>
+                            <div class="step">A = <span class="frac"><span class="num">1</span><span class="den">3</span></span> × 3</div>
+                            <div class="step">A = <span class="frac"><span class="num">1 × 3</span><span class="den">3</span></span></div>
+                            <div class="step">A = <span class="frac"><span class="num">3</span><span class="den">3</span></span></div>
+                            <div class="step">A = 1</div>
+                        </div>
+                        <div class="demo-barre">
+                            <div class="step">L'inverse de −<span class="frac"><span class="num">2</span><span class="den">3</span></span> est −<span class="frac"><span class="num">3</span><span class="den">2</span></span> car :</div>
+                            <div class="step">B = −<span class="frac"><span class="num">2</span><span class="den">3</span></span> × ( −<span class="frac"><span class="num">3</span><span class="den">2</span></span> )</div>
+                            <div class="step">B = <span class="frac"><span class="num">2 × 3</span><span class="den">3 × 2</span></span></div>
+                            <div class="step">B = <span class="frac"><span class="num">6</span><span class="den">6</span></span></div>
+                            <div class="step">B = 1</div>
+                        </div>
+                    </div>
                 </div>
-                <div class="important">
-                    <div class="step"><span style="color:red;">Propriété :</span> Soient a et b deux nombres non nuls, l'inverse de la fraction <span class="frac"><span class="num">a</span><span class="den">b</span></span> est <span class="frac"><span class="num">b</span><span class="den">a</span></span> car <span class="frac"><span class="num">a</span><span class="den">b</span></span> × <span class="frac"><span class="num">b</span><span class="den">a</span></span> = <span class="frac"><span class="num"><span style="text-decoration:line-through;">a</span>×<span style="text-decoration:line-through;">b</span></span><span class="den"><span style="text-decoration:line-through;">b</span>×<span style="text-decoration:line-through;">a</span></span></span> = 1.</div>
-                </div>
-                <div class="example">
-                    <div class="step"><strong>Exemple :</strong> L'inverse de <span class="frac"><span class="num">−2</span><span class="den">3</span></span> est <span class="frac"><span class="num">3</span><span class="den">−2</span></span> car <span class="frac"><span class="num">−2</span><span class="den">3</span></span> × <span class="frac"><span class="num">3</span><span class="den">−2</span></span> = <span class="frac"><span class="num">−6</span><span class="den">−6</span></span> = 1.</div>
+            </div>
+
+            <!-- Slide 3 : I. Propriété et remarques -->
+            <div class="slide">
+                <div class="important demo-barre">
+                    <div class="step"><span style="color:red;">Propriété :</span> Soient <span class="math">a</span> et <span class="math">b</span> deux nombres non nuls, l'inverse de la fraction <span class="frac"><span class="num"><span class="math">a</span></span><span class="den"><span class="math">b</span></span></span> est <span class="frac"><span class="num"><span class="math">b</span></span><span class="den"><span class="math">a</span></span></span> car <span class="frac"><span class="num"><span class="math">a</span></span><span class="den"><span class="math">b</span></span></span> × <span class="frac"><span class="num"><span class="math">b</span></span><span class="den"><span class="math">a</span></span></span> = <span class="frac"><span class="num"><span class="barre"><span class="math">a</span></span> × <span class="barre"><span class="math">b</span></span></span><span class="den"><span class="barre"><span class="math">b</span></span> × <span class="barre"><span class="math">a</span></span></span></span></div>
+                    <div class="step barre-trigger" style="height:0;overflow:hidden;margin:0;padding:0;"></div>
+                    <div class="step">= 1.</div>
                 </div>
                 <div class="remarque">
                     <div class="step"><span style="color:red;">Remarques :</span></div>
                     <div class="step">• Un nombre et son inverse ont le même signe.</div>
                     <div class="step">• Tous les nombres ont un inverse sauf 0.</div>
+                    <div class="step">• Il ne faut pas confondre l'<strong>inverse</strong> et l'<strong>opposé</strong> : l'inverse de 3 est <span class="frac"><span class="num">1</span><span class="den">3</span></span> car 3 × <span class="frac"><span class="num">1</span><span class="den">3</span></span> = 1, alors que l'opposé de 3 est −3 car 3 + ( −3 ) = 0.</div>
                 </div>
             </div>
 
-            <!-- Slide 3 : II. Divisions -->
+            <!-- Slide 4 : II. Divisions -->
             <div class="slide">
                 <h2>II. Divisions</h2>
                 <div class="important">
-                    <div class="step"><span style="color:red;">Propriété :</span> Diviser par un nombre, c'est multiplier par son inverse.</div>
-                    <div class="step">C'est-à-dire : a ÷ b = a × <span class="frac"><span class="num">1</span><span class="den">b</span></span></div>
+                    <div class="step"><span style="color:red;">Propriété :</span> Diviser par un nombre non nul, c'est multiplier par son inverse.</div>
+                    <div class="step">C'est-à-dire : <span class="math">a</span> ÷ <span class="math">b</span> = <span class="math">a</span> × <span class="frac"><span class="num">1</span><span class="den"><span class="math">b</span></span></span> (avec <span class="math">b</span> ≠ 0).</div>
                 </div>
                 <div class="method">
                     <div class="step"><strong>Preuve :</strong></div>
-                    <div class="step">a × <span class="frac"><span class="num">1</span><span class="den">b</span></span> = <span class="frac"><span class="num">a × 1</span><span class="den">b</span></span> = <span class="frac"><span class="num">a</span><span class="den">b</span></span> = a ÷ b</div>
+                    <div class="step"><span class="math">a</span> × <span class="frac"><span class="num">1</span><span class="den"><span class="math">b</span></span></span></div>
+                    <div class="step">= <span class="frac"><span class="num"><span class="math">a</span> × 1</span><span class="den"><span class="math">b</span></span></span></div>
+                    <div class="step">= <span class="frac"><span class="num"><span class="math">a</span></span><span class="den"><span class="math">b</span></span></span></div>
+                    <div class="step">= <span class="math">a</span> ÷ <span class="math">b</span></div>
                 </div>
+            </div>
+
+            <!-- Slide 5 : II. Diviser deux fractions (C et D) -->
+            <div class="slide">
                 <div class="important">
                     <div class="step"><span style="color:red;">Propriété :</span> Pour diviser deux fractions, il faut multiplier la première fraction par l'inverse de la deuxième fraction.</div>
                 </div>
                 <div class="example">
-                    <div class="step"><strong>Exemple 1 :</strong></div>
-                    <div class="step"><span class="frac"><span class="num">1</span><span class="den">2</span></span> ÷ <span class="frac"><span class="num">3</span><span class="den">4</span></span> = <span class="frac"><span class="num">1</span><span class="den">2</span></span> × <span class="frac"><span class="num">4</span><span class="den">3</span></span> = <span class="frac"><span class="num">1 × 4</span><span class="den">2 × 3</span></span> = <span class="frac"><span class="num">4</span><span class="den">6</span></span> = <span class="frac"><span class="num"><span style="text-decoration:line-through;">2</span> × 2</span><span class="den"><span style="text-decoration:line-through;">2</span> × 3</span></span> = <span class="frac"><span class="num">2</span><span class="den">3</span></span></div>
-                </div>
-                <div class="example">
-                    <div class="step"><strong>Exemple 2 :</strong></div>
-                    <div class="step"><span class="frac"><span class="num">−4</span><span class="den">5</span></span> ÷ <span class="frac"><span class="num">3</span><span class="den">4</span></span> = −<span class="frac"><span class="num">4</span><span class="den">5</span></span> × <span class="frac"><span class="num">4</span><span class="den">3</span></span> = −<span class="frac"><span class="num">16</span><span class="den">15</span></span></div>
-                </div>
-                <div class="example">
-                    <div class="step"><strong>Exemple 3 :</strong></div>
-                    <div class="step"><span class="frac"><span class="num">5</span><span class="den">7</span></span> ÷ 3 = <span class="frac"><span class="num">5</span><span class="den">7</span></span> × <span class="frac"><span class="num">1</span><span class="den">3</span></span> = <span class="frac"><span class="num">5 × 1</span><span class="den">7 × 3</span></span> = <span class="frac"><span class="num">5</span><span class="den">21</span></span></div>
-                </div>
-                <div class="example">
-                    <div class="step"><strong>Exemple 4 :</strong></div>
-                    <div class="step"><span class="frac"><span class="num">2</span><span class="den">3</span></span> ÷ 4 = <span class="frac"><span class="num">2</span><span class="den">3</span></span> × <span class="frac"><span class="num">1</span><span class="den">4</span></span> = <span class="frac"><span class="num">2</span><span class="den">12</span></span> = <span class="frac"><span class="num"><span style="text-decoration:line-through;">2</span></span><span class="den"><span style="text-decoration:line-through;">2</span> × 2 × 3</span></span> = <span class="frac"><span class="num">1</span><span class="den">2 × 3</span></span> = <span class="frac"><span class="num">1</span><span class="den">6</span></span></div>
+                    <div class="step"><strong>Exemples :</strong></div>
+                    <div class="exemples-cote">
+                        <div class="demo-barre">
+                            <div class="step">C = <span class="frac"><span class="num">1</span><span class="den">2</span></span> ÷ <span class="frac"><span class="num">3</span><span class="den">4</span></span></div>
+                            <div class="step">C = <span class="frac"><span class="num">1</span><span class="den">2</span></span> × <span class="frac"><span class="num">4</span><span class="den">3</span></span></div>
+                            <div class="step">C = <span class="frac"><span class="num">1 × 4</span><span class="den">2 × 3</span></span></div>
+                            <div class="step">C = <span class="frac"><span class="num">4</span><span class="den">6</span></span></div>
+                            <div class="step">C = <span class="frac"><span class="num"><span class="barre">2</span> × 2</span><span class="den"><span class="barre">2</span> × 3</span></span></div>
+                            <div class="step barre-trigger" style="height:0;overflow:hidden;margin:0;padding:0;"></div>
+                            <div class="step">C = <span class="frac"><span class="num">2</span><span class="den">3</span></span></div>
+                        </div>
+                        <div class="demo-barre">
+                            <div class="step">D = −<span class="frac"><span class="num">4</span><span class="den">5</span></span> ÷ <span class="frac"><span class="num">3</span><span class="den">4</span></span></div>
+                            <div class="step">D = −<span class="frac"><span class="num">4</span><span class="den">5</span></span> × <span class="frac"><span class="num">4</span><span class="den">3</span></span></div>
+                            <div class="step">D = −<span class="frac"><span class="num">4 × 4</span><span class="den">5 × 3</span></span></div>
+                            <div class="step">D = −<span class="frac"><span class="num">16</span><span class="den">15</span></span></div>
+                        </div>
+                    </div>
                 </div>
             </div>
 
-            <!-- Slide 4 : III. Produit en croix -->
+            <!-- Slide 6 : II. Exemples E et F -->
+            <div class="slide">
+                <div class="example">
+                    <div class="step"><strong>Exemples :</strong></div>
+                    <div class="exemples-cote">
+                        <div class="demo-barre">
+                            <div class="step">E = <span class="frac"><span class="num">5</span><span class="den">7</span></span> ÷ 3</div>
+                            <div class="step">E = <span class="frac"><span class="num">5</span><span class="den">7</span></span> × <span class="frac"><span class="num">1</span><span class="den">3</span></span></div>
+                            <div class="step">E = <span class="frac"><span class="num">5 × 1</span><span class="den">7 × 3</span></span></div>
+                            <div class="step">E = <span class="frac"><span class="num">5</span><span class="den">21</span></span></div>
+                        </div>
+                        <div class="demo-barre">
+                            <div class="step">F = <span class="frac"><span class="num">2</span><span class="den">3</span></span> ÷ 4</div>
+                            <div class="step">F = <span class="frac"><span class="num">2</span><span class="den">3</span></span> × <span class="frac"><span class="num">1</span><span class="den">4</span></span></div>
+                            <div class="step">F = <span class="frac"><span class="num">2 × 1</span><span class="den">3 × 4</span></span></div>
+                            <div class="step">F = <span class="frac"><span class="num">2</span><span class="den">12</span></span></div>
+                            <div class="step">F = <span class="frac"><span class="num"><span class="barre">2</span></span><span class="den"><span class="barre">2</span> × 2 × 3</span></span></div>
+                            <div class="step barre-trigger" style="height:0;overflow:hidden;margin:0;padding:0;"></div>
+                            <div class="step">F = <span class="frac"><span class="num">1</span><span class="den">6</span></span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 7 : III. Produit en croix -->
             <div class="slide">
                 <h2>III. Produit en croix</h2>
                 <div class="important">
-                    <div class="step"><span style="color:red;">Propriété :</span> a, b, c, d désignent quatre nombres relatifs avec b ≠ 0 et d ≠ 0.</div>
-                    <div class="step">Si <span class="frac"><span class="num">a</span><span class="den">b</span></span> = <span class="frac"><span class="num">c</span><span class="den">d</span></span>, alors a × d = b × c.</div>
-                    <div class="step">On appelle cette propriété le <span style="color:red;"><strong>produit en croix</strong></span>.</div>
+                    <div class="step"><span style="color:red;">Propriété :</span> <span class="math">a</span>, <span class="math">b</span>, <span class="math">c</span>, <span class="math">d</span> désignent quatre nombres relatifs avec <span class="math">b</span> ≠ 0 et <span class="math">d</span> ≠ 0.</div>
+                    <div class="step">Si <span class="frac"><span class="num"><span class="math">a</span></span><span class="den"><span class="math">b</span></span></span> = <span class="frac"><span class="num"><span class="math">c</span></span><span class="den"><span class="math">d</span></span></span>, alors <span class="math">a</span> × <span class="math">d</span> = <span class="math">b</span> × <span class="math">c</span>.</div>
+                    <div class="step">Réciproquement, si <span class="math">a</span> × <span class="math">d</span> = <span class="math">b</span> × <span class="math">c</span>, alors <span class="frac"><span class="num"><span class="math">a</span></span><span class="den"><span class="math">b</span></span></span> = <span class="frac"><span class="num"><span class="math">c</span></span><span class="den"><span class="math">d</span></span></span>.</div>
+                    <div class="step">On appelle cette propriété le <span style="color:red;">produit en croix</span>.</div>
                 </div>
                 <div class="remarque">
                     <div class="step"><strong>Schéma du produit en croix :</strong></div>
-                    <div class="step" style="text-align: center; margin: 20px;">
-                        <img src="4-51.png" alt="Schéma du produit en croix" style="max-width: 400px;">
+                    <div class="step" style="text-align: center; margin: 10px;">
+                        <svg viewBox="0 0 360 165" width="520" style="display:block;margin:6px auto;" xmlns="http://www.w3.org/2000/svg" font-family="Cambria Math, STIX Two Math, Latin Modern Math, serif" font-style="italic">
+  <defs>
+    <marker id="pcR" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#d62828"/></marker>
+    <marker id="pcB" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1d4ed8"/></marker>
+  </defs>
+  <text x="80" y="52" font-size="40" text-anchor="middle" fill="#d62828">a</text>
+  <line x1="55" y1="67" x2="105" y2="67" stroke="#000" stroke-width="2.5"/>
+  <text x="80" y="108" font-size="40" text-anchor="middle" fill="#1d4ed8">b</text>
+  <text x="280" y="52" font-size="40" text-anchor="middle" fill="#1d4ed8">c</text>
+  <line x1="255" y1="67" x2="305" y2="67" stroke="#000" stroke-width="2.5"/>
+  <text x="280" y="108" font-size="40" text-anchor="middle" fill="#d62828">d</text>
+  <line x1="108" y1="38" x2="252" y2="96" stroke="#d62828" stroke-width="2.5" marker-start="url(#pcR)" marker-end="url(#pcR)"/>
+  <line x1="108" y1="96" x2="252" y2="38" stroke="#1d4ed8" stroke-width="2.5" marker-start="url(#pcB)" marker-end="url(#pcB)"/>
+  <rect x="164" y="56" width="32" height="22" rx="4" fill="#e8e8e8"/>
+  <text x="180" y="78" font-size="36" text-anchor="middle" font-style="normal">=</text>
+  <text x="180" y="150" font-size="30" text-anchor="middle"><tspan fill="#d62828">a × d</tspan><tspan font-style="normal" fill="#000"> = </tspan><tspan fill="#1d4ed8">b × c</tspan></text>
+</svg>
                     </div>
                 </div>
+            </div>
+
+            <!-- Slide 8 : III. Exemple 1 -->
+            <div class="slide">
                 <div class="example">
-                    <div class="step"><strong>Exemple 1 :</strong> On cherche un nombre x tel que <span class="frac"><span class="num">5</span><span class="den">2</span></span> = <span class="frac"><span class="num">4</span><span class="den">x</span></span>.</div>
-                    <div class="step"><span class="frac"><span class="num">5</span><span class="den">2</span></span> = <span class="frac"><span class="num">4</span><span class="den">x</span></span> donc 5 × x = 2 × 4</div>
-                    <div class="step">Ainsi x = <span class="frac"><span class="num">2 × 4</span><span class="den">5</span></span> = <span class="frac"><span class="num">8</span><span class="den">5</span></span> = 1,6</div>
+                    <div class="step"><strong>Exemple 1 :</strong> On cherche un nombre <span class="math">x</span> tel que <span class="frac"><span class="num">5</span><span class="den">2</span></span> = <span class="frac"><span class="num">4</span><span class="den"><span class="math">x</span></span></span>.</div>
+                    <div class="step"><span class="frac"><span class="num">5</span><span class="den">2</span></span> = <span class="frac"><span class="num">4</span><span class="den"><span class="math">x</span></span></span> donc 5 × <span class="math">x</span> = 2 × 4</div>
+                    <div class="step"><span class="math">x</span> = <span class="frac"><span class="num">2 × 4</span><span class="den">5</span></span></div>
+                    <div class="step"><span class="math">x</span> = <span class="frac"><span class="num">8</span><span class="den">5</span></span></div>
+                    <div class="step"><span class="math">x</span> = 1,6</div>
+                    <div class="step"><em>Le nombre cherché est 1,6.</em></div>
                 </div>
+            </div>
+
+            <!-- Slide 9 : III. Exemple 2 -->
+            <div class="slide">
                 <div class="example">
                     <div class="step"><strong>Exemple 2 :</strong> Les quotients <span class="frac"><span class="num">12</span><span class="den">20</span></span> et <span class="frac"><span class="num">18</span><span class="den">30</span></span> sont-ils égaux ?</div>
                     <div class="step"><strong>Méthode 1 : Produit en croix</strong></div>
-                    <div class="step">12 × 30 = 360 et 20 × 18 = 360.</div>
-                    <div class="step">Ainsi, <span class="frac"><span class="num">12</span><span class="den">20</span></span> = <span class="frac"><span class="num">18</span><span class="den">30</span></span></div>
-                    <div class="step" style="margin-top: 20px;"><strong>Méthode 2 : Simplification</strong></div>
-                    <div class="step"><span class="frac"><span class="num">12</span><span class="den">20</span></span> = <span class="frac"><span class="num"><span style="text-decoration:line-through;">2</span> × <span style="text-decoration:line-through;">2</span> × 3</span><span class="den"><span style="text-decoration:line-through;">2</span> × <span style="text-decoration:line-through;">2</span> × 5</span></span> = <span class="frac"><span class="num">3</span><span class="den">5</span></span></div>
-                    <div class="step"><span class="frac"><span class="num">18</span><span class="den">30</span></span> = <span class="frac"><span class="num"><span style="text-decoration:line-through;">2</span> × <span style="text-decoration:line-through;">3</span> × 3</span><span class="den"><span style="text-decoration:line-through;">2</span> × <span style="text-decoration:line-through;">3</span> × 5</span></span> = <span class="frac"><span class="num">3</span><span class="den">5</span></span></div>
-                    <div class="step">Donc <span class="frac"><span class="num">12</span><span class="den">20</span></span> = <span class="frac"><span class="num">18</span><span class="den">30</span></span> = <span class="frac"><span class="num">3</span><span class="den">5</span></span></div>
+                    <div class="step">12 × 30 = 360</div>
+                    <div class="step">20 × 18 = 360</div>
+                    <div class="step"><em>Les produits en croix sont égaux donc <span class="frac"><span class="num">12</span><span class="den">20</span></span> = <span class="frac"><span class="num">18</span><span class="den">30</span></span>.</em></div>
+                    <div class="step" style="margin-top: 16px;"><strong>Méthode 2 : Simplification</strong></div>
+                    <div class="exemples-cote">
+                        <div class="demo-barre">
+                            <div class="step"><span class="frac"><span class="num">12</span><span class="den">20</span></span></div>
+                            <div class="step">= <span class="frac"><span class="num"><span class="barre">2</span> × <span class="barre">2</span> × 3</span><span class="den"><span class="barre">2</span> × <span class="barre">2</span> × 5</span></span></div>
+                            <div class="step barre-trigger" style="height:0;overflow:hidden;margin:0;padding:0;"></div>
+                            <div class="step">= <span class="frac"><span class="num">3</span><span class="den">5</span></span></div>
+                        </div>
+                        <div class="demo-barre">
+                            <div class="step"><span class="frac"><span class="num">18</span><span class="den">30</span></span></div>
+                            <div class="step">= <span class="frac"><span class="num"><span class="barre">2</span> × <span class="barre">3</span> × 3</span><span class="den"><span class="barre">2</span> × <span class="barre">3</span> × 5</span></span></div>
+                            <div class="step barre-trigger" style="height:0;overflow:hidden;margin:0;padding:0;"></div>
+                            <div class="step">= <span class="frac"><span class="num">3</span><span class="den">5</span></span></div>
+                        </div>
+                    </div>
+                    <div class="step"><em>Donc <span class="frac"><span class="num">12</span><span class="den">20</span></span> = <span class="frac"><span class="num">18</span><span class="den">30</span></span> = <span class="frac"><span class="num">3</span><span class="den">5</span></span>.</em></div>
                 </div>
             </div>
 

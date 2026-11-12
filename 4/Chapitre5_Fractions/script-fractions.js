@@ -4,12 +4,17 @@ let currentStepIndex = 0;
 let slides = null;
 let totalSlides = 0;
 
-// Titres correspondant aux 4 slides du HTML
+// Titres correspondant aux 9 slides du HTML
 const slideTitles = [
-    "Chapitre 5 : Écriture fractionnaire partie 2",    // Slide 1
-    "I. Notion d'inverse",                              // Slide 2
-    "II. Divisions",                                    // Slide 3
-    "III. Produit en croix"                             // Slide 4
+    "Chapitre 5 : Écriture fractionnaire partie 2",
+    "I. Notion d'inverse",
+    "I. Propriété et remarques",
+    "II. Divisions",
+    "II. Diviser deux fractions (C et D)",
+    "II. Exemples E et F",
+    "III. Produit en croix",
+    "III. Exemple 1",
+    "III. Exemple 2"
 ];
 
 // Initialisation - attendre que le DOM soit chargé
