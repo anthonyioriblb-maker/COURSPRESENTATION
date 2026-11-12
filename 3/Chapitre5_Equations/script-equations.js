@@ -4,7 +4,7 @@ let currentStepIndex = 0;
 let slides = null;
 let totalSlides = 0;
 
-// Titres correspondant aux 9 slides du HTML
+// Titres correspondant aux 10 slides du HTML
 const slideTitles = [
     "Chapitre 5 : Équations",                              // Slide 1
     "I. Définitions",                                      // Slide 2
@@ -13,8 +13,9 @@ const slideTitles = [
     "II. Équation du premier degré — 2) Vérification",     // Slide 5
     "II. Équation du premier degré — 3) Résolution",       // Slide 6
     "II. Équation du premier degré — Résolution détaillée",// Slide 7
-    "III. Équation produit nul",                           // Slide 8
-    "IV. Équation x² = a"                                  // Slide 9
+    "II. Équation du premier degré — 4) Mise en équation", // Slide 8
+    "III. Équation produit nul",                           // Slide 9
+    "IV. Équation x² = a"                                  // Slide 10
 ];
 
 // Initialisation - attendre que le DOM soit chargé
