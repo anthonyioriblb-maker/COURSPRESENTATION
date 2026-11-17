@@ -5,7 +5,9 @@
    de <body>, après le script du chapitre :
        <script src="../../stylo.js"></script>
 
-   - Bouton ✏️ flottant (à gauche) : ouvre la barre d'outils et active le stylo.
+   - Barre d'outils placée dans la barre du bas, à la place de l'indicateur
+     « Étape / Slide » (masqué). À défaut, bouton ✏️ flottant à gauche.
+   - ✏️ active le stylo (✖ pour quitter) ; choisir une couleur l'active aussi.
    - Couleurs, 3 épaisseurs, gomme, « tout effacer » (diapo courante).
    - Souris, stylet et doigt (TBI / écran tactile).
    - Les annotations sont gardées par diapo tant que la page est ouverte.
@@ -55,6 +57,13 @@
         '#styloBar .outils{display:none;flex-direction:column;align-items:center;gap:8px;}' +
         '#styloBar.ouvert .outils{display:flex;}' +
         '#styloBar hr{width:30px;border:none;border-top:1px solid rgba(255,255,255,0.3);margin:0;}' +
+        // version intégrée à la barre du bas
+        '#styloBar.integre{position:static;transform:none;flex-direction:row;flex-wrap:nowrap;gap:4px;padding:0;background:none;box-shadow:none;border-radius:0;}' +
+        '#styloBar.integre .outils{display:flex;flex-direction:row;gap:4px;}' +
+        '#styloBar.integre button{width:34px;height:34px;font-size:17px;border-radius:8px;}' +
+        '#styloBar.integre .pastille{width:18px;height:18px;}' +
+        '#styloBar.integre .trait{width:20px;}' +
+        '#styloBar.integre hr{width:0;height:24px;border-top:none;border-left:1px solid rgba(255,255,255,0.3);margin:0 2px;}' +
         '@media print{#styloBar,#styloCanvas{display:none !important;}}';
     document.head.appendChild(css);
 
@@ -72,7 +81,14 @@
     html += '<hr><button id="styloGomme" title="Gomme (G)">🧽</button>' +
             '<button id="styloEffacer" title="Tout effacer sur cette diapo">🗑️</button></div>';
     bar.innerHTML = html;
-    document.body.appendChild(bar);
+    var progress = document.querySelector('.controls .progress');
+    if (progress) {
+        progress.style.display = 'none';           // « Étape x/y – Slide x/y » remplacé par les outils
+        bar.classList.add('integre');
+        progress.parentNode.insertBefore(bar, progress.nextSibling);
+    } else {
+        document.body.appendChild(bar);
+    }
 
     var btnToggle = document.getElementById('styloToggle');
     var btnGomme = document.getElementById('styloGomme');
