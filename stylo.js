@@ -9,6 +9,10 @@
    - Couleurs, 3 épaisseurs, gomme, « tout effacer » (diapo courante).
    - Souris, stylet et doigt (TBI / écran tactile).
    - Les annotations sont gardées par diapo tant que la page est ouverte.
+   - Chaque trait est accroché à l'élément sur lequel il commence (étape,
+     encadré, titre…) : si le texte se décale (nouvelle étape affichée,
+     redimensionnement), le trait suit. Un trait posé sur une étape est
+     masqué quand on revient avant cette étape.
    - Stylo actif : il capte les clics sur la diapo (boutons des animations
      inclus). Les boutons du bas et le clavier (flèches, espace) restent actifs.
    - Raccourcis : P = stylo, G = gomme, Échap = quitter le stylo.
@@ -133,12 +137,50 @@
         }
     }
 
+    // ---------- ancrage des traits sur le texte ----------
+    function versHTML(el) {
+        while (el && !(el instanceof HTMLElement)) el = el.parentElement;
+        return el;
+    }
+    function ancreSous(x, y) {            // x, y : coordonnées écran
+        canvas.style.pointerEvents = 'none';
+        var el = document.elementFromPoint(x, y);
+        canvas.style.pointerEvents = '';
+        el = versHTML(el);
+        // on ignore les étapes pas encore affichées (elles occupent la place mais sont invisibles)
+        var st = el && el.closest('.step');
+        while (st && !st.classList.contains('visible')) {
+            el = st.parentElement;
+            st = el && el.closest('.step');
+        }
+        if (!el || el === content || !content.contains(el) || el.classList.contains('slide')) return null;
+        return el;                        // l'élément le plus précis sous le trait (mot, fraction, encadré…)
+    }
+    function pos(el) {                    // position dans .content, sans les transformations CSS
+        var x = 0, y = 0;
+        while (el && el !== content) { x += el.offsetLeft; y += el.offsetTop; el = el.offsetParent; }
+        return [x, y];
+    }
+    function visible(t) {
+        var a = t.ancre;
+        if (!a) return true;
+        if (!a.isConnected || a.offsetParent === null) return false;
+        var st = a.closest('.step');
+        return !st || st.classList.contains('visible');
+    }
+    function decalage(t) {
+        if (!t.ancre) return [0, 0];
+        var p = pos(t.ancre);
+        return [p[0] - t.ax, p[1] - t.ay];
+    }
+
     // ---------- dessin ----------
     function tracer(t) {
+        if (!visible(t)) return;
+        var d = decalage(t), dx = d[0], dy = d[1];
         var p = t.pts;
         if (!p.length) return;
         ctx.save();
-        ctx.globalCompositeOperation = t.gomme ? 'destination-out' : 'source-over';
         ctx.strokeStyle = t.couleur;
         ctx.fillStyle = t.couleur;
         ctx.lineWidth = t.epaisseur;
@@ -146,16 +188,16 @@
         ctx.lineJoin = 'round';
         if (p.length === 1) {
             ctx.beginPath();
-            ctx.arc(p[0][0], p[0][1], t.epaisseur / 2, 0, 2 * Math.PI);
+            ctx.arc(p[0][0] + dx, p[0][1] + dy, t.epaisseur / 2, 0, 2 * Math.PI);
             ctx.fill();
         } else {
             ctx.beginPath();
-            ctx.moveTo(p[0][0], p[0][1]);
+            ctx.moveTo(p[0][0] + dx, p[0][1] + dy);
             for (var i = 1; i < p.length - 1; i++) {
                 var mx = (p[i][0] + p[i + 1][0]) / 2, my = (p[i][1] + p[i + 1][1]) / 2;
-                ctx.quadraticCurveTo(p[i][0], p[i][1], mx, my);
+                ctx.quadraticCurveTo(p[i][0] + dx, p[i][1] + dy, mx + dx, my + dy);
             }
-            ctx.lineTo(p[p.length - 1][0], p[p.length - 1][1]);
+            ctx.lineTo(p[p.length - 1][0] + dx, p[p.length - 1][1] + dy);
             ctx.stroke();
         }
         ctx.restore();
@@ -167,10 +209,65 @@
         ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
         (dessins[diapoCourante] || []).forEach(tracer);
         if (trait) tracer(trait);
+        if (gommeCurseur) {
+            ctx.save();
+            ctx.strokeStyle = 'rgba(0,0,0,0.45)';
+            ctx.setLineDash([4, 3]);
+            ctx.beginPath();
+            ctx.arc(gommeCurseur[0], gommeCurseur[1], GOMME / 2, 0, 2 * Math.PI);
+            ctx.stroke();
+            ctx.restore();
+        }
     }
     function point(e) {
         var r = canvas.getBoundingClientRect();
         return [e.clientX - r.left, e.clientY - r.top];
+    }
+    // points rapprochés (≤ 3 px) pour que la gomme coupe proprement
+    function densifier(pts) {
+        var out = [pts[0]];
+        for (var i = 1; i < pts.length; i++) {
+            var a = out[out.length - 1], b = pts[i];
+            var d = Math.hypot(b[0] - a[0], b[1] - a[1]), n = Math.floor(d / 3);
+            for (var k = 1; k <= n; k++) out.push([a[0] + (b[0] - a[0]) * k / (n + 1), a[1] + (b[1] - a[1]) * k / (n + 1)]);
+            out.push(b);
+        }
+        return out;
+    }
+
+    // ---------- gomme : coupe les traits là où elle passe ----------
+    var gommeCurseur = null, gommeDernier = null;
+    function gommer(c) {
+        var liste = dessins[diapoCourante];
+        if (!liste) return;
+        var res = [];
+        liste.forEach(function (t) {
+            if (!visible(t)) { res.push(t); return; }
+            var d = decalage(t), r = GOMME / 2 + t.epaisseur / 2;
+            var morceau = [], touche = false;
+            t.pts.forEach(function (p) {
+                if (Math.hypot(p[0] + d[0] - c[0], p[1] + d[1] - c[1]) <= r) {
+                    touche = true;
+                    if (morceau.length) res.push(copie(t, morceau));
+                    morceau = [];
+                } else morceau.push(p);
+            });
+            if (!touche) { res.push(t); return; }
+            if (morceau.length) res.push(copie(t, morceau));
+        });
+        dessins[diapoCourante] = res;
+    }
+    function copie(t, pts) {
+        return { couleur: t.couleur, epaisseur: t.epaisseur, ancre: t.ancre, ax: t.ax, ay: t.ay, pts: pts };
+    }
+    function gommerVers(c) {              // interpole entre deux positions de la gomme
+        if (gommeDernier) {
+            var d = Math.hypot(c[0] - gommeDernier[0], c[1] - gommeDernier[1]);
+            var n = Math.ceil(d / (GOMME / 3));
+            for (var k = 1; k < n; k++) gommer([gommeDernier[0] + (c[0] - gommeDernier[0]) * k / n, gommeDernier[1] + (c[1] - gommeDernier[1]) * k / n]);
+        }
+        gommer(c);
+        gommeDernier = c;
     }
 
     canvas.addEventListener('pointerdown', function (e) {
@@ -178,18 +275,31 @@
         e.preventDefault();
         verifierDiapo();
         canvas.setPointerCapture(e.pointerId);
-        var gomme = (outil === 'gomme') || e.button === 5;   // bouton gomme d'un stylet
-        trait = { couleur: couleur, epaisseur: gomme ? GOMME : epaisseur, gomme: gomme, pts: [point(e)] };
+        var p = point(e);
+        if (outil === 'gomme' || e.button === 5) {      // 5 = bouton gomme d'un stylet
+            gommeEnCours = true; gommeDernier = null; gommeCurseur = p;
+            gommerVers(p);
+        } else {
+            var an = ancreSous(e.clientX, e.clientY), ap = an ? pos(an) : [0, 0];
+            trait = { couleur: couleur, epaisseur: epaisseur, ancre: an, ax: ap[0], ay: ap[1], pts: [p] };
+        }
         redessiner();
     });
+    var gommeEnCours = false;
     canvas.addEventListener('pointermove', function (e) {
+        var p = point(e);
+        if (gommeEnCours) { e.preventDefault(); gommeCurseur = p; gommerVers(p); redessiner(); return; }
+        if (actif && outil === 'gomme') { gommeCurseur = p; redessiner(); return; }
         if (!trait) return;
         e.preventDefault();
-        trait.pts.push(point(e));
+        trait.pts.push(p);
         redessiner();
     });
+    canvas.addEventListener('pointerleave', function () { if (gommeCurseur && !gommeEnCours) { gommeCurseur = null; redessiner(); } });
     function finTrait() {
+        if (gommeEnCours) { gommeEnCours = false; gommeDernier = null; redessiner(); return; }
         if (!trait) return;
+        trait.pts = densifier(trait.pts);
         (dessins[diapoCourante] = dessins[diapoCourante] || []).push(trait);
         trait = null;
         redessiner();
@@ -208,10 +318,27 @@
     });
 
     // ---------- suivi des changements de diapo / de taille ----------
-    new MutationObserver(function () { verifierDiapo(); dimensionner(); })
-        .observe(content, { subtree: true, attributes: true, attributeFilter: ['class'] });
-    window.addEventListener('resize', dimensionner);
-    if (window.ResizeObserver) new ResizeObserver(dimensionner).observe(content);
+    // Toute modification de la mise en page (étape affichée, redimensionnement,
+    // iframe qui grandit…) → on recalcule la taille et on redessine (traits recalés).
+    var rafPrevu = false;
+    function actualiser() {
+        if (rafPrevu) return;
+        rafPrevu = true;
+        requestAnimationFrame(function () {
+            rafPrevu = false;
+            verifierDiapo();
+            dimensionner();
+            redessiner();
+        });
+    }
+    new MutationObserver(actualiser)
+        .observe(content, { subtree: true, childList: true, attributes: true, attributeFilter: ['class', 'style', 'height', 'width'] });
+    window.addEventListener('resize', actualiser);
+    if (window.ResizeObserver) {
+        var ro = new ResizeObserver(actualiser);
+        ro.observe(content);
+        content.querySelectorAll('.slide').forEach(function (sl) { ro.observe(sl); });
+    }
 
     verifierDiapo();
     majBarre();
