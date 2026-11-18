@@ -110,7 +110,7 @@ def main():
     for i, (t, contenu) in enumerate(ex_s):
         corr_html = ex_c[i][1] if i < len(ex_c) else '<p>Pas de correction.</p>'
         diapos.append(
-            '<div class="slide" data-titre="%s">\n<h2>%s</h2>\n<div class="enonce">%s</div>\n'
+            '<div class="slide" data-titre="%s">\n<h2>%s</h2>\n<div class="enonce">%s</div>\n<div class="zone-ecriture"></div>\n'
             '<div class="correction-box" hidden>\n<div class="correction-titre">Correction</div>\n%s\n</div>\n</div>'
             % (html.escape(t, quote=True), html.escape(t), contenu, corr_html))
         menu.append('<button onclick="allerA(%d)">%s</button>' % (i + 1, html.escape(t)))
@@ -128,16 +128,18 @@ def main():
 /* --- Styles propres à la feuille --- */
 %(css_page)s
 /* --- Présentation des exercices --- */
-.slide { text-align: left; font-size: 1.45em; }
+.slide { text-align: left; font-size: 1.05em; }
 .slide.titre-feuille { text-align: center; }
 .slide.titre-feuille h1 { font-size: 2.2em; margin: 30px 0 10px; }
-.slide h2 { font-size: 1.5em; text-decoration: none; color: #c2185b; border-bottom: 3px solid #eba8cc; padding-bottom: 6px; margin: 0 0 14px; text-align: left; }
+.slide h2 { font-size: 1.25em; text-decoration: none; color: #c2185b; border-bottom: 3px solid #eba8cc; padding-bottom: 6px; margin: 0 0 14px; text-align: left; }
 .enonce, .enonce *, .correction-box, .correction-box * { color: #111; }
 .enonce .faux, .correction-box .faux { color: #c0392b; } .enonce .vrai, .correction-box .vrai { color: #1e8449; }
 .correction-box .correction-titre { color: #2e7d32; }
-.fig svg { width: 560px; max-width: 100%%; height: auto; }
+.fig svg { width: 420px; max-width: 100%%; height: auto; }
 .enonce img, .correction-box img { max-width: 100%%; }
-.enonce { background: #ffe6f0; border-left: 6px solid #eba8cc; padding: 14px 20px; border-radius: 8px; }
+.enonce { background: #ffe6f0; border-left: 6px solid #eba8cc; padding: 10px 16px; border-radius: 8px; }
+.zone-ecriture { height: 62vh; margin-top: 12px; border: 2px dashed #ddd; border-radius: 8px; position: relative; }
+.zone-ecriture::before { content: 'Zone de correction'; position: absolute; top: 6px; right: 12px; color: #bbb; font-size: .8em; }
 .correction-box { background: #e8f5e9; border-left: 6px solid #43a047; padding: 14px 20px; border-radius: 8px; margin-top: 18px; }
 .correction-box[hidden] { display: none; }
 .correction-titre { font-weight: bold; color: #2e7d32; margin-bottom: 6px; }

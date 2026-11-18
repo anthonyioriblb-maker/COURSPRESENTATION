@@ -152,16 +152,18 @@
         
     
 /* --- Présentation des exercices --- */
-.slide { text-align: left; font-size: 1.45em; }
+.slide { text-align: left; font-size: 1.05em; }
 .slide.titre-feuille { text-align: center; }
 .slide.titre-feuille h1 { font-size: 2.2em; margin: 30px 0 10px; }
-.slide h2 { font-size: 1.5em; text-decoration: none; color: #c2185b; border-bottom: 3px solid #eba8cc; padding-bottom: 6px; margin: 0 0 14px; text-align: left; }
+.slide h2 { font-size: 1.25em; text-decoration: none; color: #c2185b; border-bottom: 3px solid #eba8cc; padding-bottom: 6px; margin: 0 0 14px; text-align: left; }
 .enonce, .enonce *, .correction-box, .correction-box * { color: #111; }
 .enonce .faux, .correction-box .faux { color: #c0392b; } .enonce .vrai, .correction-box .vrai { color: #1e8449; }
 .correction-box .correction-titre { color: #2e7d32; }
-.fig svg { width: 560px; max-width: 100%; height: auto; }
+.fig svg { width: 420px; max-width: 100%; height: auto; }
 .enonce img, .correction-box img { max-width: 100%; }
-.enonce { background: #ffe6f0; border-left: 6px solid #eba8cc; padding: 14px 20px; border-radius: 8px; }
+.enonce { background: #ffe6f0; border-left: 6px solid #eba8cc; padding: 10px 16px; border-radius: 8px; }
+.zone-ecriture { height: 62vh; margin-top: 12px; border: 2px dashed #ddd; border-radius: 8px; position: relative; }
+.zone-ecriture::before { content: 'Zone de correction'; position: absolute; top: 6px; right: 12px; color: #bbb; font-size: .8em; }
 .correction-box { background: #e8f5e9; border-left: 6px solid #43a047; padding: 14px 20px; border-radius: 8px; margin-top: 18px; }
 .correction-box[hidden] { display: none; }
 .correction-titre { font-weight: bold; color: #2e7d32; margin-bottom: 6px; }
@@ -187,6 +189,7 @@
 <div class="question"><span class="question-label">a.</span>Si un nombre se termine par 0, alors il est divisible par 10.</div>
 <div class="question"><span class="question-label">b.</span>Si un animal est un chat, alors il a quatre pattes.</div>
 <div class="question"><span class="question-label">c.</span>Si un quadrilatère est un losange, alors ses diagonales sont perpendiculaires.</div></div>
+<div class="zone-ecriture"></div>
 <div class="correction-box" hidden>
 <div class="correction-titre">Correction</div>
 <div class="question"><span class="question-label">a.</span>Réciproque : Si un nombre est divisible par 10, alors il se termine par 0. <span class="vrai">Vraie.</span></div>
@@ -207,6 +210,7 @@
 <div class="question"><span class="question-label">c.</span>GHI tel que GH = 2,8 cm, HI = 4,5 cm et GI = 5,3 cm.</div>
 <div class="question"><span class="question-label">d.</span>KLM tel que KL = 12 cm, LM = 13 cm et KM = 5 cm.</div>
 </div></div>
+<div class="zone-ecriture"></div>
 <div class="correction-box" hidden>
 <div class="correction-titre">Correction</div>
 <div class="question"><span class="question-label">a.</span></div>
@@ -244,6 +248,7 @@
 <div class="enonce"><div class="question"><span class="question-label">a.</span>RST est un triangle rectangle en S tel que RS = 9 cm et ST = 12 cm. Calculer RT.</div>
 <div class="question"><span class="question-label">b.</span>UVW est un triangle rectangle en V tel que UV = 5 cm et UW = 13 cm. Calculer VW.</div>
 <div class="question"><span class="question-label">c.</span>XYZ est un triangle rectangle en Y tel que XY = 4 cm et YZ = 7 cm. Calculer XZ. Arrondir au dixième.</div></div>
+<div class="zone-ecriture"></div>
 <div class="correction-box" hidden>
 <div class="correction-titre">Correction</div>
 <div class="question"><span class="question-label">a.</span>Le triangle RST est rectangle en S, donc d'après le théorème de Pythagore :</div>
@@ -280,6 +285,7 @@
 <h2>Exercice 4</h2>
 <div class="enonce"><p>Un menuisier fabrique un cadre de 60 cm de longueur et 45 cm de largeur. Pour vérifier que ses coins sont bien droits, il mesure une diagonale : il trouve 74 cm.</p>
 <p>Le cadre est-il un rectangle ? Justifier.</p></div>
+<div class="zone-ecriture"></div>
 <div class="correction-box" hidden>
 <div class="correction-titre">Correction</div>
 <p>On note ABCD le cadre, avec AB = 60 cm, BC = 45 cm et la diagonale AC = 74 cm.</p>
@@ -296,6 +302,7 @@
 <h2>Exercice 5</h2>
 <div class="enonce"><p>La taille d'un écran de télévision est donnée par la longueur de sa diagonale, en pouces. Un écran mesure 88,6 cm de largeur et 49,8 cm de hauteur.</p>
 <p>On rappelle que 1 pouce = 2,54 cm. Quelle est la taille de cet écran en pouces ? Arrondir à l'unité.</p></div>
+<div class="zone-ecriture"></div>
 <div class="correction-box" hidden>
 <div class="correction-titre">Correction</div>
 <p>La largeur, la hauteur et la diagonale de l'écran forment un triangle rectangle. On note 𝑑 la diagonale. D'après le théorème de Pythagore :</p>
@@ -331,6 +338,7 @@
 <div class="question"><span class="question-label">3.</span>Calculer l'aire du terrain ABCD.</div>
 <div class="question"><span class="question-label">4.</span>M. Martin veut entourer son terrain d'un grillage. Le grillage est vendu en rouleaux de 25 m, au prix de 39,90 € le rouleau. <b>Combien va-t-il dépenser ? Présenter la démarche avec des phrases.</b></div>
 <div class="question"><span class="question-label">5.</span>Il construit un abri de jardin. Pour vérifier qu'un coin de l'abri est un angle droit, il trace au sol un triangle EFG avec EF = 1,2 m, FG = 1,6 m et EG = 2,1 m. <b>Le coin est-il un angle droit ? Justifier.</b></div></div>
+<div class="zone-ecriture"></div>
 <div class="correction-box" hidden>
 <div class="correction-titre">Correction</div>
 <div class="question"><span class="question-label">1.</span>(1 point)</div>
