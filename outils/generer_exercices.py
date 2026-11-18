@@ -128,6 +128,15 @@ def main():
 /* --- Styles propres à la feuille --- */
 %(css_page)s
 /* --- Présentation des exercices --- */
+.container { width: 100%%; height: 100vh; border-radius: 0; }
+.content { padding: 12px 30px 16px; }
+.controls { padding: 4px 10px; gap: 10px; }
+.controls-left, .controls-right { gap: 6px; }
+.controls button { padding: 4px 12px; font-size: .85em; border-radius: 7px; }
+.controls #styloBar.integre button { width: 26px; height: 26px; font-size: 14px; padding: 0; border-radius: 6px; }
+.controls #styloBar.integre .pastille { width: 14px; height: 14px; }
+.controls #styloBar.integre .trait { width: 16px; }
+.controls #styloBar.integre hr { height: 18px; }
 .slide { text-align: left; font-size: 1.05em; }
 .slide.titre-feuille { text-align: center; }
 .slide.titre-feuille h1 { font-size: 2.2em; margin: 30px 0 10px; }
@@ -135,10 +144,14 @@ def main():
 .enonce, .enonce *, .correction-box, .correction-box * { color: #111; }
 .enonce .faux, .correction-box .faux { color: #c0392b; } .enonce .vrai, .correction-box .vrai { color: #1e8449; }
 .correction-box .correction-titre { color: #2e7d32; }
+.enonce { font-size: .82em; cursor: zoom-in; transition: font-size .2s; }
+.enonce.grand { font-size: 1.3em; cursor: zoom-out; }
+.enonce .fig svg { width: 300px; }
+.enonce.grand .fig svg { width: 560px; }
 .fig svg { width: 420px; max-width: 100%%; height: auto; }
 .enonce img, .correction-box img { max-width: 100%%; }
 .enonce { background: #ffe6f0; border-left: 6px solid #eba8cc; padding: 10px 16px; border-radius: 8px; }
-.zone-ecriture { height: 62vh; margin-top: 12px; border: 2px dashed #ddd; border-radius: 8px; position: relative; }
+.zone-ecriture { min-height: 300px; margin-top: 12px; border: 2px dashed #ddd; border-radius: 8px; position: relative; }
 .zone-ecriture::before { content: 'Zone de correction'; position: absolute; top: 6px; right: 12px; color: #bbb; font-size: .8em; }
 .correction-box { background: #e8f5e9; border-left: 6px solid #43a047; padding: 14px 20px; border-radius: 8px; margin-top: 18px; }
 .correction-box[hidden] { display: none; }
@@ -180,10 +193,17 @@ function afficher(n) {
   cur = Math.max(0, Math.min(slides.length - 1, n));
   slides.forEach(function (s, i) { s.classList.toggle('active', i === cur); });
   document.querySelector('.content').scrollTop = 0;
-  majCorr();
+  majCorr(); ajusterZone();
   document.getElementById('numEx').textContent = cur ? 'Exercice ' + cur + ' / ' + (slides.length - 1) : '';
   document.getElementById('prevBtn').disabled = cur === 0;
 }
+// La zone d'écriture remplit la place qui reste sous l'énoncé
+function ajusterZone() {
+  var z = slides[cur].querySelector('.zone-ecriture'); if (!z) return;
+  var c = document.querySelector('.content');
+  z.style.height = Math.max(300, c.clientHeight - (z.getBoundingClientRect().top - c.getBoundingClientRect().top) - 20) + 'px';
+}
+window.addEventListener('resize', ajusterZone);
 function changer(d) { afficher(cur + d); }
 function allerA(n) { fermerMenu(); afficher(n); }
 function boiteCorr() { return slides[cur].querySelector('.correction-box'); }
@@ -200,6 +220,10 @@ function basculerCorrection() {
 }
 function ouvrirMenu() { document.getElementById('menuEx').classList.add('ouvert'); }
 function fermerMenu() { document.getElementById('menuEx').classList.remove('ouvert'); }
+document.querySelectorAll('.enonce').forEach(function (el) {
+  el.title = 'Cliquer pour agrandir / réduire';
+  el.addEventListener('click', function () { el.classList.toggle('grand'); setTimeout(ajusterZone, 250); });
+});
 document.addEventListener('keydown', function (e) {
   if (e.ctrlKey || e.metaKey || e.altKey) return;
   if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === ' ' || e.key === 'PageDown') { e.preventDefault(); changer(1); }
