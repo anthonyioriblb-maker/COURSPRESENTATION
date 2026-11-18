@@ -305,6 +305,8 @@ Exemple : `Archives/MathsIORI/6°/chapitre10 - Les angles/cours_2026-05-06_14h32
 
 ## COURSPRESENTATION — spécifique aux présentations
 
+**Titre de la première diapo** (nov. 2026) : toujours `<h1>Chapitre N : Titre du chapitre</h1>`, avec le numéro du chapitre dans MathsIORI. À vérifier et corriger au fur et à mesure, à chaque fois qu'une présentation est créée ou modifiée. Restent à corriger (5e) : ch. 6 « Les triangles » et ch. 13 « Calcul littéral 1 » (sans numéro), ch. 8 (affiche « Chapitre 9 »).
+
 **Références absolues (modèles à toujours relire avant de produire/corriger une présentation)** :
 - Chapitre 11 Proportionnalité 4ᵉ (`COURSPRESENTATION/4/Chapitre11_Proportionnalite/`)
   - Source : `MathsIORI/4°/chapitre11 - Proportionnalite/cours.html`
