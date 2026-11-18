@@ -308,7 +308,8 @@ Exemple : `Archives/MathsIORI/6°/chapitre10 - Les angles/cours_2026-05-06_14h32
 **Présentations d'exercices** (nov. 2026) : une feuille d'exercices MathsIORI (+ sa correction) se présente en classe exercice par exercice, avec stylo et bouton « Correction » (touche C). Fichier autonome, marche hors ligne, généré par :
 `python3 outils/generer_exercices.py <sujet.html> <correction.html> <niveau>/<ChapitreN_…>/exercices/<Nom>.html`
 → Sujet et correction : exercices dans des `<div class="exercice">` avec `<div class="exercice-titre">`, dans le même ordre. Images intégrées en base64.
-→ À relancer à chaque création ou modification de la feuille ou de sa correction (comme les PDF), et ajouter le lien dans `index.html` (clé `exercices` de la carte du chapitre).
+→ Pour TOUTES les feuilles en ligne d'un coup (chapitres disponibles, exercices actifs dans les classe-Xe.html de MathsIORI) : `python3 outils/generer_tous_exercices.py` — génère tout et met à jour les liens « 📝 » de `index.html` (clé `exercices` des cartes). À relancer à chaque création ou modification d'une feuille ou de sa correction, comme les PDF.
+→ Formats reconnus : `div.exercice` + `.exercice-titre`, ou un titre `<h2>Exercice N</h2>` dans un bloc (`div.bloc`…) ou suivi de ses éléments. Exercices appariés sujet/correction par leur numéro. Ce qui précède le 1er exercice (figure commune) est repris en tête de chaque exercice.
 
 **Titre de la première diapo** (nov. 2026) : toujours `<h1>Chapitre N : Titre du chapitre</h1>`, avec le numéro du chapitre dans MathsIORI. À vérifier et corriger au fur et à mesure, à chaque fois qu'une présentation est créée ou modifiée. Restent à corriger (5e) : ch. 6 « Les triangles » et ch. 13 « Calcul littéral 1 » (sans numéro), ch. 8 (affiche « Chapitre 9 »).
 

@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Exercices - Double distributivité et identité remarquable</title>
+<link rel="stylesheet" href="../../../styles.css">
+<style>
+/* --- Règles mathématiques reprises de MathsIORI/styles.css --- */
+.frac, .fraction {
+    display: inline-block;
+    margin-left: .1em;
+    margin-right: .1em;
+    vertical-align: middle;
+    text-align: center;
+    
+}
+.frac > .num, 
+.frac > .numerateur, 
+.fraction > .numerateur,
+.numerateur {
+    display: block;
+    padding: 0 .1em;
+    border-bottom: 1px solid black;
+    padding-bottom: 2px;
+}
+.frac > .den, 
+.frac > .denominateur,
+.fraction > .denominateur,
+.denominateur {
+    display: block;
+    padding: 0 .1em;
+    padding-top: 2px;
+}
+.frac > .fracbar {
+    display: block;
+    height: 0;
+    margin: 0;
+    border: 0;
+    border-bottom: .1em solid;
+    overflow: hidden;
+}
+.sqrt {
+    position: relative;
+    display: inline-block;
+    border-top: 2px solid black;
+    margin-left: .7em;
+    padding-left: .2em;
+    padding-right: .1em;
+}
+.sqrt:before {
+    content: " ";
+    position: absolute;
+    display: inline-block;
+    left: -.65em;
+    height: 56%;
+    width: .6em;
+    border-right: 2px solid black;
+    border-bottom: 2.5px solid black;
+    transform-origin: top right;
+    transform: rotate(55deg) skew(50deg);
+}
+.sqrt.red {
+    border-top-color: red;
+    color: red;
+}
+.sqrt.red:before {
+    border-right-color: red;
+    border-bottom-color: red;
+}
+.angle {
+    position: relative;
+    display: inline-block;
+}
+.angle::before {
+    content: '^';
+    position: absolute;
+    top: -0.5em;
+    left: 50%;
+    transform: translateX(-50%) scaleX(2.5) scaleY(1.2);
+    font-size: 1.5em;
+    font-weight: 300;
+}
+.couleur-speciale {
+    color: red;
+    position: relative;
+    display: inline-block;
+    text-decoration: line-through;
+}
+.fraction-rectangle {
+    display: inline-flex;
+    border: 2px solid #333;
+    height: 60px;
+    margin: 10px 5px;
+    vertical-align: middle;
+}
+.fraction-rectangle.large {
+    height: 80px;
+}
+.fraction-part {
+    flex: 1;
+    border-right: 1px solid #333;
+    min-width: 40px;
+}
+.fraction-part:last-child {
+    border-right: none;
+}
+.fraction-part.colored {
+    background-color: #4a90e2;
+}
+.fraction-part.orange {
+    background-color: #ff8c42;
+}
+.fraction-part.green {
+    background-color: #6fdc6f;
+}
+.fraction-part.red {
+    background-color: #e24a4a;
+}
+.fraction-visual {
+    text-align: center;
+    margin: 20px 0;
+}
+/* --- Styles propres à la feuille --- */
+.slide .question { margin: 8px 0 8px 20px; font-size: 1.05em; }
+.slide .exercice-titre { font-weight: bold; text-decoration: underline; margin-bottom: 4px; }
+.slide .grille { display: grid; grid-template-columns: repeat(3, 1fr); }
+.slide .grille2 { display: grid; grid-template-columns: repeat(2, 1fr); }
+.slide .question-label { font-weight: bold; margin-right: 8px; }
+.slide .calc { margin: 6px 0 12px 20px; line-height: 1.7; }
+.slide .question { margin: 8px 0 8px 20px; font-size: 1.05em; }
+.slide .exercice-titre { font-weight: bold; text-decoration: underline; margin-bottom: 4px; }
+.slide .grille { display: grid; grid-template-columns: repeat(3, 1fr); }
+.slide .grille2 { display: grid; grid-template-columns: repeat(2, 1fr); }
+.slide .question-label { font-weight: bold; margin-right: 8px; }
+.slide .calc { margin: 6px 0 12px 20px; line-height: 1.7; }
+/* --- Présentation des exercices --- */
+/* pas d'effet de soulèvement au survol : il faisait trembler le menu des exercices */
+button:hover { transform: none !important; }
+.container { width: 100%; height: 100vh; border-radius: 0; }
+.content { padding: 12px 30px 16px; }
+.controls { padding: 4px 10px; gap: 10px; }
+.controls-left, .controls-right { gap: 6px; }
+.controls button { padding: 4px 12px; font-size: .85em; border-radius: 7px; }
+.controls #styloBar.integre button { width: 26px; height: 26px; font-size: 14px; padding: 0; border-radius: 6px; }
+.controls #styloBar.integre .pastille { width: 14px; height: 14px; }
+.controls #styloBar.integre .trait { width: 16px; }
+.controls #styloBar.integre hr { height: 18px; }
+.slide { text-align: left; font-size: 1.05em; }
+.slide.titre-feuille { text-align: center; }
+.slide.titre-feuille h1 { font-size: 2.2em; margin: 30px 0 10px; }
+.slide h2 { font-size: 1.25em; text-decoration: none; color: #c2185b; border-bottom: 3px solid #eba8cc; padding-bottom: 6px; margin: 0 0 14px; text-align: left; }
+.enonce, .enonce *, .correction-box, .correction-box * { color: #111; }
+.enonce .faux, .correction-box .faux { color: #c0392b; } .enonce .vrai, .correction-box .vrai { color: #1e8449; }
+.correction-box .correction-titre { color: #2e7d32; }
+.enonce { font-size: .82em; cursor: zoom-in; transition: font-size .2s; }
+.enonce.grand { font-size: 1.3em; cursor: zoom-out; }
+.enonce .fig svg { width: 300px; }
+.enonce.grand .fig svg { width: 560px; }
+.fig svg { width: 420px; max-width: 100%; height: auto; }
+.enonce img, .correction-box img { max-width: 100%; }
+.enonce { background: #ffe6f0; border-left: 6px solid #eba8cc; padding: 10px 16px; border-radius: 8px; }
+.zone-ecriture { min-height: 300px; margin-top: 12px; border: 2px dashed #ddd; border-radius: 8px; position: relative; }
+.zone-ecriture::before { content: 'Zone de correction'; position: absolute; top: 6px; right: 12px; color: #bbb; font-size: .8em; }
+.correction-box { scroll-margin-top: 12px; font-size: 40px; background: #e8f5e9; border-left: 6px solid #43a047; padding: 14px 20px; border-radius: 8px; margin-top: 18px; }
+.correction-box[hidden] { display: none; }
+.correction-titre { font-weight: bold; color: #2e7d32; margin-bottom: 6px; }
+.correction-box { overflow-x: auto; }
+.correction-box table { font-size: .6em; }
+.correction-box svg, .correction-box img { max-width: 100%; height: auto; }
+.enonce p, .correction-box p { margin: 6px 0; }
+.liste-ex { display: flex; flex-wrap: wrap; gap: 14px; justify-content: center; margin-top: 30px; }
+.liste-ex button, #menuEx button { font-size: 1em; }
+#btnCorr.ouvert { background: #43a047; }
+#menuEx { position: fixed; inset: 0; background: rgba(0,0,0,.45); display: none; align-items: center; justify-content: center; z-index: 3000; }
+#menuEx.ouvert { display: flex; }
+#menuEx .boite { background: #fff; border-radius: 14px; padding: 20px 26px; display: flex; flex-direction: column; gap: 10px; min-width: 320px; }
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="content">
+    <div class="slide titre-feuille active">
+      <h1>Exercices - Double distributivité et identité remarquable</h1>
+      <div class="liste-ex"><button onclick="allerA(1)">Exercice 1</button><button onclick="allerA(2)">Exercice 2</button><button onclick="allerA(3)">Exercice 3</button><button onclick="allerA(4)">Exercice 4</button><button onclick="allerA(5)">Exercice 5</button><button onclick="allerA(6)">Exercice 6</button></div>
+    </div>
+<div class="slide" data-titre="Exercice 1">
+<h2>Exercice 1</h2>
+<div class="enonce"><p>Développer et réduire les expressions suivantes :</p>
+<div class="grille2">
+<div class="question"><em>A</em> = (𝑥 + 2)(𝑥 + 5)</div>
+<div class="question"><em>B</em> = (𝑥 − 3)(𝑥 + 4)</div>
+<div class="question"><em>C</em> = (2𝑥 + 1)(𝑥 − 6)</div>
+<div class="question"><em>D</em> = (3𝑥 − 2)(4𝑥 − 5)</div>
+<div class="question"><em>E</em> = (5 − 𝑥)(2𝑥 + 3)</div>
+<div class="question"><em>F</em> = (𝑥 + 4)(𝑦 − 2)</div>
+</div></div>
+<div class="zone-ecriture"></div>
+<div class="correction-box" hidden>
+<div class="correction-titre">Correction</div>
+<div class="grille2">
+<div class="calc"><div><em>A</em> = (𝑥 + 2)(𝑥 + 5)</div><div><em>A</em> = 𝑥 × 𝑥 + 𝑥 × 5 + 2 × 𝑥 + 2 × 5</div><div><em>A</em> = 𝑥² + 5𝑥 + 2𝑥 + 10</div><div><em>A</em> = 𝑥² + 7𝑥 + 10</div></div>
+<div class="calc"><div><em>B</em> = (𝑥 − 3)(𝑥 + 4)</div><div><em>B</em> = 𝑥 × 𝑥 + 𝑥 × 4 − 3 × 𝑥 − 3 × 4</div><div><em>B</em> = 𝑥² + 4𝑥 − 3𝑥 − 12</div><div><em>B</em> = 𝑥² + 𝑥 − 12</div></div>
+<div class="calc"><div><em>C</em> = (2𝑥 + 1)(𝑥 − 6)</div><div><em>C</em> = 2𝑥 × 𝑥 − 2𝑥 × 6 + 1 × 𝑥 − 1 × 6</div><div><em>C</em> = 2𝑥² − 12𝑥 + 𝑥 − 6</div><div><em>C</em> = 2𝑥² − 11𝑥 − 6</div></div>
+<div class="calc"><div><em>D</em> = (3𝑥 − 2)(4𝑥 − 5)</div><div><em>D</em> = 3𝑥 × 4𝑥 − 3𝑥 × 5 − 2 × 4𝑥 + 2 × 5</div><div><em>D</em> = 12𝑥² − 15𝑥 − 8𝑥 + 10</div><div><em>D</em> = 12𝑥² − 23𝑥 + 10</div></div>
+<div class="calc"><div><em>E</em> = (5 − 𝑥)(2𝑥 + 3)</div><div><em>E</em> = 5 × 2𝑥 + 5 × 3 − 𝑥 × 2𝑥 − 𝑥 × 3</div><div><em>E</em> = 10𝑥 + 15 − 2𝑥² − 3𝑥</div><div><em>E</em> = −2𝑥² + 7𝑥 + 15</div></div>
+<div class="calc"><div><em>F</em> = (𝑥 + 4)(𝑦 − 2)</div><div><em>F</em> = 𝑥 × 𝑦 − 𝑥 × 2 + 4 × 𝑦 − 4 × 2</div><div><em>F</em> = 𝑥𝑦 − 2𝑥 + 4𝑦 − 8</div></div>
+</div>
+</div>
+</div>
+<div class="slide" data-titre="Exercice 2">
+<h2>Exercice 2</h2>
+<div class="enonce"><p>Développer et réduire les expressions suivantes :</p>
+<div class="grille2">
+<div class="question"><em>G</em> = (𝑥 + 1)(𝑥 + 3) + 2𝑥</div>
+<div class="question"><em>H</em> = (2𝑥 − 1)(𝑥 + 5) − 3𝑥²</div>
+<div class="question"><em>I</em> = 3(𝑥 + 2) + (𝑥 − 1)(2𝑥 + 3)</div>
+<div class="question"><em>J</em> = (𝑥 + 2)(𝑥 − 1) − (𝑥 + 4)(𝑥 − 3)</div>
+</div></div>
+<div class="zone-ecriture"></div>
+<div class="correction-box" hidden>
+<div class="correction-titre">Correction</div>
+<div class="grille2">
+<div class="calc"><div><em>G</em> = (𝑥 + 1)(𝑥 + 3) + 2𝑥</div><div><em>G</em> = 𝑥 × 𝑥 + 𝑥 × 3 + 1 × 𝑥 + 1 × 3 + 2𝑥</div><div><em>G</em> = 𝑥² + 3𝑥 + 𝑥 + 3 + 2𝑥</div><div><em>G</em> = 𝑥² + 6𝑥 + 3</div></div>
+<div class="calc"><div><em>H</em> = (2𝑥 − 1)(𝑥 + 5) − 3𝑥²</div><div><em>H</em> = 2𝑥 × 𝑥 + 2𝑥 × 5 − 1 × 𝑥 − 1 × 5 − 3𝑥²</div><div><em>H</em> = 2𝑥² + 10𝑥 − 𝑥 − 5 − 3𝑥²</div><div><em>H</em> = −𝑥² + 9𝑥 − 5</div></div>
+<div class="calc"><div><em>I</em> = 3(𝑥 + 2) + (𝑥 − 1)(2𝑥 + 3)</div><div><em>I</em> = 3 × 𝑥 + 3 × 2 + 𝑥 × 2𝑥 + 𝑥 × 3 − 1 × 2𝑥 − 1 × 3</div><div><em>I</em> = 3𝑥 + 6 + 2𝑥² + 3𝑥 − 2𝑥 − 3</div><div><em>I</em> = 2𝑥² + 4𝑥 + 3</div></div>
+<div class="calc"><div><em>J</em> = (𝑥 + 2)(𝑥 − 1) − (𝑥 + 4)(𝑥 − 3)</div><div><em>J</em> = 𝑥² − 𝑥 + 2𝑥 − 2 − (𝑥² − 3𝑥 + 4𝑥 − 12)</div><div><em>J</em> = 𝑥² + 𝑥 − 2 − (𝑥² + 𝑥 − 12)</div><div><em>J</em> = 𝑥² + 𝑥 − 2 − 𝑥² − 𝑥 + 12</div><div><em>J</em> = 10</div></div>
+</div>
+</div>
+</div>
+<div class="slide" data-titre="Exercice 3">
+<h2>Exercice 3</h2>
+<div class="enonce"><p>Développer en utilisant l'identité remarquable :</p>
+<div class="grille2">
+<div class="question"><em>K</em> = (𝑥 + 3)(𝑥 − 3)</div>
+<div class="question"><em>L</em> = (𝑥 − 7)(𝑥 + 7)</div>
+<div class="question"><em>M</em> = (2𝑥 + 5)(2𝑥 − 5)</div>
+<div class="question"><em>N</em> = (4 − 3𝑥)(4 + 3𝑥)</div>
+<div class="question"><em>P</em> = (6𝑦 + 𝑥)(6𝑦 − 𝑥)</div>
+<div class="question"><em>Q</em> = (−𝑥 + 10)(10 + 𝑥)</div>
+</div></div>
+<div class="zone-ecriture"></div>
+<div class="correction-box" hidden>
+<div class="correction-titre">Correction</div>
+<div class="grille2">
+<div class="calc"><div><em>K</em> = (𝑥 + 3)(𝑥 − 3)</div><div><em>K</em> = 𝑥² − 3²</div><div><em>K</em> = 𝑥² − 9</div></div>
+<div class="calc"><div><em>L</em> = (𝑥 − 7)(𝑥 + 7)</div><div><em>L</em> = 𝑥² − 7²</div><div><em>L</em> = 𝑥² − 49</div></div>
+<div class="calc"><div><em>M</em> = (2𝑥 + 5)(2𝑥 − 5)</div><div><em>M</em> = (2𝑥)² − 5²</div><div><em>M</em> = 4𝑥² − 25</div></div>
+<div class="calc"><div><em>N</em> = (4 − 3𝑥)(4 + 3𝑥)</div><div><em>N</em> = 4² − (3𝑥)²</div><div><em>N</em> = 16 − 9𝑥²</div></div>
+<div class="calc"><div><em>P</em> = (6𝑦 + 𝑥)(6𝑦 − 𝑥)</div><div><em>P</em> = (6𝑦)² − 𝑥²</div><div><em>P</em> = 36𝑦² − 𝑥²</div></div>
+<div class="calc"><div><em>Q</em> = (−𝑥 + 10)(10 + 𝑥)</div><div><em>Q</em> = (10 − 𝑥)(10 + 𝑥)</div><div><em>Q</em> = 10² − 𝑥²</div><div><em>Q</em> = 100 − 𝑥²</div></div>
+</div>
+</div>
+</div>
+<div class="slide" data-titre="Exercice 4">
+<h2>Exercice 4</h2>
+<div class="enonce"><p>Calculer en utilisant l'identité remarquable :</p>
+<div class="grille2">
+<div class="question"><span class="question-label">a.</span>21 × 19</div>
+<div class="question"><span class="question-label">b.</span>102 × 98</div>
+<div class="question"><span class="question-label">c.</span>53 × 47</div>
+<div class="question"><span class="question-label">d.</span>(<span class="sqrt">7</span> + 2)(<span class="sqrt">7</span> − 2)</div>
+</div></div>
+<div class="zone-ecriture"></div>
+<div class="correction-box" hidden>
+<div class="correction-titre">Correction</div>
+<div class="grille2">
+<div class="calc"><div><strong>a.</strong> 21 × 19</div><div>= (20 + 1)(20 − 1)</div><div>= 20² − 1²</div><div>= 400 − 1</div><div>= 399</div></div>
+<div class="calc"><div><strong>b.</strong> 102 × 98</div><div>= (100 + 2)(100 − 2)</div><div>= 100² − 2²</div><div>= 10 000 − 4</div><div>= 9 996</div></div>
+<div class="calc"><div><strong>c.</strong> 53 × 47</div><div>= (50 + 3)(50 − 3)</div><div>= 50² − 3²</div><div>= 2 500 − 9</div><div>= 2 491</div></div>
+<div class="calc"><div><strong>d.</strong> (<span class="sqrt">7</span> + 2)(<span class="sqrt">7</span> − 2)</div><div>= <span class="sqrt">7</span>² − 2²</div><div>= 7 − 4</div><div>= 3</div></div>
+</div>
+</div>
+</div>
+<div class="slide" data-titre="Exercice 5">
+<h2>Exercice 5</h2>
+<div class="enonce"><p>On considère le rectangle ci-dessous (les longueurs sont en cm).</p>
+<svg style="display:block;margin:4px auto;" viewbox="0 0 340 150" width="230">
+<rect fill="#eaf2fb" height="90" stroke="#000" stroke-width="2" width="250" x="50" y="20"></rect>
+<text font-size="16" text-anchor="middle" x="175" y="137">2𝑥 + 3</text>
+<text font-size="16" text-anchor="middle" x="25" y="70">𝑥 + 1</text>
+</svg>
+<div class="question"><span class="question-label">1.</span>Montrer que l'aire de ce rectangle est égale à 2𝑥² + 5𝑥 + 3.</div>
+<div class="question"><span class="question-label">2.</span>Calculer l'aire du rectangle lorsque 𝑥 = 4.</div></div>
+<div class="zone-ecriture"></div>
+<div class="correction-box" hidden>
+<div class="correction-titre">Correction</div>
+<div class="calc"><div><strong>1.</strong> Aire = (2𝑥 + 3)(𝑥 + 1)</div><div>Aire = 2𝑥 × 𝑥 + 2𝑥 × 1 + 3 × 𝑥 + 3 × 1</div><div>Aire = 2𝑥² + 2𝑥 + 3𝑥 + 3</div><div>Aire = 2𝑥² + 5𝑥 + 3</div></div>
+<div class="calc"><div><strong>2.</strong> Pour 𝑥 = 4 : 2 × 4² + 5 × 4 + 3 = 2 × 16 + 20 + 3 = 32 + 20 + 3 = 55</div><div>L'aire du rectangle est 55 cm².</div></div>
+</div>
+</div>
+<div class="slide" data-titre="Exercice 6">
+<h2>Exercice 6</h2>
+<div class="enonce"><p>Voici un programme de calcul :</p>
+<div class="question">• Choisir un nombre.<br/>• Lui ajouter 3.<br/>• Multiplier le résultat par le nombre de départ diminué de 3.<br/>• Ajouter 9.</div>
+<div class="question"><span class="question-label">1.</span>Montrer que si l'on choisit 5, on obtient 25.</div>
+<div class="question"><span class="question-label">2.</span>Quel résultat obtient-on si l'on choisit −2 ?</div>
+<div class="question"><span class="question-label">3.</span>Quelle conjecture peut-on faire ?</div>
+<div class="question"><span class="question-label">4.</span>On appelle 𝑥 le nombre choisi. Démontrer cette conjecture.</div></div>
+<div class="zone-ecriture"></div>
+<div class="correction-box" hidden>
+<div class="correction-titre">Correction</div>
+<div class="calc"><div><strong>1.</strong> 5 + 3 = 8 ; 5 − 3 = 2 ; 8 × 2 = 16 ; 16 + 9 = 25. On obtient bien 25.</div></div>
+<div class="calc"><div><strong>2.</strong> −2 + 3 = 1 ; −2 − 3 = −5 ; 1 × (−5) = −5 ; −5 + 9 = 4. On obtient 4.</div></div>
+<div class="calc"><div><strong>3.</strong> On peut conjecturer que le résultat est le carré du nombre de départ.</div></div>
+<div class="calc"><div><strong>4.</strong> Le programme donne : (𝑥 + 3)(𝑥 − 3) + 9</div><div>= 𝑥² − 3² + 9</div><div>= 𝑥² − 9 + 9</div><div>= 𝑥²</div><div>Le résultat est bien le carré du nombre de départ.</div></div>
+</div>
+</div>
+  </div>
+  <div class="controls">
+    <div class="controls-left">
+      <button class="btn-menu" onclick="ouvrirMenu()">☰ Exercices</button>
+      <button id="btnCorr" onclick="basculerCorrection()">✅ Correction</button>
+    </div>
+    <div class="progress"><span id="numEx"></span></div>
+    <div class="controls-right">
+      <button id="prevBtn" onclick="changer(-1)">◀ Précédent</button>
+      <button onclick="changer(1)">Suivant ▶</button>
+    </div>
+  </div>
+</div>
+<div id="menuEx" onclick="if(event.target===this)fermerMenu()"><div class="boite"><button onclick="allerA(1)">Exercice 1</button><button onclick="allerA(2)">Exercice 2</button><button onclick="allerA(3)">Exercice 3</button><button onclick="allerA(4)">Exercice 4</button><button onclick="allerA(5)">Exercice 5</button><button onclick="allerA(6)">Exercice 6</button><button onclick="fermerMenu()">Fermer</button></div></div>
+<script>
+var slides = document.querySelectorAll('.slide'), cur = 0;
+function afficher(n) {
+  cur = Math.max(0, Math.min(slides.length - 1, n));
+  slides.forEach(function (s, i) { s.classList.toggle('active', i === cur); });
+  document.querySelector('.content').scrollTop = 0;
+  majCorr(); ajusterZone();
+  document.getElementById('numEx').textContent = cur ? 'Exercice ' + cur + ' / ' + (slides.length - 1) : '';
+  document.getElementById('prevBtn').disabled = cur === 0;
+}
+// La zone d'écriture remplit la place qui reste sous l'énoncé
+function ajusterZone() {
+  var z = slides[cur].querySelector('.zone-ecriture'); if (!z) return;
+  var c = document.querySelector('.content');
+  z.style.height = Math.floor(Math.max(300, c.clientHeight - (z.getBoundingClientRect().top - c.getBoundingClientRect().top) - 40)) + 'px';
+}
+window.addEventListener('resize', ajusterZone);
+function changer(d) { afficher(cur + d); }
+function allerA(n) { fermerMenu(); afficher(n); }
+function boiteCorr() { return slides[cur].querySelector('.correction-box'); }
+function majCorr() {
+  var b = boiteCorr(), btn = document.getElementById('btnCorr');
+  btn.disabled = !b;
+  btn.classList.toggle('ouvert', !!b && !b.hidden);
+  btn.textContent = (b && !b.hidden) ? '🙈 Masquer la correction' : '✅ Correction';
+}
+function basculerCorrection() {
+  var b = boiteCorr(); if (!b) return;
+  b.hidden = !b.hidden; majCorr();
+  if (!b.hidden) b.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+function ouvrirMenu() { document.getElementById('menuEx').classList.add('ouvert'); }
+function fermerMenu() { document.getElementById('menuEx').classList.remove('ouvert'); }
+document.querySelectorAll('.enonce').forEach(function (el) {
+  el.title = 'Cliquer pour agrandir / réduire';
+  el.addEventListener('click', function () { el.classList.toggle('grand'); setTimeout(ajusterZone, 250); });
+});
+document.addEventListener('keydown', function (e) {
+  if (e.ctrlKey || e.metaKey || e.altKey) return;
+  if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === ' ' || e.key === 'PageDown') { e.preventDefault(); changer(1); }
+  else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp' || e.key === 'PageUp') { e.preventDefault(); changer(-1); }
+  else if (e.key === 'c' || e.key === 'C') basculerCorrection();
+  else if (e.key === 'm' || e.key === 'M') ouvrirMenu();
+  else if (e.key === 'Escape') fermerMenu();
+});
+afficher(0);
+</script>
+<script src="../../../stylo.js"></script>
+</body>
+</html>

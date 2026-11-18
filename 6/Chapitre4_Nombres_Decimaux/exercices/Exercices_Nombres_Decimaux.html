@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Exercices du chapitre 4 – Les nombres décimaux</title>
+<link rel="stylesheet" href="../../../styles.css">
+<style>
+/* --- Règles mathématiques reprises de MathsIORI/styles.css --- */
+.frac, .fraction {
+    display: inline-block;
+    margin-left: .1em;
+    margin-right: .1em;
+    vertical-align: middle;
+    text-align: center;
+    
+}
+.frac > .num, 
+.frac > .numerateur, 
+.fraction > .numerateur,
+.numerateur {
+    display: block;
+    padding: 0 .1em;
+    border-bottom: 1px solid black;
+    padding-bottom: 2px;
+}
+.frac > .den, 
+.frac > .denominateur,
+.fraction > .denominateur,
+.denominateur {
+    display: block;
+    padding: 0 .1em;
+    padding-top: 2px;
+}
+.frac > .fracbar {
+    display: block;
+    height: 0;
+    margin: 0;
+    border: 0;
+    border-bottom: .1em solid;
+    overflow: hidden;
+}
+.sqrt {
+    position: relative;
+    display: inline-block;
+    border-top: 2px solid black;
+    margin-left: .7em;
+    padding-left: .2em;
+    padding-right: .1em;
+}
+.sqrt:before {
+    content: " ";
+    position: absolute;
+    display: inline-block;
+    left: -.65em;
+    height: 56%;
+    width: .6em;
+    border-right: 2px solid black;
+    border-bottom: 2.5px solid black;
+    transform-origin: top right;
+    transform: rotate(55deg) skew(50deg);
+}
+.sqrt.red {
+    border-top-color: red;
+    color: red;
+}
+.sqrt.red:before {
+    border-right-color: red;
+    border-bottom-color: red;
+}
+.angle {
+    position: relative;
+    display: inline-block;
+}
+.angle::before {
+    content: '^';
+    position: absolute;
+    top: -0.5em;
+    left: 50%;
+    transform: translateX(-50%) scaleX(2.5) scaleY(1.2);
+    font-size: 1.5em;
+    font-weight: 300;
+}
+.couleur-speciale {
+    color: red;
+    position: relative;
+    display: inline-block;
+    text-decoration: line-through;
+}
+.fraction-rectangle {
+    display: inline-flex;
+    border: 2px solid #333;
+    height: 60px;
+    margin: 10px 5px;
+    vertical-align: middle;
+}
+.fraction-rectangle.large {
+    height: 80px;
+}
+.fraction-part {
+    flex: 1;
+    border-right: 1px solid #333;
+    min-width: 40px;
+}
+.fraction-part:last-child {
+    border-right: none;
+}
+.fraction-part.colored {
+    background-color: #4a90e2;
+}
+.fraction-part.orange {
+    background-color: #ff8c42;
+}
+.fraction-part.green {
+    background-color: #6fdc6f;
+}
+.fraction-part.red {
+    background-color: #e24a4a;
+}
+.fraction-visual {
+    text-align: center;
+    margin: 20px 0;
+}
+/* --- Styles propres à la feuille --- */
+.slide h2 { color: #2E75B5; border-bottom: 2px solid #2E75B5; padding-bottom: 3px; margin: 14px 0 8px; font-size: 1.2em; }
+.slide .grid2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 4px 24px; margin: 6px 0 6px 20px; }
+.slide .grid3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px 16px; margin: 6px 0 6px 20px; }
+.slide .nb { font-weight: bold; }
+.slide .rep { color: #c0392b; font-weight: bold; }
+.slide .note { color: #555; font-style: italic; font-size: 0.95em; }
+.slide p { margin: 6px 0; }
+@media screen and (max-width: 700px) {.slide .grid2, .slide .grid3 { grid-template-columns: 1fr 1fr; }}
+.slide h2 { color: #2E75B5; border-bottom: 2px solid #2E75B5; padding-bottom: 3px; margin: 14px 0 8px; font-size: 1.2em; }
+.slide .grid2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 4px 24px; margin: 6px 0 6px 20px; }
+.slide .grid3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px 16px; margin: 6px 0 6px 20px; }
+.slide .nb { font-weight: bold; }
+.slide .rep { color: #c0392b; font-weight: bold; }
+.slide .note { color: #555; font-style: italic; font-size: 0.95em; }
+.slide p { margin: 6px 0; }
+@media screen and (max-width: 700px) {.slide .grid2, .slide .grid3 { grid-template-columns: 1fr 1fr; }}
+/* --- Présentation des exercices --- */
+/* pas d'effet de soulèvement au survol : il faisait trembler le menu des exercices */
+button:hover { transform: none !important; }
+.container { width: 100%; height: 100vh; border-radius: 0; }
+.content { padding: 12px 30px 16px; }
+.controls { padding: 4px 10px; gap: 10px; }
+.controls-left, .controls-right { gap: 6px; }
+.controls button { padding: 4px 12px; font-size: .85em; border-radius: 7px; }
+.controls #styloBar.integre button { width: 26px; height: 26px; font-size: 14px; padding: 0; border-radius: 6px; }
+.controls #styloBar.integre .pastille { width: 14px; height: 14px; }
+.controls #styloBar.integre .trait { width: 16px; }
+.controls #styloBar.integre hr { height: 18px; }
+.slide { text-align: left; font-size: 1.05em; }
+.slide.titre-feuille { text-align: center; }
+.slide.titre-feuille h1 { font-size: 2.2em; margin: 30px 0 10px; }
+.slide h2 { font-size: 1.25em; text-decoration: none; color: #c2185b; border-bottom: 3px solid #eba8cc; padding-bottom: 6px; margin: 0 0 14px; text-align: left; }
+.enonce, .enonce *, .correction-box, .correction-box * { color: #111; }
+.enonce .faux, .correction-box .faux { color: #c0392b; } .enonce .vrai, .correction-box .vrai { color: #1e8449; }
+.correction-box .correction-titre { color: #2e7d32; }
+.enonce { font-size: .82em; cursor: zoom-in; transition: font-size .2s; }
+.enonce.grand { font-size: 1.3em; cursor: zoom-out; }
+.enonce .fig svg { width: 300px; }
+.enonce.grand .fig svg { width: 560px; }
+.fig svg { width: 420px; max-width: 100%; height: auto; }
+.enonce img, .correction-box img { max-width: 100%; }
+.enonce { background: #ffe6f0; border-left: 6px solid #eba8cc; padding: 10px 16px; border-radius: 8px; }
+.zone-ecriture { min-height: 300px; margin-top: 12px; border: 2px dashed #ddd; border-radius: 8px; position: relative; }
+.zone-ecriture::before { content: 'Zone de correction'; position: absolute; top: 6px; right: 12px; color: #bbb; font-size: .8em; }
+.correction-box { scroll-margin-top: 12px; font-size: 40px; background: #e8f5e9; border-left: 6px solid #43a047; padding: 14px 20px; border-radius: 8px; margin-top: 18px; }
+.correction-box[hidden] { display: none; }
+.correction-titre { font-weight: bold; color: #2e7d32; margin-bottom: 6px; }
+.correction-box { overflow-x: auto; }
+.correction-box table { font-size: .6em; }
+.correction-box svg, .correction-box img { max-width: 100%; height: auto; }
+.enonce p, .correction-box p { margin: 6px 0; }
+.liste-ex { display: flex; flex-wrap: wrap; gap: 14px; justify-content: center; margin-top: 30px; }
+.liste-ex button, #menuEx button { font-size: 1em; }
+#btnCorr.ouvert { background: #43a047; }
+#menuEx { position: fixed; inset: 0; background: rgba(0,0,0,.45); display: none; align-items: center; justify-content: center; z-index: 3000; }
+#menuEx.ouvert { display: flex; }
+#menuEx .boite { background: #fff; border-radius: 14px; padding: 20px 26px; display: flex; flex-direction: column; gap: 10px; min-width: 320px; }
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="content">
+    <div class="slide titre-feuille active">
+      <h1>Exercices du chapitre 4 – Les nombres décimaux</h1>
+      <div class="liste-ex"><button onclick="allerA(1)">Exercice 1</button><button onclick="allerA(2)">Exercice 2</button><button onclick="allerA(3)">Exercice 3</button><button onclick="allerA(4)">Exercice 4</button><button onclick="allerA(5)">Exercice 5</button><button onclick="allerA(6)">Exercice 6</button></div>
+    </div>
+<div class="slide" data-titre="Exercice 1">
+<h2>Exercice 1</h2>
+<div class="enonce"><p><strong>a.</strong> On considère le nombre <span class="nb">6 482,159</span>. Quel est :</p>
+<div class="grid2">
+<div>① le chiffre des dixièmes ? ……………</div>
+<div>② le chiffre des centaines ? ……………</div>
+<div>③ le chiffre des millièmes ? ……………</div>
+<div>④ le nombre de dizaines ? ……………</div>
+<div>⑤ le nombre de dixièmes ? ……………</div>
+<div>⑥ le nombre de centièmes ? ……………</div>
+</div>
+<p><strong>b.</strong> On considère le nombre <span class="nb">30,705</span>. Quel est :</p>
+<div class="grid2">
+<div>① le chiffre des centièmes ? ……………</div>
+<div>② le chiffre des dizaines ? ……………</div>
+<div>③ le nombre de dixièmes ? ……………</div>
+<div>④ le nombre d’unités ? ……………</div>
+</div></div>
+<div class="zone-ecriture"></div>
+<div class="correction-box" hidden>
+<div class="correction-titre">Correction</div>
+<p><strong>a.</strong> On considère le nombre <span class="nb">6 482,159</span>. Quel est :</p>
+<div class="grid2">
+<div>① le chiffre des dixièmes ? <span class="rep">1</span></div>
+<div>② le chiffre des centaines ? <span class="rep">4</span></div>
+<div>③ le chiffre des millièmes ? <span class="rep">9</span></div>
+<div>④ le nombre de dizaines ? <span class="rep">648</span></div>
+<div>⑤ le nombre de dixièmes ? <span class="rep">64 821</span></div>
+<div>⑥ le nombre de centièmes ? <span class="rep">648 215</span></div>
+</div>
+<p><strong>b.</strong> On considère le nombre <span class="nb">30,705</span>. Quel est :</p>
+<div class="grid2">
+<div>① le chiffre des centièmes ? <span class="rep">0</span></div>
+<div>② le chiffre des dizaines ? <span class="rep">3</span></div>
+<div>③ le nombre de dixièmes ? <span class="rep">307</span></div>
+<div>④ le nombre d’unités ? <span class="rep">30</span></div>
+</div>
+</div>
+</div>
+<div class="slide" data-titre="Exercice 2">
+<h2>Exercice 2</h2>
+<div class="enonce">Complète : « Dans le nombre …, 5 est le chiffre des … »
+    <div class="grid2">
+<div><strong>a.</strong> 352,8 : 5 est le chiffre des ……………</div>
+<div><strong>b.</strong> 12,503 : 5 est le chiffre des ……………</div>
+<div><strong>c.</strong> 7,045 : 5 est le chiffre des ……………</div>
+<div><strong>d.</strong> 5 041,2 : 5 est le chiffre des ……………</div>
+<div><strong>e.</strong> 0,25 : 5 est le chiffre des ……………</div>
+<div><strong>f.</strong> 6 875 : 5 est le chiffre des ……………</div>
+</div></div>
+<div class="zone-ecriture"></div>
+<div class="correction-box" hidden>
+<div class="correction-titre">Correction</div>
+Complète : « Dans le nombre …, 5 est le chiffre des … »
+    <div class="grid2">
+<div><strong>a.</strong> 352,8 : 5 est le chiffre des <span class="rep">dizaines</span></div>
+<div><strong>b.</strong> 12,503 : 5 est le chiffre des <span class="rep">dixièmes</span></div>
+<div><strong>c.</strong> 7,045 : 5 est le chiffre des <span class="rep">millièmes</span></div>
+<div><strong>d.</strong> 5 041,2 : 5 est le chiffre des <span class="rep">milliers</span></div>
+<div><strong>e.</strong> 0,25 : 5 est le chiffre des <span class="rep">centièmes</span></div>
+<div><strong>f.</strong> 6 875 : 5 est le chiffre des <span class="rep">unités</span></div>
+</div>
+</div>
+</div>
+<div class="slide" data-titre="Exercice 3">
+<h2>Exercice 3</h2>
+<div class="enonce">Compare les nombres en complétant avec <, > ou =.
+    <div class="grid3" style="grid-template-columns: repeat(4, 1fr);">
+<div><strong>a.</strong> 12,7 … 9,85</div>
+<div><strong>b.</strong> 0,62 … 0,7</div>
+<div><strong>c.</strong> 3,8 … 3,45</div>
+<div><strong>d.</strong> 5,09 … 5,1</div>
+<div><strong>e.</strong> 14,250 … 14,25</div>
+<div><strong>f.</strong> 7,456 … 7,465</div>
+<div><strong>g.</strong> 101,3 … 99,99</div>
+<div><strong>h.</strong> 0,08 … 0,1</div>
+</div></div>
+<div class="zone-ecriture"></div>
+<div class="correction-box" hidden>
+<div class="correction-titre">Correction</div>
+Compare les nombres en complétant avec <, > ou =.
+    <div class="grid3" style="grid-template-columns: repeat(4, 1fr);">
+<div><strong>a.</strong> 12,7 <span class="rep">&gt;</span> 9,85</div>
+<div><strong>b.</strong> 0,62 <span class="rep">&lt;</span> 0,7</div>
+<div><strong>c.</strong> 3,8 <span class="rep">&gt;</span> 3,45</div>
+<div><strong>d.</strong> 5,09 <span class="rep">&lt;</span> 5,1</div>
+<div><strong>e.</strong> 14,250 <span class="rep">=</span> 14,25</div>
+<div><strong>f.</strong> 7,456 <span class="rep">&lt;</span> 7,465</div>
+<div><strong>g.</strong> 101,3 <span class="rep">&gt;</span> 99,99</div>
+<div><strong>h.</strong> 0,08 <span class="rep">&lt;</span> 0,1</div>
+</div>
+</div>
+</div>
+<div class="slide" data-titre="Exercice 4">
+<h2>Exercice 4</h2>
+<div class="enonce"><p><strong>a.</strong> Range dans l’ordre croissant : 4,5 ; 4,05 ; 40,5 ; 4,55 ; 4,505 ; 4,055</p>
+<p style="margin-left:20px">…………………………………………………………………………………………</p>
+<p><strong>b.</strong> Range dans l’ordre décroissant : 0,9 ; 0,19 ; 1,09 ; 0,091 ; 0,91 ; 1,9</p>
+<p style="margin-left:20px">…………………………………………………………………………………………</p></div>
+<div class="zone-ecriture"></div>
+<div class="correction-box" hidden>
+<div class="correction-titre">Correction</div>
+<p><strong>a.</strong> Range dans l’ordre croissant : 4,5 ; 4,05 ; 40,5 ; 4,55 ; 4,505 ; 4,055</p>
+<p style="margin-left:20px"><span class="rep">4,05 &lt; 4,055 &lt; 4,5 &lt; 4,505 &lt; 4,55 &lt; 40,5</span></p>
+<p><strong>b.</strong> Range dans l’ordre décroissant : 0,9 ; 0,19 ; 1,09 ; 0,091 ; 0,91 ; 1,9</p>
+<p style="margin-left:20px"><span class="rep">1,9 &gt; 1,09 &gt; 0,91 &gt; 0,9 &gt; 0,19 &gt; 0,091</span></p>
+</div>
+</div>
+<div class="slide" data-titre="Exercice 5">
+<h2>Exercice 5</h2>
+<div class="enonce">Encadre chaque nombre comme demandé.
+    <div class="grid2">
+<div><strong>a.</strong> 18,63 à l’unité : ……… &lt; 18,63 &lt; ………</div>
+<div><strong>b.</strong> 7,284 au dixième : ……… &lt; 7,284 &lt; ………</div>
+<div><strong>c.</strong> 0,957 au centième : ……… &lt; 0,957 &lt; ………</div>
+<div><strong>d.</strong> 129,4 à l’unité : ……… &lt; 129,4 &lt; ………</div>
+<div><strong>e.</strong> 3,96 au dixième : ……… &lt; 3,96 &lt; ………</div>
+<div><strong>f.</strong> 12,999 au centième : ……… &lt; 12,999 &lt; ………</div>
+</div></div>
+<div class="zone-ecriture"></div>
+<div class="correction-box" hidden>
+<div class="correction-titre">Correction</div>
+Encadre chaque nombre comme demandé.
+    <div class="grid2">
+<div><strong>a.</strong> 18,63 à l’unité : <span class="rep">18</span> &lt; 18,63 &lt; <span class="rep">19</span></div>
+<div><strong>b.</strong> 7,284 au dixième : <span class="rep">7,2</span> &lt; 7,284 &lt; <span class="rep">7,3</span></div>
+<div><strong>c.</strong> 0,957 au centième : <span class="rep">0,95</span> &lt; 0,957 &lt; <span class="rep">0,96</span></div>
+<div><strong>d.</strong> 129,4 à l’unité : <span class="rep">129</span> &lt; 129,4 &lt; <span class="rep">130</span></div>
+<div><strong>e.</strong> 3,96 au dixième : <span class="rep">3,9</span> &lt; 3,96 &lt; <span class="rep">4,0</span></div>
+<div><strong>f.</strong> 12,999 au centième : <span class="rep">12,99</span> &lt; 12,999 &lt; <span class="rep">13,00</span></div>
+</div>
+</div>
+</div>
+<div class="slide" data-titre="Exercice 6">
+<h2>Exercice 6</h2>
+<div class="enonce">Intercale un nombre entre les deux nombres donnés.
+    <div class="grid3" style="grid-template-columns: repeat(4, 1fr);">
+<div><strong>a.</strong> 14 &lt; ……… &lt; 15</div>
+<div><strong>b.</strong> 6,3 &lt; ……… &lt; 6,4</div>
+<div><strong>c.</strong> 7,2 &gt; ……… &gt; 7,1</div>
+<div><strong>d.</strong> 5 &lt; ……… &lt; 5,1</div>
+<div><strong>e.</strong> 9,99 &lt; ……… &lt; 10</div>
+<div><strong>f.</strong> 0,9 &gt; ……… &gt; 0,8</div>
+<div><strong>g.</strong> 3,41 &lt; ……… &lt; 3,42</div>
+<div><strong>h.</strong> 2 &gt; ……… &gt; 1,9</div>
+</div></div>
+<div class="zone-ecriture"></div>
+<div class="correction-box" hidden>
+<div class="correction-titre">Correction</div>
+Intercale un nombre entre les deux nombres donnés. <span class="note">(plusieurs réponses possibles, en voici une)</span>
+<div class="grid3" style="grid-template-columns: repeat(4, 1fr);">
+<div><strong>a.</strong> 14 &lt; <span class="rep">14,5</span> &lt; 15</div>
+<div><strong>b.</strong> 6,3 &lt; <span class="rep">6,35</span> &lt; 6,4</div>
+<div><strong>c.</strong> 7,2 &gt; <span class="rep">7,15</span> &gt; 7,1</div>
+<div><strong>d.</strong> 5 &lt; <span class="rep">5,05</span> &lt; 5,1</div>
+<div><strong>e.</strong> 9,99 &lt; <span class="rep">9,995</span> &lt; 10</div>
+<div><strong>f.</strong> 0,9 &gt; <span class="rep">0,85</span> &gt; 0,8</div>
+<div><strong>g.</strong> 3,41 &lt; <span class="rep">3,415</span> &lt; 3,42</div>
+<div><strong>h.</strong> 2 &gt; <span class="rep">1,95</span> &gt; 1,9</div>
+</div>
+</div>
+</div>
+  </div>
+  <div class="controls">
+    <div class="controls-left">
+      <button class="btn-menu" onclick="ouvrirMenu()">☰ Exercices</button>
+      <button id="btnCorr" onclick="basculerCorrection()">✅ Correction</button>
+    </div>
+    <div class="progress"><span id="numEx"></span></div>
+    <div class="controls-right">
+      <button id="prevBtn" onclick="changer(-1)">◀ Précédent</button>
+      <button onclick="changer(1)">Suivant ▶</button>
+    </div>
+  </div>
+</div>
+<div id="menuEx" onclick="if(event.target===this)fermerMenu()"><div class="boite"><button onclick="allerA(1)">Exercice 1</button><button onclick="allerA(2)">Exercice 2</button><button onclick="allerA(3)">Exercice 3</button><button onclick="allerA(4)">Exercice 4</button><button onclick="allerA(5)">Exercice 5</button><button onclick="allerA(6)">Exercice 6</button><button onclick="fermerMenu()">Fermer</button></div></div>
+<script>
+var slides = document.querySelectorAll('.slide'), cur = 0;
+function afficher(n) {
+  cur = Math.max(0, Math.min(slides.length - 1, n));
+  slides.forEach(function (s, i) { s.classList.toggle('active', i === cur); });
+  document.querySelector('.content').scrollTop = 0;
+  majCorr(); ajusterZone();
+  document.getElementById('numEx').textContent = cur ? 'Exercice ' + cur + ' / ' + (slides.length - 1) : '';
+  document.getElementById('prevBtn').disabled = cur === 0;
+}
+// La zone d'écriture remplit la place qui reste sous l'énoncé
+function ajusterZone() {
+  var z = slides[cur].querySelector('.zone-ecriture'); if (!z) return;
+  var c = document.querySelector('.content');
+  z.style.height = Math.floor(Math.max(300, c.clientHeight - (z.getBoundingClientRect().top - c.getBoundingClientRect().top) - 40)) + 'px';
+}
+window.addEventListener('resize', ajusterZone);
+function changer(d) { afficher(cur + d); }
+function allerA(n) { fermerMenu(); afficher(n); }
+function boiteCorr() { return slides[cur].querySelector('.correction-box'); }
+function majCorr() {
+  var b = boiteCorr(), btn = document.getElementById('btnCorr');
+  btn.disabled = !b;
+  btn.classList.toggle('ouvert', !!b && !b.hidden);
+  btn.textContent = (b && !b.hidden) ? '🙈 Masquer la correction' : '✅ Correction';
+}
+function basculerCorrection() {
+  var b = boiteCorr(); if (!b) return;
+  b.hidden = !b.hidden; majCorr();
+  if (!b.hidden) b.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+function ouvrirMenu() { document.getElementById('menuEx').classList.add('ouvert'); }
+function fermerMenu() { document.getElementById('menuEx').classList.remove('ouvert'); }
+document.querySelectorAll('.enonce').forEach(function (el) {
+  el.title = 'Cliquer pour agrandir / réduire';
+  el.addEventListener('click', function () { el.classList.toggle('grand'); setTimeout(ajusterZone, 250); });
+});
+document.addEventListener('keydown', function (e) {
+  if (e.ctrlKey || e.metaKey || e.altKey) return;
+  if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === ' ' || e.key === 'PageDown') { e.preventDefault(); changer(1); }
+  else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp' || e.key === 'PageUp') { e.preventDefault(); changer(-1); }
+  else if (e.key === 'c' || e.key === 'C') basculerCorrection();
+  else if (e.key === 'm' || e.key === 'M') ouvrirMenu();
+  else if (e.key === 'Escape') fermerMenu();
+});
+afficher(0);
+</script>
+<script src="../../../stylo.js"></script>
+</body>
+</html>

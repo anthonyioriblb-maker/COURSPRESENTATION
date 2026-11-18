@@ -62,6 +62,43 @@ def styles_page(soup):
     return css
 
 
+def limiter_css(css):
+    """Ne garde du CSS de la page que ce qui concerne le contenu des exercices :
+    les règles de mise en page (body, html, .container, .page, h1, .home-button…) sont
+    retirées, et chaque sélecteur est préfixé par .slide pour ne pas toucher à la présentation."""
+    css = re.sub(r'/\*.*?\*/', '', css, flags=re.S)
+    out, i, n = [], 0, len(css)
+    while i < n:
+        j = css.find('{', i)
+        if j < 0:
+            break
+        sel = css[i:j].strip()
+        depth, k = 1, j + 1
+        while k < n and depth:
+            if css[k] == '{': depth += 1
+            elif css[k] == '}': depth -= 1
+            k += 1
+        bloc = css[j:k]
+        i = k
+        if sel.startswith('@'):
+            if sel.startswith('@media') and 'print' not in sel:
+                out.append(sel + ' {' + limiter_css(bloc[1:-1]) + '}')
+            elif sel.startswith(('@font-face', '@keyframes')):
+                out.append(sel + ' ' + bloc)
+            continue
+        garde = []
+        for x in sel.split(','):
+            x = x.strip()
+            premier = re.split(r'[\s>+~:]', x, 1)[0]
+            if premier in ('html', 'body', '*', ':root', '.container', '.page', 'h1', '.home-button',
+                           '.subtitle', '.toolbar', '.lien-corrige', '.content', '.controls') or x.startswith(':root'):
+                continue
+            garde.append('.slide ' + x)
+        if garde:
+            out.append(', '.join(garde) + ' ' + bloc)
+    return '\n'.join(out)
+
+
 def integrer_images(bloc, dossier):
     for img in bloc.find_all('img'):
         src = img.get('src', '')
@@ -74,41 +111,104 @@ def integrer_images(bloc, dossier):
                 img['src'] = 'data:%s;base64,%s' % (mime, base64.b64encode(f.read()).decode())
 
 
+RE_TITRE = re.compile(r'^\s*exercice\s*(\d+)', re.I)
+A_RETIRER = ['.home-button', '.lien-corrige', 'script', 'button', '.no-print', '.toolbar']
+
+
+def est_titre(el):
+    if not getattr(el, 'name', None):
+        return False
+    if 'exercice-titre' in (el.get('class') or []):
+        return True
+    return el.name in ('h2', 'h3', 'h4') and bool(RE_TITRE.match(el.get_text(' ', strip=True)))
+
+
+def contient_titre(el):
+    return getattr(el, 'name', None) and (est_titre(el) or any(est_titre(d) for d in el.find_all(True)))
+
+
 def exercices(chemin):
+    """Découpe une feuille en exercices. Reconnaît :
+    - <div class="exercice"> avec <div class="exercice-titre"> ou un <h2> « Exercice N » dedans ;
+    - un bloc quelconque (div.bloc…) qui ne contient qu'un titre « Exercice N » ;
+    - un titre « Exercice N » suivi de ses éléments frères, jusqu'au titre suivant.
+    Ce qui précède le premier exercice (figure commune…) est renvoyé à part (préambule).
+    Renvoie (soup, titre_page, préambule_html, [(numéro, titre, html), ...])."""
     soup = BeautifulSoup(lire(chemin), 'html.parser')
-    blocs = soup.select('div.exercice')
+    sous_titre = soup.select_one('.subtitle')
+    sous_titre = sous_titre.get_text(' ', strip=True) if sous_titre else ''
+    for sel in A_RETIRER + ['.subtitle']:
+        for el in soup.select(sel):
+            el.decompose()
+    integrer_images(soup, os.path.dirname(chemin))
+    titres = [t for t in soup.find_all(True) if est_titre(t)]
+    # un titre dans un titre (h2 dans .exercice-titre…) : garder l'extérieur
+    titres = [t for t in titres if not any(est_titre(p) for p in t.parents)]
+    def nb_titres(el):
+        return sum(1 for d in el.find_all(True) if est_titre(d) and not any(est_titre(q) for q in d.parents))
+
+    # 1er passage (arbre intact) : le bloc de chaque exercice
+    blocs = []
+    for t in titres:
+        bloc, p = None, t.parent
+        while p is not None and p.name not in ('body', '[document]') and nb_titres(p) == 1:
+            bloc, p = p, p.parent
+        blocs.append(bloc)
+    # préambule : ce qui précède le premier exercice, à son niveau (figure commune…)
+    preambule = ''
+    if titres:
+        ancre = blocs[0] or titres[0]
+        avant = []
+        for fr in ancre.previous_siblings:
+            if getattr(fr, 'name', None) in ('h1', 'style', 'link', 'meta', 'title', 'header'):
+                break
+            if getattr(fr, 'name', None) and fr.get_text(strip=True) or getattr(fr, 'name', None) in ('svg', 'img', 'figure'):
+                avant.insert(0, str(fr))
+        preambule = ''.join(avant).strip()
+    # 2e passage : contenu de chaque exercice
     res = []
-    for b in blocs:
-        integrer_images(b, os.path.dirname(chemin))
-        t = b.select_one('.exercice-titre')
-        titre = t.get_text(' ', strip=True) if t else ''
-        if t:
-            t.decompose()
-        res.append((titre, b.decode_contents().strip()))
+    for t, bloc in zip(titres, blocs):
+        num = RE_TITRE.match(t.get_text(' ', strip=True))
+        num = int(num.group(1)) if num else len(res) + 1
+        titre = t.get_text(' ', strip=True).rstrip(' :')
+        if bloc is not None:
+            morceaux = [str(c) for c in bloc.contents if c is not t]
+        else:
+            morceaux = []
+            for fr in t.next_siblings:
+                if contient_titre(fr):
+                    break
+                morceaux.append(str(fr))
+        res.append((num, titre, ''.join(morceaux).strip()))
     titre_page = soup.h1.get_text(' ', strip=True) if soup.h1 else os.path.basename(chemin)
-    return soup, titre_page, res
+    if sous_titre:
+        titre_page += ' – ' + sous_titre
+    return soup, titre_page, preambule, res
 
 
 def main():
     if len(sys.argv) != 4:
         print(__doc__); sys.exit(1)
     sujet, corr, sortie = map(os.path.abspath, sys.argv[1:])
-    s_soup, titre, ex_s = exercices(sujet)
-    c_soup, _, ex_c = exercices(corr)
-    if len(ex_s) != len(ex_c):
-        print('Attention : %d exercices dans le sujet, %d dans la correction.' % (len(ex_s), len(ex_c)))
+    s_soup, titre, preambule, ex_s = exercices(sujet)
+    c_soup, _, _, ex_c = exercices(corr)
+    corr_par_num = {n: h for n, _, h in ex_c}
+    if sorted(n for n, _, _ in ex_s) != sorted(n for n, _, _ in ex_c):
+        print('Attention : exercices %s dans le sujet, %s dans la correction.' % ([n for n, _, _ in ex_s], [n for n, _, _ in ex_c]))
 
     mi_css = os.path.join(os.path.dirname(RACINE), 'MathsIORI', 'styles.css')
     css_maths = regles_css(lire(mi_css), ['.frac', '.fraction', '.numerateur', '.denominateur',
                                           '.sqrt', '.angle', '.couleur-speciale']) if os.path.exists(mi_css) else ''
-    css_page = styles_page(s_soup) + '\n' + styles_page(c_soup)
+    css_page = limiter_css(styles_page(s_soup)) + '\n' + limiter_css(styles_page(c_soup))
 
     prof = os.path.relpath(RACINE, os.path.dirname(sortie)).replace(os.sep, '/')
 
     diapos = []
     menu = []
-    for i, (t, contenu) in enumerate(ex_s):
-        corr_html = ex_c[i][1] if i < len(ex_c) else '<p>Pas de correction.</p>'
+    for i, (num, t, contenu) in enumerate(ex_s):
+        corr_html = corr_par_num.get(num, '<p>Pas de correction pour cet exercice.</p>')
+        if preambule:
+            contenu = '<div class="preambule">%s</div>' % preambule + contenu
         diapos.append(
             '<div class="slide" data-titre="%s">\n<h2>%s</h2>\n<div class="enonce">%s</div>\n<div class="zone-ecriture"></div>\n'
             '<div class="correction-box" hidden>\n<div class="correction-titre">Correction</div>\n%s\n</div>\n</div>'
@@ -158,6 +258,9 @@ button:hover { transform: none !important; }
 .correction-box { scroll-margin-top: 12px; font-size: 40px; background: #e8f5e9; border-left: 6px solid #43a047; padding: 14px 20px; border-radius: 8px; margin-top: 18px; }
 .correction-box[hidden] { display: none; }
 .correction-titre { font-weight: bold; color: #2e7d32; margin-bottom: 6px; }
+.correction-box { overflow-x: auto; }
+.correction-box table { font-size: .6em; }
+.correction-box svg, .correction-box img { max-width: 100%%; height: auto; }
 .enonce p, .correction-box p { margin: 6px 0; }
 .liste-ex { display: flex; flex-wrap: wrap; gap: 14px; justify-content: center; margin-top: 30px; }
 .liste-ex button, #menuEx button { font-size: 1em; }

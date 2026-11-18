@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Exercices - Écriture fractionnaire (révisions)</title>
+<link rel="stylesheet" href="../../../styles.css">
+<style>
+/* --- Règles mathématiques reprises de MathsIORI/styles.css --- */
+.frac, .fraction {
+    display: inline-block;
+    margin-left: .1em;
+    margin-right: .1em;
+    vertical-align: middle;
+    text-align: center;
+    
+}
+.frac > .num, 
+.frac > .numerateur, 
+.fraction > .numerateur,
+.numerateur {
+    display: block;
+    padding: 0 .1em;
+    border-bottom: 1px solid black;
+    padding-bottom: 2px;
+}
+.frac > .den, 
+.frac > .denominateur,
+.fraction > .denominateur,
+.denominateur {
+    display: block;
+    padding: 0 .1em;
+    padding-top: 2px;
+}
+.frac > .fracbar {
+    display: block;
+    height: 0;
+    margin: 0;
+    border: 0;
+    border-bottom: .1em solid;
+    overflow: hidden;
+}
+.sqrt {
+    position: relative;
+    display: inline-block;
+    border-top: 2px solid black;
+    margin-left: .7em;
+    padding-left: .2em;
+    padding-right: .1em;
+}
+.sqrt:before {
+    content: " ";
+    position: absolute;
+    display: inline-block;
+    left: -.65em;
+    height: 56%;
+    width: .6em;
+    border-right: 2px solid black;
+    border-bottom: 2.5px solid black;
+    transform-origin: top right;
+    transform: rotate(55deg) skew(50deg);
+}
+.sqrt.red {
+    border-top-color: red;
+    color: red;
+}
+.sqrt.red:before {
+    border-right-color: red;
+    border-bottom-color: red;
+}
+.angle {
+    position: relative;
+    display: inline-block;
+}
+.angle::before {
+    content: '^';
+    position: absolute;
+    top: -0.5em;
+    left: 50%;
+    transform: translateX(-50%) scaleX(2.5) scaleY(1.2);
+    font-size: 1.5em;
+    font-weight: 300;
+}
+.couleur-speciale {
+    color: red;
+    position: relative;
+    display: inline-block;
+    text-decoration: line-through;
+}
+.fraction-rectangle {
+    display: inline-flex;
+    border: 2px solid #333;
+    height: 60px;
+    margin: 10px 5px;
+    vertical-align: middle;
+}
+.fraction-rectangle.large {
+    height: 80px;
+}
+.fraction-part {
+    flex: 1;
+    border-right: 1px solid #333;
+    min-width: 40px;
+}
+.fraction-part:last-child {
+    border-right: none;
+}
+.fraction-part.colored {
+    background-color: #4a90e2;
+}
+.fraction-part.orange {
+    background-color: #ff8c42;
+}
+.fraction-part.green {
+    background-color: #6fdc6f;
+}
+.fraction-part.red {
+    background-color: #e24a4a;
+}
+.fraction-visual {
+    text-align: center;
+    margin: 20px 0;
+}
+/* --- Styles propres à la feuille --- */
+.slide .question { margin: 8px 0 8px 20px; font-size: 1.05em; line-height: 2; }
+.slide .exercice-titre { font-weight: bold; text-decoration: underline; margin-bottom: 4px; break-after: avoid; }
+.slide .grille { display: grid; grid-template-columns: repeat(4, 1fr); }
+.slide .grille3 { display: grid; grid-template-columns: repeat(3, 1fr); }
+.slide .grille2 { display: grid; grid-template-columns: repeat(2, 1fr); }
+.slide .question-label { font-weight: bold; margin-right: 8px; }
+.slide .calc { margin: 4px 0 6px 20px; line-height: 2.1; break-inside: avoid; }
+.slide .question { margin: 8px 0 8px 20px; font-size: 1.05em; line-height: 2; }
+.slide .exercice-titre { font-weight: bold; text-decoration: underline; margin-bottom: 4px; break-after: avoid; }
+.slide .grille { display: grid; grid-template-columns: repeat(4, 1fr); }
+.slide .grille3 { display: grid; grid-template-columns: repeat(3, 1fr); }
+.slide .grille2 { display: grid; grid-template-columns: repeat(2, 1fr); }
+.slide .question-label { font-weight: bold; margin-right: 8px; }
+.slide .calc { margin: 4px 0 6px 10px; line-height: 1.9; break-inside: avoid; }
+/* --- Présentation des exercices --- */
+/* pas d'effet de soulèvement au survol : il faisait trembler le menu des exercices */
+button:hover { transform: none !important; }
+.container { width: 100%; height: 100vh; border-radius: 0; }
+.content { padding: 12px 30px 16px; }
+.controls { padding: 4px 10px; gap: 10px; }
+.controls-left, .controls-right { gap: 6px; }
+.controls button { padding: 4px 12px; font-size: .85em; border-radius: 7px; }
+.controls #styloBar.integre button { width: 26px; height: 26px; font-size: 14px; padding: 0; border-radius: 6px; }
+.controls #styloBar.integre .pastille { width: 14px; height: 14px; }
+.controls #styloBar.integre .trait { width: 16px; }
+.controls #styloBar.integre hr { height: 18px; }
+.slide { text-align: left; font-size: 1.05em; }
+.slide.titre-feuille { text-align: center; }
+.slide.titre-feuille h1 { font-size: 2.2em; margin: 30px 0 10px; }
+.slide h2 { font-size: 1.25em; text-decoration: none; color: #c2185b; border-bottom: 3px solid #eba8cc; padding-bottom: 6px; margin: 0 0 14px; text-align: left; }
+.enonce, .enonce *, .correction-box, .correction-box * { color: #111; }
+.enonce .faux, .correction-box .faux { color: #c0392b; } .enonce .vrai, .correction-box .vrai { color: #1e8449; }
+.correction-box .correction-titre { color: #2e7d32; }
+.enonce { font-size: .82em; cursor: zoom-in; transition: font-size .2s; }
+.enonce.grand { font-size: 1.3em; cursor: zoom-out; }
+.enonce .fig svg { width: 300px; }
+.enonce.grand .fig svg { width: 560px; }
+.fig svg { width: 420px; max-width: 100%; height: auto; }
+.enonce img, .correction-box img { max-width: 100%; }
+.enonce { background: #ffe6f0; border-left: 6px solid #eba8cc; padding: 10px 16px; border-radius: 8px; }
+.zone-ecriture { min-height: 300px; margin-top: 12px; border: 2px dashed #ddd; border-radius: 8px; position: relative; }
+.zone-ecriture::before { content: 'Zone de correction'; position: absolute; top: 6px; right: 12px; color: #bbb; font-size: .8em; }
+.correction-box { scroll-margin-top: 12px; font-size: 40px; background: #e8f5e9; border-left: 6px solid #43a047; padding: 14px 20px; border-radius: 8px; margin-top: 18px; }
+.correction-box[hidden] { display: none; }
+.correction-titre { font-weight: bold; color: #2e7d32; margin-bottom: 6px; }
+.correction-box { overflow-x: auto; }
+.correction-box table { font-size: .6em; }
+.correction-box svg, .correction-box img { max-width: 100%; height: auto; }
+.enonce p, .correction-box p { margin: 6px 0; }
+.liste-ex { display: flex; flex-wrap: wrap; gap: 14px; justify-content: center; margin-top: 30px; }
+.liste-ex button, #menuEx button { font-size: 1em; }
+#btnCorr.ouvert { background: #43a047; }
+#menuEx { position: fixed; inset: 0; background: rgba(0,0,0,.45); display: none; align-items: center; justify-content: center; z-index: 3000; }
+#menuEx.ouvert { display: flex; }
+#menuEx .boite { background: #fff; border-radius: 14px; padding: 20px 26px; display: flex; flex-direction: column; gap: 10px; min-width: 320px; }
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="content">
+    <div class="slide titre-feuille active">
+      <h1>Exercices - Écriture fractionnaire (révisions)</h1>
+      <div class="liste-ex"><button onclick="allerA(1)">Exercice 1</button><button onclick="allerA(2)">Exercice 2</button><button onclick="allerA(3)">Exercice 3</button><button onclick="allerA(4)">Exercice 4</button><button onclick="allerA(5)">Exercice 5</button><button onclick="allerA(6)">Exercice 6</button><button onclick="allerA(7)">Exercice 7</button></div>
+    </div>
+<div class="slide" data-titre="Exercice 1">
+<h2>Exercice 1</h2>
+<div class="enonce"><p>Pour chaque fraction, dire si elle est positive ou négative :</p>
+<div class="grille3">
+<div class="question"><span class="question-label">a.</span><span class="frac"><span class="num">12</span><span class="fracbar">/</span><span class="den">−5</span></span></div>
+<div class="question"><span class="question-label">b.</span><span class="frac"><span class="num">−7</span><span class="fracbar">/</span><span class="den">−3</span></span></div>
+<div class="question"><span class="question-label">c.</span>−<span class="frac"><span class="num">6</span><span class="fracbar">/</span><span class="den">11</span></span></div>
+<div class="question"><span class="question-label">d.</span><span class="frac"><span class="num">9</span><span class="fracbar">/</span><span class="den">4</span></span></div>
+<div class="question"><span class="question-label">e.</span><span class="frac"><span class="num">−15</span><span class="fracbar">/</span><span class="den">8</span></span></div>
+<div class="question"><span class="question-label">f.</span><span class="frac"><span class="num">−2</span><span class="fracbar">/</span><span class="den">−9</span></span></div>
+</div></div>
+<div class="zone-ecriture"></div>
+<div class="correction-box" hidden>
+<div class="correction-titre">Correction</div>
+<div class="grille3">
+<div class="question"><span class="question-label">a.</span><span class="frac"><span class="num">12</span><span class="fracbar">/</span><span class="den">−5</span></span> est négative.</div>
+<div class="question"><span class="question-label">b.</span><span class="frac"><span class="num">−7</span><span class="fracbar">/</span><span class="den">−3</span></span> est positive.</div>
+<div class="question"><span class="question-label">c.</span>−<span class="frac"><span class="num">6</span><span class="fracbar">/</span><span class="den">11</span></span> est négative.</div>
+<div class="question"><span class="question-label">d.</span><span class="frac"><span class="num">9</span><span class="fracbar">/</span><span class="den">4</span></span> est positive.</div>
+<div class="question"><span class="question-label">e.</span><span class="frac"><span class="num">−15</span><span class="fracbar">/</span><span class="den">8</span></span> est négative.</div>
+<div class="question"><span class="question-label">f.</span><span class="frac"><span class="num">−2</span><span class="fracbar">/</span><span class="den">−9</span></span> est positive.</div>
+</div>
+</div>
+</div>
+<div class="slide" data-titre="Exercice 2">
+<h2>Exercice 2</h2>
+<div class="enonce"><p>Parmi les nombres suivants, lesquels sont premiers ? 2 ; 9 ; 13 ; 21 ; 1 ; 29 ; 17 ; 27 ; 51 ; 31</p></div>
+<div class="zone-ecriture"></div>
+<div class="correction-box" hidden>
+<div class="correction-titre">Correction</div>
+<p>Parmi les nombres suivants, lesquels sont premiers ? 2 ; 9 ; 13 ; 21 ; 1 ; 29 ; 17 ; 27 ; 51 ; 31</p>
+<div class="question">Les nombres premiers sont : <strong>2 ; 13 ; 17 ; 29 ; 31</strong>.</div>
+<div class="question">9 = 3 × 3 ; 21 = 3 × 7 ; 27 = 3 × 9 ; 51 = 3 × 17 ne sont pas premiers. 1 n'est pas premier : il n'a qu'un seul diviseur.</div>
+</div>
+</div>
+<div class="slide" data-titre="Exercice 3">
+<h2>Exercice 3</h2>
+<div class="enonce"><p>Décomposer chaque nombre en produit de facteurs premiers :</p>
+<div class="grille">
+<div class="question"><span class="question-label">a.</span>36</div>
+<div class="question"><span class="question-label">b.</span>90</div>
+<div class="question"><span class="question-label">c.</span>126</div>
+<div class="question"><span class="question-label">d.</span>210</div>
+</div></div>
+<div class="zone-ecriture"></div>
+<div class="correction-box" hidden>
+<div class="correction-titre">Correction</div>
+<div class="grille2">
+<div class="question"><span class="question-label">a.</span>36 = 2 × 2 × 3 × 3</div>
+<div class="question"><span class="question-label">b.</span>90 = 2 × 3 × 3 × 5</div>
+<div class="question"><span class="question-label">c.</span>126 = 2 × 3 × 3 × 7</div>
+<div class="question"><span class="question-label">d.</span>210 = 2 × 3 × 5 × 7</div>
+</div>
+</div>
+</div>
+<div class="slide" data-titre="Exercice 4">
+<h2>Exercice 4</h2>
+<div class="enonce"><p>Simplifier chaque fraction pour la rendre irréductible (on pourra utiliser l'exercice 3 pour d. et e.) :</p>
+<div class="grille3">
+<div class="question"><span class="question-label">a.</span><span class="frac"><span class="num">18</span><span class="fracbar">/</span><span class="den">24</span></span></div>
+<div class="question"><span class="question-label">b.</span><span class="frac"><span class="num">45</span><span class="fracbar">/</span><span class="den">60</span></span></div>
+<div class="question"><span class="question-label">c.</span>−<span class="frac"><span class="num">28</span><span class="fracbar">/</span><span class="den">42</span></span></div>
+<div class="question"><span class="question-label">d.</span><span class="frac"><span class="num">36</span><span class="fracbar">/</span><span class="den">90</span></span></div>
+<div class="question"><span class="question-label">e.</span><span class="frac"><span class="num">126</span><span class="fracbar">/</span><span class="den">210</span></span></div>
+</div></div>
+<div class="zone-ecriture"></div>
+<div class="correction-box" hidden>
+<div class="correction-titre">Correction</div>
+<div class="grille3">
+<div class="calc"><div><strong>a.</strong> <span class="frac"><span class="num">18</span><span class="fracbar">/</span><span class="den">24</span></span></div><div>= <span class="frac"><span class="num"><span style="color:red;font-weight:bold;">2</span> × <span style="color:red;font-weight:bold;">3</span> × 3</span><span class="fracbar">/</span><span class="den"><span style="color:red;font-weight:bold;">2</span> × 2 × 2 × <span style="color:red;font-weight:bold;">3</span></span></span></div><div>= <span class="frac"><span class="num">3</span><span class="fracbar">/</span><span class="den">4</span></span></div></div>
+<div class="calc"><div><strong>b.</strong> <span class="frac"><span class="num">45</span><span class="fracbar">/</span><span class="den">60</span></span></div><div>= <span class="frac"><span class="num"><span style="color:red;font-weight:bold;">3</span> × 3 × <span style="color:red;font-weight:bold;">5</span></span><span class="fracbar">/</span><span class="den">2 × 2 × <span style="color:red;font-weight:bold;">3</span> × <span style="color:red;font-weight:bold;">5</span></span></span></div><div>= <span class="frac"><span class="num">3</span><span class="fracbar">/</span><span class="den">4</span></span></div></div>
+<div class="calc"><div><strong>c.</strong> −<span class="frac"><span class="num">28</span><span class="fracbar">/</span><span class="den">42</span></span></div><div>= −<span class="frac"><span class="num"><span style="color:red;font-weight:bold;">2</span> × 2 × <span style="color:red;font-weight:bold;">7</span></span><span class="fracbar">/</span><span class="den"><span style="color:red;font-weight:bold;">2</span> × 3 × <span style="color:red;font-weight:bold;">7</span></span></span></div><div>= −<span class="frac"><span class="num">2</span><span class="fracbar">/</span><span class="den">3</span></span></div></div>
+<div class="calc"><div><strong>d.</strong> <span class="frac"><span class="num">36</span><span class="fracbar">/</span><span class="den">90</span></span></div><div>= <span class="frac"><span class="num"><span style="color:red;font-weight:bold;">2</span> × 2 × <span style="color:red;font-weight:bold;">3</span> × <span style="color:red;font-weight:bold;">3</span></span><span class="fracbar">/</span><span class="den"><span style="color:red;font-weight:bold;">2</span> × <span style="color:red;font-weight:bold;">3</span> × <span style="color:red;font-weight:bold;">3</span> × 5</span></span></div><div>= <span class="frac"><span class="num">2</span><span class="fracbar">/</span><span class="den">5</span></span></div></div>
+<div class="calc"><div><strong>e.</strong> <span class="frac"><span class="num">126</span><span class="fracbar">/</span><span class="den">210</span></span></div><div>= <span class="frac"><span class="num"><span style="color:red;font-weight:bold;">2</span> × <span style="color:red;font-weight:bold;">3</span> × 3 × <span style="color:red;font-weight:bold;">7</span></span><span class="fracbar">/</span><span class="den"><span style="color:red;font-weight:bold;">2</span> × <span style="color:red;font-weight:bold;">3</span> × 5 × <span style="color:red;font-weight:bold;">7</span></span></span></div><div>= <span class="frac"><span class="num">3</span><span class="fracbar">/</span><span class="den">5</span></span></div></div>
+</div>
+</div>
+</div>
+<div class="slide" data-titre="Exercice 5">
+<h2>Exercice 5</h2>
+<div class="enonce"><p>Calculer et donner le résultat sous forme d'une fraction irréductible :</p>
+<div class="grille">
+<div class="question"><span class="question-label">a.</span><span class="frac"><span class="num">2</span><span class="fracbar">/</span><span class="den">5</span></span> + <span class="frac"><span class="num">1</span><span class="fracbar">/</span><span class="den">5</span></span></div>
+<div class="question"><span class="question-label">b.</span><span class="frac"><span class="num">3</span><span class="fracbar">/</span><span class="den">4</span></span> + <span class="frac"><span class="num">5</span><span class="fracbar">/</span><span class="den">8</span></span></div>
+<div class="question"><span class="question-label">c.</span><span class="frac"><span class="num">7</span><span class="fracbar">/</span><span class="den">6</span></span> − <span class="frac"><span class="num">1</span><span class="fracbar">/</span><span class="den">3</span></span></div>
+<div class="question"><span class="question-label">d.</span><span class="frac"><span class="num">5</span><span class="fracbar">/</span><span class="den">12</span></span> + <span class="frac"><span class="num">3</span><span class="fracbar">/</span><span class="den">4</span></span></div>
+<div class="question"><span class="question-label">e.</span>−<span class="frac"><span class="num">2</span><span class="fracbar">/</span><span class="den">3</span></span> + <span class="frac"><span class="num">5</span><span class="fracbar">/</span><span class="den">6</span></span></div>
+<div class="question"><span class="question-label">f.</span><span class="frac"><span class="num">1</span><span class="fracbar">/</span><span class="den">6</span></span> − <span class="frac"><span class="num">3</span><span class="fracbar">/</span><span class="den">4</span></span></div>
+<div class="question"><span class="question-label">g.</span><span class="frac"><span class="num">3</span><span class="fracbar">/</span><span class="den">10</span></span> − <span class="frac"><span class="num">7</span><span class="fracbar">/</span><span class="den">15</span></span></div>
+<div class="question"><span class="question-label">h.</span>2 − <span class="frac"><span class="num">3</span><span class="fracbar">/</span><span class="den">5</span></span></div>
+</div></div>
+<div class="zone-ecriture"></div>
+<div class="correction-box" hidden>
+<div class="correction-titre">Correction</div>
+<div class="grille">
+<div class="calc"><div><strong>a.</strong> <span class="frac"><span class="num">2</span><span class="fracbar">/</span><span class="den">5</span></span> + <span class="frac"><span class="num">1</span><span class="fracbar">/</span><span class="den">5</span></span></div><div>= <span class="frac"><span class="num">3</span><span class="fracbar">/</span><span class="den">5</span></span></div></div>
+<div class="calc"><div><strong>b.</strong> <span class="frac"><span class="num">3</span><span class="fracbar">/</span><span class="den">4</span></span> + <span class="frac"><span class="num">5</span><span class="fracbar">/</span><span class="den">8</span></span></div><div>= <span class="frac"><span class="num">3 × 2</span><span class="fracbar">/</span><span class="den">4 × 2</span></span> + <span class="frac"><span class="num">5</span><span class="fracbar">/</span><span class="den">8</span></span></div><div>= <span class="frac"><span class="num">6</span><span class="fracbar">/</span><span class="den">8</span></span> + <span class="frac"><span class="num">5</span><span class="fracbar">/</span><span class="den">8</span></span></div><div>= <span class="frac"><span class="num">11</span><span class="fracbar">/</span><span class="den">8</span></span></div></div>
+<div class="calc"><div><strong>c.</strong> <span class="frac"><span class="num">7</span><span class="fracbar">/</span><span class="den">6</span></span> − <span class="frac"><span class="num">1</span><span class="fracbar">/</span><span class="den">3</span></span></div><div>= <span class="frac"><span class="num">7</span><span class="fracbar">/</span><span class="den">6</span></span> − <span class="frac"><span class="num">1 × 2</span><span class="fracbar">/</span><span class="den">3 × 2</span></span></div><div>= <span class="frac"><span class="num">7</span><span class="fracbar">/</span><span class="den">6</span></span> − <span class="frac"><span class="num">2</span><span class="fracbar">/</span><span class="den">6</span></span></div><div>= <span class="frac"><span class="num">5</span><span class="fracbar">/</span><span class="den">6</span></span></div></div>
+<div class="calc"><div><strong>d.</strong> <span class="frac"><span class="num">5</span><span class="fracbar">/</span><span class="den">12</span></span> + <span class="frac"><span class="num">3</span><span class="fracbar">/</span><span class="den">4</span></span></div><div>= <span class="frac"><span class="num">5</span><span class="fracbar">/</span><span class="den">12</span></span> + <span class="frac"><span class="num">3 × 3</span><span class="fracbar">/</span><span class="den">4 × 3</span></span></div><div>= <span class="frac"><span class="num">5</span><span class="fracbar">/</span><span class="den">12</span></span> + <span class="frac"><span class="num">9</span><span class="fracbar">/</span><span class="den">12</span></span></div><div>= <span class="frac"><span class="num">14</span><span class="fracbar">/</span><span class="den">12</span></span></div><div>= <span class="frac"><span class="num"><span style="color:red;font-weight:bold;">2</span> × 7</span><span class="fracbar">/</span><span class="den"><span style="color:red;font-weight:bold;">2</span> × 2 × 3</span></span></div><div>= <span class="frac"><span class="num">7</span><span class="fracbar">/</span><span class="den">6</span></span></div></div>
+<div class="calc"><div><strong>e.</strong> −<span class="frac"><span class="num">2</span><span class="fracbar">/</span><span class="den">3</span></span> + <span class="frac"><span class="num">5</span><span class="fracbar">/</span><span class="den">6</span></span></div><div>= −<span class="frac"><span class="num">2 × 2</span><span class="fracbar">/</span><span class="den">3 × 2</span></span> + <span class="frac"><span class="num">5</span><span class="fracbar">/</span><span class="den">6</span></span></div><div>= −<span class="frac"><span class="num">4</span><span class="fracbar">/</span><span class="den">6</span></span> + <span class="frac"><span class="num">5</span><span class="fracbar">/</span><span class="den">6</span></span></div><div>= <span class="frac"><span class="num">1</span><span class="fracbar">/</span><span class="den">6</span></span></div></div>
+<div class="calc"><div><strong>f.</strong> <span class="frac"><span class="num">1</span><span class="fracbar">/</span><span class="den">6</span></span> − <span class="frac"><span class="num">3</span><span class="fracbar">/</span><span class="den">4</span></span></div><div>= <span class="frac"><span class="num">1 × 2</span><span class="fracbar">/</span><span class="den">6 × 2</span></span> − <span class="frac"><span class="num">3 × 3</span><span class="fracbar">/</span><span class="den">4 × 3</span></span></div><div>= <span class="frac"><span class="num">2</span><span class="fracbar">/</span><span class="den">12</span></span> − <span class="frac"><span class="num">9</span><span class="fracbar">/</span><span class="den">12</span></span></div><div>= −<span class="frac"><span class="num">7</span><span class="fracbar">/</span><span class="den">12</span></span></div></div>
+<div class="calc"><div><strong>g.</strong> <span class="frac"><span class="num">3</span><span class="fracbar">/</span><span class="den">10</span></span> − <span class="frac"><span class="num">7</span><span class="fracbar">/</span><span class="den">15</span></span></div><div>= <span class="frac"><span class="num">3 × 3</span><span class="fracbar">/</span><span class="den">10 × 3</span></span> − <span class="frac"><span class="num">7 × 2</span><span class="fracbar">/</span><span class="den">15 × 2</span></span></div><div>= <span class="frac"><span class="num">9</span><span class="fracbar">/</span><span class="den">30</span></span> − <span class="frac"><span class="num">14</span><span class="fracbar">/</span><span class="den">30</span></span></div><div>= −<span class="frac"><span class="num">5</span><span class="fracbar">/</span><span class="den">30</span></span></div><div>= −<span class="frac"><span class="num"><span style="color:red;font-weight:bold;">5</span></span><span class="fracbar">/</span><span class="den">2 × 3 × <span style="color:red;font-weight:bold;">5</span></span></span></div><div>= −<span class="frac"><span class="num">1</span><span class="fracbar">/</span><span class="den">6</span></span></div></div>
+<div class="calc"><div><strong>h.</strong> 2 − <span class="frac"><span class="num">3</span><span class="fracbar">/</span><span class="den">5</span></span></div><div>= <span class="frac"><span class="num">10</span><span class="fracbar">/</span><span class="den">5</span></span> − <span class="frac"><span class="num">3</span><span class="fracbar">/</span><span class="den">5</span></span></div><div>= <span class="frac"><span class="num">7</span><span class="fracbar">/</span><span class="den">5</span></span></div></div>
+</div>
+</div>
+</div>
+<div class="slide" data-titre="Exercice 6">
+<h2>Exercice 6</h2>
+<div class="enonce"><p>Calculer et donner le résultat sous forme d'une fraction irréductible :</p>
+<div class="grille3">
+<div class="question"><span class="question-label">a.</span><span class="frac"><span class="num">3</span><span class="fracbar">/</span><span class="den">5</span></span> × <span class="frac"><span class="num">2</span><span class="fracbar">/</span><span class="den">7</span></span></div>
+<div class="question"><span class="question-label">b.</span><span class="frac"><span class="num">4</span><span class="fracbar">/</span><span class="den">9</span></span> × <span class="frac"><span class="num">3</span><span class="fracbar">/</span><span class="den">8</span></span></div>
+<div class="question"><span class="question-label">c.</span>−<span class="frac"><span class="num">5</span><span class="fracbar">/</span><span class="den">6</span></span> × <span class="frac"><span class="num">9</span><span class="fracbar">/</span><span class="den">10</span></span></div>
+<div class="question"><span class="question-label">d.</span>−<span class="frac"><span class="num">7</span><span class="fracbar">/</span><span class="den">4</span></span> × (−<span class="frac"><span class="num">8</span><span class="fracbar">/</span><span class="den">21</span></span>)</div>
+<div class="question"><span class="question-label">e.</span>6 × <span class="frac"><span class="num">5</span><span class="fracbar">/</span><span class="den">9</span></span></div>
+</div></div>
+<div class="zone-ecriture"></div>
+<div class="correction-box" hidden>
+<div class="correction-titre">Correction</div>
+<div class="grille3">
+<div class="calc"><div><strong>a.</strong> <span class="frac"><span class="num">3</span><span class="fracbar">/</span><span class="den">5</span></span> × <span class="frac"><span class="num">2</span><span class="fracbar">/</span><span class="den">7</span></span></div><div>= <span class="frac"><span class="num">3 × 2</span><span class="fracbar">/</span><span class="den">5 × 7</span></span></div><div>= <span class="frac"><span class="num">6</span><span class="fracbar">/</span><span class="den">35</span></span></div></div>
+<div class="calc"><div><strong>b.</strong> <span class="frac"><span class="num">4</span><span class="fracbar">/</span><span class="den">9</span></span> × <span class="frac"><span class="num">3</span><span class="fracbar">/</span><span class="den">8</span></span></div><div>= <span class="frac"><span class="num">4 × 3</span><span class="fracbar">/</span><span class="den">9 × 8</span></span></div><div>= <span class="frac"><span class="num"><span style="color:red;font-weight:bold;">2</span> × <span style="color:red;font-weight:bold;">2</span> × <span style="color:red;font-weight:bold;">3</span></span><span class="fracbar">/</span><span class="den"><span style="color:red;font-weight:bold;">3</span> × 3 × <span style="color:red;font-weight:bold;">2</span> × <span style="color:red;font-weight:bold;">2</span> × 2</span></span></div><div>= <span class="frac"><span class="num">1</span><span class="fracbar">/</span><span class="den">6</span></span></div></div>
+<div class="calc"><div><strong>c.</strong> −<span class="frac"><span class="num">5</span><span class="fracbar">/</span><span class="den">6</span></span> × <span class="frac"><span class="num">9</span><span class="fracbar">/</span><span class="den">10</span></span></div><div>= −<span class="frac"><span class="num">5 × 9</span><span class="fracbar">/</span><span class="den">6 × 10</span></span></div><div>= −<span class="frac"><span class="num"><span style="color:red;font-weight:bold;">5</span> × <span style="color:red;font-weight:bold;">3</span> × 3</span><span class="fracbar">/</span><span class="den">2 × <span style="color:red;font-weight:bold;">3</span> × 2 × <span style="color:red;font-weight:bold;">5</span></span></span></div><div>= −<span class="frac"><span class="num">3</span><span class="fracbar">/</span><span class="den">4</span></span></div></div>
+<div class="calc"><div><strong>d.</strong> −<span class="frac"><span class="num">7</span><span class="fracbar">/</span><span class="den">4</span></span> × (−<span class="frac"><span class="num">8</span><span class="fracbar">/</span><span class="den">21</span></span>)</div><div>= <span class="frac"><span class="num">7 × 8</span><span class="fracbar">/</span><span class="den">4 × 21</span></span></div><div>= <span class="frac"><span class="num"><span style="color:red;font-weight:bold;">7</span> × <span style="color:red;font-weight:bold;">2</span> × <span style="color:red;font-weight:bold;">2</span> × 2</span><span class="fracbar">/</span><span class="den"><span style="color:red;font-weight:bold;">2</span> × <span style="color:red;font-weight:bold;">2</span> × 3 × <span style="color:red;font-weight:bold;">7</span></span></span></div><div>= <span class="frac"><span class="num">2</span><span class="fracbar">/</span><span class="den">3</span></span></div></div>
+<div class="calc"><div><strong>e.</strong> 6 × <span class="frac"><span class="num">5</span><span class="fracbar">/</span><span class="den">9</span></span></div><div>= <span class="frac"><span class="num">6 × 5</span><span class="fracbar">/</span><span class="den">9</span></span></div><div>= <span class="frac"><span class="num">2 × <span style="color:red;font-weight:bold;">3</span> × 5</span><span class="fracbar">/</span><span class="den"><span style="color:red;font-weight:bold;">3</span> × 3</span></span></div><div>= <span class="frac"><span class="num">10</span><span class="fracbar">/</span><span class="den">3</span></span></div></div>
+</div>
+</div>
+</div>
+<div class="slide" data-titre="Exercice 7">
+<h2>Exercice 7</h2>
+<div class="enonce"><div class="question"><span class="question-label">1.</span>Dans un collège de 540 élèves, les <span class="frac"><span class="num">4</span><span class="fracbar">/</span><span class="den">9</span></span> des élèves sont demi-pensionnaires. Combien y a-t-il de demi-pensionnaires ?</div>
+<div class="question"><span class="question-label">2.</span>Une recette de gâteau pour 600 g de pâte contient les <span class="frac"><span class="num">3</span><span class="fracbar">/</span><span class="den">8</span></span> de farine. Quelle masse de farine faut-il ?</div>
+<div class="question"><span class="question-label">3.</span>Léo dépense <span class="frac"><span class="num">1</span><span class="fracbar">/</span><span class="den">4</span></span> de son argent pour un jeu et <span class="frac"><span class="num">2</span><span class="fracbar">/</span><span class="den">5</span></span> pour des vêtements.</div>
+<div class="question"><span class="question-label">a)</span>Quelle fraction de son argent a-t-il dépensée ?</div>
+<div class="question"><span class="question-label">b)</span>Il avait 60 €. Combien d'argent lui reste-t-il ?</div></div>
+<div class="zone-ecriture"></div>
+<div class="correction-box" hidden>
+<div class="correction-titre">Correction</div>
+<div class="question"><span class="question-label">1.</span>Dans un collège de 540 élèves, les <span class="frac"><span class="num">4</span><span class="fracbar">/</span><span class="den">9</span></span> des élèves sont demi-pensionnaires. Combien y a-t-il de demi-pensionnaires ?</div>
+<div class="calc"><div><strong></strong> 540 × <span class="frac"><span class="num">4</span><span class="fracbar">/</span><span class="den">9</span></span></div><div>= <span class="frac"><span class="num">540 × 4</span><span class="fracbar">/</span><span class="den">9</span></span></div><div>= <span class="frac"><span class="num">2 × 2 × <span style="color:red;font-weight:bold;">3</span> × <span style="color:red;font-weight:bold;">3</span> × 3 × 5 × 2 × 2</span><span class="fracbar">/</span><span class="den"><span style="color:red;font-weight:bold;">3</span> × <span style="color:red;font-weight:bold;">3</span></span></span></div><div>= 240</div></div>
+<div class="question">Il y a 240 demi-pensionnaires.</div>
+<div class="question"><span class="question-label">2.</span>Une recette de gâteau pour 600 g de pâte contient les <span class="frac"><span class="num">3</span><span class="fracbar">/</span><span class="den">8</span></span> de farine. Quelle masse de farine faut-il ?</div>
+<div class="calc"><div><strong></strong> 600 × <span class="frac"><span class="num">3</span><span class="fracbar">/</span><span class="den">8</span></span></div><div>= <span class="frac"><span class="num">600 × 3</span><span class="fracbar">/</span><span class="den">8</span></span></div><div>= <span class="frac"><span class="num"><span style="color:red;font-weight:bold;">2</span> × <span style="color:red;font-weight:bold;">2</span> × <span style="color:red;font-weight:bold;">2</span> × 3 × 5 × 5 × 3</span><span class="fracbar">/</span><span class="den"><span style="color:red;font-weight:bold;">2</span> × <span style="color:red;font-weight:bold;">2</span> × <span style="color:red;font-weight:bold;">2</span></span></span></div><div>= 225</div></div>
+<div class="question">Il faut 225 g de farine.</div>
+<div class="question"><span class="question-label">3.</span>Léo dépense <span class="frac"><span class="num">1</span><span class="fracbar">/</span><span class="den">4</span></span> de son argent pour un jeu et <span class="frac"><span class="num">2</span><span class="fracbar">/</span><span class="den">5</span></span> pour des vêtements.</div>
+<div class="question"><span class="question-label">a)</span>Quelle fraction de son argent a-t-il dépensée ?</div>
+<div class="calc"><div><strong></strong> <span class="frac"><span class="num">1</span><span class="fracbar">/</span><span class="den">4</span></span> + <span class="frac"><span class="num">2</span><span class="fracbar">/</span><span class="den">5</span></span></div><div>= <span class="frac"><span class="num">1 × 5</span><span class="fracbar">/</span><span class="den">4 × 5</span></span> + <span class="frac"><span class="num">2 × 4</span><span class="fracbar">/</span><span class="den">5 × 4</span></span></div><div>= <span class="frac"><span class="num">5</span><span class="fracbar">/</span><span class="den">20</span></span> + <span class="frac"><span class="num">8</span><span class="fracbar">/</span><span class="den">20</span></span></div><div>= <span class="frac"><span class="num">13</span><span class="fracbar">/</span><span class="den">20</span></span></div></div>
+<div class="question">Il a dépensé les <span class="frac"><span class="num">13</span><span class="fracbar">/</span><span class="den">20</span></span> de son argent.</div>
+<div class="question"><span class="question-label">b)</span>Il avait 60 €. Combien d'argent lui reste-t-il ?</div>
+<div class="question">Il lui reste <span class="frac"><span class="num">20</span><span class="fracbar">/</span><span class="den">20</span></span> − <span class="frac"><span class="num">13</span><span class="fracbar">/</span><span class="den">20</span></span> = <span class="frac"><span class="num">7</span><span class="fracbar">/</span><span class="den">20</span></span> de son argent.</div>
+<div class="calc"><div><strong></strong> 60 × <span class="frac"><span class="num">7</span><span class="fracbar">/</span><span class="den">20</span></span></div><div>= <span class="frac"><span class="num">60 × 7</span><span class="fracbar">/</span><span class="den">20</span></span></div><div>= <span class="frac"><span class="num"><span style="color:red;font-weight:bold;">2</span> × <span style="color:red;font-weight:bold;">2</span> × 3 × <span style="color:red;font-weight:bold;">5</span> × 7</span><span class="fracbar">/</span><span class="den"><span style="color:red;font-weight:bold;">2</span> × <span style="color:red;font-weight:bold;">2</span> × <span style="color:red;font-weight:bold;">5</span></span></span></div><div>= 21</div></div>
+<div class="question">Il lui reste 21 €.</div>
+</div>
+</div>
+  </div>
+  <div class="controls">
+    <div class="controls-left">
+      <button class="btn-menu" onclick="ouvrirMenu()">☰ Exercices</button>
+      <button id="btnCorr" onclick="basculerCorrection()">✅ Correction</button>
+    </div>
+    <div class="progress"><span id="numEx"></span></div>
+    <div class="controls-right">
+      <button id="prevBtn" onclick="changer(-1)">◀ Précédent</button>
+      <button onclick="changer(1)">Suivant ▶</button>
+    </div>
+  </div>
+</div>
+<div id="menuEx" onclick="if(event.target===this)fermerMenu()"><div class="boite"><button onclick="allerA(1)">Exercice 1</button><button onclick="allerA(2)">Exercice 2</button><button onclick="allerA(3)">Exercice 3</button><button onclick="allerA(4)">Exercice 4</button><button onclick="allerA(5)">Exercice 5</button><button onclick="allerA(6)">Exercice 6</button><button onclick="allerA(7)">Exercice 7</button><button onclick="fermerMenu()">Fermer</button></div></div>
+<script>
+var slides = document.querySelectorAll('.slide'), cur = 0;
+function afficher(n) {
+  cur = Math.max(0, Math.min(slides.length - 1, n));
+  slides.forEach(function (s, i) { s.classList.toggle('active', i === cur); });
+  document.querySelector('.content').scrollTop = 0;
+  majCorr(); ajusterZone();
+  document.getElementById('numEx').textContent = cur ? 'Exercice ' + cur + ' / ' + (slides.length - 1) : '';
+  document.getElementById('prevBtn').disabled = cur === 0;
+}
+// La zone d'écriture remplit la place qui reste sous l'énoncé
+function ajusterZone() {
+  var z = slides[cur].querySelector('.zone-ecriture'); if (!z) return;
+  var c = document.querySelector('.content');
+  z.style.height = Math.floor(Math.max(300, c.clientHeight - (z.getBoundingClientRect().top - c.getBoundingClientRect().top) - 40)) + 'px';
+}
+window.addEventListener('resize', ajusterZone);
+function changer(d) { afficher(cur + d); }
+function allerA(n) { fermerMenu(); afficher(n); }
+function boiteCorr() { return slides[cur].querySelector('.correction-box'); }
+function majCorr() {
+  var b = boiteCorr(), btn = document.getElementById('btnCorr');
+  btn.disabled = !b;
+  btn.classList.toggle('ouvert', !!b && !b.hidden);
+  btn.textContent = (b && !b.hidden) ? '🙈 Masquer la correction' : '✅ Correction';
+}
+function basculerCorrection() {
+  var b = boiteCorr(); if (!b) return;
+  b.hidden = !b.hidden; majCorr();
+  if (!b.hidden) b.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+function ouvrirMenu() { document.getElementById('menuEx').classList.add('ouvert'); }
+function fermerMenu() { document.getElementById('menuEx').classList.remove('ouvert'); }
+document.querySelectorAll('.enonce').forEach(function (el) {
+  el.title = 'Cliquer pour agrandir / réduire';
+  el.addEventListener('click', function () { el.classList.toggle('grand'); setTimeout(ajusterZone, 250); });
+});
+document.addEventListener('keydown', function (e) {
+  if (e.ctrlKey || e.metaKey || e.altKey) return;
+  if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === ' ' || e.key === 'PageDown') { e.preventDefault(); changer(1); }
+  else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp' || e.key === 'PageUp') { e.preventDefault(); changer(-1); }
+  else if (e.key === 'c' || e.key === 'C') basculerCorrection();
+  else if (e.key === 'm' || e.key === 'M') ouvrirMenu();
+  else if (e.key === 'Escape') fermerMenu();
+});
+afficher(0);
+</script>
+<script src="../../../stylo.js"></script>
+</body>
+</html>

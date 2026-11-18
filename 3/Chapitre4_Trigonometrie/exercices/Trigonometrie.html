@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Exercices - Trigonométrie</title>
+<link rel="stylesheet" href="../../../styles.css">
+<style>
+/* --- Règles mathématiques reprises de MathsIORI/styles.css --- */
+.frac, .fraction {
+    display: inline-block;
+    margin-left: .1em;
+    margin-right: .1em;
+    vertical-align: middle;
+    text-align: center;
+    
+}
+.frac > .num, 
+.frac > .numerateur, 
+.fraction > .numerateur,
+.numerateur {
+    display: block;
+    padding: 0 .1em;
+    border-bottom: 1px solid black;
+    padding-bottom: 2px;
+}
+.frac > .den, 
+.frac > .denominateur,
+.fraction > .denominateur,
+.denominateur {
+    display: block;
+    padding: 0 .1em;
+    padding-top: 2px;
+}
+.frac > .fracbar {
+    display: block;
+    height: 0;
+    margin: 0;
+    border: 0;
+    border-bottom: .1em solid;
+    overflow: hidden;
+}
+.sqrt {
+    position: relative;
+    display: inline-block;
+    border-top: 2px solid black;
+    margin-left: .7em;
+    padding-left: .2em;
+    padding-right: .1em;
+}
+.sqrt:before {
+    content: " ";
+    position: absolute;
+    display: inline-block;
+    left: -.65em;
+    height: 56%;
+    width: .6em;
+    border-right: 2px solid black;
+    border-bottom: 2.5px solid black;
+    transform-origin: top right;
+    transform: rotate(55deg) skew(50deg);
+}
+.sqrt.red {
+    border-top-color: red;
+    color: red;
+}
+.sqrt.red:before {
+    border-right-color: red;
+    border-bottom-color: red;
+}
+.angle {
+    position: relative;
+    display: inline-block;
+}
+.angle::before {
+    content: '^';
+    position: absolute;
+    top: -0.5em;
+    left: 50%;
+    transform: translateX(-50%) scaleX(2.5) scaleY(1.2);
+    font-size: 1.5em;
+    font-weight: 300;
+}
+.couleur-speciale {
+    color: red;
+    position: relative;
+    display: inline-block;
+    text-decoration: line-through;
+}
+.fraction-rectangle {
+    display: inline-flex;
+    border: 2px solid #333;
+    height: 60px;
+    margin: 10px 5px;
+    vertical-align: middle;
+}
+.fraction-rectangle.large {
+    height: 80px;
+}
+.fraction-part {
+    flex: 1;
+    border-right: 1px solid #333;
+    min-width: 40px;
+}
+.fraction-part:last-child {
+    border-right: none;
+}
+.fraction-part.colored {
+    background-color: #4a90e2;
+}
+.fraction-part.orange {
+    background-color: #ff8c42;
+}
+.fraction-part.green {
+    background-color: #6fdc6f;
+}
+.fraction-part.red {
+    background-color: #e24a4a;
+}
+.fraction-visual {
+    text-align: center;
+    margin: 20px 0;
+}
+/* --- Styles propres à la feuille --- */
+.slide .question { margin: 4px 0 4px 20px; font-size: 1.05em; line-height: 1.9; }
+.slide .exercice-titre { font-weight: bold; text-decoration: underline; margin-bottom: 4px; }
+.slide .grille2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 4px 16px; }
+.slide .item { display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 6px; }
+.slide .grille3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px 16px; }
+.slide .question-label { font-weight: bold; margin-right: 8px; }
+.slide .calc { margin: 4px 0 8px 20px; line-height: 1.9; }
+.slide .calc > div { margin: 2px 0; }
+.slide .concl { font-style: italic; }
+.slide .rouge { color: #c0392b; }
+.slide .question { margin: 4px 0 4px 20px; font-size: 1.05em; line-height: 1.9; }
+.slide .exercice-titre { font-weight: bold; text-decoration: underline; margin-bottom: 4px; }
+.slide .grille2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 4px 16px; }
+.slide .item { display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 6px; }
+.slide .grille3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px 16px; }
+.slide .question-label { font-weight: bold; margin-right: 8px; }
+.slide .calc { margin: 4px 0 8px 20px; line-height: 1.9; }
+.slide .calc > div { margin: 2px 0; }
+.slide .concl { font-style: italic; }
+.slide .rouge { color: #c0392b; }
+/* --- Présentation des exercices --- */
+/* pas d'effet de soulèvement au survol : il faisait trembler le menu des exercices */
+button:hover { transform: none !important; }
+.container { width: 100%; height: 100vh; border-radius: 0; }
+.content { padding: 12px 30px 16px; }
+.controls { padding: 4px 10px; gap: 10px; }
+.controls-left, .controls-right { gap: 6px; }
+.controls button { padding: 4px 12px; font-size: .85em; border-radius: 7px; }
+.controls #styloBar.integre button { width: 26px; height: 26px; font-size: 14px; padding: 0; border-radius: 6px; }
+.controls #styloBar.integre .pastille { width: 14px; height: 14px; }
+.controls #styloBar.integre .trait { width: 16px; }
+.controls #styloBar.integre hr { height: 18px; }
+.slide { text-align: left; font-size: 1.05em; }
+.slide.titre-feuille { text-align: center; }
+.slide.titre-feuille h1 { font-size: 2.2em; margin: 30px 0 10px; }
+.slide h2 { font-size: 1.25em; text-decoration: none; color: #c2185b; border-bottom: 3px solid #eba8cc; padding-bottom: 6px; margin: 0 0 14px; text-align: left; }
+.enonce, .enonce *, .correction-box, .correction-box * { color: #111; }
+.enonce .faux, .correction-box .faux { color: #c0392b; } .enonce .vrai, .correction-box .vrai { color: #1e8449; }
+.correction-box .correction-titre { color: #2e7d32; }
+.enonce { font-size: .82em; cursor: zoom-in; transition: font-size .2s; }
+.enonce.grand { font-size: 1.3em; cursor: zoom-out; }
+.enonce .fig svg { width: 300px; }
+.enonce.grand .fig svg { width: 560px; }
+.fig svg { width: 420px; max-width: 100%; height: auto; }
+.enonce img, .correction-box img { max-width: 100%; }
+.enonce { background: #ffe6f0; border-left: 6px solid #eba8cc; padding: 10px 16px; border-radius: 8px; }
+.zone-ecriture { min-height: 300px; margin-top: 12px; border: 2px dashed #ddd; border-radius: 8px; position: relative; }
+.zone-ecriture::before { content: 'Zone de correction'; position: absolute; top: 6px; right: 12px; color: #bbb; font-size: .8em; }
+.correction-box { scroll-margin-top: 12px; font-size: 40px; background: #e8f5e9; border-left: 6px solid #43a047; padding: 14px 20px; border-radius: 8px; margin-top: 18px; }
+.correction-box[hidden] { display: none; }
+.correction-titre { font-weight: bold; color: #2e7d32; margin-bottom: 6px; }
+.correction-box { overflow-x: auto; }
+.correction-box table { font-size: .6em; }
+.correction-box svg, .correction-box img { max-width: 100%; height: auto; }
+.enonce p, .correction-box p { margin: 6px 0; }
+.liste-ex { display: flex; flex-wrap: wrap; gap: 14px; justify-content: center; margin-top: 30px; }
+.liste-ex button, #menuEx button { font-size: 1em; }
+#btnCorr.ouvert { background: #43a047; }
+#menuEx { position: fixed; inset: 0; background: rgba(0,0,0,.45); display: none; align-items: center; justify-content: center; z-index: 3000; }
+#menuEx.ouvert { display: flex; }
+#menuEx .boite { background: #fff; border-radius: 14px; padding: 20px 26px; display: flex; flex-direction: column; gap: 10px; min-width: 320px; }
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="content">
+    <div class="slide titre-feuille active">
+      <h1>Exercices - Trigonométrie</h1>
+      <div class="liste-ex"><button onclick="allerA(1)">Exercice 1</button><button onclick="allerA(2)">Exercice 2</button><button onclick="allerA(3)">Exercice 3</button><button onclick="allerA(4)">Exercice 4</button><button onclick="allerA(5)">Exercice 5</button><button onclick="allerA(6)">Exercice 6</button><button onclick="allerA(7)">Exercice 7</button></div>
+    </div>
+<div class="slide" data-titre="Exercice 1">
+<h2>Exercice 1</h2>
+<div class="enonce"><div class="item"><div>
+<p>KLM est un triangle rectangle en L.</p>
+<div class="question"><span class="question-label">1.</span>Quelle est l'hypoténuse de ce triangle ?</div>
+<div class="question"><span class="question-label">2.</span>Quel est le côté opposé à l'angle <span class="angle math">LKM</span> ? le côté adjacent à l'angle <span class="angle math">LKM</span> ?</div>
+<div class="question"><span class="question-label">3.</span>Écrire cos(<span class="angle math">LKM</span>), sin(<span class="angle math">LKM</span>) et tan(<span class="angle math">LKM</span>) sous forme de quotients de longueurs.</div>
+<div class="question"><span class="question-label">4.</span>Même question pour l'angle <span class="angle math">LMK</span>.</div>
+</div><div><svg style="display:block;margin:2px auto;overflow:visible;" viewbox="0 0 160 124" width="168"><polygon fill="#eaf2fb" points="51.7,83.7 120.0,65.4 40.0,40.0" stroke="#000" stroke-width="1.8"></polygon><polyline fill="none" points="61.4,81.1 58.8,71.5 49.1,74.0" stroke="#000" stroke-width="1.2"></polyline><text font-size="15" text-anchor="middle" x="42.3" y="99.0">L</text><text font-size="15" text-anchor="middle" x="134.0" y="71.1">K</text><text font-size="15" text-anchor="middle" x="28.8" y="36.6">M</text></svg></div></div></div>
+<div class="zone-ecriture"></div>
+<div class="correction-box" hidden>
+<div class="correction-titre">Correction</div>
+<div class="grille2"><div>
+<div class="question"><span class="question-label">1.</span>L'hypoténuse est le côté opposé à l'angle droit : c'est [KM].</div>
+<div class="question"><span class="question-label">2.</span>Le côté opposé à l'angle <span class="angle math">LKM</span> est [LM].<br/>Le côté adjacent à l'angle <span class="angle math">LKM</span> est [KL].</div>
+</div><div><svg style="display:block;margin:2px auto;overflow:visible;" viewbox="0 0 160 124" width="168"><polygon fill="#eaf2fb" points="51.7,83.7 120.0,65.4 40.0,40.0" stroke="#000" stroke-width="1.8"></polygon><polyline fill="none" points="61.4,81.1 58.8,71.5 49.1,74.0" stroke="#000" stroke-width="1.2"></polyline><text font-size="15" text-anchor="middle" x="42.3" y="99.0">L</text><text font-size="15" text-anchor="middle" x="134.0" y="71.1">K</text><text font-size="15" text-anchor="middle" x="28.8" y="36.6">M</text></svg></div></div>
+<div class="grille2">
+<div class="calc"><strong>3.</strong><div>cos(<span class="angle math">LKM</span>) = <span class="frac"><span class="num">KL</span><span class="den">KM</span></span></div><div>sin(<span class="angle math">LKM</span>) = <span class="frac"><span class="num">LM</span><span class="den">KM</span></span></div><div>tan(<span class="angle math">LKM</span>) = <span class="frac"><span class="num">LM</span><span class="den">KL</span></span></div></div>
+<div class="calc"><strong>4.</strong><div>cos(<span class="angle math">LMK</span>) = <span class="frac"><span class="num">LM</span><span class="den">KM</span></span></div><div>sin(<span class="angle math">LMK</span>) = <span class="frac"><span class="num">KL</span><span class="den">KM</span></span></div><div>tan(<span class="angle math">LMK</span>) = <span class="frac"><span class="num">KL</span><span class="den">LM</span></span></div></div>
+</div>
+</div>
+</div>
+<div class="slide" data-titre="Exercice 2">
+<h2>Exercice 2</h2>
+<div class="enonce"><p>À l'aide de la calculatrice (en mode degrés) :</p>
+<div class="question">Donner l'arrondi au centième de :</div>
+<div class="grille3"><div class="question"><span class="question-label">a.</span>cos(40°)</div><div class="question"><span class="question-label">b.</span>sin(72°)</div><div class="question"><span class="question-label">c.</span>tan(15°)</div></div>
+<div class="question">Donner l'arrondi au dixième de degré de l'angle aigu :</div>
+<div class="grille3"><div class="question"><span class="question-label">d.</span><span class="math">𝑥</span> tel que cos(<span class="math">𝑥</span>) = 0,4</div><div class="question"><span class="question-label">e.</span><span class="math">𝑦</span> tel que sin(<span class="math">𝑦</span>) = 0,85</div><div class="question"><span class="question-label">f.</span><span class="math">𝑧</span> tel que tan(<span class="math">𝑧</span>) = 2,3</div></div></div>
+<div class="zone-ecriture"></div>
+<div class="correction-box" hidden>
+<div class="correction-titre">Correction</div>
+<div class="grille3">
+<div class="calc"><div><strong>a.</strong> cos(40°) ≈ 0,77</div></div><div class="calc"><div><strong>b.</strong> sin(72°) ≈ 0,95</div></div><div class="calc"><div><strong>c.</strong> tan(15°) ≈ 0,27</div></div>
+<div class="calc"><div><strong>d.</strong> <span class="math">𝑥</span> ≈ 66,4°</div></div><div class="calc"><div><strong>e.</strong> <span class="math">𝑦</span> ≈ 58,2°</div></div><div class="calc"><div><strong>f.</strong> <span class="math">𝑧</span> ≈ 66,5°</div></div>
+</div>
+</div>
+</div>
+<div class="slide" data-titre="Exercice 3">
+<h2>Exercice 3</h2>
+<div class="enonce"><p>Dans chaque cas, calculer la longueur demandée. Arrondir au dixième.</p>
+<div class="grille2">
+<div class="item"><div><div class="question"><span class="question-label">A.</span>RST est rectangle en S, <span class="angle math">SRT</span> = 38° et RT = 9 cm. Calculer ST.</div></div><div><svg style="display:block;margin:2px auto;overflow:visible;" viewbox="0 0 160 156" width="168"><polygon fill="#eaf2fb" points="40.0,102.0 120.0,116.1 50.9,40.0" stroke="#000" stroke-width="1.8"></polygon><polyline fill="none" points="49.8,103.7 51.6,93.9 41.7,92.1" stroke="#000" stroke-width="1.2"></polyline><path d="M98.3,112.3 A22,22 0 0 1 105.2,99.8" fill="none" stroke="#c0392b" stroke-width="1.5"></path><text fill="#c0392b" font-size="13" text-anchor="middle" x="85.0" y="101.8">38°</text><text font-size="15" text-anchor="middle" x="27.6" y="113.5">S</text><text font-size="15" text-anchor="middle" x="132.0" y="128.3">R</text><text font-size="15" text-anchor="middle" x="45.5" y="32.1">T</text><text font-size="13" text-anchor="start" x="91.4" y="72.6">9 cm</text></svg></div></div>
+<div class="item"><div><div class="question"><span class="question-label">B.</span>EFG est rectangle en G, <span class="angle math">GEF</span> = 52° et EG = 6,5 cm. Calculer FG.</div></div><div><svg style="display:block;margin:2px auto;overflow:visible;" viewbox="0 0 143 160" width="150"><polygon fill="#eaf2fb" points="102.7,120.0 40.0,120.0 102.7,40.0" stroke="#000" stroke-width="1.8"></polygon><polyline fill="none" points="92.7,120.0 92.7,110.0 102.7,110.0" stroke="#000" stroke-width="1.2"></polyline><path d="M62.0,120.0 A22,22 0 0 0 53.6,102.7" fill="none" stroke="#c0392b" stroke-width="1.5"></path><text fill="#c0392b" font-size="13" text-anchor="middle" x="76.0" y="107.5">52°</text><text font-size="15" text-anchor="middle" x="111.3" y="136.0">G</text><text font-size="15" text-anchor="middle" x="28.2" y="132.5">E</text><text font-size="15" text-anchor="middle" x="107.8" y="32.0">F</text><text font-size="13" text-anchor="middle" x="71.3" y="138.0">6,5 cm</text></svg></div></div>
+<div class="item"><div><div class="question"><span class="question-label">C.</span>ABC est rectangle en B, <span class="angle math">BCA</span> = 61° et BC = 4,2 cm. Calculer AC.</div></div><div><svg style="display:block;margin:2px auto;overflow:visible;" viewbox="0 0 160 124" width="168"><polygon fill="#eaf2fb" points="120.0,84.2 120.0,40.0 40.0,84.2" stroke="#000" stroke-width="1.8"></polygon><polyline fill="none" points="120.0,74.2 110.0,74.2 110.0,84.2" stroke="#000" stroke-width="1.2"></polyline><path d="M120.0,62.0 A22,22 0 0 1 100.7,50.6" fill="none" stroke="#c0392b" stroke-width="1.5"></path><text fill="#c0392b" font-size="13" text-anchor="middle" x="99.7" y="79.5">61°</text><text font-size="15" text-anchor="middle" x="132.3" y="96.0">B</text><text font-size="15" text-anchor="middle" x="129.4" y="34.6">C</text><text font-size="15" text-anchor="middle" x="26.5" y="92.9">A</text><text font-size="13" text-anchor="start" x="128.0" y="66.1">4,2 cm</text></svg></div></div>
+<div class="item"><div><div class="question"><span class="question-label">D.</span>PQR est rectangle en P, <span class="angle math">PQR</span> = 24° et PR = 3 cm. Calculer QR.</div></div><div><svg style="display:block;margin:2px auto;overflow:visible;" viewbox="0 0 160 116" width="168"><polygon fill="#eaf2fb" points="120.0,40.0 40.0,40.0 120.0,75.8" stroke="#000" stroke-width="1.8"></polygon><polyline fill="none" points="110.0,40.0 110.0,50.0 120.0,50.0" stroke="#000" stroke-width="1.2"></polyline><path d="M62.0,40.0 A22,22 0 0 1 60.1,49.0" fill="none" stroke="#c0392b" stroke-width="1.5"></path><text fill="#c0392b" font-size="13" text-anchor="middle" x="79.1" y="53.4">24°</text><text font-size="15" text-anchor="middle" x="132.8" y="39.3">P</text><text font-size="15" text-anchor="middle" x="26.3" y="41.9">Q</text><text font-size="15" text-anchor="middle" x="130.4" y="90.2">R</text><text font-size="13" text-anchor="start" x="128.0" y="61.9">3 cm</text></svg></div></div>
+</div></div>
+<div class="zone-ecriture"></div>
+<div class="correction-box" hidden>
+<div class="correction-titre">Correction</div>
+<div class="grille2">
+<div class="calc"><div><strong>A.</strong> Le triangle RST est rectangle en S, on a :</div><div>sin(<span class="angle math">SRT</span>) = <span class="frac"><span class="num">ST</span><span class="den">RT</span></span></div><div>sin(38°) = <span class="frac"><span class="num">ST</span><span class="den">9</span></span></div><div>ST = 9 × sin(38°)</div><div>ST ≈ 5,5</div><div><span class="concl">Le segment [ST] mesure environ 5,5 cm.</span></div></div>
+<div class="calc"><div><strong>B.</strong> Le triangle EFG est rectangle en G, on a :</div><div>tan(<span class="angle math">GEF</span>) = <span class="frac"><span class="num">FG</span><span class="den">EG</span></span></div><div>tan(52°) = <span class="frac"><span class="num">FG</span><span class="den">6,5</span></span></div><div>FG = 6,5 × tan(52°)</div><div>FG ≈ 8,3</div><div><span class="concl">Le segment [FG] mesure environ 8,3 cm.</span></div></div>
+<div class="calc"><div><strong>C.</strong> Le triangle ABC est rectangle en B, on a :</div><div>cos(<span class="angle math">BCA</span>) = <span class="frac"><span class="num">BC</span><span class="den">AC</span></span></div><div>cos(61°) = <span class="frac"><span class="num">4,2</span><span class="den">AC</span></span></div><div>AC = <span class="frac"><span class="num">4,2</span><span class="den">cos(61°)</span></span></div><div>AC ≈ 8,7</div><div><span class="concl">Le segment [AC] mesure environ 8,7 cm.</span></div></div>
+<div class="calc"><div><strong>D.</strong> Le triangle PQR est rectangle en P, on a :</div><div>sin(<span class="angle math">PQR</span>) = <span class="frac"><span class="num">PR</span><span class="den">QR</span></span></div><div>sin(24°) = <span class="frac"><span class="num">3</span><span class="den">QR</span></span></div><div>QR = <span class="frac"><span class="num">3</span><span class="den">sin(24°)</span></span></div><div>QR ≈ 7,4</div><div><span class="concl">Le segment [QR] mesure environ 7,4 cm.</span></div></div>
+</div>
+</div>
+</div>
+<div class="slide" data-titre="Exercice 4">
+<h2>Exercice 4</h2>
+<div class="enonce"><p>Dans chaque cas, calculer la mesure de l'angle demandé. Arrondir au degré.</p>
+<div class="grille3">
+<div><div class="question"><span class="question-label">A.</span>IJK est rectangle en J, IJ = 7 cm et IK = 10 cm. Calculer <span class="angle math">JIK</span>.</div><svg style="display:block;margin:2px auto;overflow:visible;" viewbox="0 0 160 140" width="168"><polygon fill="#eaf2fb" points="61.7,99.5 120.0,78.3 40.0,40.0" stroke="#000" stroke-width="1.8"></polygon><polyline fill="none" points="71.1,96.1 67.6,86.7 58.2,90.1" stroke="#000" stroke-width="1.2"></polyline><path d="M99.3,85.8 A22,22 0 0 1 100.2,68.8" fill="none" stroke="#c0392b" stroke-width="1.5"></path><text font-size="15" text-anchor="middle" x="55.9" y="117.3">J</text><text font-size="15" text-anchor="middle" x="133.9" y="85.0">I</text><text font-size="15" text-anchor="middle" x="29.9" y="35.3">K</text><text font-size="13" text-anchor="middle" x="93.6" y="106.0">7 cm</text><text font-size="13" text-anchor="start" x="83.5" y="50.5">10 cm</text></svg></div>
+<div><div class="question"><span class="question-label">B.</span>UVW est rectangle en U, UV = 4,5 cm et UW = 6 cm. Calculer <span class="angle math">UVW</span>.</div><svg style="display:block;margin:2px auto;overflow:visible;" viewbox="0 0 160 159" width="168"><polygon fill="#eaf2fb" points="98.9,118.6 40.0,102.8 120.0,40.0" stroke="#000" stroke-width="1.8"></polygon><polyline fill="none" points="89.3,116.0 91.9,106.3 101.5,108.9" stroke="#000" stroke-width="1.2"></polyline><path d="M61.3,108.5 A22,22 0 0 0 57.3,89.2" fill="none" stroke="#c0392b" stroke-width="1.5"></path><text font-size="15" text-anchor="middle" x="104.2" y="136.6">U</text><text font-size="15" text-anchor="middle" x="26.7" y="112.3">V</text><text font-size="15" text-anchor="middle" x="128.1" y="33.6">W</text><text font-size="13" text-anchor="middle" x="67.4" y="128.2">4,5 cm</text><text font-size="13" text-anchor="start" x="117.2" y="86.9">6 cm</text></svg></div>
+<div><div class="question"><span class="question-label">C.</span>DEF est rectangle en F, DF = 5 cm et DE = 13 cm. Calculer <span class="angle math">DEF</span>.</div><svg style="display:block;margin:2px auto;overflow:visible;" viewbox="0 0 160 109" width="168"><polygon fill="#eaf2fb" points="109.5,40.0 40.0,65.3 120.0,68.9" stroke="#000" stroke-width="1.8"></polygon><polyline fill="none" points="100.1,43.4 103.5,52.8 112.9,49.4" stroke="#000" stroke-width="1.2"></polyline><path d="M60.7,57.8 A22,22 0 0 1 62.0,66.3" fill="none" stroke="#c0392b" stroke-width="1.5"></path><text font-size="15" text-anchor="middle" x="119.8" y="35.5">F</text><text font-size="15" text-anchor="middle" x="26.1" y="72.3">E</text><text font-size="15" text-anchor="middle" x="133.2" y="78.7">D</text><text font-size="13" text-anchor="start" x="122.3" y="53.7">5 cm</text><text font-size="13" text-anchor="middle" x="79.6" y="85.1">13 cm</text></svg></div>
+</div></div>
+<div class="zone-ecriture"></div>
+<div class="correction-box" hidden>
+<div class="correction-titre">Correction</div>
+<div class="grille3">
+<div class="calc"><div><strong>A.</strong> Le triangle IJK est rectangle en J, on a :</div><div>cos(<span class="angle math">JIK</span>) = <span class="frac"><span class="num">IJ</span><span class="den">IK</span></span></div><div>cos(<span class="angle math">JIK</span>) = <span class="frac"><span class="num">7</span><span class="den">10</span></span></div><div>À la calculatrice on trouve <span class="angle math">JIK</span> ≈ 46°.</div><div><span class="concl">L'angle <span class="angle math">JIK</span> mesure environ 46°.</span></div></div>
+<div class="calc"><div><strong>B.</strong> Le triangle UVW est rectangle en U, on a :</div><div>tan(<span class="angle math">UVW</span>) = <span class="frac"><span class="num">UW</span><span class="den">UV</span></span></div><div>tan(<span class="angle math">UVW</span>) = <span class="frac"><span class="num">6</span><span class="den">4,5</span></span></div><div>À la calculatrice on trouve <span class="angle math">UVW</span> ≈ 53°.</div><div><span class="concl">L'angle <span class="angle math">UVW</span> mesure environ 53°.</span></div></div>
+<div class="calc"><div><strong>C.</strong> Le triangle DEF est rectangle en F, on a :</div><div>sin(<span class="angle math">DEF</span>) = <span class="frac"><span class="num">DF</span><span class="den">DE</span></span></div><div>sin(<span class="angle math">DEF</span>) = <span class="frac"><span class="num">5</span><span class="den">13</span></span></div><div>À la calculatrice on trouve <span class="angle math">DEF</span> ≈ 23°.</div><div><span class="concl">L'angle <span class="angle math">DEF</span> mesure environ 23°.</span></div></div>
+</div>
+</div>
+</div>
+<div class="slide" data-titre="Exercice 5">
+<h2>Exercice 5</h2>
+<div class="enonce"><div class="item"><div><p>Une échelle de 6 m est appuyée contre un mur vertical. Elle forme avec le sol horizontal un angle de 72°.</p>
+<div class="question"><span class="question-label">1.</span>À quelle hauteur le haut de l'échelle touche-t-il le mur ? Arrondir au dixième de mètre.</div>
+<div class="question"><span class="question-label">2.</span>À quelle distance du mur se trouve le pied de l'échelle ? Arrondir au dixième de mètre.</div>
+</div><svg style="display:block;margin:2px auto;overflow:visible;" viewbox="0 0 220 175" width="140"><rect fill="#ddd" height="150" stroke="#000" width="14" x="150" y="10"></rect><line stroke="#000" stroke-width="2" x1="40" x2="200" y1="160" y2="160"></line><line stroke="#8e5a2b" stroke-width="4" x1="105.5" x2="150.0" y1="160" y2="23.1"></line><polyline fill="none" points="141,160 141,151 150,151" stroke="#000"></polyline><path d="M121.5,160 A16,16 0 0 0 110.4,144.8" fill="none" stroke="#c0392b" stroke-width="1.5"></path><text fill="#c0392b" font-size="13" text-anchor="end" x="101.5" y="140">72°</text><text font-size="13" text-anchor="end" x="117.8" y="91.5">6 m</text></svg></div></div>
+<div class="zone-ecriture"></div>
+<div class="correction-box" hidden>
+<div class="correction-titre">Correction</div>
+<div class="grille2"><div>
+<p>On note S le pied de l'échelle, H le haut de l'échelle et M le pied du mur. Le mur est vertical et le sol horizontal, donc le triangle SMH est rectangle en M, avec SH = 6 m et <span class="angle math">MSH</span> = 72°.</p>
+</div><div><svg style="display:block;margin:2px auto;overflow:visible;" viewbox="0 0 220 175" width="140"><rect fill="#ddd" height="150" stroke="#000" width="14" x="150" y="10"></rect><line stroke="#000" stroke-width="2" x1="40" x2="200" y1="160" y2="160"></line><line stroke="#8e5a2b" stroke-width="4" x1="105.5" x2="150.0" y1="160" y2="23.1"></line><polyline fill="none" points="141,160 141,151 150,151" stroke="#000"></polyline><path d="M121.5,160 A16,16 0 0 0 110.4,144.8" fill="none" stroke="#c0392b" stroke-width="1.5"></path><text fill="#c0392b" font-size="13" text-anchor="end" x="101.5" y="140">72°</text><text font-size="13" text-anchor="end" x="117.8" y="91.5">6 m</text></svg></div></div>
+<div class="grille2">
+<div class="calc"><div><strong>1.</strong> Le triangle SMH est rectangle en M, on a :</div><div>sin(<span class="angle math">MSH</span>) = <span class="frac"><span class="num">MH</span><span class="den">SH</span></span></div><div>sin(72°) = <span class="frac"><span class="num">MH</span><span class="den">6</span></span></div><div>MH = 6 × sin(72°)</div><div>MH ≈ 5,7</div><div><span class="concl">Le haut de l'échelle touche le mur à environ 5,7 m de hauteur.</span></div></div>
+<div class="calc"><div><strong>2.</strong> Le triangle SMH est rectangle en M, on a :</div><div>cos(<span class="angle math">MSH</span>) = <span class="frac"><span class="num">SM</span><span class="den">SH</span></span></div><div>cos(72°) = <span class="frac"><span class="num">SM</span><span class="den">6</span></span></div><div>SM = 6 × cos(72°)</div><div>SM ≈ 1,9</div><div><span class="concl">Le pied de l'échelle se trouve à environ 1,9 m du mur.</span></div></div>
+</div>
+</div>
+</div>
+<div class="slide" data-titre="Exercice 6">
+<h2>Exercice 6</h2>
+<div class="enonce"><p>Une rampe d'accès monte de 0,5 m sur une distance horizontale de 8 m.</p>
+<svg style="display:block;margin:4px auto;" viewbox="0 0 330 85" width="300"><polygon fill="#eaf2fb" points="20,65 280,65 280,25" stroke="#000" stroke-width="1.8"></polygon><polyline fill="none" points="270,65 270,55 280,55" stroke="#000"></polyline><text font-size="13" text-anchor="middle" x="150" y="80">8 m</text><text font-size="13" x="285" y="49">0,5 m</text></svg>
+<p>On recommande que l'angle formé par la rampe avec le sol soit inférieur à 3°. Cette rampe respecte-t-elle cette recommandation ? Justifier.</p></div>
+<div class="zone-ecriture"></div>
+<div class="correction-box" hidden>
+<div class="correction-titre">Correction</div>
+<p>On note A le bas de la rampe, B son sommet et C le point au sol à la verticale de B. Le triangle ABC est rectangle en C, avec AC = 8 m et BC = 0,5 m.</p>
+<div class="calc"><div>Le triangle ABC est rectangle en C, on a :</div><div>tan(<span class="angle math">BAC</span>) = <span class="frac"><span class="num">BC</span><span class="den">AC</span></span></div><div>tan(<span class="angle math">BAC</span>) = <span class="frac"><span class="num">0,5</span><span class="den">8</span></span></div><div>À la calculatrice on trouve <span class="angle math">BAC</span> ≈ 3,6°.</div><div>3,6° &gt; 3°</div><div><span class="concl">La rampe forme avec le sol un angle d'environ 3,6°, supérieur à 3° : elle ne respecte pas cette recommandation.</span></div></div>
+</div>
+</div>
+<div class="slide" data-titre="Exercice 7">
+<h2>Exercice 7</h2>
+<div class="enonce"><div class="grille2">
+<div class="question"><span class="question-label">1.</span><span class="math">𝑥</span> désigne un angle aigu tel que sin(<span class="math">𝑥</span>) = 0,6. Calculer la valeur exacte de cos(<span class="math">𝑥</span>), puis celle de tan(<span class="math">𝑥</span>).</div>
+<div class="question"><span class="question-label">2.</span><span class="math">𝑦</span> désigne un angle aigu tel que cos(<span class="math">𝑦</span>) = <span class="frac"><span class="num">5</span><span class="den">13</span></span>. Calculer la valeur exacte de sin(<span class="math">𝑦</span>), puis celle de tan(<span class="math">𝑦</span>).</div>
+</div></div>
+<div class="zone-ecriture"></div>
+<div class="correction-box" hidden>
+<div class="correction-titre">Correction</div>
+<div class="grille2">
+<div class="calc"><div><strong>1.</strong> cos²(<span class="math">𝑥</span>) + sin²(<span class="math">𝑥</span>) = 1</div><div>cos²(<span class="math">𝑥</span>) + 0,6² = 1</div><div>cos²(<span class="math">𝑥</span>) + 0,36 = 1</div><div>cos²(<span class="math">𝑥</span>) = 1 − 0,36</div><div>cos²(<span class="math">𝑥</span>) = 0,64</div><div>Or cos(<span class="math">𝑥</span>) est positif (angle aigu), donc :</div><div>cos(<span class="math">𝑥</span>) = <span class="sqrt">0,64</span></div><div>cos(<span class="math">𝑥</span>) = 0,8</div><div>tan(<span class="math">𝑥</span>) = <span class="frac"><span class="num">sin(<span class="math">𝑥</span>)</span><span class="den">cos(<span class="math">𝑥</span>)</span></span></div><div>tan(<span class="math">𝑥</span>) = <span class="frac"><span class="num">0,6</span><span class="den">0,8</span></span></div><div>tan(<span class="math">𝑥</span>) = 0,75</div><div><span class="concl">On a donc cos(<span class="math">𝑥</span>) = 0,8 et tan(<span class="math">𝑥</span>) = 0,75.</span></div></div>
+<div class="calc"><div><strong>2.</strong> cos²(<span class="math">𝑦</span>) + sin²(<span class="math">𝑦</span>) = 1</div><div>(<span class="frac"><span class="num">5</span><span class="den">13</span></span>)² + sin²(<span class="math">𝑦</span>) = 1</div><div><span class="frac"><span class="num">25</span><span class="den">169</span></span> + sin²(<span class="math">𝑦</span>) = 1</div><div>sin²(<span class="math">𝑦</span>) = 1 − <span class="frac"><span class="num">25</span><span class="den">169</span></span></div><div>sin²(<span class="math">𝑦</span>) = <span class="frac"><span class="num">169</span><span class="den">169</span></span> − <span class="frac"><span class="num">25</span><span class="den">169</span></span></div><div>sin²(<span class="math">𝑦</span>) = <span class="frac"><span class="num">144</span><span class="den">169</span></span></div><div>Or sin(<span class="math">𝑦</span>) est positif (angle aigu), donc :</div><div>sin(<span class="math">𝑦</span>) = <span class="frac"><span class="num"><span class="sqrt">144</span></span><span class="den"><span class="sqrt">169</span></span></span></div><div>sin(<span class="math">𝑦</span>) = <span class="frac"><span class="num">12</span><span class="den">13</span></span></div><div>tan(<span class="math">𝑦</span>) = <span class="frac"><span class="num">sin(<span class="math">𝑦</span>)</span><span class="den">cos(<span class="math">𝑦</span>)</span></span></div><div>tan(<span class="math">𝑦</span>) = <span class="frac"><span class="num">12</span><span class="den">13</span></span> ÷ <span class="frac"><span class="num">5</span><span class="den">13</span></span></div><div>tan(<span class="math">𝑦</span>) = <span class="frac"><span class="num">12</span><span class="den">13</span></span> × <span class="frac"><span class="num">13</span><span class="den">5</span></span></div><div>tan(<span class="math">𝑦</span>) = <span class="frac"><span class="num">12 × <span class="rouge">13</span></span><span class="den"><span class="rouge">13</span> × 5</span></span></div><div>tan(<span class="math">𝑦</span>) = <span class="frac"><span class="num">12</span><span class="den">5</span></span></div><div><span class="concl">On a donc sin(<span class="math">𝑦</span>) = <span class="frac"><span class="num">12</span><span class="den">13</span></span> et tan(<span class="math">𝑦</span>) = <span class="frac"><span class="num">12</span><span class="den">5</span></span>.</span></div></div>
+</div>
+</div>
+</div>
+  </div>
+  <div class="controls">
+    <div class="controls-left">
+      <button class="btn-menu" onclick="ouvrirMenu()">☰ Exercices</button>
+      <button id="btnCorr" onclick="basculerCorrection()">✅ Correction</button>
+    </div>
+    <div class="progress"><span id="numEx"></span></div>
+    <div class="controls-right">
+      <button id="prevBtn" onclick="changer(-1)">◀ Précédent</button>
+      <button onclick="changer(1)">Suivant ▶</button>
+    </div>
+  </div>
+</div>
+<div id="menuEx" onclick="if(event.target===this)fermerMenu()"><div class="boite"><button onclick="allerA(1)">Exercice 1</button><button onclick="allerA(2)">Exercice 2</button><button onclick="allerA(3)">Exercice 3</button><button onclick="allerA(4)">Exercice 4</button><button onclick="allerA(5)">Exercice 5</button><button onclick="allerA(6)">Exercice 6</button><button onclick="allerA(7)">Exercice 7</button><button onclick="fermerMenu()">Fermer</button></div></div>
+<script>
+var slides = document.querySelectorAll('.slide'), cur = 0;
+function afficher(n) {
+  cur = Math.max(0, Math.min(slides.length - 1, n));
+  slides.forEach(function (s, i) { s.classList.toggle('active', i === cur); });
+  document.querySelector('.content').scrollTop = 0;
+  majCorr(); ajusterZone();
+  document.getElementById('numEx').textContent = cur ? 'Exercice ' + cur + ' / ' + (slides.length - 1) : '';
+  document.getElementById('prevBtn').disabled = cur === 0;
+}
+// La zone d'écriture remplit la place qui reste sous l'énoncé
+function ajusterZone() {
+  var z = slides[cur].querySelector('.zone-ecriture'); if (!z) return;
+  var c = document.querySelector('.content');
+  z.style.height = Math.floor(Math.max(300, c.clientHeight - (z.getBoundingClientRect().top - c.getBoundingClientRect().top) - 40)) + 'px';
+}
+window.addEventListener('resize', ajusterZone);
+function changer(d) { afficher(cur + d); }
+function allerA(n) { fermerMenu(); afficher(n); }
+function boiteCorr() { return slides[cur].querySelector('.correction-box'); }
+function majCorr() {
+  var b = boiteCorr(), btn = document.getElementById('btnCorr');
+  btn.disabled = !b;
+  btn.classList.toggle('ouvert', !!b && !b.hidden);
+  btn.textContent = (b && !b.hidden) ? '🙈 Masquer la correction' : '✅ Correction';
+}
+function basculerCorrection() {
+  var b = boiteCorr(); if (!b) return;
+  b.hidden = !b.hidden; majCorr();
+  if (!b.hidden) b.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+function ouvrirMenu() { document.getElementById('menuEx').classList.add('ouvert'); }
+function fermerMenu() { document.getElementById('menuEx').classList.remove('ouvert'); }
+document.querySelectorAll('.enonce').forEach(function (el) {
+  el.title = 'Cliquer pour agrandir / réduire';
+  el.addEventListener('click', function () { el.classList.toggle('grand'); setTimeout(ajusterZone, 250); });
+});
+document.addEventListener('keydown', function (e) {
+  if (e.ctrlKey || e.metaKey || e.altKey) return;
+  if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === ' ' || e.key === 'PageDown') { e.preventDefault(); changer(1); }
+  else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp' || e.key === 'PageUp') { e.preventDefault(); changer(-1); }
+  else if (e.key === 'c' || e.key === 'C') basculerCorrection();
+  else if (e.key === 'm' || e.key === 'M') ouvrirMenu();
+  else if (e.key === 'Escape') fermerMenu();
+});
+afficher(0);
+</script>
+<script src="../../../stylo.js"></script>
+</body>
+</html>

@@ -122,35 +122,29 @@
     margin: 20px 0;
 }
 /* --- Styles propres à la feuille --- */
-
-        .question { margin: 3px 0 3px 20px; font-size: 1.05em; line-height: 1.5; }
-        .sous { margin-left: 44px; }
-        .exercice-titre { font-weight: bold; text-decoration: underline; margin-bottom: 4px; break-after: avoid; }
-        .grille2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0 20px; }
-        .question-label { font-weight: bold; margin-right: 8px; }
-        .calc { margin: 2px 0 4px 40px; line-height: 1.6; break-inside: avoid; }
-        .calc div { margin: 0; }
-        .fig { text-align: center; margin: 6px 0; }
-        .fig svg text { font-family: Arial, sans-serif; }
-        .vrai { color: #1e8449; font-weight: bold; } .faux { color: #c0392b; font-weight: bold; }
-        
-        
-    
-
-        .question { margin: 3px 0 3px 20px; font-size: 1.05em; line-height: 1.5; }
-        .sous { margin-left: 44px; }
-        .question:has(+ .calc) { break-after: avoid; page-break-after: avoid; }
-        .exercice-titre { font-weight: bold; text-decoration: underline; margin-bottom: 4px; break-after: avoid; }
-        .grille2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0 20px; }
-        .question-label { font-weight: bold; margin-right: 8px; }
-        .calc { margin: 2px 0 4px 40px; line-height: 1.6; break-inside: avoid; }
-        .calc div { margin: 0; }
-        .fig { text-align: center; margin: 6px 0; }
-        .fig svg text { font-family: Arial, sans-serif; }
-        .vrai { color: #1e8449; font-weight: bold; } .faux { color: #c0392b; font-weight: bold; }
-        
-        
-    
+.slide .question { margin: 3px 0 3px 20px; font-size: 1.05em; line-height: 1.5; }
+.slide .sous { margin-left: 44px; }
+.slide .exercice-titre { font-weight: bold; text-decoration: underline; margin-bottom: 4px; break-after: avoid; }
+.slide .grille2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0 20px; }
+.slide .question-label { font-weight: bold; margin-right: 8px; }
+.slide .calc { margin: 2px 0 4px 40px; line-height: 1.6; break-inside: avoid; }
+.slide .calc div { margin: 0; }
+.slide .fig { text-align: center; margin: 6px 0; }
+.slide .fig svg text { font-family: Arial, sans-serif; }
+.slide .vrai { color: #1e8449; font-weight: bold; }
+.slide .faux { color: #c0392b; font-weight: bold; }
+.slide .question { margin: 3px 0 3px 20px; font-size: 1.05em; line-height: 1.5; }
+.slide .sous { margin-left: 44px; }
+.slide .question:has(+ .calc) { break-after: avoid; page-break-after: avoid; }
+.slide .exercice-titre { font-weight: bold; text-decoration: underline; margin-bottom: 4px; break-after: avoid; }
+.slide .grille2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0 20px; }
+.slide .question-label { font-weight: bold; margin-right: 8px; }
+.slide .calc { margin: 2px 0 4px 40px; line-height: 1.6; break-inside: avoid; }
+.slide .calc div { margin: 0; }
+.slide .fig { text-align: center; margin: 6px 0; }
+.slide .fig svg text { font-family: Arial, sans-serif; }
+.slide .vrai { color: #1e8449; font-weight: bold; }
+.slide .faux { color: #c0392b; font-weight: bold; }
 /* --- Présentation des exercices --- */
 /* pas d'effet de soulèvement au survol : il faisait trembler le menu des exercices */
 button:hover { transform: none !important; }
@@ -182,6 +176,9 @@ button:hover { transform: none !important; }
 .correction-box { scroll-margin-top: 12px; font-size: 40px; background: #e8f5e9; border-left: 6px solid #43a047; padding: 14px 20px; border-radius: 8px; margin-top: 18px; }
 .correction-box[hidden] { display: none; }
 .correction-titre { font-weight: bold; color: #2e7d32; margin-bottom: 6px; }
+.correction-box { overflow-x: auto; }
+.correction-box table { font-size: .6em; }
+.correction-box svg, .correction-box img { max-width: 100%; height: auto; }
 .enonce p, .correction-box p { margin: 6px 0; }
 .liste-ex { display: flex; flex-wrap: wrap; gap: 14px; justify-content: center; margin-top: 30px; }
 .liste-ex button, #menuEx button { font-size: 1em; }
