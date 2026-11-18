@@ -152,6 +152,8 @@
         
     
 /* --- Présentation des exercices --- */
+/* pas d'effet de soulèvement au survol : il faisait trembler le menu des exercices */
+button:hover { transform: none !important; }
 .container { width: 100%; height: 100vh; border-radius: 0; }
 .content { padding: 12px 30px 16px; }
 .controls { padding: 4px 10px; gap: 10px; }
@@ -177,7 +179,7 @@
 .enonce { background: #ffe6f0; border-left: 6px solid #eba8cc; padding: 10px 16px; border-radius: 8px; }
 .zone-ecriture { min-height: 300px; margin-top: 12px; border: 2px dashed #ddd; border-radius: 8px; position: relative; }
 .zone-ecriture::before { content: 'Zone de correction'; position: absolute; top: 6px; right: 12px; color: #bbb; font-size: .8em; }
-.correction-box { background: #e8f5e9; border-left: 6px solid #43a047; padding: 14px 20px; border-radius: 8px; margin-top: 18px; }
+.correction-box { scroll-margin-top: 12px; font-size: 40px; background: #e8f5e9; border-left: 6px solid #43a047; padding: 14px 20px; border-radius: 8px; margin-top: 18px; }
 .correction-box[hidden] { display: none; }
 .correction-titre { font-weight: bold; color: #2e7d32; margin-bottom: 6px; }
 .enonce p, .correction-box p { margin: 6px 0; }
@@ -264,33 +266,32 @@
 <div class="zone-ecriture"></div>
 <div class="correction-box" hidden>
 <div class="correction-titre">Correction</div>
-<div class="question"><span class="question-label">a.</span>Le triangle RST est rectangle en S, donc d'après le théorème de Pythagore :</div>
+<div class="question"><span class="question-label">a.</span>Le triangle RST est rectangle en S, d'après le théorème de Pythagore on a :</div>
 <div class="calc">
 <div>RT² = RS² + ST²</div>
 <div>RT² = 9² + 12²</div>
 <div>RT² = 81 + 144</div>
 <div>RT² = 225</div>
-<div>RT = <span class="sqrt">225</span></div>
-<div>RT = 15 cm</div>
+<div>RT = <span class="sqrt">225</span> = 15</div>
+<div>[RT] mesure 15 cm.</div>
 </div>
-<div class="question"><span class="question-label">b.</span>Le triangle UVW est rectangle en V, donc d'après le théorème de Pythagore :</div>
+<div class="question"><span class="question-label">b.</span>Le triangle UVW est rectangle en V, d'après le théorème de Pythagore on a :</div>
 <div class="calc">
-<div>UW² = UV² + VW²</div>
-<div>13² = 5² + VW²</div>
-<div>169 = 25 + VW²</div>
+<div>VW² = UW² − UV²</div>
+<div>VW² = 13² − 5²</div>
 <div>VW² = 169 − 25</div>
 <div>VW² = 144</div>
-<div>VW = <span class="sqrt">144</span></div>
-<div>VW = 12 cm</div>
+<div>VW = <span class="sqrt">144</span> = 12</div>
+<div>[VW] mesure 12 cm.</div>
 </div>
-<div class="question"><span class="question-label">c.</span>Le triangle XYZ est rectangle en Y, donc d'après le théorème de Pythagore :</div>
+<div class="question"><span class="question-label">c.</span>Le triangle XYZ est rectangle en Y, d'après le théorème de Pythagore on a :</div>
 <div class="calc">
 <div>XZ² = XY² + YZ²</div>
 <div>XZ² = 4² + 7²</div>
 <div>XZ² = 16 + 49</div>
 <div>XZ² = 65</div>
-<div>XZ = <span class="sqrt">65</span></div>
-<div>XZ ≈ 8,1 cm</div>
+<div>XZ = <span class="sqrt">65</span> ≈ 8,1</div>
+<div>[XZ] mesure environ 8,1 cm.</div>
 </div>
 </div>
 </div>
@@ -318,13 +319,13 @@
 <div class="zone-ecriture"></div>
 <div class="correction-box" hidden>
 <div class="correction-titre">Correction</div>
-<p>La largeur, la hauteur et la diagonale de l'écran forment un triangle rectangle. On note 𝑑 la diagonale. D'après le théorème de Pythagore :</p>
+<p>La largeur, la hauteur et la diagonale de l'écran forment un triangle rectangle. On note 𝑑 la diagonale. D'après le théorème de Pythagore on a :</p>
 <div class="calc">
 <div>𝑑² = 88,6² + 49,8²</div>
 <div>𝑑² = 7 849,96 + 2 480,04</div>
 <div>𝑑² = 10 330</div>
-<div>𝑑 = <span class="sqrt">10 330</span></div>
-<div>𝑑 ≈ 101,64 cm</div>
+<div>𝑑 = <span class="sqrt">10 330</span> ≈ 101,64</div>
+<div>La diagonale mesure environ 101,64 cm.</div>
 </div>
 <p>En pouces : 101,64 ÷ 2,54 ≈ 40. L'écran mesure environ 40 pouces.</p>
 </div>

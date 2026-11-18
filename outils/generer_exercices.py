@@ -128,6 +128,8 @@ def main():
 /* --- Styles propres à la feuille --- */
 %(css_page)s
 /* --- Présentation des exercices --- */
+/* pas d'effet de soulèvement au survol : il faisait trembler le menu des exercices */
+button:hover { transform: none !important; }
 .container { width: 100%%; height: 100vh; border-radius: 0; }
 .content { padding: 12px 30px 16px; }
 .controls { padding: 4px 10px; gap: 10px; }
@@ -153,7 +155,7 @@ def main():
 .enonce { background: #ffe6f0; border-left: 6px solid #eba8cc; padding: 10px 16px; border-radius: 8px; }
 .zone-ecriture { min-height: 300px; margin-top: 12px; border: 2px dashed #ddd; border-radius: 8px; position: relative; }
 .zone-ecriture::before { content: 'Zone de correction'; position: absolute; top: 6px; right: 12px; color: #bbb; font-size: .8em; }
-.correction-box { background: #e8f5e9; border-left: 6px solid #43a047; padding: 14px 20px; border-radius: 8px; margin-top: 18px; }
+.correction-box { scroll-margin-top: 12px; font-size: 40px; background: #e8f5e9; border-left: 6px solid #43a047; padding: 14px 20px; border-radius: 8px; margin-top: 18px; }
 .correction-box[hidden] { display: none; }
 .correction-titre { font-weight: bold; color: #2e7d32; margin-bottom: 6px; }
 .enonce p, .correction-box p { margin: 6px 0; }
