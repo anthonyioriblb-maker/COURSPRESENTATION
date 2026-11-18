@@ -305,6 +305,11 @@ Exemple : `Archives/MathsIORI/6°/chapitre10 - Les angles/cours_2026-05-06_14h32
 
 ## COURSPRESENTATION — spécifique aux présentations
 
+**Présentations d'exercices** (nov. 2026) : une feuille d'exercices MathsIORI (+ sa correction) se présente en classe exercice par exercice, avec stylo et bouton « Correction » (touche C). Fichier autonome, marche hors ligne, généré par :
+`python3 outils/generer_exercices.py <sujet.html> <correction.html> <niveau>/<ChapitreN_…>/exercices/<Nom>.html`
+→ Sujet et correction : exercices dans des `<div class="exercice">` avec `<div class="exercice-titre">`, dans le même ordre. Images intégrées en base64.
+→ À relancer à chaque création ou modification de la feuille ou de sa correction (comme les PDF), et ajouter le lien dans `index.html` (clé `exercices` de la carte du chapitre).
+
 **Titre de la première diapo** (nov. 2026) : toujours `<h1>Chapitre N : Titre du chapitre</h1>`, avec le numéro du chapitre dans MathsIORI. À vérifier et corriger au fur et à mesure, à chaque fois qu'une présentation est créée ou modifiée. Restent à corriger (5e) : ch. 6 « Les triangles » et ch. 13 « Calcul littéral 1 » (sans numéro), ch. 8 (affiche « Chapitre 9 »).
 
 **Références absolues (modèles à toujours relire avant de produire/corriger une présentation)** :

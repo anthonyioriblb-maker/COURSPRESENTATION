@@ -506,7 +506,10 @@ const data = {
         {
             num: 4,
             titre: "Théorème de Pythagore",
-            lien: "4/Chapitre4_Pythagore/Chapitre 4 Pythagore2 presentation.html"
+            lien: "4/Chapitre4_Pythagore/Chapitre 4 Pythagore2 presentation.html",
+            exercices: [
+                { titre: "Pythagore, réciproque et contraposée", lien: "4/Chapitre4_Pythagore/exercices/Exercices_Pythagore_Reciproque_Contraposee.html" }
+            ]
         },
         {
             num: 5,
@@ -633,6 +636,14 @@ function buildCard(grade, chapter) {
             ).join('')}
            </div>`
         : '';
+    // Feuilles d'exercices présentables (générées par outils/generer_exercices.py)
+    const exoSection = chapter.exercices
+        ? `<div class="animations">
+            ${chapter.exercices.map(e =>
+                `<a href="${e.lien}" class="anim-link" target="_blank">📝 ${e.titre}</a>`
+            ).join('')}
+           </div>`
+        : '';
 
     return `
         <div class="chapter-card grade-${grade}" data-title="${chapter.titre.toLowerCase()}" data-grade="${grade}">
@@ -640,6 +651,7 @@ function buildCard(grade, chapter) {
             <h3>${chapter.titre}</h3>
             <a href="${chapter.lien}" class="main-link" target="_blank">${arrowIcon} Ouvrir le cours</a>
             ${animSection}
+            ${exoSection}
         </div>`;
 }
 

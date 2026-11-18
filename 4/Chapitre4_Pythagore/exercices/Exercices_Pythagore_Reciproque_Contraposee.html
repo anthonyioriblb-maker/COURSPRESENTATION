@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Exercices - Théorème de Pythagore, réciproque et contraposée</title>
+<link rel="stylesheet" href="../../../styles.css">
+<style>
+/* --- Règles mathématiques reprises de MathsIORI/styles.css --- */
+.frac, .fraction {
+    display: inline-block;
+    margin-left: .1em;
+    margin-right: .1em;
+    vertical-align: middle;
+    text-align: center;
+    
+}
+.frac > .num, 
+.frac > .numerateur, 
+.fraction > .numerateur,
+.numerateur {
+    display: block;
+    padding: 0 .1em;
+    border-bottom: 1px solid black;
+    padding-bottom: 2px;
+}
+.frac > .den, 
+.frac > .denominateur,
+.fraction > .denominateur,
+.denominateur {
+    display: block;
+    padding: 0 .1em;
+    padding-top: 2px;
+}
+.frac > .fracbar {
+    display: block;
+    height: 0;
+    margin: 0;
+    border: 0;
+    border-bottom: .1em solid;
+    overflow: hidden;
+}
+.sqrt {
+    position: relative;
+    display: inline-block;
+    border-top: 2px solid black;
+    margin-left: .7em;
+    padding-left: .2em;
+    padding-right: .1em;
+}
+.sqrt:before {
+    content: " ";
+    position: absolute;
+    display: inline-block;
+    left: -.65em;
+    height: 56%;
+    width: .6em;
+    border-right: 2px solid black;
+    border-bottom: 2.5px solid black;
+    transform-origin: top right;
+    transform: rotate(55deg) skew(50deg);
+}
+.sqrt.red {
+    border-top-color: red;
+    color: red;
+}
+.sqrt.red:before {
+    border-right-color: red;
+    border-bottom-color: red;
+}
+.angle {
+    position: relative;
+    display: inline-block;
+}
+.angle::before {
+    content: '^';
+    position: absolute;
+    top: -0.5em;
+    left: 50%;
+    transform: translateX(-50%) scaleX(2.5) scaleY(1.2);
+    font-size: 1.5em;
+    font-weight: 300;
+}
+.couleur-speciale {
+    color: red;
+    position: relative;
+    display: inline-block;
+    text-decoration: line-through;
+}
+.fraction-rectangle {
+    display: inline-flex;
+    border: 2px solid #333;
+    height: 60px;
+    margin: 10px 5px;
+    vertical-align: middle;
+}
+.fraction-rectangle.large {
+    height: 80px;
+}
+.fraction-part {
+    flex: 1;
+    border-right: 1px solid #333;
+    min-width: 40px;
+}
+.fraction-part:last-child {
+    border-right: none;
+}
+.fraction-part.colored {
+    background-color: #4a90e2;
+}
+.fraction-part.orange {
+    background-color: #ff8c42;
+}
+.fraction-part.green {
+    background-color: #6fdc6f;
+}
+.fraction-part.red {
+    background-color: #e24a4a;
+}
+.fraction-visual {
+    text-align: center;
+    margin: 20px 0;
+}
+/* --- Styles propres à la feuille --- */
+
+        .question { margin: 3px 0 3px 20px; font-size: 1.05em; line-height: 1.5; }
+        .sous { margin-left: 44px; }
+        .exercice-titre { font-weight: bold; text-decoration: underline; margin-bottom: 4px; break-after: avoid; }
+        .grille2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0 20px; }
+        .question-label { font-weight: bold; margin-right: 8px; }
+        .calc { margin: 2px 0 4px 40px; line-height: 1.6; break-inside: avoid; }
+        .calc div { margin: 0; }
+        .fig { text-align: center; margin: 6px 0; }
+        .fig svg text { font-family: Arial, sans-serif; }
+        .vrai { color: #1e8449; font-weight: bold; } .faux { color: #c0392b; font-weight: bold; }
+        
+        
+    
+
+        .question { margin: 3px 0 3px 20px; font-size: 1.05em; line-height: 1.5; }
+        .sous { margin-left: 44px; }
+        .question:has(+ .calc) { break-after: avoid; page-break-after: avoid; }
+        .exercice-titre { font-weight: bold; text-decoration: underline; margin-bottom: 4px; break-after: avoid; }
+        .grille2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0 20px; }
+        .question-label { font-weight: bold; margin-right: 8px; }
+        .calc { margin: 2px 0 4px 40px; line-height: 1.6; break-inside: avoid; }
+        .calc div { margin: 0; }
+        .fig { text-align: center; margin: 6px 0; }
+        .fig svg text { font-family: Arial, sans-serif; }
+        .vrai { color: #1e8449; font-weight: bold; } .faux { color: #c0392b; font-weight: bold; }
+        
+        
+    
+/* --- Présentation des exercices --- */
+.slide { text-align: left; font-size: 1.45em; }
+.slide.titre-feuille { text-align: center; }
+.slide.titre-feuille h1 { font-size: 2.2em; margin: 30px 0 10px; }
+.slide h2 { font-size: 1.5em; text-decoration: none; color: #c2185b; border-bottom: 3px solid #eba8cc; padding-bottom: 6px; margin: 0 0 14px; text-align: left; }
+.enonce, .enonce *, .correction-box, .correction-box * { color: #111; }
+.enonce .faux, .correction-box .faux { color: #c0392b; } .enonce .vrai, .correction-box .vrai { color: #1e8449; }
+.correction-box .correction-titre { color: #2e7d32; }
+.fig svg { width: 560px; max-width: 100%; height: auto; }
+.enonce img, .correction-box img { max-width: 100%; }
+.enonce { background: #ffe6f0; border-left: 6px solid #eba8cc; padding: 14px 20px; border-radius: 8px; }
+.correction-box { background: #e8f5e9; border-left: 6px solid #43a047; padding: 14px 20px; border-radius: 8px; margin-top: 18px; }
+.correction-box[hidden] { display: none; }
+.correction-titre { font-weight: bold; color: #2e7d32; margin-bottom: 6px; }
+.enonce p, .correction-box p { margin: 6px 0; }
+.liste-ex { display: flex; flex-wrap: wrap; gap: 14px; justify-content: center; margin-top: 30px; }
+.liste-ex button, #menuEx button { font-size: 1em; }
+#btnCorr.ouvert { background: #43a047; }
+#menuEx { position: fixed; inset: 0; background: rgba(0,0,0,.45); display: none; align-items: center; justify-content: center; z-index: 3000; }
+#menuEx.ouvert { display: flex; }
+#menuEx .boite { background: #fff; border-radius: 14px; padding: 20px 26px; display: flex; flex-direction: column; gap: 10px; min-width: 320px; }
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="content">
+    <div class="slide titre-feuille active">
+      <h1>Exercices - Théorème de Pythagore, réciproque et contraposée</h1>
+      <div class="liste-ex"><button onclick="allerA(1)">Exercice 1</button><button onclick="allerA(2)">Exercice 2</button><button onclick="allerA(3)">Exercice 3</button><button onclick="allerA(4)">Exercice 4</button><button onclick="allerA(5)">Exercice 5</button><button onclick="allerA(6)">Exercice 6 – Type brevet (6 points)</button></div>
+    </div>
+<div class="slide" data-titre="Exercice 1">
+<h2>Exercice 1</h2>
+<div class="enonce"><p>Pour chaque phrase, écrire sa réciproque et sa contraposée, puis dire si la réciproque est vraie ou fausse.</p>
+<div class="question"><span class="question-label">a.</span>Si un nombre se termine par 0, alors il est divisible par 10.</div>
+<div class="question"><span class="question-label">b.</span>Si un animal est un chat, alors il a quatre pattes.</div>
+<div class="question"><span class="question-label">c.</span>Si un quadrilatère est un losange, alors ses diagonales sont perpendiculaires.</div></div>
+<div class="correction-box" hidden>
+<div class="correction-titre">Correction</div>
+<div class="question"><span class="question-label">a.</span>Réciproque : Si un nombre est divisible par 10, alors il se termine par 0. <span class="vrai">Vraie.</span></div>
+<div class="question sous">Contraposée : Si un nombre n'est pas divisible par 10, alors il ne se termine pas par 0.</div>
+<div class="question"><span class="question-label">b.</span>Réciproque : Si un animal a quatre pattes, alors c'est un chat. <span class="faux">Fausse</span> (un chien a aussi quatre pattes).</div>
+<div class="question sous">Contraposée : Si un animal n'a pas quatre pattes, alors ce n'est pas un chat.</div>
+<div class="question"><span class="question-label">c.</span>Réciproque : Si les diagonales d'un quadrilatère sont perpendiculaires, alors c'est un losange. <span class="faux">Fausse</span> (un cerf-volant a aussi des diagonales perpendiculaires).</div>
+<div class="question sous">Contraposée : Si les diagonales d'un quadrilatère ne sont pas perpendiculaires, alors ce n'est pas un losange.</div>
+<p style="margin-left:20px">La contraposée d'une propriété vraie est toujours vraie.</p>
+</div>
+</div>
+<div class="slide" data-titre="Exercice 2">
+<h2>Exercice 2</h2>
+<div class="enonce"><p>Les triangles suivants sont-ils rectangles ? Justifier.</p>
+<div class="grille2">
+<div class="question"><span class="question-label">a.</span>ABC tel que AB = 6 cm, BC = 10 cm et AC = 8 cm.</div>
+<div class="question"><span class="question-label">b.</span>DEF tel que DE = 7 cm, EF = 9 cm et DF = 11 cm.</div>
+<div class="question"><span class="question-label">c.</span>GHI tel que GH = 2,8 cm, HI = 4,5 cm et GI = 5,3 cm.</div>
+<div class="question"><span class="question-label">d.</span>KLM tel que KL = 12 cm, LM = 13 cm et KM = 5 cm.</div>
+</div></div>
+<div class="correction-box" hidden>
+<div class="correction-titre">Correction</div>
+<div class="question"><span class="question-label">a.</span></div>
+<div class="calc">
+<div>Dans le triangle ABC, le côté le plus long est [BC].</div>
+<div>D'une part, BC² = 10² = 100</div>
+<div>D'autre part, AB² + AC² = 6² + 8² = 36 + 64 = 100</div>
+<div>Ainsi AB² + AC² = BC², d'après la réciproque du théorème de Pythagore, le triangle ABC est rectangle en A.</div>
+</div>
+<div class="question"><span class="question-label">b.</span></div>
+<div class="calc">
+<div>Dans le triangle DEF, le côté le plus long est [DF].</div>
+<div>D'une part, DF² = 11² = 121</div>
+<div>D'autre part, DE² + EF² = 7² + 9² = 49 + 81 = 130</div>
+<div>Ainsi DE² + EF² ≠ DF², d'après la contraposée du théorème de Pythagore, le triangle DEF n'est pas rectangle.</div>
+</div>
+<div class="question"><span class="question-label">c.</span></div>
+<div class="calc">
+<div>Dans le triangle GHI, le côté le plus long est [GI].</div>
+<div>D'une part, GI² = 5,3² = 28,09</div>
+<div>D'autre part, GH² + HI² = 2,8² + 4,5² = 7,84 + 20,25 = 28,09</div>
+<div>Ainsi GH² + HI² = GI², d'après la réciproque du théorème de Pythagore, le triangle GHI est rectangle en H.</div>
+</div>
+<div class="question"><span class="question-label">d.</span></div>
+<div class="calc">
+<div>Dans le triangle KLM, le côté le plus long est [LM].</div>
+<div>D'une part, LM² = 13² = 169</div>
+<div>D'autre part, KL² + KM² = 12² + 5² = 144 + 25 = 169</div>
+<div>Ainsi KL² + KM² = LM², d'après la réciproque du théorème de Pythagore, le triangle KLM est rectangle en K.</div>
+</div>
+</div>
+</div>
+<div class="slide" data-titre="Exercice 3">
+<h2>Exercice 3</h2>
+<div class="enonce"><div class="question"><span class="question-label">a.</span>RST est un triangle rectangle en S tel que RS = 9 cm et ST = 12 cm. Calculer RT.</div>
+<div class="question"><span class="question-label">b.</span>UVW est un triangle rectangle en V tel que UV = 5 cm et UW = 13 cm. Calculer VW.</div>
+<div class="question"><span class="question-label">c.</span>XYZ est un triangle rectangle en Y tel que XY = 4 cm et YZ = 7 cm. Calculer XZ. Arrondir au dixième.</div></div>
+<div class="correction-box" hidden>
+<div class="correction-titre">Correction</div>
+<div class="question"><span class="question-label">a.</span>Le triangle RST est rectangle en S, donc d'après le théorème de Pythagore :</div>
+<div class="calc">
+<div>RT² = RS² + ST²</div>
+<div>RT² = 9² + 12²</div>
+<div>RT² = 81 + 144</div>
+<div>RT² = 225</div>
+<div>RT = <span class="sqrt">225</span></div>
+<div>RT = 15 cm</div>
+</div>
+<div class="question"><span class="question-label">b.</span>Le triangle UVW est rectangle en V, donc d'après le théorème de Pythagore :</div>
+<div class="calc">
+<div>UW² = UV² + VW²</div>
+<div>13² = 5² + VW²</div>
+<div>169 = 25 + VW²</div>
+<div>VW² = 169 − 25</div>
+<div>VW² = 144</div>
+<div>VW = <span class="sqrt">144</span></div>
+<div>VW = 12 cm</div>
+</div>
+<div class="question"><span class="question-label">c.</span>Le triangle XYZ est rectangle en Y, donc d'après le théorème de Pythagore :</div>
+<div class="calc">
+<div>XZ² = XY² + YZ²</div>
+<div>XZ² = 4² + 7²</div>
+<div>XZ² = 16 + 49</div>
+<div>XZ² = 65</div>
+<div>XZ = <span class="sqrt">65</span></div>
+<div>XZ ≈ 8,1 cm</div>
+</div>
+</div>
+</div>
+<div class="slide" data-titre="Exercice 4">
+<h2>Exercice 4</h2>
+<div class="enonce"><p>Un menuisier fabrique un cadre de 60 cm de longueur et 45 cm de largeur. Pour vérifier que ses coins sont bien droits, il mesure une diagonale : il trouve 74 cm.</p>
+<p>Le cadre est-il un rectangle ? Justifier.</p></div>
+<div class="correction-box" hidden>
+<div class="correction-titre">Correction</div>
+<p>On note ABCD le cadre, avec AB = 60 cm, BC = 45 cm et la diagonale AC = 74 cm.</p>
+<div class="calc">
+<div>Dans le triangle ABC, le côté le plus long est [AC].</div>
+<div>D'une part, AC² = 74² = 5 476</div>
+<div>D'autre part, AB² + BC² = 60² + 45² = 3 600 + 2 025 = 5 625</div>
+<div>Ainsi AB² + BC² ≠ AC², d'après la contraposée du théorème de Pythagore, le triangle ABC n'est pas rectangle.</div>
+</div>
+<p>Le coin B n'est donc pas un angle droit : le cadre n'est pas un rectangle.</p>
+</div>
+</div>
+<div class="slide" data-titre="Exercice 5">
+<h2>Exercice 5</h2>
+<div class="enonce"><p>La taille d'un écran de télévision est donnée par la longueur de sa diagonale, en pouces. Un écran mesure 88,6 cm de largeur et 49,8 cm de hauteur.</p>
+<p>On rappelle que 1 pouce = 2,54 cm. Quelle est la taille de cet écran en pouces ? Arrondir à l'unité.</p></div>
+<div class="correction-box" hidden>
+<div class="correction-titre">Correction</div>
+<p>La largeur, la hauteur et la diagonale de l'écran forment un triangle rectangle. On note 𝑑 la diagonale. D'après le théorème de Pythagore :</p>
+<div class="calc">
+<div>𝑑² = 88,6² + 49,8²</div>
+<div>𝑑² = 7 849,96 + 2 480,04</div>
+<div>𝑑² = 10 330</div>
+<div>𝑑 = <span class="sqrt">10 330</span></div>
+<div>𝑑 ≈ 101,64 cm</div>
+</div>
+<p>En pouces : 101,64 ÷ 2,54 ≈ 40. L'écran mesure environ 40 pouces.</p>
+</div>
+</div>
+<div class="slide" data-titre="Exercice 6 – Type brevet (6 points)">
+<h2>Exercice 6 – Type brevet (6 points)</h2>
+<div class="enonce"><p>M. Martin possède un terrain ABCD représenté ci-dessous.</p>
+<p>AB = 30 m ; AD = 40 m ; BD = 50 m ; BC = 120 m ; CD = 130 m.</p>
+<div class="fig"><svg height="230" viewbox="0 0 360 230" width="360">
+<polygon fill="#eef6e8" points="30,200 96,200 307,42 30,112" stroke="#2e7d32" stroke-width="2"></polygon>
+<line stroke="#2e7d32" stroke-dasharray="5,3" stroke-width="1.5" x1="96" x2="30" y1="200" y2="112"></line>
+<text font-size="15" font-weight="bold" x="16" y="216">A</text>
+<text font-size="15" font-weight="bold" x="96" y="218">B</text>
+<text font-size="15" font-weight="bold" x="312" y="40">C</text>
+<text font-size="15" font-weight="bold" x="14" y="110">D</text>
+<text font-size="13" x="50" y="218">30 m</text>
+<text font-size="13" x="0" y="160">40 m</text>
+<text font-size="13" x="66" y="150">50 m</text>
+<text font-size="13" x="212" y="138">120 m</text>
+<text font-size="13" x="150" y="66">130 m</text>
+</svg><br/><em style="font-size:.9em">La figure n'est pas à l'échelle.</em></div>
+<div class="question"><span class="question-label">1.</span>Démontrer que le triangle ABD est rectangle en A.</div>
+<div class="question"><span class="question-label">2.</span>Le triangle BCD est-il rectangle ? Justifier.</div>
+<div class="question"><span class="question-label">3.</span>Calculer l'aire du terrain ABCD.</div>
+<div class="question"><span class="question-label">4.</span>M. Martin veut entourer son terrain d'un grillage. Le grillage est vendu en rouleaux de 25 m, au prix de 39,90 € le rouleau. <b>Combien va-t-il dépenser ? Présenter la démarche avec des phrases.</b></div>
+<div class="question"><span class="question-label">5.</span>Il construit un abri de jardin. Pour vérifier qu'un coin de l'abri est un angle droit, il trace au sol un triangle EFG avec EF = 1,2 m, FG = 1,6 m et EG = 2,1 m. <b>Le coin est-il un angle droit ? Justifier.</b></div></div>
+<div class="correction-box" hidden>
+<div class="correction-titre">Correction</div>
+<div class="question"><span class="question-label">1.</span>(1 point)</div>
+<div class="calc">
+<div>Dans le triangle ABD, le côté le plus long est [BD].</div>
+<div>D'une part, BD² = 50² = 2 500</div>
+<div>D'autre part, AB² + AD² = 30² + 40² = 900 + 1 600 = 2 500</div>
+<div>Ainsi AB² + AD² = BD², d'après la réciproque du théorème de Pythagore, le triangle ABD est rectangle en A.</div>
+</div>
+<div class="question"><span class="question-label">2.</span>(1 point)</div>
+<div class="calc">
+<div>Dans le triangle BCD, le côté le plus long est [CD].</div>
+<div>D'une part, CD² = 130² = 16 900</div>
+<div>D'autre part, BD² + BC² = 50² + 120² = 2 500 + 14 400 = 16 900</div>
+<div>Ainsi BD² + BC² = CD², d'après la réciproque du théorème de Pythagore, le triangle BCD est rectangle en B.</div>
+</div>
+<div class="question"><span class="question-label">3.</span>(1,5 point) Les deux triangles sont rectangles, on additionne leurs aires.</div>
+<div class="calc">
+<div>Aire de ABD = (AB × AD) ÷ 2 = (30 × 40) ÷ 2 = 600 m²</div>
+<div>Aire de BCD = (BD × BC) ÷ 2 = (50 × 120) ÷ 2 = 3 000 m²</div>
+<div>Aire de ABCD = 600 + 3 000 = 3 600 m²</div>
+</div>
+<div class="question"><span class="question-label">4.</span>(1,5 point)</div>
+<div class="calc">
+<div>Le périmètre du terrain est : AB + BC + CD + DA = 30 + 120 + 130 + 40 = 320 m.</div>
+<div>Nombre de rouleaux : 320 ÷ 25 = 12,8. Il faut donc acheter 13 rouleaux.</div>
+<div>Prix : 13 × 39,90 = 518,70 €.</div>
+<div>M. Martin va dépenser 518,70 €.</div>
+</div>
+<div class="question"><span class="question-label">5.</span>(1 point)</div>
+<div class="calc">
+<div>Dans le triangle EFG, le côté le plus long est [EG].</div>
+<div>D'une part, EG² = 2,1² = 4,41</div>
+<div>D'autre part, EF² + FG² = 1,2² + 1,6² = 1,44 + 2,56 = 4</div>
+<div>Ainsi EF² + FG² ≠ EG², d'après la contraposée du théorème de Pythagore, le triangle EFG n'est pas rectangle.</div>
+</div>
+<p>Le coin de l'abri n'est donc pas un angle droit.</p>
+</div>
+</div>
+  </div>
+  <div class="controls">
+    <div class="controls-left">
+      <button class="btn-menu" onclick="ouvrirMenu()">☰ Exercices</button>
+      <button id="btnCorr" onclick="basculerCorrection()">✅ Correction</button>
+    </div>
+    <div class="progress"><span id="numEx"></span></div>
+    <div class="controls-right">
+      <button id="prevBtn" onclick="changer(-1)">◀ Précédent</button>
+      <button onclick="changer(1)">Suivant ▶</button>
+    </div>
+  </div>
+</div>
+<div id="menuEx" onclick="if(event.target===this)fermerMenu()"><div class="boite"><button onclick="allerA(1)">Exercice 1</button><button onclick="allerA(2)">Exercice 2</button><button onclick="allerA(3)">Exercice 3</button><button onclick="allerA(4)">Exercice 4</button><button onclick="allerA(5)">Exercice 5</button><button onclick="allerA(6)">Exercice 6 – Type brevet (6 points)</button><button onclick="fermerMenu()">Fermer</button></div></div>
+<script>
+var slides = document.querySelectorAll('.slide'), cur = 0;
+function afficher(n) {
+  cur = Math.max(0, Math.min(slides.length - 1, n));
+  slides.forEach(function (s, i) { s.classList.toggle('active', i === cur); });
+  document.querySelector('.content').scrollTop = 0;
+  majCorr();
+  document.getElementById('numEx').textContent = cur ? 'Exercice ' + cur + ' / ' + (slides.length - 1) : '';
+  document.getElementById('prevBtn').disabled = cur === 0;
+}
+function changer(d) { afficher(cur + d); }
+function allerA(n) { fermerMenu(); afficher(n); }
+function boiteCorr() { return slides[cur].querySelector('.correction-box'); }
+function majCorr() {
+  var b = boiteCorr(), btn = document.getElementById('btnCorr');
+  btn.disabled = !b;
+  btn.classList.toggle('ouvert', !!b && !b.hidden);
+  btn.textContent = (b && !b.hidden) ? '🙈 Masquer la correction' : '✅ Correction';
+}
+function basculerCorrection() {
+  var b = boiteCorr(); if (!b) return;
+  b.hidden = !b.hidden; majCorr();
+  if (!b.hidden) b.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+function ouvrirMenu() { document.getElementById('menuEx').classList.add('ouvert'); }
+function fermerMenu() { document.getElementById('menuEx').classList.remove('ouvert'); }
+document.addEventListener('keydown', function (e) {
+  if (e.ctrlKey || e.metaKey || e.altKey) return;
+  if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === ' ' || e.key === 'PageDown') { e.preventDefault(); changer(1); }
+  else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp' || e.key === 'PageUp') { e.preventDefault(); changer(-1); }
+  else if (e.key === 'c' || e.key === 'C') basculerCorrection();
+  else if (e.key === 'm' || e.key === 'M') ouvrirMenu();
+  else if (e.key === 'Escape') fermerMenu();
+});
+afficher(0);
+</script>
+<script src="../../../stylo.js"></script>
+</body>
+</html>
