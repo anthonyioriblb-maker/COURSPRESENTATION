@@ -44,6 +44,8 @@
     var css = document.createElement('style');
     css.textContent =
         '#styloCanvas{position:absolute;left:0;top:0;pointer-events:none;z-index:50;}' +
+        // place de la barre de défilement toujours réservée : évite qu'elle apparaisse/disparaisse en boucle
+        '.content{scrollbar-gutter:stable;}' +
         '#styloCanvas.on{pointer-events:auto;touch-action:none;cursor:crosshair;}' +
         '#styloCanvas.on.gomme{cursor:cell;}' +
         '#styloBar{position:fixed;left:14px;top:50%;transform:translateY(-50%);z-index:2000;display:flex;flex-direction:column;align-items:center;gap:8px;' +
@@ -133,8 +135,10 @@
         var dpr = window.devicePixelRatio || 1;
         var w = content.clientWidth;
         var slide = content.querySelectorAll('.slide')[diapoCourante];
-        var bas = slide ? slide.offsetTop + slide.offsetHeight + 30 : 0;
-        var h = Math.max(content.clientHeight, bas);
+        var bas = slide ? slide.offsetTop + slide.offsetHeight : 0;   // pas de marge en plus : elle créait une barre de défilement
+        // à 125 %, 150 %… les tailles tombent entre deux pixels : on reste 1 px sous la hauteur visible
+        // pour ne jamais créer à nous seuls une barre de défilement
+        var h = bas > content.clientHeight ? Math.ceil(bas) : content.clientHeight - 1;
         if (canvas.width !== Math.round(w * dpr) || canvas.height !== Math.round(h * dpr)) {
             canvas.width = Math.round(w * dpr);
             canvas.height = Math.round(h * dpr);

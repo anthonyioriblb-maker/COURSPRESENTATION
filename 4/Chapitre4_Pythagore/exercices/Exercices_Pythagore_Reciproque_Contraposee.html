@@ -420,7 +420,7 @@ function afficher(n) {
 function ajusterZone() {
   var z = slides[cur].querySelector('.zone-ecriture'); if (!z) return;
   var c = document.querySelector('.content');
-  z.style.height = Math.max(300, c.clientHeight - (z.getBoundingClientRect().top - c.getBoundingClientRect().top) - 20) + 'px';
+  z.style.height = Math.floor(Math.max(300, c.clientHeight - (z.getBoundingClientRect().top - c.getBoundingClientRect().top) - 40)) + 'px';
 }
 window.addEventListener('resize', ajusterZone);
 function changer(d) { afficher(cur + d); }
