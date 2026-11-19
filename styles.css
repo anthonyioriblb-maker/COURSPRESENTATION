@@ -259,9 +259,16 @@ h3 {
 }
 
 /* Style pour les angles */
-.angle {
-    font-style: normal;
+/* Angles : chapeau fin en deux traits (ne touche pas les lettres) */
+.angle { position: relative; display: inline-block; line-height: 1; }
+.angle::before, .angle::after {
+    content: ''; position: absolute; top: -0.16em; width: 52%; height: 0.065em;
+    font-size: 1em; font-weight: normal; background: currentColor; border-radius: 0.04em;
+    -webkit-print-color-adjust: exact; print-color-adjust: exact;
 }
+.angle::before { left: 0; right: auto; transform-origin: 0 50%; transform: rotate(-11deg); }
+.angle::after { right: 0; left: auto; transform-origin: 100% 50%; transform: rotate(11deg); }
+
 .example {
     background: #e8f8f0;
     border-left: 6px solid #27ae60;
@@ -618,10 +625,6 @@ button:active {
     font-family: monospace; 
 }
 /* Angles */
-.angle {
-    position: relative;
-    display: inline-block;
-}
 /* Racine carrée */
 .sqrt {
     position: relative;
@@ -650,16 +653,6 @@ button:active {
 .exposant {
     vertical-align: super;
     font-size: 0.8em;
-}
-
-.angle::before {
-    content: '^';
-    position: absolute;
-    top: -0.5em;
-    left: 50%;
-    transform: translateX(-50%) scaleX(2.2) scaleY(1.1);
-    font-size: 1.5em;
-    font-weight: 400;
 }
 
 /* ===== DISPOSITION EN 2 COLONNES ===== */

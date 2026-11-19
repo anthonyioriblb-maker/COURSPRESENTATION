@@ -68,19 +68,14 @@
     border-right-color: red;
     border-bottom-color: red;
 }
-.angle {
-    position: relative;
-    display: inline-block;
+.angle { position: relative; display: inline-block; line-height: 1; }
+.angle::before, .angle::after {
+    content: ''; position: absolute; top: -0.16em; width: 52%; height: 0.065em;
+    font-size: 1em; font-weight: normal; background: currentColor; border-radius: 0.04em;
+    -webkit-print-color-adjust: exact; print-color-adjust: exact;
 }
-.angle::before {
-    content: '^';
-    position: absolute;
-    top: -0.5em;
-    left: 50%;
-    transform: translateX(-50%) scaleX(2.5) scaleY(1.2);
-    font-size: 1.5em;
-    font-weight: 300;
-}
+.angle::before { left: 0; right: auto; transform-origin: 0 50%; transform: rotate(-11deg); }
+.angle::after { right: 0; left: auto; transform-origin: 100% 50%; transform: rotate(11deg); }
 .couleur-speciale {
     color: red;
     position: relative;
@@ -126,8 +121,10 @@
 .slide .fig { display:block; margin:10px auto; max-width:100%; height:auto; }
 .slide .exercice { margin:16px 0; padding:12px 18px; background:#f8f9fa; border-left:4px solid var(--bleu); border-radius:5px; break-inside:avoid; }
 .slide .exercice h2 { font-size:1.05em; color:var(--bleu); text-decoration:underline; margin-bottom:6px; }
-.slide .angle { position:relative; display:inline-block; }
-.slide .angle::before { content:'^'; position:absolute; top:-0.5em; left:50%; transform:translateX(-50%) scaleX(2.5) scaleY(1.2); font-size:1.5em; font-weight:300; }
+.slide .angle {position:relative;display:inline-block;line-height:1}
+.slide .angle::before, .slide .angle::after {content:'';position:absolute;top:-.16em;width:52%;height:.065em;font-size:1em;font-weight:normal;background:currentColor;border-radius:.04em;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+.slide .angle::before {left:0;right:auto;transform-origin:0 50%;transform:rotate(-11deg)}
+.slide .angle::after {right:0;left:auto;transform-origin:100% 50%;transform:rotate(11deg)}
 .slide .redaction { margin-top:10px; border-left:4px solid var(--vert); background:#eefaf2; padding:8px 14px; border-radius:5px; }
 .slide .redaction p { margin:6px 0; }
 .slide .mot { font-weight:bold; color:var(--vert); }
@@ -136,8 +133,10 @@
 .slide .fig { display:block; margin:10px auto; max-width:100%; height:auto; }
 .slide .exercice { margin:16px 0; padding:12px 18px; background:#f8f9fa; border-left:4px solid var(--bleu); border-radius:5px; break-inside:avoid; }
 .slide .exercice h2 { font-size:1.05em; color:var(--bleu); text-decoration:underline; margin-bottom:6px; }
-.slide .angle { position:relative; display:inline-block; }
-.slide .angle::before { content:'^'; position:absolute; top:-0.5em; left:50%; transform:translateX(-50%) scaleX(2.5) scaleY(1.2); font-size:1.5em; font-weight:300; }
+.slide .angle {position:relative;display:inline-block;line-height:1}
+.slide .angle::before, .slide .angle::after {content:'';position:absolute;top:-.16em;width:52%;height:.065em;font-size:1em;font-weight:normal;background:currentColor;border-radius:.04em;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+.slide .angle::before {left:0;right:auto;transform-origin:0 50%;transform:rotate(-11deg)}
+.slide .angle::after {right:0;left:auto;transform-origin:100% 50%;transform:rotate(11deg)}
 .slide .redaction { margin-top:10px; border-left:4px solid var(--vert); background:#eefaf2; padding:8px 14px; border-radius:5px; }
 .slide .redaction p { margin:6px 0; }
 .slide .mot { font-weight:bold; color:var(--vert); }
