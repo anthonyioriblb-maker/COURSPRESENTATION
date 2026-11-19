@@ -201,7 +201,25 @@ def main():
                                           '.sqrt', '.angle', '.couleur-speciale']) if os.path.exists(mi_css) else ''
     css_page = limiter_css(styles_page(s_soup)) + '\n' + limiter_css(styles_page(c_soup))
 
+    # Version « coup de pouce » : <sujet>_Aide.html à côté du sujet (mêmes numéros d'exercices).
+    # Bouton « 💡 Coup de pouce » (touche A) : remplace l'énoncé par l'énoncé guidé.
+    f_aide = sujet[:-5] + '_Aide.html'
+    aide_par_num = {}
+    if os.path.exists(f_aide):
+        a_soup, _, _, ex_a = exercices(f_aide)
+        aide_par_num = {n: h for n, _, h in ex_a}
+        css_page += '\n' + limiter_css(styles_page(a_soup))
+
     prof = os.path.relpath(RACINE, os.path.dirname(sortie)).replace(os.sep, '/')
+
+    # Bouton « 📘 Propriétés » : si le dossier du chapitre contient proprietes.html (fragment HTML),
+    # il s'affiche en grand au tableau (touche R). Fichier côté COURSPRESENTATION, invisible des élèves.
+    f_prop = os.path.join(os.path.dirname(os.path.dirname(sortie)), 'proprietes.html')
+    btn_prop = overlay_prop = ''
+    if os.path.exists(f_prop):
+        btn_prop = '\n      <button onclick="basculerProp()" title="Propriétés du chapitre (touche R)">📘 Propriétés</button>'
+        overlay_prop = ('\n<div id="propChap" onclick="if(event.target===this)basculerProp()"><div class="boite">%s'
+                        '<button class="fermer" onclick="basculerProp()">Fermer</button></div></div>' % lire(f_prop))
 
     diapos = []
     menu = []
@@ -209,10 +227,12 @@ def main():
         corr_html = corr_par_num.get(num, '<p>Pas de correction pour cet exercice.</p>')
         if preambule:
             contenu = '<div class="preambule">%s</div>' % preambule + contenu
+        aide_html = ('<div class="aide-box" hidden>%s</div>\n' % aide_par_num[num]) if num in aide_par_num else ''
         diapos.append(
-            '<div class="slide" data-titre="%s">\n<h2>%s</h2>\n<div class="enonce">%s</div>\n<div class="zone-ecriture"></div>\n'
+            '<div class="slide" data-titre="%s">\n<h2>%s</h2>\n<div class="enonce">%s</div>\n%s'
+            '<div class="zone-ecriture"></div>\n'
             '<div class="correction-box" hidden>\n<div class="correction-titre">Correction</div>\n%s\n</div>\n</div>'
-            % (html.escape(t, quote=True), html.escape(t), contenu, corr_html))
+            % (html.escape(t, quote=True), html.escape(t), contenu, aide_html, corr_html))
         menu.append('<button onclick="allerA(%d)">%s</button>' % (i + 1, html.escape(t)))
 
     page = '''<!DOCTYPE html>
@@ -268,6 +288,19 @@ button:hover { transform: none !important; }
 #btnCorr.ouvert { background: #43a047; }
 #menuEx { position: fixed; inset: 0; background: rgba(0,0,0,.45); display: none; align-items: center; justify-content: center; z-index: 3000; }
 #menuEx.ouvert { display: flex; }
+.aide-box { background: #fff8e1; border-left: 6px solid #f9a825; padding: 10px 16px; border-radius: 8px; font-size: .95em; color: #111; }
+.aide-box[hidden] { display: none; }
+.aide-box .fig svg, .aide-box .duo > .fig svg { width: 300px; }
+.aide-box .etape .num { display: inline-block !important; width: auto !important; }
+.aide-box .mini .fig svg { width: 200px; }
+.aide-box .exercice { border: none !important; padding: 0 !important; margin: 0 !important; }
+#btnAide.ouvert, #btnCorr.ouvert { box-shadow: inset 0 0 0 2px #fff; }
+#propChap { position: fixed; inset: 0; background: rgba(0,0,0,.45); display: none; align-items: center; justify-content: center; z-index: 3000; }
+#propChap.ouvert { display: flex; }
+#propChap .boite { background: #fff; border-radius: 14px; padding: 22px 30px; max-width: 92vw; max-height: 88vh; overflow: auto; font-size: 30px; line-height: 1.45; color: #111; border-left: 8px solid #2471a3; }
+#propChap .boite h2 { margin: 0 0 12px; color: #2471a3; font-size: 1.1em; }
+#propChap .boite p { margin: 8px 0; }
+#propChap .fermer { display: block; margin: 14px auto 0; font-size: 18px; }
 #menuEx .boite { background: #fff; border-radius: 14px; padding: 20px 26px; display: flex; flex-direction: column; gap: 10px; min-width: 320px; }
 </style>
 </head>
@@ -284,7 +317,7 @@ button:hover { transform: none !important; }
     <div class="controls-left">
       <button class="btn-menu" onclick="ouvrirMenu()">☰ Exercices</button>
       <button id="btnCorr" onclick="basculerCorrection()">✅ Correction</button>
-      <button onclick="agrandirZone()" title="Ajouter de la place pour écrire (touche +)">➕ Place</button>
+      <button onclick="agrandirZone()" title="Ajouter de la place pour écrire (touche +)">➕ Place</button>%(btn_prop)s%(btn_aide)s
     </div>
     <div class="progress"><span id="numEx"></span></div>
     <div class="controls-right">
@@ -293,14 +326,14 @@ button:hover { transform: none !important; }
     </div>
   </div>
 </div>
-<div id="menuEx" onclick="if(event.target===this)fermerMenu()"><div class="boite">%(menu)s<button onclick="fermerMenu()">Fermer</button></div></div>
+<div id="menuEx" onclick="if(event.target===this)fermerMenu()"><div class="boite">%(menu)s<button onclick="fermerMenu()">Fermer</button></div></div>%(overlay_prop)s
 <script>
 var slides = document.querySelectorAll('.slide'), cur = 0;
 function afficher(n) {
   cur = Math.max(0, Math.min(slides.length - 1, n));
   slides.forEach(function (s, i) { s.classList.toggle('active', i === cur); });
   document.querySelector('.content').scrollTop = 0;
-  majCorr(); ajusterZone();
+  majCorr(); majAide(); ajusterZone();
   document.getElementById('numEx').textContent = cur ? 'Exercice ' + cur + ' / ' + (slides.length - 1) : '';
   document.getElementById('prevBtn').disabled = cur === 0;
 }
@@ -322,6 +355,20 @@ function agrandirZone() {
 window.addEventListener('resize', ajusterZone);
 function changer(d) { afficher(cur + d); }
 function allerA(n) { fermerMenu(); afficher(n); }
+function boiteAide() { return slides[cur].querySelector('.aide-box'); }
+function majAide() {
+  var btn = document.getElementById('btnAide'); if (!btn) return;
+  var b = boiteAide();
+  btn.disabled = !b;
+  btn.classList.toggle('ouvert', !!b && !b.hidden);
+  btn.textContent = (b && !b.hidden) ? '📄 Énoncé normal' : '💡 Coup de pouce';
+}
+function basculerAide() {
+  var b = boiteAide(); if (!b) return;
+  b.hidden = !b.hidden;
+  slides[cur].querySelector('.enonce').style.display = b.hidden ? '' : 'none';
+  majAide(); ajusterZone();
+}
 function boiteCorr() { return slides[cur].querySelector('.correction-box'); }
 function majCorr() {
   var b = boiteCorr(), btn = document.getElementById('btnCorr');
@@ -334,6 +381,7 @@ function basculerCorrection() {
   b.hidden = !b.hidden; majCorr();
   if (!b.hidden) b.scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
+function basculerProp() { document.getElementById('propChap').classList.toggle('ouvert'); }
 function ouvrirMenu() { document.getElementById('menuEx').classList.add('ouvert'); }
 function fermerMenu() { document.getElementById('menuEx').classList.remove('ouvert'); }
 document.querySelectorAll('.enonce').forEach(function (el) {
@@ -347,7 +395,9 @@ document.addEventListener('keydown', function (e) {
   else if (e.key === 'c' || e.key === 'C') basculerCorrection();
   else if (e.key === 'm' || e.key === 'M') ouvrirMenu();
   else if (e.key === '+' || e.key === '=') agrandirZone();
-  else if (e.key === 'Escape') fermerMenu();
+  else if ((e.key === 'a' || e.key === 'A') && document.getElementById('btnAide')) basculerAide();
+  else if ((e.key === 'r' || e.key === 'R') && document.getElementById('propChap')) basculerProp();
+  else if (e.key === 'Escape') { fermerMenu(); var pc = document.getElementById('propChap'); if (pc) pc.classList.remove('ouvert'); }
 });
 afficher(0);
 </script>
@@ -355,7 +405,8 @@ afficher(0);
 </body>
 </html>
 ''' % {'titre': html.escape(titre), 'prof': prof, 'css_maths': css_maths, 'css_page': css_page,
-       'menu': ''.join(menu), 'diapos': '\n'.join(diapos)}
+       'menu': ''.join(menu), 'diapos': '\n'.join(diapos), 'btn_prop': btn_prop, 'overlay_prop': overlay_prop,
+       'btn_aide': ('\n      <button id="btnAide" onclick="basculerAide()" title="Énoncé guidé (touche A)">💡 Coup de pouce</button>' if aide_par_num else '')}
     os.makedirs(os.path.dirname(sortie), exist_ok=True)
     with open(sortie, 'w', encoding='utf-8') as f:
         f.write(page)

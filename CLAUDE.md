@@ -560,3 +560,8 @@ Classes de boîtes définies dans `COURSPRESENTATION/styles.css` (`font-size: 2.
 - Oublier d'archiver avant modification.
 
 - Regénération automatique : un hook `post-commit` dans `MathsIORI/.git/hooks/` relance `outils/generer_tous_exercices.py` à chaque commit de MathsIORI touchant des exercices, une page classe-*.html ou styles.css (log : /tmp/generer_exercices.log).
+
+- Bouton « 📘 Propriétés » (touche R) dans les présentations d'exercices : ajouté automatiquement par le générateur si le dossier du chapitre contient `proprietes.html` (fragment HTML : <h2> + <p>). Exemple : `5/Chapitre4_Angles_Parallelisme/proprietes.html`. Fichier côté COURSPRESENTATION uniquement (pas visible des élèves).
+- Règle (nov. 2026) : quand une feuille d'exercices s'appuie sur des propriétés/définitions du cours, PROPOSER à Anthony de créer le proprietes.html du chapitre (sans attendre qu'il le demande).
+- Bouton « 💡 Coup de pouce » (touche A) : ajouté automatiquement si un fichier <sujet>_Aide.html existe à côté du sujet dans MathsIORI (mêmes numéros d'exercices) ; il remplace l'énoncé par l'énoncé guidé (trames, figures colorées).
+- Différenciation (règle permanente) : à chaque nouvelle feuille d'exercices, proposer la version « coup de pouce » (_Aide.html) et le proprietes.html du chapitre (voir checklist du CLAUDE.md de MathsIORI).

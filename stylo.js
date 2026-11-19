@@ -8,7 +8,10 @@
    - Barre d'outils placée dans la barre du bas, à la place de l'indicateur
      « Étape / Slide » (masqué). À défaut, bouton ✏️ flottant à gauche.
    - ✏️ active le stylo (✖ pour quitter) ; choisir une couleur l'active aussi.
-   - Couleurs, 3 épaisseurs, gomme, « tout effacer » (diapo courante).
+   - Deux outils d'écriture : stylo (6 couleurs) et surligneur (4 couleurs fluo,
+     transparent, passe sous les traits de stylo). 3 épaisseurs par outil.
+   - Gomme à 3 tailles (choisies avec les boutons d'épaisseur quand la gomme
+     est active), « tout effacer » (diapo courante).
    - Souris, stylet et doigt (TBI / écran tactile).
    - Les annotations sont gardées par diapo tant que la page est ouverte.
    - Chaque trait est accroché à l'élément sur lequel il commence (étape,
@@ -17,14 +20,21 @@
      masqué quand on revient avant cette étape.
    - Stylo actif : il capte les clics sur la diapo (boutons des animations
      inclus). Les boutons du bas et le clavier (flèches, espace) restent actifs.
-   - Raccourcis : P = stylo, G = gomme, Échap = quitter le stylo.
+   - Raccourcis : P = stylo, S = surligneur, G = gomme, Échap = quitter.
    =================================================================== */
 (function () {
     'use strict';
 
-    var COULEURS = ['#222222', '#e74c3c', '#2980b9', '#27ae60', '#f39c12'];
-    var EPAISSEURS = [3, 6, 11];
-    var GOMME = 34;
+    var PALETTES = {
+        stylo:      ['#222222', '#e74c3c', '#2980b9', '#27ae60', '#f39c12', '#8e44ad'],
+        surligneur: ['#ffe600', '#7dff4a', '#ff6ec7', '#4fd8ff']
+    };
+    var TAILLES = {
+        stylo:      [3, 6, 11],
+        surligneur: [14, 24, 36],
+        gomme:      [34, 70, 130]
+    };
+    var OPACITE_SURLIGNEUR = 0.38;
 
     var content = document.querySelector('.content');
     if (!content) return;
@@ -35,7 +45,14 @@
     content.appendChild(canvas);
     var ctx = canvas.getContext('2d');
 
-    var actif = false, outil = 'stylo', couleur = COULEURS[1], epaisseur = EPAISSEURS[0];
+    var actif = false, outil = 'stylo';           // 'stylo' | 'surligneur' | 'gomme'
+    var ecriture = 'stylo';                         // dernier outil d'écriture utilisé
+    var choix = {                                   // couleur et taille retenues pour chaque outil
+        stylo:      { couleur: PALETTES.stylo[1], taille: 0 },
+        surligneur: { couleur: PALETTES.surligneur[0], taille: 1 },
+        gomme:      { taille: 1 }
+    };
+    function tailleGomme() { return TAILLES.gomme[choix.gomme.taille]; }
     var dessins = {};          // index de diapo -> liste de traits
     var trait = null;          // trait en cours
     var diapoCourante = -1;
@@ -56,6 +73,9 @@
         '#styloBar button.sel{outline:3px solid #fff;outline-offset:-3px;}' +
         '#styloBar .pastille{width:22px;height:22px;border-radius:50%;border:2px solid #fff;}' +
         '#styloBar .trait{background:#fff;border-radius:4px;width:24px;}' +
+        '#styloBar .couleurs{display:contents;}' +
+        '#styloBar .pastille.fluo{border-radius:4px;width:24px;height:14px;}' +
+        '#styloBar .gomme-taille{display:block;border:2px dashed #fff;border-radius:50%;}' +
         '#styloBar .outils{display:none;flex-direction:column;align-items:center;gap:8px;}' +
         '#styloBar.ouvert .outils{display:flex;}' +
         '#styloBar hr{width:30px;border:none;border-top:1px solid rgba(255,255,255,0.3);margin:0;}' +
@@ -65,6 +85,7 @@
         '#styloBar.integre button{width:34px;height:34px;font-size:17px;border-radius:8px;}' +
         '#styloBar.integre .pastille{width:18px;height:18px;}' +
         '#styloBar.integre .trait{width:20px;}' +
+        '#styloBar.integre .pastille.fluo{width:20px;height:12px;}' +
         '#styloBar.integre hr{width:0;height:24px;border-top:none;border-left:1px solid rgba(255,255,255,0.3);margin:0 2px;}' +
         '@media print{#styloBar,#styloCanvas{display:none !important;}}';
     document.head.appendChild(css);
@@ -72,15 +93,14 @@
     // ---------- barre d'outils ----------
     var bar = document.createElement('div');
     bar.id = 'styloBar';
-    var html = '<button id="styloToggle" title="Stylo (P)">✏️</button><div class="outils">';
-    COULEURS.forEach(function (c, i) {
-        html += '<button class="couleur" data-i="' + i + '" title="Couleur"><span class="pastille" style="background:' + c + '"></span></button>';
+    var html = '<button id="styloToggle" title="Stylo (P)">✏️</button><div class="outils">' +
+        '<button class="mode" data-o="stylo" title="Stylo (P)">🖊️</button>' +
+        '<button class="mode" data-o="surligneur" title="Surligneur (S)">🖍️</button><hr>' +
+        '<span class="couleurs"></span><hr>';
+    [0, 1, 2].forEach(function (i) {
+        html += '<button class="epaisseur" data-i="' + i + '" title="Épaisseur"><span class="trait" style="height:' + [2, 5, 9][i] + 'px"></span></button>';
     });
-    html += '<hr>';
-    EPAISSEURS.forEach(function (e, i) {
-        html += '<button class="epaisseur" data-i="' + i + '" title="Épaisseur"><span class="trait" style="height:' + Math.max(2, e - 1) + 'px"></span></button>';
-    });
-    html += '<hr><button id="styloGomme" title="Gomme (G)">🧽</button>' +
+    html += '<hr><button id="styloGomme" title="Gomme (G) — taille avec les boutons d\'épaisseur">🧽</button>' +
             '<button id="styloEffacer" title="Tout effacer sur cette diapo">🗑️</button></div>';
     bar.innerHTML = html;
     var progress = document.querySelector('.controls .progress');
@@ -95,7 +115,24 @@
     var btnToggle = document.getElementById('styloToggle');
     var btnGomme = document.getElementById('styloGomme');
 
+    var zoneCouleurs = bar.querySelector('.couleurs');
+    function construireCouleurs() {
+        var h = '';
+        PALETTES[ecriture].forEach(function (c, i) {
+            h += '<button class="couleur" data-i="' + i + '" title="Couleur"><span class="pastille' +
+                 (ecriture === 'surligneur' ? ' fluo' : '') + '" style="background:' + c + '"></span></button>';
+        });
+        zoneCouleurs.innerHTML = h;
+        zoneCouleurs.dataset.pour = ecriture;
+        zoneCouleurs.querySelectorAll('.couleur').forEach(function (b) {
+            b.addEventListener('click', function () {
+                choix[ecriture].couleur = PALETTES[ecriture][b.dataset.i];
+                outil = ecriture; setActif(true);
+            });
+        });
+    }
     function majBarre() {
+        if (zoneCouleurs.dataset.pour !== ecriture) construireCouleurs();
         bar.classList.toggle('ouvert', actif);
         btnToggle.classList.toggle('sel', actif);
         btnToggle.textContent = actif ? '✖' : '✏️';
@@ -103,23 +140,35 @@
         canvas.classList.toggle('on', actif);
         canvas.classList.toggle('gomme', outil === 'gomme');
         btnGomme.classList.toggle('sel', outil === 'gomme');
-        bar.querySelectorAll('.couleur').forEach(function (b) {
-            b.classList.toggle('sel', outil === 'stylo' && COULEURS[b.dataset.i] === couleur);
+        bar.querySelectorAll('.mode').forEach(function (b) {
+            b.classList.toggle('sel', outil === b.dataset.o);
         });
+        bar.querySelectorAll('.couleur').forEach(function (b) {
+            b.classList.toggle('sel', outil !== 'gomme' && PALETTES[ecriture][b.dataset.i] === choix[ecriture].couleur);
+        });
+        var cle = outil === 'gomme' ? 'gomme' : ecriture;
         bar.querySelectorAll('.epaisseur').forEach(function (b) {
-            b.classList.toggle('sel', EPAISSEURS[b.dataset.i] === epaisseur);
+            b.classList.toggle('sel', +b.dataset.i === choix[cle].taille);
+            b.title = outil === 'gomme' ? 'Taille de la gomme' : 'Épaisseur';
+            var sp = b.firstChild;
+            if (outil === 'gomme') { var d = [10, 16, 24][b.dataset.i]; sp.className = 'gomme-taille'; sp.style.width = d + 'px'; sp.style.height = d + 'px'; }
+            else { sp.className = 'trait'; sp.style.width = ''; sp.style.height = [2, 5, 9][b.dataset.i] + 'px'; }
         });
     }
     function setActif(v) { actif = v; if (v) dimensionner(); majBarre(); }
+    function choisirEcriture(o) { ecriture = o; outil = o; setActif(true); }
 
     btnToggle.addEventListener('click', function () { setActif(!actif); });
-    bar.querySelectorAll('.couleur').forEach(function (b) {
-        b.addEventListener('click', function () { couleur = COULEURS[b.dataset.i]; outil = 'stylo'; setActif(true); });
+    bar.querySelectorAll('.mode').forEach(function (b) {
+        b.addEventListener('click', function () { choisirEcriture(b.dataset.o); });
     });
     bar.querySelectorAll('.epaisseur').forEach(function (b) {
-        b.addEventListener('click', function () { epaisseur = EPAISSEURS[b.dataset.i]; if (outil === 'gomme') outil = 'stylo'; setActif(true); });
+        b.addEventListener('click', function () {
+            choix[outil === 'gomme' ? 'gomme' : ecriture].taille = +b.dataset.i;
+            setActif(true);
+        });
     });
-    btnGomme.addEventListener('click', function () { outil = (outil === 'gomme') ? 'stylo' : 'gomme'; setActif(true); });
+    btnGomme.addEventListener('click', function () { outil = (outil === 'gomme') ? ecriture : 'gomme'; setActif(true); });
     document.getElementById('styloEffacer').addEventListener('click', function () {
         dessins[diapoCourante] = [];
         redessiner();
@@ -201,6 +250,7 @@
         var p = t.pts;
         if (!p.length) return;
         ctx.save();
+        if (t.surligneur) ctx.globalAlpha = OPACITE_SURLIGNEUR;
         ctx.strokeStyle = t.couleur;
         ctx.fillStyle = t.couleur;
         ctx.lineWidth = t.epaisseur;
@@ -227,14 +277,17 @@
         ctx.setTransform(1, 0, 0, 1, 0, 0);
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-        (dessins[diapoCourante] || []).forEach(tracer);
-        if (trait) tracer(trait);
+        var liste = dessins[diapoCourante] || [];
+        liste.forEach(function (t) { if (t.surligneur) tracer(t); });     // surligneur sous l'encre
+        if (trait && trait.surligneur) tracer(trait);
+        liste.forEach(function (t) { if (!t.surligneur) tracer(t); });
+        if (trait && !trait.surligneur) tracer(trait);
         if (gommeCurseur) {
             ctx.save();
             ctx.strokeStyle = 'rgba(0,0,0,0.45)';
             ctx.setLineDash([4, 3]);
             ctx.beginPath();
-            ctx.arc(gommeCurseur[0], gommeCurseur[1], GOMME / 2, 0, 2 * Math.PI);
+            ctx.arc(gommeCurseur[0], gommeCurseur[1], tailleGomme() / 2, 0, 2 * Math.PI);
             ctx.stroke();
             ctx.restore();
         }
@@ -263,7 +316,7 @@
         var res = [];
         liste.forEach(function (t) {
             if (!visible(t)) { res.push(t); return; }
-            var d = decalage(t), r = GOMME / 2 + t.epaisseur / 2;
+            var d = decalage(t), r = tailleGomme() / 2 + t.epaisseur / 2;
             var morceau = [], touche = false;
             t.pts.forEach(function (p) {
                 if (Math.hypot(p[0] + d[0] - c[0], p[1] + d[1] - c[1]) <= r) {
@@ -278,12 +331,12 @@
         dessins[diapoCourante] = res;
     }
     function copie(t, pts) {
-        return { couleur: t.couleur, epaisseur: t.epaisseur, ancre: t.ancre, ax: t.ax, ay: t.ay, pts: pts };
+        return { couleur: t.couleur, epaisseur: t.epaisseur, surligneur: t.surligneur, ancre: t.ancre, ax: t.ax, ay: t.ay, pts: pts };
     }
     function gommerVers(c) {              // interpole entre deux positions de la gomme
         if (gommeDernier) {
             var d = Math.hypot(c[0] - gommeDernier[0], c[1] - gommeDernier[1]);
-            var n = Math.ceil(d / (GOMME / 3));
+            var n = Math.ceil(d / (tailleGomme() / 3));
             for (var k = 1; k < n; k++) gommer([gommeDernier[0] + (c[0] - gommeDernier[0]) * k / n, gommeDernier[1] + (c[1] - gommeDernier[1]) * k / n]);
         }
         gommer(c);
@@ -301,7 +354,9 @@
             gommerVers(p);
         } else {
             var an = ancreSous(e.clientX, e.clientY), ap = an ? pos(an) : [0, 0];
-            trait = { couleur: couleur, epaisseur: epaisseur, ancre: an, ax: ap[0], ay: ap[1], pts: [p] };
+            var o = ecriture;
+            trait = { couleur: choix[o].couleur, epaisseur: TAILLES[o][choix[o].taille], surligneur: o === 'surligneur',
+                      ancre: an, ax: ap[0], ay: ap[1], pts: [p] };
         }
         redessiner();
     });
@@ -332,7 +387,8 @@
         if (e.ctrlKey || e.metaKey || e.altKey) return;
         var t = e.target && e.target.tagName;
         if (t === 'INPUT' || t === 'TEXTAREA') return;
-        if (e.key === 'p' || e.key === 'P') { if (outil === 'gomme') outil = 'stylo'; setActif(!(actif && outil === 'stylo')); }
+        if (e.key === 'p' || e.key === 'P') { if (actif && outil === 'stylo') setActif(false); else choisirEcriture('stylo'); }
+        else if (e.key === 's' || e.key === 'S') { if (actif && outil === 'surligneur') setActif(false); else choisirEcriture('surligneur'); }
         else if (e.key === 'g' || e.key === 'G') { outil = 'gomme'; setActif(true); }
         else if (e.key === 'Escape' && actif) { setActif(false); }
     });
