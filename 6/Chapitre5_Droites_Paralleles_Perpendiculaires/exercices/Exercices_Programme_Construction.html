@@ -181,6 +181,7 @@ button:hover { transform: none !important; }
 .correction-titre { font-weight: bold; color: #2e7d32; margin-bottom: 6px; }
 .correction-box { overflow-x: auto; }
 .correction-box table { font-size: .6em; }
+.correction-box svg.croquis { width: 320px; height: auto; }
 .correction-box svg, .correction-box img { max-width: 100%; height: auto; }
 .enonce p, .correction-box p { margin: 6px 0; }
 .liste-ex { display: flex; flex-wrap: wrap; gap: 14px; justify-content: center; margin-top: 30px; }
@@ -270,6 +271,7 @@ Pour chaque étape de la construction, écris la consigne qui a été donnée (o
     <div class="controls-left">
       <button class="btn-menu" onclick="ouvrirMenu()">☰ Exercices</button>
       <button id="btnCorr" onclick="basculerCorrection()">✅ Correction</button>
+      <button onclick="agrandirZone()" title="Ajouter de la place pour écrire (touche +)">➕ Place</button>
     </div>
     <div class="progress"><span id="numEx"></span></div>
     <div class="controls-right">
@@ -293,7 +295,16 @@ function afficher(n) {
 function ajusterZone() {
   var z = slides[cur].querySelector('.zone-ecriture'); if (!z) return;
   var c = document.querySelector('.content');
-  z.style.height = Math.floor(Math.max(300, c.clientHeight - (z.getBoundingClientRect().top - c.getBoundingClientRect().top) - 40)) + 'px';
+  var extra = parseInt(z.dataset.extra || '0', 10);
+  z.style.height = Math.floor(Math.max(300, c.clientHeight - (z.getBoundingClientRect().top - c.getBoundingClientRect().top + c.scrollTop) - 40) + extra) + 'px';
+}
+// Bouton « ➕ Place » : allonge la zone blanche et descend dessus
+function agrandirZone() {
+  var z = slides[cur].querySelector('.zone-ecriture'); if (!z) return;
+  var c = document.querySelector('.content'), pas = Math.round(c.clientHeight * 0.6);
+  z.dataset.extra = parseInt(z.dataset.extra || '0', 10) + pas;
+  ajusterZone();
+  c.scrollBy({ top: pas, behavior: 'smooth' });
 }
 window.addEventListener('resize', ajusterZone);
 function changer(d) { afficher(cur + d); }
@@ -322,6 +333,7 @@ document.addEventListener('keydown', function (e) {
   else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp' || e.key === 'PageUp') { e.preventDefault(); changer(-1); }
   else if (e.key === 'c' || e.key === 'C') basculerCorrection();
   else if (e.key === 'm' || e.key === 'M') ouvrirMenu();
+  else if (e.key === '+' || e.key === '=') agrandirZone();
   else if (e.key === 'Escape') fermerMenu();
 });
 afficher(0);

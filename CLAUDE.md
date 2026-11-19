@@ -558,3 +558,5 @@ Classes de boîtes définies dans `COURSPRESENTATION/styles.css` (`font-size: 2.
 - Ajouter des slides de plan / sommaire / conclusion absentes du cours.
 - Modifier la numérotation des sections par rapport au cours.
 - Oublier d'archiver avant modification.
+
+- Regénération automatique : un hook `post-commit` dans `MathsIORI/.git/hooks/` relance `outils/generer_tous_exercices.py` à chaque commit de MathsIORI touchant des exercices, une page classe-*.html ou styles.css (log : /tmp/generer_exercices.log).
