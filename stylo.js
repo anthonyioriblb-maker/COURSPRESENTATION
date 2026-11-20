@@ -20,7 +20,10 @@
      masqué quand on revient avant cette étape.
    - Stylo actif : il capte les clics sur la diapo (boutons des animations
      inclus). Les boutons du bas et le clavier (flèches, espace) restent actifs.
-   - Raccourcis : P = stylo, S = surligneur, G = gomme, Échap = quitter.
+   - 📝 Brouillon (touche B) : feuille plein écran par-dessus la diapo, fond au
+     choix (blanc, petits carreaux, Seyès, repère), plusieurs pages ; on y écrit
+     avec les mêmes outils. Échap ou 📝 pour revenir à la diapo (brouillon gardé).
+   - Raccourcis : P = stylo, S = surligneur, G = gomme, B = brouillon, Échap = quitter.
    =================================================================== */
 (function () {
     'use strict';
@@ -87,7 +90,26 @@
         '#styloBar.integre .trait{width:20px;}' +
         '#styloBar.integre .pastille.fluo{width:20px;height:12px;}' +
         '#styloBar.integre hr{width:0;height:24px;border-top:none;border-left:1px solid rgba(255,255,255,0.3);margin:0 2px;}' +
-        '@media print{#styloBar,#styloCanvas{display:none !important;}}';
+        '#brouillon{position:absolute;left:0;top:0;z-index:45;display:none;background:#fff;}' +
+        '#brouillon.ouvert{display:block;}' +
+        '#brouillon.carreaux{background-color:#fff;background-image:linear-gradient(#cfe0f5 1px,transparent 1px),linear-gradient(90deg,#cfe0f5 1px,transparent 1px);background-size:32px 32px;}' +
+        '#brouillon.seyes{background-color:#fff;background-image:linear-gradient(90deg,transparent 119px,#e57373 119px,#e57373 121px,transparent 121px),' +
+            'linear-gradient(#9fb8e0 1px,transparent 1px),linear-gradient(90deg,#c9d6ee 1px,transparent 1px),linear-gradient(#dfe7f5 1px,transparent 1px);' +
+            'background-size:100% 100%,48px 48px,48px 48px,12px 12px;background-position:0 0,1px 1px,1px 1px,1px 1px;}' +
+        '#brouillon svg{position:absolute;left:0;top:0;}' +
+        '#brouillonBar{position:absolute;left:0;right:0;bottom:0;z-index:60;display:none;gap:4px;align-items:center;justify-content:center;background:rgba(44,62,80,.95);padding:5px 8px;}' +
+        '#brouillonBar button{all:unset;cursor:pointer;color:#fff;font-size:15px;padding:3px 8px;border-radius:6px;background:rgba(255,255,255,.1);}' +
+        '#brouillonBar button:hover{background:rgba(255,255,255,.25);}' +
+        '#brouillonBar button.sel{outline:2px solid #fff;outline-offset:-2px;}' +
+        '#brouillonBar span{color:#fff;font:bold 14px sans-serif;padding:0 4px;}' +
+        
+        '#brRep{display:none;align-items:center;gap:2px;margin-left:18px;padding-left:14px;border-left:1px solid rgba(255,255,255,.35);}' +
+        '#brRep.vu{display:flex;}' +
+        '#brRep input{width:42px;font:14px sans-serif;text-align:center;border:none;border-radius:5px;padding:3px 2px;}' +
+        '#brRep .sep{margin-left:10px;}' +
+        '#brouillonBar.ouvert{display:flex;}' +
+        '#styloBrouillon.sel{outline:3px solid #fff;outline-offset:-3px;}' +
+        '@media print{#styloBar,#styloCanvas,#brouillon{display:none !important;}}';
     document.head.appendChild(css);
 
     // ---------- barre d'outils ----------
@@ -101,7 +123,8 @@
         html += '<button class="epaisseur" data-i="' + i + '" title="Épaisseur"><span class="trait" style="height:' + [2, 5, 9][i] + 'px"></span></button>';
     });
     html += '<hr><button id="styloGomme" title="Gomme (G) — taille avec les boutons d\'épaisseur">🧽</button>' +
-            '<button id="styloEffacer" title="Tout effacer sur cette diapo">🗑️</button></div>';
+            '<button id="styloEffacer" title="Tout effacer sur cette diapo">🗑️</button></div>' +
+            '<button id="styloBrouillon" title="Brouillon (B)">📝</button>';
     bar.innerHTML = html;
     var progress = document.querySelector('.controls .progress');
     if (progress) {
@@ -176,6 +199,7 @@
 
     // ---------- diapo courante & taille du canevas ----------
     function indexDiapo() {
+        if (brouillon.ouvert) return 'b' + brouillon.page;
         var s = content.querySelectorAll('.slide');
         for (var i = 0; i < s.length; i++) if (s[i].classList.contains('active')) return i;
         return 0;
@@ -183,7 +207,7 @@
     function dimensionner() {
         var dpr = window.devicePixelRatio || 1;
         var w = content.clientWidth;
-        var slide = content.querySelectorAll('.slide')[diapoCourante];
+        var slide = brouillon.ouvert ? null : content.querySelectorAll('.slide')[diapoCourante];
         var bas = slide ? slide.offsetTop + slide.offsetHeight : 0;   // pas de marge en plus : elle créait une barre de défilement
         // à 125 %, 150 %… les tailles tombent entre deux pixels : on reste 1 px sous la hauteur visible
         // pour ne jamais créer à nous seuls une barre de défilement
@@ -212,6 +236,7 @@
         return el;
     }
     function ancreSous(x, y) {            // x, y : coordonnées écran
+        if (brouillon.ouvert) return null;
         canvas.style.pointerEvents = 'none';
         var el = document.elementFromPoint(x, y);
         canvas.style.pointerEvents = '';
@@ -382,6 +407,122 @@
     canvas.addEventListener('pointerup', finTrait);
     canvas.addEventListener('pointercancel', finTrait);
 
+    // ---------- brouillon ----------
+    var brouillon = { ouvert: false, page: 0, pages: 1, fond: 'blanc', scroll: 0, overflow: '',
+                      rep: { xmin: -5, xmax: 5, px: 1, ymin: -4, ymax: 4, py: 1 } };
+    var feuille = document.createElement('div');
+    feuille.id = 'brouillon';
+    content.appendChild(feuille);
+    var bb = document.createElement('div');
+    bb.id = 'brouillonBar';
+    bb.innerHTML =
+        '<button data-f="blanc" title="Feuille blanche">⬜</button>' +
+        '<button data-f="carreaux" title="Petits carreaux">▦</button>' +
+        '<button data-f="seyes" title="Lignes Seyès">☰</button>' +
+        '<button data-f="repere" title="Repère">✛</button>' +
+        '<button id="brPrec" title="Page précédente">◀</button><span id="brNum">1/1</span>' +
+        '<button id="brSuiv" title="Page suivante">▶</button>' +
+        '<button id="brAjout" title="Nouvelle page">+ page</button>' +
+        '<button id="brFermer" title="Revenir à la diapo (Échap)">✖</button>' +
+        '<div id="brRep">' +
+        '<span>x : de</span><input data-k="xmin"><span>à</span><input data-k="xmax"><span>pas</span><input data-k="px">' +
+        '<span class="sep">y : de</span><input data-k="ymin"><span>à</span><input data-k="ymax"><span>pas</span><input data-k="py">' +
+        '</div>';
+    content.appendChild(bb);                 // hors de la feuille : doit rester cliquable au-dessus du canevas
+    var btnBrouillon = document.getElementById('styloBrouillon');
+
+    function nb(v) { var t = Math.round(v * 1000) / 1000; return String(t).replace('.', ',').replace('-', '−'); }
+    function dessinerRepere() {
+        var old = feuille.querySelector('svg'); if (old) old.remove();
+        if (brouillon.fond !== 'repere') return;
+        var R = brouillon.rep, w = feuille.clientWidth, h = feuille.clientHeight - bb.offsetHeight, m = 34;   // bandeau des réglages en bas
+        if (!(R.xmax > R.xmin) || !(R.ymax > R.ymin) || !(R.px > 0) || !(R.py > 0)) return;
+        var sx = (w - 2 * m) / (R.xmax - R.xmin), sy = (h - 2 * m) / (R.ymax - R.ymin);
+        var X = function (x) { return m + (x - R.xmin) * sx; }, Y = function (y) { return h - m - (y - R.ymin) * sy; };
+        var ax = Y(Math.min(Math.max(0, R.ymin), R.ymax)), ay = X(Math.min(Math.max(0, R.xmin), R.xmax));   // position des axes
+        var g = '', t = '', k, v;
+        // pas d'affichage des nombres si les graduations sont trop serrées
+        var ex = Math.max(1, Math.ceil(28 / (R.px * sx))), ey = Math.max(1, Math.ceil(22 / (R.py * sy)));
+        var i0 = Math.ceil(R.xmin / R.px - 1e-9), i1 = Math.floor(R.xmax / R.px + 1e-9);
+        for (k = i0; k <= i1 && k - i0 < 400; k++) {
+            v = k * R.px; var x = X(v);
+            g += '<line x1="' + x + '" y1="' + m + '" x2="' + x + '" y2="' + (h - m) + '" stroke="#dde6f3"/>';
+            t += '<line x1="' + x + '" y1="' + (ax - 4) + '" x2="' + x + '" y2="' + (ax + 4) + '" stroke="#333"/>';
+            if (k && k % ex === 0) t += '<text x="' + x + '" y="' + (ax + 19) + '" font-size="14" text-anchor="middle" font-family="Arial">' + nb(v) + '</text>';
+        }
+        var j0 = Math.ceil(R.ymin / R.py - 1e-9), j1 = Math.floor(R.ymax / R.py + 1e-9);
+        for (k = j0; k <= j1 && k - j0 < 400; k++) {
+            v = k * R.py; var y = Y(v);
+            g += '<line x1="' + m + '" y1="' + y + '" x2="' + (w - m) + '" y2="' + y + '" stroke="#dde6f3"/>';
+            t += '<line x1="' + (ay - 4) + '" y1="' + y + '" x2="' + (ay + 4) + '" y2="' + y + '" stroke="#333"/>';
+            if (k && k % ey === 0) t += '<text x="' + (ay - 8) + '" y="' + (y + 5) + '" font-size="14" text-anchor="end" font-family="Arial">' + nb(v) + '</text>';
+        }
+        var o = (R.xmin <= 0 && R.xmax >= 0 && R.ymin <= 0 && R.ymax >= 0) ?
+            '<text x="' + (ay - 8) + '" y="' + (ax + 19) + '" font-size="15" text-anchor="end" font-family="Arial">O</text>' : '';
+        feuille.insertAdjacentHTML('afterbegin',
+            '<svg width="' + w + '" height="' + h + '">' + g + t + o +
+            '<line x1="' + (m - 14) + '" y1="' + ax + '" x2="' + (w - m + 18) + '" y2="' + ax + '" stroke="#333" stroke-width="1.6"/>' +
+            '<line x1="' + ay + '" y1="' + (h - m + 14) + '" x2="' + ay + '" y2="' + (m - 18) + '" stroke="#333" stroke-width="1.6"/>' +
+            '<polygon points="' + (w - m + 24) + ',' + ax + ' ' + (w - m + 14) + ',' + (ax - 5) + ' ' + (w - m + 14) + ',' + (ax + 5) + '" fill="#333"/>' +
+            '<polygon points="' + ay + ',' + (m - 24) + ' ' + (ay - 5) + ',' + (m - 14) + ' ' + (ay + 5) + ',' + (m - 14) + '" fill="#333"/></svg>');
+    }
+    function placerFeuille() {
+        feuille.style.width = content.clientWidth + 'px';
+        feuille.style.height = content.clientHeight + 'px';
+        dessinerRepere();
+    }
+    function majBrouillon() {
+        feuille.className = brouillon.ouvert ? 'ouvert ' + brouillon.fond : brouillon.fond;
+        btnBrouillon.classList.toggle('sel', brouillon.ouvert);
+        bb.classList.toggle('ouvert', brouillon.ouvert);
+        bb.querySelectorAll('[data-f]').forEach(function (b) { b.classList.toggle('sel', b.dataset.f === brouillon.fond); });
+        document.getElementById('brNum').textContent = (brouillon.page + 1) + '/' + brouillon.pages;
+        document.getElementById('brRep').classList.toggle('vu', brouillon.fond === 'repere');
+        if (brouillon.ouvert) dessinerRepere();
+    }
+    function ouvrirBrouillon(v) {
+        if (v === brouillon.ouvert) return;
+        brouillon.ouvert = v;
+        if (v) {
+            brouillon.scroll = content.scrollTop;
+            brouillon.overflow = content.style.overflow;
+            content.scrollTop = 0;
+            content.style.overflow = 'hidden';
+            placerFeuille();
+            if (!actif || outil === 'gomme') { outil = ecriture; }
+            setActif(true);
+        } else {
+            content.style.overflow = brouillon.overflow;
+            content.scrollTop = brouillon.scroll;
+        }
+        majBrouillon();
+        trait = null; diapoCourante = -1;
+        verifierDiapo(); dimensionner(); redessiner();
+    }
+    function allerPage(n) {
+        brouillon.page = Math.max(0, Math.min(brouillon.pages - 1, n));
+        majBrouillon(); verifierDiapo(); redessiner();
+    }
+    btnBrouillon.addEventListener('click', function () { ouvrirBrouillon(!brouillon.ouvert); });
+    bb.querySelectorAll('[data-f]').forEach(function (b) {
+        b.addEventListener('click', function () { brouillon.fond = b.dataset.f; majBrouillon(); dessinerRepere(); });
+    });
+    document.getElementById('brPrec').addEventListener('click', function () { allerPage(brouillon.page - 1); });
+    document.getElementById('brSuiv').addEventListener('click', function () { allerPage(brouillon.page + 1); });
+    document.getElementById('brAjout').addEventListener('click', function () { brouillon.pages++; allerPage(brouillon.pages - 1); });
+    document.getElementById('brFermer').addEventListener('click', function () { ouvrirBrouillon(false); });
+    window.addEventListener('resize', function () { if (brouillon.ouvert) placerFeuille(); });
+    bb.querySelectorAll('#brRep input').forEach(function (inp) {
+        inp.value = nb(brouillon.rep[inp.dataset.k]);
+        // les touches tapées dans les champs ne doivent pas changer de diapo ni d'outil
+        inp.addEventListener('keydown', function (e) { e.stopPropagation(); if (e.key === 'Enter') inp.blur(); });
+        inp.addEventListener('input', function () {
+            var v = parseFloat(inp.value.replace(',', '.').replace('−', '-'));
+            if (!isNaN(v)) { brouillon.rep[inp.dataset.k] = v; dessinerRepere(); }
+        });
+    });
+    majBrouillon();
+
     // ---------- clavier ----------
     document.addEventListener('keydown', function (e) {
         if (e.ctrlKey || e.metaKey || e.altKey) return;
@@ -390,6 +531,8 @@
         if (e.key === 'p' || e.key === 'P') { if (actif && outil === 'stylo') setActif(false); else choisirEcriture('stylo'); }
         else if (e.key === 's' || e.key === 'S') { if (actif && outil === 'surligneur') setActif(false); else choisirEcriture('surligneur'); }
         else if (e.key === 'g' || e.key === 'G') { outil = 'gomme'; setActif(true); }
+        else if (e.key === 'b' || e.key === 'B') { ouvrirBrouillon(!brouillon.ouvert); }
+        else if (e.key === 'Escape' && brouillon.ouvert) { ouvrirBrouillon(false); }
         else if (e.key === 'Escape' && actif) { setActif(false); }
     });
 

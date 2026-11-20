@@ -565,3 +565,4 @@ Classes de boîtes définies dans `COURSPRESENTATION/styles.css` (`font-size: 2.
 - Règle (nov. 2026) : quand une feuille d'exercices s'appuie sur des propriétés/définitions du cours, PROPOSER à Anthony de créer le proprietes.html du chapitre (sans attendre qu'il le demande).
 - Bouton « 💡 Coup de pouce » (touche A) : ajouté automatiquement si un fichier <sujet>_Aide.html existe à côté du sujet dans MathsIORI (mêmes numéros d'exercices) ; il remplace l'énoncé par l'énoncé guidé (trames, figures colorées).
 - Différenciation (règle permanente) : à chaque nouvelle feuille d'exercices, proposer la version « coup de pouce » (_Aide.html) et le proprietes.html du chapitre (voir checklist du CLAUDE.md de MathsIORI).
+- Brouillon (stylo.js, bouton 📝 / touche B) : feuille plein écran par-dessus la diapo, fonds blanc/petits carreaux/Seyès/repère, plusieurs pages, mêmes outils d'écriture ; un brouillon commun à toute la présentation, gardé tant que la page est ouverte.
