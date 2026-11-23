@@ -283,6 +283,17 @@ button:hover { transform: none !important; }
 .correction-box svg.croquis { width: 320px; height: auto; }
 .correction-box svg, .correction-box img { max-width: 100%%; height: auto; }
 .enonce p, .correction-box p { margin: 6px 0; }
+#captMsg { position: fixed; left: 50%%; bottom: 60px; transform: translateX(-50%%); background: #2c3e50; color: #fff; padding: 8px 16px; border-radius: 8px; font-size: 15px; z-index: 4000; opacity: 0; transition: opacity .3s; pointer-events: none; }
+#captMsg.vu { opacity: 1; }
+#captRecadre { position: fixed; inset: 0; background: rgba(0,0,0,.8); z-index: 3500; display: none; flex-direction: column; align-items: center; justify-content: center; gap: 10px; }
+#captRecadre.ouvert { display: flex; }
+#captRecadre .barre { color: #fff; font-size: 16px; display: flex; gap: 10px; align-items: center; }
+#captRecadre img { max-width: 94vw; max-height: 84vh; cursor: crosshair; user-select: none; -webkit-user-drag: none; background: #fff; }
+#captRecadre .sel { position: fixed; border: 3px dashed #f1c40f; background: rgba(241,196,15,.15); pointer-events: none; display: none; }
+.capture .enonce { background: #fff; border-left-color: #8e44ad; text-align: center; }
+.capture-img { width: 60%%; max-width: 100%%; }
+.capture .enonce.grand .capture-img { width: 100%%; }
+.capt-suppr { float: right; font-size: .55em; padding: 4px 10px; background: #e74c3c; color: #fff; border: none; border-radius: 6px; cursor: pointer; }
 .liste-ex { display: flex; flex-wrap: wrap; gap: 14px; justify-content: center; margin-top: 30px; }
 .liste-ex button, #menuEx button { font-size: 1em; }
 #btnCorr.ouvert { background: #43a047; }
@@ -318,6 +329,7 @@ button:hover { transform: none !important; }
       <button class="btn-menu" onclick="ouvrirMenu()">☰ Exercices</button>
       <button id="btnCorr" onclick="basculerCorrection()">✅ Correction</button>
       <button onclick="agrandirZone()" title="Ajouter de la place pour écrire (touche +)">➕ Place</button>%(btn_prop)s%(btn_aide)s
+      <button onclick="captCapturer()" title="Capturer un exercice d'un manuel en ligne (ou Cmd+V pour coller une capture d'écran)">📸 Capture</button>
     </div>
     <div class="progress"><span id="numEx"></span></div>
     <div class="controls-right">
@@ -334,7 +346,8 @@ function afficher(n) {
   slides.forEach(function (s, i) { s.classList.toggle('active', i === cur); });
   document.querySelector('.content').scrollTop = 0;
   majCorr(); majAide(); ajusterZone();
-  document.getElementById('numEx').textContent = cur ? 'Exercice ' + cur + ' / ' + (slides.length - 1) : '';
+  var nbEx = document.querySelectorAll('.slide:not(.capture)').length - 1;
+  document.getElementById('numEx').textContent = !cur ? '' : (slides[cur].dataset.capture ? slides[cur].dataset.titre : 'Exercice ' + cur + ' / ' + nbEx);
   document.getElementById('prevBtn').disabled = cur === 0;
 }
 // La zone d'écriture remplit la place qui reste sous l'énoncé
@@ -399,8 +412,156 @@ document.addEventListener('keydown', function (e) {
   else if ((e.key === 'r' || e.key === 'R') && document.getElementById('propChap')) basculerProp();
   else if (e.key === 'Escape') { fermerMenu(); var pc = document.getElementById('propChap'); if (pc) pc.classList.remove('ouvert'); }
 });
+/* ===== Captures d'exercices (manuels en ligne) =====
+   - Cmd+V (ou Ctrl+V) : colle une capture d'écran (Cmd+Ctrl+Maj+4 sur Mac) → nouvelle diapo.
+   - Bouton « 📸 Capture » : choisir l'onglet/la fenêtre du manuel, puis recadrer l'exercice.
+   - Les captures sont enregistrées sur cet ordinateur (IndexedDB) et retrouvées à la réouverture. */
+var CAPT_CLE = 'captures:' + location.pathname, captures = [], captDB = null;
+function captOuvrirDB(fn) {
+  try {
+    var r = indexedDB.open('presentations-captures', 1);
+    r.onupgradeneeded = function () { r.result.createObjectStore('pages'); };
+    r.onsuccess = function () { captDB = r.result; fn(); };
+    r.onerror = function () { fn(); };
+  } catch (e) { fn(); }
+}
+function captEnregistrer() {
+  if (!captDB) return;
+  try { captDB.transaction('pages', 'readwrite').objectStore('pages').put(captures, CAPT_CLE); } catch (e) {}
+}
+function captCharger(fn) {
+  if (!captDB) return fn([]);
+  try {
+    var r = captDB.transaction('pages').objectStore('pages').get(CAPT_CLE);
+    r.onsuccess = function () { fn(r.result || []); };
+    r.onerror = function () { fn([]); };
+  } catch (e) { fn([]); }
+}
+function captMessage(t) {
+  var m = document.getElementById('captMsg');
+  m.textContent = t; m.classList.add('vu');
+  clearTimeout(m._t); m._t = setTimeout(function () { m.classList.remove('vu'); }, 4000);
+}
+function rafraichirSlides() { slides = document.querySelectorAll('.slide'); }
+function captDiapo(c) {
+  var s = document.createElement('div');
+  s.className = 'slide capture';
+  s.dataset.titre = c.titre; s.dataset.capture = c.id;
+  s.innerHTML = '<h2>' + c.titre + ' <button class="capt-suppr" title="Supprimer cette capture">🗑 Supprimer</button></h2>' +
+    '<div class="enonce"><img class="capture-img" alt="Capture"></div><div class="zone-ecriture"></div>';
+  s.querySelector('img').src = c.src;
+  var en = s.querySelector('.enonce');
+  en.title = 'Cliquer pour agrandir / réduire';
+  en.addEventListener('click', function () { en.classList.toggle('grand'); setTimeout(ajusterZone, 250); });
+  s.querySelector('.capt-suppr').addEventListener('click', function (e) { e.stopPropagation(); captSupprimer(c.id); });
+  document.querySelector('.content').appendChild(s);
+  ['.liste-ex', '#menuEx .boite'].forEach(function (sel) {
+    var zone = document.querySelector(sel); if (!zone) return;
+    var b = document.createElement('button');
+    b.className = 'btn-capture'; b.dataset.capture = c.id; b.textContent = '📸 ' + c.titre;
+    b.addEventListener('click', function () { allerA(Array.prototype.indexOf.call(slides, s)); });
+    var fermer = sel === '#menuEx .boite' ? zone.lastElementChild : null;
+    zone.insertBefore(b, fermer);
+  });
+  rafraichirSlides();
+  return s;
+}
+function captAjouter(src) {
+  var n = 1;
+  captures.forEach(function (c) { var k = parseInt(c.titre.replace(/\D/g, ''), 10); if (k >= n) n = k + 1; });
+  var c = { id: String(Date.now()), titre: 'Capture ' + n, src: src };
+  captures.push(c); captEnregistrer();
+  var s = captDiapo(c);
+  afficher(Array.prototype.indexOf.call(slides, s));
+  captMessage('✔ ' + c.titre + ' ajoutée et enregistrée sur cet ordinateur');
+}
+function captSupprimer(id) {
+  captures = captures.filter(function (c) { return c.id !== id; });
+  captEnregistrer();
+  document.querySelectorAll('[data-capture="' + id + '"]').forEach(function (el) { el.remove(); });
+  rafraichirSlides();
+  afficher(Math.min(cur, slides.length - 1));
+}
+// réduit les très grandes images (place mémoire), garde le PNG pour la netteté du texte
+function captDepuisImage(img, rect) {
+  var r = rect || { x: 0, y: 0, w: img.naturalWidth || img.width, h: img.naturalHeight || img.height };
+  var k = Math.min(1, 2000 / r.w), cv = document.createElement('canvas');
+  cv.width = Math.round(r.w * k); cv.height = Math.round(r.h * k);
+  cv.getContext('2d').drawImage(img, r.x, r.y, r.w, r.h, 0, 0, cv.width, cv.height);
+  return cv.toDataURL('image/png');
+}
+// coller une capture
+document.addEventListener('paste', function (e) {
+  var t = e.target && e.target.tagName;
+  if (t === 'INPUT' || t === 'TEXTAREA') return;
+  var items = (e.clipboardData || {}).items || [];
+  for (var i = 0; i < items.length; i++) {
+    if (items[i].type.indexOf('image') === 0) {
+      e.preventDefault();
+      var img = new Image(), url = URL.createObjectURL(items[i].getAsFile());
+      img.onload = function () { captAjouter(captDepuisImage(img)); URL.revokeObjectURL(url); };
+      img.src = url;
+      return;
+    }
+  }
+});
+// bouton « 📸 Capture » : capture d'un onglet / d'une fenêtre puis recadrage
+function captCapturer() {
+  if (!navigator.mediaDevices || !navigator.mediaDevices.getDisplayMedia) {
+    captMessage('Capture impossible ici : fais Cmd+Ctrl+Maj+4 puis Cmd+V dans la présentation');
+    return;
+  }
+  navigator.mediaDevices.getDisplayMedia({ video: true, audio: false }).then(function (flux) {
+    var v = document.createElement('video');
+    v.srcObject = flux; v.muted = true;
+    v.onloadedmetadata = function () {
+      v.play().then(function () {
+        setTimeout(function () {
+          var cv = document.createElement('canvas');
+          cv.width = v.videoWidth; cv.height = v.videoHeight;
+          cv.getContext('2d').drawImage(v, 0, 0);
+          flux.getTracks().forEach(function (tr) { tr.stop(); });
+          captRecadrer(cv.toDataURL('image/png'));
+        }, 350);
+      });
+    };
+  }).catch(function () { captMessage('Capture annulée'); });
+}
+function captRecadrer(src) {
+  var ov = document.getElementById('captRecadre'), img = ov.querySelector('img'), sel = ov.querySelector('.sel');
+  var d = null, r = null;
+  img.onload = function () { ov.classList.add('ouvert'); sel.style.display = 'none'; r = null; };
+  img.src = src;
+  function pt(e) { var b = img.getBoundingClientRect(); return [Math.max(0, Math.min(b.width, e.clientX - b.left)), Math.max(0, Math.min(b.height, e.clientY - b.top)), b]; }
+  img.onpointerdown = function (e) { e.preventDefault(); d = pt(e); img.setPointerCapture(e.pointerId); };
+  img.onpointermove = function (e) {
+    if (!d) return;
+    var p = pt(e), b = p[2];
+    r = { x: Math.min(d[0], p[0]), y: Math.min(d[1], p[1]), w: Math.abs(p[0] - d[0]), h: Math.abs(p[1] - d[1]) };
+    sel.style.display = 'block';
+    sel.style.left = (b.left + r.x) + 'px'; sel.style.top = (b.top + r.y) + 'px';
+    sel.style.width = r.w + 'px'; sel.style.height = r.h + 'px';
+  };
+  img.onpointerup = function () { d = null; };
+  ov.querySelector('.ok').onclick = function () {
+    var k = img.naturalWidth / img.getBoundingClientRect().width;
+    var zone = (r && r.w > 10 && r.h > 10) ? { x: r.x * k, y: r.y * k, w: r.w * k, h: r.h * k } : null;
+    ov.classList.remove('ouvert');
+    captAjouter(captDepuisImage(img, zone));
+  };
+  ov.querySelector('.annuler').onclick = function () { ov.classList.remove('ouvert'); };
+}
+captOuvrirDB(function () {
+  captCharger(function (liste) {
+    captures = liste;
+    captures.forEach(captDiapo);
+  });
+});
 afficher(0);
 </script>
+<div id="captMsg"></div>
+<div id="captRecadre"><div class="barre">Trace un rectangle autour de l'exercice (ou garde toute l'image)
+  <button class="ok">✔ Ajouter</button><button class="annuler">✖ Annuler</button></div><img alt=""><div class="sel"></div></div>
 <script src="%(prof)s/stylo.js"></script>
 </body>
 </html>
