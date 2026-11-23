@@ -180,7 +180,9 @@ button:hover { transform: none !important; }
 #captRecadre .sel i[data-coin="bg"] { left: -11px; bottom: -11px; cursor: nesw-resize; }
 #captRecadre .sel i[data-coin="bd"] { right: -11px; bottom: -11px; cursor: nwse-resize; }
 .capture .enonce { background: #fff; border-left-color: #8e44ad; text-align: center; }
-.capture-img { width: 60%; max-width: 100%; }
+.capture-img { display: block; width: 60%; max-width: 100%; margin: 0 auto; }
+#captMsg button { margin-left: 12px; font-size: 14px; padding: 3px 10px; }
+#captMsg.vu { pointer-events: auto; }
 .capture .enonce.grand .capture-img { width: 100%; }
 .capt-suppr { float: right; font-size: .55em; padding: 4px 10px; background: #e74c3c; color: #fff; border: none; border-radius: 6px; cursor: pointer; }
 .liste-ex { display: flex; flex-wrap: wrap; gap: 14px; justify-content: center; margin-top: 30px; }
@@ -447,10 +449,33 @@ function captCharger(fn) {
     r.onerror = function () { fn([]); };
   } catch (e) { fn([]); }
 }
-function captMessage(t) {
+function captMessage(t, action, fn) {
   var m = document.getElementById('captMsg');
-  m.textContent = t; m.classList.add('vu');
-  clearTimeout(m._t); m._t = setTimeout(function () { m.classList.remove('vu'); }, 4000);
+  m.textContent = t;
+  if (action) {
+    var b = document.createElement('button'); b.textContent = action;
+    b.onclick = function () { m.classList.remove('vu'); fn(); };
+    m.appendChild(b);
+  }
+  m.classList.add('vu');
+  clearTimeout(m._t); m._t = setTimeout(function () { m.classList.remove('vu'); }, action ? 7000 : 4000);
+}
+function captCourante() {
+  var id = slides[cur] && slides[cur].dataset.capture;
+  return id ? captures.filter(function (c) { return c.id === id; })[0] : null;
+}
+function captImg(src) { var i = document.createElement('img'); i.className = 'capture-img'; i.alt = 'Capture'; i.src = src; return i; }
+// ajoute un morceau sous une capture existante (exercice trop long pour un seul écran)
+function captSuite(c, src) {
+  c.srcs.push(src); captEnregistrer();
+  var s = document.querySelector('.slide[data-capture="' + c.id + '"]');
+  s.querySelector('.enonce').appendChild(captImg(src));
+  setTimeout(ajusterZone, 100);
+  captMessage('✔ Ajouté à la suite de ' + c.titre + ' (' + c.srcs.length + ' morceaux)', '↩ En faire une capture séparée', function () {
+    c.srcs.pop(); captEnregistrer();
+    var en = s.querySelector('.enonce'); en.removeChild(en.lastElementChild);
+    captAjouter(src);
+  });
 }
 function rafraichirSlides() { slides = document.querySelectorAll('.slide'); }
 function captDiapo(c) {
@@ -458,9 +483,9 @@ function captDiapo(c) {
   s.className = 'slide capture';
   s.dataset.titre = c.titre; s.dataset.capture = c.id;
   s.innerHTML = '<h2>' + c.titre + ' <button class="capt-suppr" title="Supprimer cette capture">🗑 Supprimer</button></h2>' +
-    '<div class="enonce"><img class="capture-img" alt="Capture"></div><div class="zone-ecriture"></div>';
-  s.querySelector('img').src = c.src;
+    '<div class="enonce"></div><div class="zone-ecriture"></div>';
   var en = s.querySelector('.enonce');
+  c.srcs.forEach(function (src) { en.appendChild(captImg(src)); });
   en.title = 'Cliquer pour agrandir / réduire';
   en.addEventListener('click', function () { en.classList.toggle('grand'); setTimeout(ajusterZone, 250); });
   s.querySelector('.capt-suppr').addEventListener('click', function (e) { e.stopPropagation(); captSupprimer(c.id); });
@@ -479,7 +504,7 @@ function captDiapo(c) {
 function captAjouter(src) {
   var n = 1;
   captures.forEach(function (c) { var k = parseInt(c.titre.replace(/\D/g, ''), 10); if (k >= n) n = k + 1; });
-  var c = { id: String(Date.now()), titre: 'Capture ' + n, src: src };
+  var c = { id: String(Date.now()), titre: 'Capture ' + n, srcs: [src] };
   captures.push(c); captEnregistrer();
   var s = captDiapo(c);
   afficher(Array.prototype.indexOf.call(slides, s));
@@ -509,7 +534,11 @@ document.addEventListener('paste', function (e) {
     if (items[i].type.indexOf('image') === 0) {
       e.preventDefault();
       var img = new Image(), url = URL.createObjectURL(items[i].getAsFile());
-      img.onload = function () { captAjouter(captDepuisImage(img)); URL.revokeObjectURL(url); };
+      img.onload = function () {
+        var src = captDepuisImage(img), c = captCourante();
+        if (c) captSuite(c, src); else captAjouter(src);
+        URL.revokeObjectURL(url);
+      };
       img.src = url;
       return;
     }
@@ -558,10 +587,10 @@ function captRecadrer(src) {
     return [Math.max(0, Math.min(b.width, e.clientX - b.left)), Math.max(0, Math.min(b.height, e.clientY - b.top))];
   }
   function majSel() {
-    if (!r || r.w < 4 || r.h < 4) { sel.style.display = 'none'; ov.querySelector('.ok').textContent = '✔ Ajouter toute l’image'; return; }
+    if (!r || r.w < 4 || r.h < 4) { sel.style.display = 'none'; ov.querySelector('.ok').textContent = '✔ Nouvelle capture (toute l’image)'; return; }
     sel.style.display = 'block';
     sel.style.left = r.x + 'px'; sel.style.top = r.y + 'px'; sel.style.width = r.w + 'px'; sel.style.height = r.h + 'px';
-    ov.querySelector('.ok').textContent = '✔ Ajouter la sélection';
+    ov.querySelector('.ok').textContent = '✔ Nouvelle capture (sélection)';
   }
   zone.onpointerdown = function (e) {
     e.preventDefault(); zone.setPointerCapture(e.pointerId);
@@ -591,17 +620,23 @@ function captRecadrer(src) {
     majSel();
   };
   zone.onpointerup = zone.onpointercancel = function () { mode = null; };
-  ov.querySelector('.ok').onclick = function () {
+  function decoupe() {
     var k = img.naturalWidth / zone.getBoundingClientRect().width;
     var z = (r && r.w > 10 && r.h > 10) ? { x: r.x * k, y: r.y * k, w: r.w * k, h: r.h * k } : null;
     ov.classList.remove('ouvert');
-    captAjouter(captDepuisImage(img, z));
-  };
+    return captDepuisImage(img, z);
+  }
+  var cc = captCourante(), bs = ov.querySelector('.suite');
+  bs.style.display = cc ? '' : 'none';
+  if (cc) bs.textContent = '➕ À la suite de ' + cc.titre;
+  bs.onclick = function () { captSuite(cc, decoupe()); };
+  ov.querySelector('.ok').onclick = function () { captAjouter(decoupe()); };
   ov.querySelector('.annuler').onclick = function () { ov.classList.remove('ouvert'); };
 }
 captOuvrirDB(function () {
   captCharger(function (liste) {
     captures = liste;
+    captures.forEach(function (c) { if (!c.srcs) { c.srcs = [c.src]; delete c.src; } });
     captures.forEach(captDiapo);
   });
 });
@@ -609,7 +644,7 @@ afficher(0);
 </script>
 <div id="captMsg"></div>
 <div id="captRecadre"><div class="barre">Trace un rectangle autour de l'exercice (ajuste-le par ses coins ou déplace-le)
-  <button class="ok">✔ Ajouter toute l’image</button><button class="annuler">✖ Annuler</button></div>
+  <button class="ok">✔ Nouvelle capture (toute l’image)</button><button class="suite"></button><button class="annuler">✖ Annuler</button></div>
   <div class="zone"><img alt=""><div class="sel"><i data-coin="hg"></i><i data-coin="hd"></i><i data-coin="bg"></i><i data-coin="bd"></i></div></div></div>
 <script src="../../../stylo.js"></script>
 </body>
