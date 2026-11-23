@@ -6,15 +6,26 @@ let totalSlides = 0;
 
 // Titres correspondant exactement aux 8 slides du HTML
 const slideTitles = [
-    "Trigonométrie dans un triangle rectangle",                                    // Slide 1
-    "I. Trois formules — 1) Triangle rectangle et vocabulaire",                    // Slide 2
-    "I. Trois formules — 2) Cosinus, sinus et tangente d'un angle aigu",          // Slide 3
-    "II. Utilisation de la calculatrice — 1) Calculer la valeur d'un cosinus",    // Slide 4
-    "II. Utilisation de la calculatrice — 2) Calculer un angle connaissant le cosinus", // Slide 5
-    "III. Calcul de longueur dans un triangle rectangle",                          // Slide 6
-    "IV. Calcul d'angles dans un triangle rectangle",                              // Slide 7
-    "V. Relations trigonométriques"                                                // Slide 8
+    "Chapitre 4 : Trigonométrie dans un triangle rectangle",
+    "I. Trois formules — 1) Triangle rectangle et vocabulaire",
+    "I. 2) Cosinus, sinus et tangente d'un angle aigu",
+    "II. Utilisation de la calculatrice",
+    "II. 1) Calculer la valeur d'un cosinus lorsque l'on connait la valeur de l'angle",
+    "II. 2) Calculer la valeur d'un angle connaissant le cosinus",
+    "III. Calcul de longueur dans un triangle rectangle",
+    "IV. Calcul d'angles dans un triangle rectangle",
+    "V. Relations trigonométriques"
 ];
+
+// Liste à plat des étapes (les .step-inline apparaissent après leur step parent)
+function buildStepsArray(slide) {
+    const steps = [];
+    slide.querySelectorAll('.step').forEach(step => {
+        steps.push(step);
+        step.querySelectorAll('.step-inline').forEach(inline => steps.push(inline));
+    });
+    return steps;
+}
 
 // Initialisation - attendre que le DOM soit chargé
 document.addEventListener('DOMContentLoaded', function() {
@@ -116,7 +127,7 @@ function updateSlide() {
 
     // Gérer les étapes de la slide actuelle
     const currentSlide = slides[currentSlideIndex];
-    const steps = currentSlide.querySelectorAll('.step');
+    const steps = buildStepsArray(currentSlide);
     const totalSteps = steps.length;
 
     steps.forEach((step, index) => {
@@ -177,7 +188,7 @@ function changeSlide(direction) {
     }
     
     const currentSlide = slides[currentSlideIndex];
-    const steps = currentSlide.querySelectorAll('.step');
+    const steps = buildStepsArray(currentSlide);
     const totalSteps = steps.length;
 
     if (direction === 1) {
@@ -197,7 +208,7 @@ function changeSlide(direction) {
             updateSlide();
         } else if (currentSlideIndex > 0) {
             currentSlideIndex--;
-            const prevSteps = slides[currentSlideIndex].querySelectorAll('.step');
+            const prevSteps = buildStepsArray(slides[currentSlideIndex]);
             currentStepIndex = prevSteps.length;
             updateSlide();
         }
