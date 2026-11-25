@@ -39,7 +39,8 @@
     };
     var OPACITE_SURLIGNEUR = 0.38;
 
-    var content = document.querySelector('.content');
+    // zone d'écriture : .content (présentations) ou un élément marqué data-stylo (ex. automatismes MathsIORI)
+    var content = document.querySelector('.content') || document.querySelector('[data-stylo]');
     if (!content) return;
     if (getComputedStyle(content).position === 'static') content.style.position = 'relative';
 
@@ -466,9 +467,19 @@
             '<polygon points="' + (w - m + 24) + ',' + ax + ' ' + (w - m + 14) + ',' + (ax - 5) + ' ' + (w - m + 14) + ',' + (ax + 5) + '" fill="#333"/>' +
             '<polygon points="' + ay + ',' + (m - 24) + ' ' + (ay - 5) + ',' + (m - 14) + ' ' + (ay + 5) + ',' + (m - 14) + '" fill="#333"/></svg>');
     }
+    // page « autonome » (zone data-stylo dans une page qui défile, ex. automatismes) :
+    // la feuille couvre la zone visible de l'écran, page bloquée pendant le brouillon
+    var autonome = !content.classList.contains('content');
     function placerFeuille() {
         feuille.style.width = content.clientWidth + 'px';
-        feuille.style.height = content.clientHeight + 'px';
+        var h = content.clientHeight;
+        if (autonome) {
+            var haut = Math.max(0, -content.getBoundingClientRect().top);
+            h = Math.min(content.clientHeight - haut, window.innerHeight - Math.max(0, content.getBoundingClientRect().top));
+            feuille.style.top = haut + 'px';
+            bb.style.bottom = 'auto'; bb.style.top = (haut + h) + 'px'; bb.style.transform = 'translateY(-100%)';
+        }
+        feuille.style.height = h + 'px';
         dessinerRepere();
     }
     function majBrouillon() {
@@ -484,13 +495,20 @@
         if (v === brouillon.ouvert) return;
         brouillon.ouvert = v;
         if (v) {
-            brouillon.scroll = content.scrollTop;
-            brouillon.overflow = content.style.overflow;
-            content.scrollTop = 0;
-            content.style.overflow = 'hidden';
+            if (autonome) {
+                brouillon.overflow = document.documentElement.style.overflow;
+                document.documentElement.style.overflow = 'hidden';
+            } else {
+                brouillon.scroll = content.scrollTop;
+                brouillon.overflow = content.style.overflow;
+                content.scrollTop = 0;
+                content.style.overflow = 'hidden';
+            }
             placerFeuille();
             if (!actif || outil === 'gomme') { outil = ecriture; }
             setActif(true);
+        } else if (autonome) {
+            document.documentElement.style.overflow = brouillon.overflow;
         } else {
             content.style.overflow = brouillon.overflow;
             content.scrollTop = brouillon.scroll;
@@ -527,7 +545,7 @@
     document.addEventListener('keydown', function (e) {
         if (e.ctrlKey || e.metaKey || e.altKey) return;
         var t = e.target && e.target.tagName;
-        if (t === 'INPUT' || t === 'TEXTAREA') return;
+        if (t === 'INPUT' || t === 'TEXTAREA' || (e.target && e.target.isContentEditable)) return;
         if (e.key === 'p' || e.key === 'P') { if (actif && outil === 'stylo') setActif(false); else choisirEcriture('stylo'); }
         else if (e.key === 's' || e.key === 'S') { if (actif && outil === 'surligneur') setActif(false); else choisirEcriture('surligneur'); }
         else if (e.key === 'g' || e.key === 'G') { outil = 'gomme'; setActif(true); }
